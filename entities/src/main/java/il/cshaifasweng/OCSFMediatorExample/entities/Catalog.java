@@ -6,14 +6,14 @@ import java.util.List;
 @Entity
 @Table(name= "catalog")
 
-public class Catalog {
+public class Catalog  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToMany(mappedBy = "items")
     private List<Item> items =new ArrayList<Item>();
     private int amount=0;
-    Catalog(){}
+    public Catalog(){}
     public void addIteam(Item item)
     {
         boolean flag= true;

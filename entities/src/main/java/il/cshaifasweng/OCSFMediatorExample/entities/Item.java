@@ -1,10 +1,11 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 import javax.persistence.*;
 import javax.xml.namespace.QName;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "items")
-public class Item {
+public class Item implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
