@@ -32,6 +32,8 @@ public class HomepageController {
 
     @FXML
     void Guest_btn(ActionEvent event) throws IOException {
+        SimpleClient.getClient().sendToServer("#opencatalog");
+        System.out.format("SADAGEagsdfg4444444444444444444444444444444444444444");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("catalog.fxml"));
         Pane1.getChildren().setAll(pane);
     }

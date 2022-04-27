@@ -1,5 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.Message;
+import il.cshaifasweng.OCSFMediatorExample.entities.Received;
 import org.greenrobot.eventbus.EventBus;
 
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
@@ -18,6 +20,18 @@ public class SimpleClient extends AbstractClient {
 		if (msg.getClass().equals(Warning.class)) {
 			EventBus.getDefault().post(new WarningEvent((Warning) msg));
 		}
+
+		//String msgstring = ((Message) msg ).getMessage();
+		if(msg.getClass().equals(String.class))
+		{
+			EventBus.getDefault().post(new Received((Message) msg));
+			System.out.format("SADAGEagsdfg");
+		}
+		/*if(msgstring.startsWith("#ok"))
+		{
+			EventBus.getDefault().post(new Received((Message) msg));
+			System.out.format("SADAGEagsdfg");
+		}*/
 
 	}
 	

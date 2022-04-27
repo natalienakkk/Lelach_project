@@ -1,5 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
 
@@ -34,11 +35,14 @@ public class SimpleServer extends AbstractServer {
     public SimpleServer(int port) {
         super(port);
 
-    }
+
+	}
+
 
     @Override
-    protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
-        String msgString = msg.toString();
+    protected void handleMessageFromClient(Object msg, ConnectionToClient client) throws IOException {
+		System.out.format("SADAGEagsdfg5555555555551111\n");
+		String msgString = msg.toString();
         if (msgString.startsWith("#warning")) {
             Warning warning = new Warning("Warning from server!");
             try {
@@ -48,6 +52,14 @@ public class SimpleServer extends AbstractServer {
                 e.printStackTrace();
             }
         }
+
+        if(msgString.startsWith("#opencatalog"))
+		{
+
+			//Message msg1 = new Message("ok");
+			client.sendToClient("ok");
+
+		}
     }
 	private static SessionFactory getSessionFactory() throws HibernateException {
 		Configuration configuration = new Configuration();
