@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fx:id="flower_name" layoutX="213.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" textAlignment="CENTER" wrappingWidth="158.93670654296875">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="flower_image" fitHeight="190.0" fitWidth="286.0" layoutX="157.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="flower_id" layoutX="23.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID : " wrappingWidth="114.93670654296875">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="flower_price" layoutX="445.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price : " wrappingWidth="130.93670654296875">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="flower_color" layoutX="22.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color : " wrappingWidth="230.93670654296875">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="flower_type" layoutX="23.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type :" wrappingWidth="114.93670654296875">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
