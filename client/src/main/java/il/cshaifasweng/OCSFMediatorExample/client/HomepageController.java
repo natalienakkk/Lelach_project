@@ -32,15 +32,24 @@ public class HomepageController {
 
     @FXML
     void Guest_btn(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer("#opencatalog");
-        System.out.format("SADAGEagsdfg4444444444444444444444444444444444444444");
+        try {
+            SimpleClient.getClient().sendToServer("#opencatalog");
+        }
+        catch(IOException e)
+        {
+
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         AnchorPane pane = FXMLLoader.load(getClass().getResource("catalog.fxml"));
         Pane1.getChildren().setAll(pane);
     }
 
     @FXML
     void Manager_btn(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("catalog.fxml"));
+        SimpleClient.getClient().sendToServer("#openspray");
+        System.out.format("SADAGEagsdfg44777777777777777777777777777444444\n");
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("flowers.fxml"));
         Pane1.getChildren().setAll(pane);
     }
 

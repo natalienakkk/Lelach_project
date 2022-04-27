@@ -14,6 +14,7 @@ import javax.persistence.criteria.Root;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
 import il.cshaifasweng.OCSFMediatorExample.entities.Catalog;
@@ -31,40 +32,68 @@ import org.hibernate.service.ServiceRegistry;
 
 public class SimpleServer extends AbstractServer {
 	private static Session session;
+	private static SessionFactory sessionFactory = getSessionFactory();
 
-    public SimpleServer(int port) {
-        super(port);
-
+	public SimpleServer(int port) {
+		super(port);
 
 	}
 
-
-    @Override
-    protected void handleMessageFromClient(Object msg, ConnectionToClient client) throws IOException {
-		System.out.format("SADAGEagsdfg5555555555551111\n");
+	@Override
+	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		String msgString = msg.toString();
-        if (msgString.startsWith("#warning")) {
-            Warning warning = new Warning("Warning from server!");
-            try {
-                client.sendToClient(warning);
-                System.out.format("Sent warning to client %s\n", client.getInetAddress().getHostAddress());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        if(msgString.startsWith("#opencatalog"))
+		if (msgString.startsWith("#warning")) {
+			Warning warning = new Warning("Warning from server!");
+			try {
+				client.sendToClient(warning);
+				System.out.format("Sent warning to client %s\n", client.getInetAddress().getHostAddress());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else if(msgString.startsWith("#opencatalog"))
 		{
+			try {
+				session = sessionFactory.openSession();
+				List<Catalog> catalogList=getAll(Catalog.class);
+				client.sendToClient(new Message("#SendLists",catalogList));
+				System.out.format("open cataloooogggg\n");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-			//Message msg1 = new Message("ok");
-			client.sendToClient("ok");
+			session.close();
 
 		}
-    }
+		else if(msgString.startsWith("#openspray"))
+		{
+
+			try {
+				session = sessionFactory.openSession();
+				List<Catalog> catalogList=getAll(Catalog.class);
+				client.sendToClient(new Message("#openspray1",catalogList.get(0)));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				System.out.format("im in server\n");
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.format("im in server\n");
+			session.close();
+		}
+
+	}
 	private static SessionFactory getSessionFactory() throws HibernateException {
 		Configuration configuration = new Configuration();
 		configuration.addAnnotatedClass(Catalog.class);
 		configuration.addAnnotatedClass(Item.class);
+		configuration.addAnnotatedClass((Message.class));
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).build();
@@ -72,11 +101,11 @@ public class SimpleServer extends AbstractServer {
 	}
 	private static void initializeData()
 	{
-		//Catalog temp =new Catalog();
+		Catalog temp =new Catalog();
 		Item it =new Item("wrde","gore","a7mr",":pic",50);
-		//session.save(temp);
+		session.save(temp);
 		session.save(it);
-//		temp.addIteam(it);
+		temp.addIteam(it);
 	}
 
 	public void connectData() {
@@ -100,5 +129,15 @@ public class SimpleServer extends AbstractServer {
 			}
 		}
 	}
+	public static <T> List<T> getAll(Class<T> object) {
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<T> criteriaQuery = builder.createQuery(object);
+		Root<T> rootEntry = criteriaQuery.from(object);
+		CriteriaQuery<T> allCriteriaQuery = criteriaQuery.select(rootEntry);
+
+		TypedQuery<T> allQuery = session.createQuery(allCriteriaQuery);
+		return allQuery.getResultList();
+	}
+
 
 }
