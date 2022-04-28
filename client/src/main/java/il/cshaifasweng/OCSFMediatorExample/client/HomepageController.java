@@ -10,7 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+
 public class HomepageController {
+
 
     @FXML
     private ResourceBundle resources;
@@ -40,9 +42,8 @@ public class HomepageController {
 
     @FXML
     void Manager_btn(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer("#openspray");
-        System.out.format("SADAGEagsdfg44777777777777777777777777777444444\n");
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("flowers.fxml"));
+        SimpleClient.getClient().sendToServer("#openmanagercatalog");
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("catalog2.fxml"));
         Pane1.getChildren().setAll(pane);
     }
 

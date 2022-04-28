@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SimpleClient extends AbstractClient {
 
-	public static Item item = null;
+
 	private static SimpleClient client = null;
 
 	private SimpleClient(String host, int port) {
@@ -19,26 +19,82 @@ public class SimpleClient extends AbstractClient {
 	@Override
 	protected void handleMessageFromServer(Object msg) {
 		String msgstring = ((Message)msg ).getMessage();
-		System.out.format(msgstring);
-
-
 		if(msgstring.startsWith("#SendLists"))
 		{
-			System.out.format("message recived \n");
+
+			catalogController2.setCataloglist1((List<Catalog>) ((Message) msg).getObject());
+
+
+		}
+		if(msgstring.startsWith("#SendLists1"))
+		{
+
 			catalogController.setCataloglist((List<Catalog>) ((Message) msg).getObject());
 
 		}
 		if(msgstring.startsWith("#openspray1"))
 		{
-			System.out.format(" message for open spray recieved! \n ");
+
 			FlowersController.setItem((Item) ((Message) msg).getObject());
-			System.out.format(" message for open spray recieved! \n ");
-		}
-		/*if(msgstring.startsWith("#ok"))
+
+
+		}if(msgstring.startsWith("#1openspray4"))
 		{
-			EventBus.getDefault().post(new Received((Message) msg));
-			System.out.format("SADAGEagsdfg");
-		}*/
+
+			ManagerController.setItem((Item) ((Message) msg).getObject());
+
+		}
+		if(msgstring.startsWith("#opendelphunim1"))
+		{
+
+			FlowersController.setItem((Item) ((Message) msg).getObject());
+
+
+		}if(msgstring.startsWith("#1opendelphunim4"))
+		{
+
+			ManagerController.setItem((Item) ((Message) msg).getObject());
+
+
+		}
+		if(msgstring.startsWith("#openbridal1"))
+		{
+
+			FlowersController.setItem((Item) ((Message) msg).getObject());
+
+
+		}if(msgstring.startsWith("#1openbridal4"))
+		{
+
+			ManagerController.setItem((Item) ((Message) msg).getObject());
+
+
+		}
+		if(msgstring.startsWith("#opensensivaria1"))
+		{
+
+			FlowersController.setItem((Item) ((Message) msg).getObject());
+
+
+		}if(msgstring.startsWith("#1opensensivaria4"))
+		{
+
+			ManagerController.setItem((Item) ((Message) msg).getObject());
+
+
+		}
+		if(msgstring.startsWith("#openzamia1"))
+		{
+
+			FlowersController.setItem((Item) ((Message) msg).getObject());
+
+
+		}if(msgstring.startsWith("#1openzamia4"))
+		{
+
+			ManagerController.setItem((Item) ((Message) msg).getObject());
+
+		}
 
 	}
 

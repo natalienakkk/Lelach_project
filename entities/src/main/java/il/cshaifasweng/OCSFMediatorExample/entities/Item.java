@@ -6,6 +6,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "items")
 public class Item implements Serializable {
+    private static final long serialVersionUID = 7030377024343093717L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,6 +20,10 @@ public class Item implements Serializable {
     @JoinColumn(name = "items_id")
     private Catalog items;
 
+    public Item() {
+
+    }
+
     public String getName() {
         return name;
     }
@@ -29,6 +34,14 @@ public class Item implements Serializable {
 
     public String getType() {
         return type;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setType(String type) {

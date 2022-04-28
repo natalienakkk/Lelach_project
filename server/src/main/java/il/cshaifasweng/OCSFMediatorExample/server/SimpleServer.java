@@ -41,38 +41,208 @@ public class SimpleServer extends AbstractServer {
 
 	@Override
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) throws IOException {
-		System.out.format("handling message from client!\n");
+
 		String msgString = msg.toString();
-//		if (msgString.startsWith("#warning")) {
-//			Warning warning = new Warning("Warning from server!");
-//			try {
-//				client.sendToClient(warning);
-//				System.out.format("Sent warning to client %s\n", client.getInetAddress().getHostAddress());
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
 		if(msgString.equals("#opencatalog"))
 		{
-			System.out.format("open cataloooogggg\n");
+
 			session = sessionFactory.openSession();
-			List<Catalog> catalogList=getAll(Catalog.class);
-			client.sendToClient(new Message("#SendLists"+ catalogList));
+			List<Item> itemList=getAll(Item.class);
+			System.out.format(itemList.get(0).getColor() + " ana hooooon    ");
+			client.sendToClient(new Message("#SendLists1", itemList.get(0)));
+			session.close();
+		}
+		else if(msgString.startsWith("#update_price"))
+		{
 
+			Message msg7 = ((Message) msg);
+			double price10 = (double) msg7.getObject();
+			long id10 = ((long) msg7.getObject2());
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Item> itemList=getAll(Item.class);
+			int i = 0;
+			for(i=0 ; i < itemList.size() ; i++)
+			{
 
+				if(itemList.get(i).getId() == id10 )
+				{
+					itemList.get(i).setPrice(price10);
+					session.save(itemList.get(i));
+					session.flush();
+					session.getTransaction().commit();
+					System.out.format("Price changed successfully! ");
+					break;
+				}
+			}
 
 			session.close();
-			System.out.format("open cataloooogggg\n");
 
 		}
+		else if(msgString.startsWith("#openmanagercatalog"))
+		{
+			session = sessionFactory.openSession();
+			List<Item> itemList=getAll(Item.class);
+			client.sendToClient(new Message("#SendLists", itemList.get(0)));
+			session.close();
+		}
 		else if(msgString.startsWith("#openspray"))
+		{
+			System.out.format("saher1");
+			try {
+				session = sessionFactory.openSession();
+				List<Item> Itemlist=getAll(Item.class);
+				client.sendToClient(new Message("#openspray1" , Itemlist.get(0)));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.format("handling in server : open spray! \n");
+			session.close();
+		}else if(msgString.startsWith("#1openspray3"))
+		{
+			System.out.format("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+			try {
+				System.out.format("aaaaaaaaaaaaaaaaaa77777777777777777777777777777777a");
+				session = sessionFactory.openSession();
+				List<Item> Itemlist=getAll(Item.class);
+				System.out.format("hhhhhhhhhhhhhhhhh" + Itemlist.get(0).getName()+ " hhhhhhhhhhhhhhhhhhhhh");
+				client.sendToClient(new Message("#1openspray4" , Itemlist.get(0)));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.format("handling in server : open spray! \n");
+			session.close();
+		}
+		else if(msgString.startsWith("#opendelphunim"))
 		{
 
 			try {
 				session = sessionFactory.openSession();
-				List<Catalog> catalogList=getAll(Catalog.class);
-				client.sendToClient(new Message("#openspray1" + catalogList));
-				client.sendToClient(catalogList);
+				List<Item> Itemlist=getAll(Item.class);
+				client.sendToClient(new Message("#opendelphunim1" , Itemlist.get(1)));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.format("handling in server : open spray! \n");
+			session.close();
+		}else if(msgString.startsWith("#1opendelphunim3"))
+		{
+
+			try {
+				session = sessionFactory.openSession();
+				List<Item> Itemlist=getAll(Item.class);
+				client.sendToClient(new Message("#1opendelphunim4" , Itemlist.get(1)));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.format("handling in server : open spray! \n");
+			session.close();
+		}
+		else if(msgString.startsWith("#openbridal"))
+		{
+
+			try {
+				session = sessionFactory.openSession();
+				List<Item> Itemlist=getAll(Item.class);
+				client.sendToClient(new Message("#openbridal1" , Itemlist.get(4)));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.format("handling in server : open spray! \n");
+			session.close();
+		}else if(msgString.startsWith("#1openbridal3"))
+		{
+
+			try {
+				session = sessionFactory.openSession();
+				List<Item> Itemlist=getAll(Item.class);
+				client.sendToClient(new Message("#1openbridal4" , Itemlist.get(4)));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.format("handling in server : open spray! \n");
+			session.close();
+		}
+		else if(msgString.startsWith("#opensensivaria"))
+		{
+
+			try {
+				session = sessionFactory.openSession();
+				List<Item> Itemlist=getAll(Item.class);
+				client.sendToClient(new Message("#opensensivaria1" , Itemlist.get(3)));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.format("handling in server : open spray! \n");
+			session.close();
+		}else if(msgString.startsWith("#1opensensivaria3"))
+		{
+
+			try {
+				session = sessionFactory.openSession();
+				List<Item> Itemlist=getAll(Item.class);
+				client.sendToClient(new Message("#1opensensivaria4" , Itemlist.get(3)));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.format("handling in server : open spray! \n");
+			session.close();
+		}
+		else if(msgString.startsWith("#openzamia"))
+		{
+
+			try {
+				session = sessionFactory.openSession();
+				List<Item> Itemlist=getAll(Item.class);
+				client.sendToClient(new Message("#openzamia1" , Itemlist.get(2)));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.format("handling in server : open spray! \n");
+			session.close();
+		}else if(msgString.startsWith("#1openzamia3"))
+		{
+
+			try {
+				session = sessionFactory.openSession();
+				List<Item> Itemlist=getAll(Item.class);
+				client.sendToClient(new Message("#1openzamia4" , Itemlist.get(2)));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -98,10 +268,22 @@ public class SimpleServer extends AbstractServer {
 	private static void initializeData()
 	{
 		Catalog temp =new Catalog();
-		Item it =new Item("wrde","gore","a7mr",":pic",50);
+		Item it1 =new Item("Spray carnations","Carnations","Pink","pic",50);
+		Item it2 =new Item("The delphinium" , "Delphinium " , "Blue" ,  "pic" ,200);
+		Item it3 =new Item("Zamia Coconut L" , "Zamia Coconut" , "Green" , "pic" ,100);
+		Item it4 =new Item("Sensivaria medium" , "Sensivaria" , "Green" , "pic" , 55);
+		Item it5 =new Item("Bridal bouquet" , "White peonies" , "White" , "pic" , 300);
 		session.save(temp);
-		session.save(it);
-		temp.addIteam(it);
+		session.save(it1);
+		session.save(it2);
+		session.save(it3);
+		session.save(it4);
+		session.save(it5);
+		temp.addIteam(it1);
+		temp.addIteam(it2);
+		temp.addIteam(it3);
+		temp.addIteam(it4);
+		temp.addIteam(it5);
 	}
 
 	public void connectData() {
@@ -109,7 +291,6 @@ public class SimpleServer extends AbstractServer {
 			SessionFactory sessionFactory = getSessionFactory();
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-
 			initializeData();
 			session.close();
 		} catch (Exception exception) {
