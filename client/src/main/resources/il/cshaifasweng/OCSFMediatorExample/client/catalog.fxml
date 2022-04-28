@@ -14,31 +14,35 @@
             <Font size="47.0" />
          </font>
       </Text>
-      <ImageView fx:id="image_1" fitHeight="100.0" fitWidth="100.0" layoutX="478.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="file:/C:/Users/Saher/IdeaProjects/saher-eissa/client/src/main/java/il/cshaifasweng/OCSFMediatorExample/client/images/image1.jpeg" />
-         </image></ImageView>
-      <ImageView fx:id="image_2" fitHeight="100.0" fitWidth="100.0" layoutX="329.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="file:/C:/Users/Saher/IdeaProjects/saher-eissa/client/src/main/java/il/cshaifasweng/OCSFMediatorExample/client/images/image2.jpeg" />
-         </image></ImageView>
-      <ImageView fx:id="image_3" fitHeight="100.0" fitWidth="100.0" layoutX="192.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="file:/C:/Users/Saher/IdeaProjects/saher-eissa/client/src/main/java/il/cshaifasweng/OCSFMediatorExample/client/images/image3.jpeg" />
-         </image></ImageView>
-      <ImageView fx:id="image_4" fitHeight="100.0" fitWidth="100.0" layoutX="64.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="file:/C:/Users/Saher/IdeaProjects/saher-eissa/client/src/main/java/il/cshaifasweng/OCSFMediatorExample/client/images/image4.jpeg" />
-         </image></ImageView>
-      <ImageView fx:id="image_5" fitHeight="100.0" fitWidth="100.0" layoutX="629.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="file:/C:/Users/Saher/IdeaProjects/saher-eissa/client/src/main/java/il/cshaifasweng/OCSFMediatorExample/client/images/image5.jpeg" />
-         </image>
-      </ImageView>
       <Button fx:id="buttun_1" layoutX="476.0" layoutY="314.0" mnemonicParsing="false" onAction="#spray_buttun" text="Spray carnations" />
       <Button fx:id="buttun_2" layoutX="329.0" layoutY="314.0" mnemonicParsing="false" onAction="#delphunium_buttun" text="The delphinium" />
       <Button fx:id="buttun_3" layoutX="181.0" layoutY="314.0" mnemonicParsing="false" onAction="#zamia_buttun" text="Zamia Coconut L" />
       <Button fx:id="buttun_4" layoutX="42.0" layoutY="314.0" mnemonicParsing="false" onAction="#sensivaria_buttun" text="Sensivaria medium" />
       <Button fx:id="buttun_5" layoutX="632.0" layoutY="314.0" mnemonicParsing="false" onAction="#bridal_buttun" text="Bridal bouquet" />
+      <ImageView fx:id="image_4" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../images/image4.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="image_3" fitHeight="100.0" fitWidth="100.0" layoutX="184.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../images/image3.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="image_2" fitHeight="100.0" fitWidth="100.0" layoutX="329.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../images/image2.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="image_5" fitHeight="100.0" fitWidth="100.0" layoutX="629.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../images/image5.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="478.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../images/image1.jpeg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
