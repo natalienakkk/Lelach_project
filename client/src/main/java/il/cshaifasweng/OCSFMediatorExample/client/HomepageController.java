@@ -32,15 +32,8 @@ public class HomepageController {
 
     @FXML
     void Guest_btn(ActionEvent event) throws IOException {
-        try {
-            SimpleClient.getClient().sendToServer("#opencatalog");
-        }
-        catch(IOException e)
-        {
-
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        SimpleClient.getClient().sendToServer("#opencatalog");
+        System.out.format("sent to server! \n");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("catalog.fxml"));
         Pane1.getChildren().setAll(pane);
     }

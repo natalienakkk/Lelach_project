@@ -40,33 +40,29 @@ public class SimpleServer extends AbstractServer {
 	}
 
 	@Override
-	protected void handleMessageFromClient(Object msg, ConnectionToClient client) {
+	protected void handleMessageFromClient(Object msg, ConnectionToClient client) throws IOException {
+		System.out.format("handling message from client!\n");
 		String msgString = msg.toString();
-		if (msgString.startsWith("#warning")) {
-			Warning warning = new Warning("Warning from server!");
-			try {
-				client.sendToClient(warning);
-				System.out.format("Sent warning to client %s\n", client.getInetAddress().getHostAddress());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		else if(msgString.startsWith("#opencatalog"))
+//		if (msgString.startsWith("#warning")) {
+//			Warning warning = new Warning("Warning from server!");
+//			try {
+//				client.sendToClient(warning);
+//				System.out.format("Sent warning to client %s\n", client.getInetAddress().getHostAddress());
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+		if(msgString.equals("#opencatalog"))
 		{
-			try {
-				session = sessionFactory.openSession();
-				List<Catalog> catalogList=getAll(Catalog.class);
-				client.sendToClient(new Message("#SendLists",catalogList));
-				System.out.format("open cataloooogggg\n");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			System.out.format("open cataloooogggg\n");
+			session = sessionFactory.openSession();
+			List<Catalog> catalogList=getAll(Catalog.class);
+			client.sendToClient(new Message("#SendLists"+ catalogList));
+
+
 
 			session.close();
+			System.out.format("open cataloooogggg\n");
 
 		}
 		else if(msgString.startsWith("#openspray"))
@@ -75,16 +71,16 @@ public class SimpleServer extends AbstractServer {
 			try {
 				session = sessionFactory.openSession();
 				List<Catalog> catalogList=getAll(Catalog.class);
-				client.sendToClient(new Message("#openspray1",catalogList.get(0)));
+				client.sendToClient(new Message("#openspray1" + catalogList));
+				client.sendToClient(catalogList);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (Exception e) {
-				System.out.format("im in server\n");
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.format("im in server\n");
+			System.out.format("handling in server : open spray! \n");
 			session.close();
 		}
 

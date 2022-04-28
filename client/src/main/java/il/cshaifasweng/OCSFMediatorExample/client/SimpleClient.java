@@ -8,7 +8,8 @@ import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 import java.util.List;
 
 public class SimpleClient extends AbstractClient {
-	
+
+	public static Item item = null;
 	private static SimpleClient client = null;
 
 	private SimpleClient(String host, int port) {
@@ -17,19 +18,21 @@ public class SimpleClient extends AbstractClient {
 
 	@Override
 	protected void handleMessageFromServer(Object msg) {
-		System.out.format(" recifasfwe4f13333333ved ");
-		String msgstring = ((Message) msg ).getMessage();
+		String msgstring = ((Message)msg ).getMessage();
+		System.out.format(msgstring);
+
 
 		if(msgstring.startsWith("#SendLists"))
 		{
-			System.out.format("message recived ");
+			System.out.format("message recived \n");
 			catalogController.setCataloglist((List<Catalog>) ((Message) msg).getObject());
-			System.out.format("message recived ");
+
 		}
-		else if(msgstring.startsWith("#openspray1"))
+		if(msgstring.startsWith("#openspray1"))
 		{
-			System.out.format(" recifasfwe4f13333333ved ");
+			System.out.format(" message for open spray recieved! \n ");
 			FlowersController.setItem((Item) ((Message) msg).getObject());
+			System.out.format(" message for open spray recieved! \n ");
 		}
 		/*if(msgstring.startsWith("#ok"))
 		{
@@ -38,7 +41,7 @@ public class SimpleClient extends AbstractClient {
 		}*/
 
 	}
-	
+
 	public static SimpleClient getClient() {
 
 		if (client == null) {

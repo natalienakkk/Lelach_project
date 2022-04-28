@@ -6,14 +6,14 @@ public class Message implements Serializable {
     /**
      *
      */
-    private static final long serialVersionUID = 1796152757076459084L;
+    private static final long serialVersionUID = 1L;
     private String message;
     private Object object;
     private Object object2;
     private Object object3;
     private Object object4;
 
-    public Message() {}
+
 
     public Message(String msg, Object obj) {
         this.message = msg;
@@ -46,7 +46,7 @@ public class Message implements Serializable {
     }
 
     public String getMessage() {
-        return this.message;
+        return message;
     }
 
     public Object getObject () {

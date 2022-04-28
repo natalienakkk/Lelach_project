@@ -1,8 +1,10 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.Catalog;
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -10,6 +12,15 @@ import javafx.scene.text.Text;
 
 public class FlowersController {
     private static Item item;
+    public static List<Catalog> cata;
+
+    public static List<Catalog> getCata() {
+        return cata;
+    }
+
+    public static void setCata(List<Catalog> cata) {
+        FlowersController.cata = cata;
+    }
 
     public static Item getItem() {
         return item;
@@ -45,13 +56,18 @@ public class FlowersController {
 
     @FXML
     void initialize() {
+        System.out.format("5555566665");
         assert flower_color != null : "fx:id=\"flower_color\" was not injected: check your FXML file 'flowers.fxml'.";
         assert flower_id != null : "fx:id=\"flower_id\" was not injected: check your FXML file 'flowers.fxml'.";
         assert flower_image != null : "fx:id=\"flower_image\" was not injected: check your FXML file 'flowers.fxml'.";
         assert flower_name != null : "fx:id=\"flower_name\" was not injected: check your FXML file 'flowers.fxml'.";
         assert flower_price != null : "fx:id=\"flower_price\" was not injected: check your FXML file 'flowers.fxml'.";
         assert flower_type != null : "fx:id=\"flower_type\" was not injected: check your FXML file 'flowers.fxml'.";
-        flower_name.setText(item.getName());
+        flower_name.setText(SimpleClient.item.getName());
+        System.out.format(item.getName()+"555555");
+        System.out.format(item.getName()+"555555");
+        System.out.format(item.getName());
+        System.out.format(item.getName());
         flower_color.setText("Color : "+ item.getColor());
 
     }

@@ -97,24 +97,24 @@ public class catalogController {
 
     @FXML
     void spray_buttun(ActionEvent event) throws IOException {
-        try {
-            SimpleClient.getClient().sendToServer("#openspray");
-            System.out.format("ana hon");
-        } catch (IOException e) {
-            System.out.format("ana hon2");
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+//        try {
+//            SimpleClient.getClient().sendToServer("#openspray");
+//            System.out.format("ana hon");
+//        } catch (IOException e) {
+//            System.out.format("ana hon2");
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
 
-//        SimpleClient.getClient().sendToServer("#openspray");
-
+        SimpleClient.getClient().sendToServer("#openspray");
+        System.out.format("sending to server : openspray \n");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("flowers.fxml"));
         Pane2.getChildren().setAll(pane);
     }
 
     @FXML
     void zamia_buttun(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer("#openspray");
+        //SimpleClient.getClient().sendToServer("#openspray");
         AnchorPane pane = FXMLLoader.load(getClass().getResource("flowers.fxml"));
         Pane2.getChildren().setAll(pane);
     }
@@ -133,7 +133,7 @@ public class catalogController {
         assert image_3 != null : "fx:id=\"image_3\" was not injected: check your FXML file 'catalog.fxml'.";
         assert image_4 != null : "fx:id=\"image_4\" was not injected: check your FXML file 'catalog.fxml'.";
         assert image_5 != null : "fx:id=\"image_5\" was not injected: check your FXML file 'catalog.fxml'.";
-        //buttun_1.setId(cataloglist.get(0).getitem(0).getName());
+        //System.out.format(cataloglist.get(0).getitem().getName());
 
     }
 
