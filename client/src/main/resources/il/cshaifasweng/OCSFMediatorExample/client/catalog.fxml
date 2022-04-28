@@ -19,29 +19,29 @@
       <Button fx:id="buttun_3" layoutX="181.0" layoutY="314.0" mnemonicParsing="false" onAction="#zamia_buttun" text="Zamia Coconut L" />
       <Button fx:id="buttun_4" layoutX="42.0" layoutY="314.0" mnemonicParsing="false" onAction="#sensivaria_buttun" text="Sensivaria medium" />
       <Button fx:id="buttun_5" layoutX="632.0" layoutY="314.0" mnemonicParsing="false" onAction="#bridal_buttun" text="Bridal bouquet" />
-      <ImageView fx:id="image_4" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="478.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../images/image4.jpeg" />
+            <Image url="@../../../../images/image1.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="image_3" fitHeight="100.0" fitWidth="100.0" layoutX="184.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="329.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../images/image3.jpeg" />
+            <Image url="@../../../../images/image2.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="image_2" fitHeight="100.0" fitWidth="100.0" layoutX="329.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="184.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../images/image2.jpeg" />
+            <Image url="@../../../../images/image3.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="image_5" fitHeight="100.0" fitWidth="100.0" layoutX="629.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../images/image5.jpeg" />
+            <Image url="@../../../../images/image4.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="478.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="629.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../images/image1.jpeg" />
+            <Image url="@../../../../images/image5.jpg" />
          </image>
       </ImageView>
    </children>
