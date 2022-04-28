@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="Pane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ManagerController">
+   <children>
+      <Text fx:id="flower_name" layoutX="143.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" textAlignment="CENTER" wrappingWidth="313.33673095703125">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="flower_image" fitHeight="190.0" fitWidth="286.0" layoutX="157.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="flower_id" layoutX="22.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID : " wrappingWidth="263.73675537109375">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="flower_price" layoutX="403.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price : " wrappingWidth="62.93670654296875">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="flower_color" layoutX="22.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color : " wrappingWidth="230.93670654296875">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="flower_type" layoutX="23.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type :" wrappingWidth="277.336669921875">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="priceee" layoutX="475.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="62.93670654296875">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="edit_price" layoutX="401.0" layoutY="311.0" onAction="#edit_price1" onKeyPressed="#edit_price2" promptText="Edit price here" />
+   </children>
+</AnchorPane>
