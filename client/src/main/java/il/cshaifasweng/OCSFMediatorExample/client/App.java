@@ -19,18 +19,18 @@ import org.greenrobot.eventbus.Subscribe;
  */
 public class App extends Application {
 
-    private static Scene scene;
-    private SimpleClient client;
+        private static Scene scene;
+        private SimpleClient client;
 
-    @Override
-    public void start(Stage stage) throws IOException {
-    	EventBus.getDefault().register(this);
-    	client = SimpleClient.getClient();
-    	client.openConnection();
-        scene = new Scene(loadFXML("homepage"), 640, 480);
-        stage.setScene(scene);
-        stage.show();
-    }
+        @Override
+        public void start(Stage stage) throws IOException {
+            EventBus.getDefault().register(this);
+            client = SimpleClient.getClient();
+            client.openConnection();
+            scene = new Scene(loadFXML("homepage"), 640, 480);
+            stage.setScene(scene);
+            stage.show();
+        }
 
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
