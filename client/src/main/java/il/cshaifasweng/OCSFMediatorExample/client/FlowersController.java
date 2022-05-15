@@ -1,7 +1,11 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -11,6 +15,7 @@ import javafx.scene.control.Button;
 import il.cshaifasweng.OCSFMediatorExample.entities.Catalog;
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -62,13 +67,11 @@ public class FlowersController {
 
     @FXML
     void back_to_catalog1(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("homepage.fxml"));
-        Pane1.getChildren().setAll(pane);
+       App.setRoot("catalog");
     }
 
     @FXML
     void initialize() {
-        System.out.format("5555566665");
         assert Pane1 != null : "fx:id=\"Pane1\" was not injected: check your FXML file 'flowers.fxml'.";
         assert back_to_catalog != null : "fx:id=\"back_to_catalog\" was not injected: check your FXML file 'flowers.fxml'.";
         assert flower_color != null : "fx:id=\"flower_color\" was not injected: check your FXML file 'flowers.fxml'.";
@@ -78,6 +81,7 @@ public class FlowersController {
         assert flower_price != null : "fx:id=\"flower_price\" was not injected: check your FXML file 'flowers.fxml'.";
         assert flower_type != null : "fx:id=\"flower_type\" was not injected: check your FXML file 'flowers.fxml'.";
         assert priceee != null : "fx:id=\"priceee\" was not injected: check your FXML file 'flowers.fxml'.";
+        //flower_image.setImage(item.getPicture());????????????
         flower_name.setText(item.getName());
         flower_color.setText("Color : "+ item.getColor());
         flower_type.setText("Type : "+ item.getType());

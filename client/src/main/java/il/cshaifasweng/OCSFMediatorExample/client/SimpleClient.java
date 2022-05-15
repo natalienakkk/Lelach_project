@@ -1,7 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
-import org.greenrobot.eventbus.EventBus;
 
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 
@@ -19,83 +18,21 @@ public class SimpleClient extends AbstractClient {
 	@Override
 	protected void handleMessageFromServer(Object msg) {
 		String msgstring = ((Message)msg ).getMessage();
-		if(msgstring.startsWith("#SendLists"))
+		if(msgstring.startsWith("#opencatalog"))
 		{
-
-			catalogController2.setCataloglist1((List<Catalog>) ((Message) msg).getObject());
-
-
+			catalogControllerUser.setItemList((List<Item>) ((Message) msg).getObject2());
+			catalogControllerUser.setType((String) ((Message) msg).getObject());
 		}
-		if(msgstring.startsWith("#SendLists1"))
+		if(msgstring.startsWith("#openuseritem"))
 		{
-
-			catalogController.setCataloglist((List<Catalog>) ((Message) msg).getObject());
-
-		}
-		if(msgstring.startsWith("#openspray1"))
-		{
-
-			FlowersController.setItem((Item) ((Message) msg).getObject());
-
-
-		}if(msgstring.startsWith("#1openspray4"))
-		{
-
+			if(catalogControllerUser.getType().equals("Manager")) {
 			ManagerController.setItem((Item) ((Message) msg).getObject());
-
-		}
-		if(msgstring.startsWith("#opendelphunim1"))
-		{
-
+			System.out.format(ManagerController.getItem().getName() + " from simple client \n"); }
+			else if(catalogControllerUser.getType().equals("Guest"))
 			FlowersController.setItem((Item) ((Message) msg).getObject());
-
-
-		}if(msgstring.startsWith("#1opendelphunim4"))
-		{
-
-			ManagerController.setItem((Item) ((Message) msg).getObject());
-
-
+			else if(catalogControllerUser.getType().equals("Client"))
+			OrderCatalogController.setItem((Item) ((Message) msg).getObject());
 		}
-		if(msgstring.startsWith("#openbridal1"))
-		{
-
-			FlowersController.setItem((Item) ((Message) msg).getObject());
-
-
-		}if(msgstring.startsWith("#1openbridal4"))
-		{
-
-			ManagerController.setItem((Item) ((Message) msg).getObject());
-
-
-		}
-		if(msgstring.startsWith("#opensensivaria1"))
-		{
-
-			FlowersController.setItem((Item) ((Message) msg).getObject());
-
-
-		}if(msgstring.startsWith("#1opensensivaria4"))
-		{
-
-			ManagerController.setItem((Item) ((Message) msg).getObject());
-
-
-		}
-		if(msgstring.startsWith("#openzamia1"))
-		{
-
-			FlowersController.setItem((Item) ((Message) msg).getObject());
-
-
-		}if(msgstring.startsWith("#1openzamia4"))
-		{
-
-			ManagerController.setItem((Item) ((Message) msg).getObject());
-
-		}
-
 	}
 
 	public static SimpleClient getClient() {

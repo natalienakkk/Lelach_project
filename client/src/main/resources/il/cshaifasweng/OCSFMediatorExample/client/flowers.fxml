@@ -7,42 +7,42 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="Pane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.FlowersController">
+<AnchorPane fx:id="Pane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.FlowersController">
    <children>
-      <Text fx:id="flower_name" layoutX="143.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" textAlignment="CENTER" wrappingWidth="313.33673095703125">
+      <Text fx:id="flower_name" layoutX="206.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" textAlignment="CENTER" wrappingWidth="313.33673095703125">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Text fx:id="flower_id" layoutX="22.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID : " wrappingWidth="263.73675537109375">
+      <Text fx:id="flower_id" layoutX="23.0" layoutY="521.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID : " wrappingWidth="263.73675537109375">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="flower_price" layoutX="403.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price : " wrappingWidth="62.93670654296875">
+      <Text fx:id="flower_price" layoutX="332.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price : " wrappingWidth="62.93670654296875">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="flower_color" layoutX="22.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color : " wrappingWidth="230.93670654296875">
+      <Text fx:id="flower_color" layoutX="23.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color : " wrappingWidth="230.93670654296875">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="flower_type" layoutX="23.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type :" wrappingWidth="277.336669921875">
+      <Text fx:id="flower_type" layoutX="23.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type :" wrappingWidth="277.336669921875">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="priceee" layoutX="475.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="62.93670654296875">
+      <Text fx:id="priceee" layoutX="395.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="62.93670654296875">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Button fx:id="back_to_catalog" layoutX="32.0" layoutY="50.0" mnemonicParsing="false" onAction="#back_to_catalog1" text="Back" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="186.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="back_to_catalog" layoutX="23.0" layoutY="33.0" mnemonicParsing="false" onAction="#back_to_catalog1" text="Back" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="274.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../images/image1.jpg" />
+            <Image url="@../../../../images/Photo_name.jpg" />
          </image>
       </ImageView>
    </children>

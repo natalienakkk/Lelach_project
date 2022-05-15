@@ -45,11 +45,11 @@ public class SimpleServer extends AbstractServer {
 		String msgString = msg.toString();
 		if(msgString.equals("#opencatalog"))
 		{
-
+			Message msg3 = ((Message) msg);
+			String user_type = (String) msg3.getObject();
 			session = sessionFactory.openSession();
 			List<Item> itemList=getAll(Item.class);
-			System.out.format(itemList.get(0).getColor() + " ana hooooon    ");
-			client.sendToClient(new Message("#SendLists1", itemList.get(0)));
+			client.sendToClient(new Message("#opencatalog", user_type , itemList));
 			session.close();
 		}
 		else if(msgString.startsWith("#update_price"))
@@ -64,193 +64,31 @@ public class SimpleServer extends AbstractServer {
 			int i = 0;
 			for(i=0 ; i < itemList.size() ; i++)
 			{
-
 				if(itemList.get(i).getId() == id10 )
 				{
 					itemList.get(i).setPrice(price10);
 					session.save(itemList.get(i));
 					session.flush();
 					session.getTransaction().commit();
-					System.out.format("Price changed successfully! ");
 					break;
 				}
 			}
-
 			session.close();
-
 		}
-		else if(msgString.startsWith("#openmanagercatalog"))
+		else if(msgString.startsWith("#openuseritem"))
 		{
+			Message msg2 = ((Message) msg);
+			String flowername = (String) msg2.getObject();
 			session = sessionFactory.openSession();
-			List<Item> itemList=getAll(Item.class);
-			client.sendToClient(new Message("#SendLists", itemList.get(0)));
-			session.close();
-		}
-		else if(msgString.startsWith("#openspray"))
-		{
-			System.out.format("saher1");
-			try {
-				session = sessionFactory.openSession();
-				List<Item> Itemlist=getAll(Item.class);
-				client.sendToClient(new Message("#openspray1" , Itemlist.get(0)));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.format("handling in server : open spray! \n");
-			session.close();
-		}else if(msgString.startsWith("#1openspray3"))
-		{
-			System.out.format("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-			try {
-				System.out.format("aaaaaaaaaaaaaaaaaa77777777777777777777777777777777a");
-				session = sessionFactory.openSession();
-				List<Item> Itemlist=getAll(Item.class);
-				System.out.format("hhhhhhhhhhhhhhhhh" + Itemlist.get(0).getName()+ " hhhhhhhhhhhhhhhhhhhhh");
-				client.sendToClient(new Message("#1openspray4" , Itemlist.get(0)));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.format("handling in server : open spray! \n");
-			session.close();
-		}
-		else if(msgString.startsWith("#opendelphunim"))
-		{
+			List<Item> Itemlist=getAll(Item.class);
 
-			try {
-				session = sessionFactory.openSession();
-				List<Item> Itemlist=getAll(Item.class);
-				client.sendToClient(new Message("#opendelphunim1" , Itemlist.get(1)));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			for(int i=0 ; i < Itemlist.size() ; i++)
+			{
+				if(Itemlist.get(i).getName().equals(flowername))
+				{
+					client.sendToClient(new Message("#openuseritem" , Itemlist.get(i)));
+				}
 			}
-			System.out.format("handling in server : open spray! \n");
-			session.close();
-		}else if(msgString.startsWith("#1opendelphunim3"))
-		{
-
-			try {
-				session = sessionFactory.openSession();
-				List<Item> Itemlist=getAll(Item.class);
-				client.sendToClient(new Message("#1opendelphunim4" , Itemlist.get(1)));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.format("handling in server : open spray! \n");
-			session.close();
-		}
-		else if(msgString.startsWith("#openbridal"))
-		{
-
-			try {
-				session = sessionFactory.openSession();
-				List<Item> Itemlist=getAll(Item.class);
-				client.sendToClient(new Message("#openbridal1" , Itemlist.get(4)));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.format("handling in server : open spray! \n");
-			session.close();
-		}else if(msgString.startsWith("#1openbridal3"))
-		{
-
-			try {
-				session = sessionFactory.openSession();
-				List<Item> Itemlist=getAll(Item.class);
-				client.sendToClient(new Message("#1openbridal4" , Itemlist.get(4)));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.format("handling in server : open spray! \n");
-			session.close();
-		}
-		else if(msgString.startsWith("#opensensivaria"))
-		{
-
-			try {
-				session = sessionFactory.openSession();
-				List<Item> Itemlist=getAll(Item.class);
-				client.sendToClient(new Message("#opensensivaria1" , Itemlist.get(3)));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.format("handling in server : open spray! \n");
-			session.close();
-		}else if(msgString.startsWith("#1opensensivaria3"))
-		{
-
-			try {
-				session = sessionFactory.openSession();
-				List<Item> Itemlist=getAll(Item.class);
-				client.sendToClient(new Message("#1opensensivaria4" , Itemlist.get(3)));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.format("handling in server : open spray! \n");
-			session.close();
-		}
-		else if(msgString.startsWith("#openzamia"))
-		{
-
-			try {
-				session = sessionFactory.openSession();
-				List<Item> Itemlist=getAll(Item.class);
-				client.sendToClient(new Message("#openzamia1" , Itemlist.get(2)));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.format("handling in server : open spray! \n");
-			session.close();
-		}else if(msgString.startsWith("#1openzamia3"))
-		{
-
-			try {
-				session = sessionFactory.openSession();
-				List<Item> Itemlist=getAll(Item.class);
-				client.sendToClient(new Message("#1openzamia4" , Itemlist.get(2)));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.format("handling in server : open spray! \n");
 			session.close();
 		}
 
@@ -268,22 +106,67 @@ public class SimpleServer extends AbstractServer {
 	private static void initializeData()
 	{
 		Catalog temp =new Catalog();
-		Item it1 =new Item("Spray carnations","Carnations","Pink","pic",50);
-		Item it2 =new Item("The delphinium" , "Delphinium " , "Blue" ,  "pic" ,200);
-		Item it3 =new Item("Zamia Coconut L" , "Zamia Coconut" , "Green" , "pic" ,100);
-		Item it4 =new Item("Sensivaria medium" , "Sensivaria" , "Green" , "pic" , 55);
-		Item it5 =new Item("Bridal bouquet" , "White peonies" , "White" , "pic" , 300);
+		Item it1 =new Item("Spray carnations","Carnations","Pink","@../../../../images/Spray carnations.jpg",50);
+		Item it2 =new Item("Delphinium" , "Plant " , "Blue" ,  "@../../../../images/Delphinium.jpg" ,20);
+		Item it3 =new Item("Zamia Coconut L" , "Zamia Coconut" , "Green" , "@../../../../images/Zamia Coconut L.jpg" ,100);
+		Item it4 =new Item("Sensivaria medium" , "Sensivaria" , "Green" , "@../../../../images/Sensivaria medium.jpg" , 55);
+		Item it5 =new Item("Bridal bouquet" , "White peonies" , "White" , "@../../../../images/Bridal bouquet.jpg" , 300);
+		Item it6 =new Item("Blue Roses" , "Roses" , "Blue" , "@../../../../images/Blue Roses.jpg" , 80);
+		Item it7 =new Item("Red Roses" , "Roses" , "Red" , "@../../../../images/Red Roses.jpg" , 90);
+		Item it8 =new Item("Single Rose" , "Rose" , "Red" , "@../../../../images/Single Rose.jpg" , 10);
+		Item it9 =new Item("Posy Bouquet" , "Bouquet" , "Pink and White" , "@../../../../images/Posy Bouquet.jpg" , 70);
+		Item it10 =new Item("Basket Bouquet" , "Bouquet" , "Pink and White" , "@../../../../images/Basket Bouquet.jpg" ,130 );
+		Item it11 =new Item("Fan Bouquet" , "Bouquet" , "White" , "@../../../../images/Fan Bouquet.jpg" ,55 );
+		Item it12 =new Item("Fiesta Bouquet" , "Bouquet" , "Red and Purple" , "@../../../../images/Fiesta Bouquet.jpg" ,110 );
+		Item it13 =new Item("Peony Bouquet" , "Bouquet" , "Pink and White" , "@../../../../images/Peony Bouquet.jpg" , 100);
+		Item it14 =new Item("Hello Sunshine" , "Sunflower" , "Yellow and White" , "@../../../../images/Hello Sunshine.jpg" ,80 );
+		Item it15 =new Item("Rainbow Roses" , "Roses" , "Rainbow" , "@../../../../images/Rainbow Roses.jpg" , 250);
+		Item it16 =new Item("Yellow Roses" , "Roses" , "Yellow" , "@../../../../images/Yellow Roses.jpg" ,70 );
+		Item it17 =new Item("White Roses" , "Roses" , "White" , "@../../../../images/White Roses.jpg" , 80);
+		Item it18 =new Item("SunFlower Bouquet" , "Bouquet" , "Yellow" , "@../../../../images/SunFlower Bouquet.jpg" ,  100);
+		Item it19 =new Item("Friendship Bouquet" , "Bouquet" , "White" , "@../../../../images/Friendship Bouquet.jpg" ,140 );
+		Item it20 =new Item("Plant" , "Plant" , "White" , "@../../../../images/Plant.jpg" , 30);
 		session.save(temp);
 		session.save(it1);
 		session.save(it2);
 		session.save(it3);
 		session.save(it4);
 		session.save(it5);
+		session.save(it6);
+		session.save(it7);
+		session.save(it8);
+		session.save(it9);
+		session.save(it10);
+		session.save(it11);
+		session.save(it12);
+		session.save(it13);
+		session.save(it14);
+		session.save(it15);
+		session.save(it16);
+		session.save(it17);
+		session.save(it18);
+		session.save(it19);
+		session.save(it20);
 		temp.addIteam(it1);
 		temp.addIteam(it2);
 		temp.addIteam(it3);
 		temp.addIteam(it4);
 		temp.addIteam(it5);
+		temp.addIteam(it6);
+		temp.addIteam(it7);
+		temp.addIteam(it8);
+		temp.addIteam(it9);
+		temp.addIteam(it10);
+		temp.addIteam(it11);
+		temp.addIteam(it12);
+		temp.addIteam(it13);
+		temp.addIteam(it14);
+		temp.addIteam(it15);
+		temp.addIteam(it16);
+		temp.addIteam(it17);
+		temp.addIteam(it18);
+		temp.addIteam(it19);
+		temp.addIteam(it20);
 	}
 
 	public void connectData() {
