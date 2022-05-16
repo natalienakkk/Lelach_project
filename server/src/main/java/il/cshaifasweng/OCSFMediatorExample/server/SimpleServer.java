@@ -1,8 +1,9 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Message;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
+import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
 
 //import javax.imageio.spi.ServiceRegistry;
 import javax.persistence.*;
@@ -15,10 +16,6 @@ import javax.persistence.criteria.Root;
 
 import java.io.IOException;
 import java.util.List;
-
-import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
-import il.cshaifasweng.OCSFMediatorExample.entities.Catalog;
-import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -48,8 +45,19 @@ public class SimpleServer extends AbstractServer {
 			Message msg3 = ((Message) msg);
 			String user_type = (String) msg3.getObject();
 			session = sessionFactory.openSession();
+			session.beginTransaction();
 			List<Item> itemList=getAll(Item.class);
-			client.sendToClient(new Message("#opencatalog", user_type , itemList));
+//			if (user_type.equals("Client")) {
+//				ShoppingCart cart = new ShoppingCart();
+//				session.save(cart);
+//				session.flush();
+//				session.getTransaction().commit();
+//				List<ShoppingCart> cartlist = getAll(ShoppingCart.class);
+//				System.out.format(user_type+" \n");
+//				client.sendToClient(new Message("#opencatalog", user_type , itemList , cartlist.get(0)));
+//				System.out.format(user_type+" \n");
+//			}
+			client.sendToClient(new Message("#opencatalog" , user_type , itemList));
 			session.close();
 		}
 		else if(msgString.startsWith("#update_price"))
@@ -78,26 +86,42 @@ public class SimpleServer extends AbstractServer {
 		else if(msgString.startsWith("#openuseritem"))
 		{
 			Message msg2 = ((Message) msg);
-			String flowername = (String) msg2.getObject();
+			int flowerid = (int) msg2.getObject();
 			session = sessionFactory.openSession();
 			List<Item> Itemlist=getAll(Item.class);
-
 			for(int i=0 ; i < Itemlist.size() ; i++)
 			{
-				if(Itemlist.get(i).getName().equals(flowername))
+				if(Itemlist.get(i).getId() == flowerid)
 				{
 					client.sendToClient(new Message("#openuseritem" , Itemlist.get(i)));
+					break;
 				}
 			}
 			session.close();
 		}
+		else if(msgString.startsWith("#addtocart"))
+		{
+			Message msg1 = ((Message) msg);
+			Item item = (Item) msg1.getObject();
+			int amount = (int) msg1.getObject2();
+			ShoppingCart cart = (ShoppingCart) msg1.getObject3();
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+//			cart.AddtoCart(item);
+//			cart.Addamount(amount);
+			session.save(cart);
+			session.flush();
+			session.getTransaction().commit();
+			session.close();
 
+		}
 	}
 	private static SessionFactory getSessionFactory() throws HibernateException {
 		Configuration configuration = new Configuration();
 		configuration.addAnnotatedClass(Catalog.class);
 		configuration.addAnnotatedClass(Item.class);
 		configuration.addAnnotatedClass((Message.class));
+		configuration.addAnnotatedClass((ShoppingCart.class));
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).build();
@@ -108,8 +132,8 @@ public class SimpleServer extends AbstractServer {
 		Catalog temp =new Catalog();
 		Item it1 =new Item("Spray carnations","Carnations","Pink","@../../../../images/Spray carnations.jpg",50);
 		Item it2 =new Item("Delphinium" , "Plant " , "Blue" ,  "@../../../../images/Delphinium.jpg" ,20);
-		Item it3 =new Item("Zamia Coconut L" , "Zamia Coconut" , "Green" , "@../../../../images/Zamia Coconut L.jpg" ,100);
-		Item it4 =new Item("Sensivaria medium" , "Sensivaria" , "Green" , "@../../../../images/Sensivaria medium.jpg" , 55);
+		Item it3 =new Item("Zamia Coconut L" , "Plant" , "Green" , "@../../../../images/Zamia Coconut L.jpg" ,100);
+		Item it4 =new Item("Sensivaria medium" , "Plant" , "Green" , "@../../../../images/Sensivaria medium.jpg" , 55);
 		Item it5 =new Item("Bridal bouquet" , "White peonies" , "White" , "@../../../../images/Bridal bouquet.jpg" , 300);
 		Item it6 =new Item("Blue Roses" , "Roses" , "Blue" , "@../../../../images/Blue Roses.jpg" , 80);
 		Item it7 =new Item("Red Roses" , "Roses" , "Red" , "@../../../../images/Red Roses.jpg" , 90);

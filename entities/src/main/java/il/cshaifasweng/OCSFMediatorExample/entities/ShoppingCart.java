@@ -20,51 +20,29 @@ public class ShoppingCart implements Serializable {
     private int discount;
     private int itemsNum =0;
     private boolean deliveryOp;
-    @ManyToMany
-    private List<Item> items= new ArrayList<Item>();
-    @ElementCollection
-    private List<Integer> amount = new ArrayList<Integer>();
-
-    public ShoppingCart() {
-    }
-
-    public int gettotalPrice(){
+    @ManyToMany(cascade = { CascadeType.ALL }) private List<Item> items= new ArrayList<Item>();
+    @ElementCollection private List<Integer> amount = new ArrayList<Integer>();
+    public ShoppingCart() { }
+    public int gettotalPrice()
+    {
         int price = 0;
         for (int i = 0; i< items.size() ; i++)
-        {
-            price += items.get(i).getPrice()* amount.get(i);
-        }
+        { price += items.get(i).getPrice()* amount.get(i); }
         return price;
     }
-
-    public int getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(int discount) {
-        this.discount = discount;
-    }
-
-    public boolean isDeliveryOp() {
-        return deliveryOp;
-    }
-
-    public void setDeliveryOp(boolean deliveryOp) {
-        this.deliveryOp = deliveryOp;
-    }
-
-    public void AddtoCart (Item item){
+    public int getDiscount() { return discount; }
+    public void setDiscount(int discount) { this.discount = discount; }
+    public boolean isDeliveryOp() { return deliveryOp; }
+    public void setDeliveryOp(boolean deliveryOp) { this.deliveryOp = deliveryOp; }
+    public void AddtoCart (Item item)
+    {
         items.add(item);
         itemsNum++;
     }
-
-    public void RemovefromCart (Item item) {
+    public void RemovefromCart (Item item)
+    {
         items.remove(item);
         itemsNum--;
     }
-
-    public void Addamount (int a){
-        amount.add(a);
-    }
-
+    public void Addamount (int a){ amount.add(a); }
 }

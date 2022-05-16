@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ShoppingCartController">
+   <children>
+      <Text layoutX="246.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shopping Cart" textAlignment="CENTER" wrappingWidth="276.5367431640625">
+         <font>
+            <Font size="39.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.46916296198504615" centerY="0.6401515079267097">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.7772417068481445" green="0.7894737124443054" blue="0.0555555559694767" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5958933788530347">
+                     <color>
+                        <Color red="0.7680400013923645" green="0.7799999713897705" blue="0.06239999830722809" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+      <TableView fx:id="table" layoutX="155.0" layoutY="175.0" prefHeight="200.0" prefWidth="457.0">
+        <columns>
+          <TableColumn fx:id="col1" prefWidth="171.2000150680542" text="Flower Name" />
+          <TableColumn fx:id="col2" prefWidth="103.19999694824219" text="Flower Price" />
+            <TableColumn fx:id="col3" prefWidth="71.199951171875" text="Amount" />
+            <TableColumn fx:id="col4" prefWidth="110.39998779296877" text="Total Price" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

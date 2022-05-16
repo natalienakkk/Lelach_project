@@ -49,17 +49,11 @@ public class Message implements Serializable {
         return message;
     }
 
-    public Object getObject () {
-        return this.object;
-    }
+    public Object getObject () { return this.object; }
 
-    public Object getObject2 () {
-        return this.object2;
-    }
+    public Object getObject2 () { return this.object2;}
 
-    public Object getObject3 () {
-        return this.object3;
-    }
+    public Object getObject3 () { return this.object3;}
 
     public void setMessage(String msg) {
         this.message=msg;
