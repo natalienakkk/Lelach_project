@@ -1,7 +1,9 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
+import javafx.application.Platform;
 import org.greenrobot.eventbus.EventBus;
+
 
 import java.util.List;
 public class SimpleClient extends AbstractClient {
@@ -11,8 +13,8 @@ public class SimpleClient extends AbstractClient {
 	}
 	@Override protected void handleMessageFromServer(Object msg) {
 		String msgstring = ((Message) msg).getMessage();
-		if (msgstring.startsWith("#opencatalog")) {
-			EventBus.getDefault().post((String) ((Message) msg).getObject());
+		if (msgstring.startsWith("#opencatalog"))
+		{
 			catalogControllerUser.setType((String) ((Message) msg).getObject());
 			catalogControllerUser.setItemList((List<Item>) ((Message) msg).getObject2());
 			//OrderCatalogController.setCart((ShoppingCart) ((Message) msg).getObject3());
