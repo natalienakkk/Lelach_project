@@ -117,12 +117,93 @@ public class SimpleServer extends AbstractServer {
 //			session.close();
 
 		}
+		else if (msgString.startsWith("#warning")) {
+			Warning warning = new Warning("Warning from server!");
+			try {
+				client.sendToClient(warning);
+				System.out.format("Sent warning to client %s\n", client.getInetAddress().getHostAddress());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else if (msgString.startsWith("#SignUpRequest")) {
+			//Registration newSignUp = new Registration();
+			Message msg1 = ((Message) msg);
+			Registration newSignUp = (Registration) msg1.getObject();
+			String ID1 = newSignUp.getClient_ID(); //(String) msg1.getObject();
+			session = sessionFactory.openSession();
+			try {
+				List<Registration> clients = getAll(Registration.class);
+				for (Registration registration : clients) {
+					if (registration.getClient_ID().equalsIgnoreCase(ID1)) {
+//                        System.out.print("foundddddddddddd\n");
+//							registration.setRegistered(true);
+						Warning new_warning = new Warning("Dear Client,you are already Signed up.\n Please go to Login.");
+						client.sendToClient(new Message("#SignUpWarning", new_warning));
+						return;
+					} else {
+						session.beginTransaction();
+						session.save(newSignUp);
+						session.flush();
+						session.getTransaction().commit();
+						Warning newWarning = new Warning("Dear " + newSignUp.getUserName() + " welcome to Lilach. you have been signed up successfully");
+						client.sendToClient(new Message("#MemberSignedUpSucces", newWarning));
+						return;
+					}
+				}
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (msgString.startsWith("#LoginRequest")) {
+			System.out.format("server1 \n");
+			Message msg1 = ((Message) msg);
+			User newLogin = (User) msg1.getObject();
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Item> itemList=getAll(Item.class);
+			String UserName = newLogin.getUserName();
+			String Password = newLogin.getPassword();
+			try{
+				List<Registration> clients = getAll(Registration.class);
+				for (Registration registration : clients){
+					System.out.format("server5 \n");
+					if(registration.getUserName().equalsIgnoreCase(UserName)){
+						System.out.format("server4 \n");
+						if(registration.getPassword().equalsIgnoreCase(Password)){
+							System.out.format("server3 \n");
+							if(registration.getStatus().equalsIgnoreCase("blocked client")){
+								Warning new_warning = new Warning("You're account have been blocked. Please contact customer service");
+								client.sendToClient(new Message("#BlockedAccount", new_warning));
+								return;
+							}
+							else{
+								System.out.format("server2 \n");
+								client.sendToClient(new Message("#LogInSucess", registration , itemList));
+								return;
+							}
+						}
+						else{
+							Warning new_warning = new Warning("You have entered invalid input. Please try again ");
+							client.sendToClient(new Message("#LoginWarning", new_warning));
+							return;
+						}
+					}
+
+				}
+
+			}catch (Exception e){
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	private static SessionFactory getSessionFactory() throws HibernateException {
 		Configuration configuration = new Configuration();
 		configuration.addAnnotatedClass(Catalog.class);
 		configuration.addAnnotatedClass(Item.class);
 		configuration.addAnnotatedClass((Message.class));
+		configuration.addAnnotatedClass((Registration.class));
 		//configuration.addAnnotatedClass((ShoppingCart.class));
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
@@ -152,6 +233,12 @@ public class SimpleServer extends AbstractServer {
 		Item it18 =new Item("SunFlower Bouquet" , "Bouquet" , "Yellow" , "@../../../../images/SunFlower Bouquet.jpg" ,  100);
 		Item it19 =new Item("Friendship Bouquet" , "Bouquet" , "White" , "@../../../../images/Friendship Bouquet.jpg" ,140 );
 		Item it20 =new Item("Plant" , "Plant" , "White" , "@../../../../images/Plant.jpg" , 30);
+		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareen@gmail.com", "0505123456", "KareenGh", "123456789", "Client", "2233445566", "1/1/2023", "Store Account");
+		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "Natalie@gmail.com", "0524789000", "NatalieNK", "22nN90999", "Client", "1234561299", "5/8/2024", "Chain Account");
+		Registration CEO = new Registration("Rashil", "Mbariky", "4443336661", "", "", "Rashi", "anabajesh3ljam3a", "CEO", "", "", "");
+		Registration NetworkMarketingWorker = new Registration("Eissa", "Wahesh", "", "", "", "Eissa", "11111", "NetworkMarketingWorker", "", "", "");
+		Registration SystemManger = new Registration("Elias", "Dow", "", "", "", "TheKing", "lampon", "SystemManger", "", "", "");
+		Registration BranchManger = new Registration("Saher", "Daoud", "", "", "", "Saher", "123456", "BranchManger", "", "", "");
 		session.save(temp);
 		session.save(it1);
 		session.save(it2);
@@ -173,6 +260,12 @@ public class SimpleServer extends AbstractServer {
 		session.save(it18);
 		session.save(it19);
 		session.save(it20);
+		session.save(client1);
+		session.save(client2);
+		session.save(CEO);
+		session.save(NetworkMarketingWorker);
+		session.save(SystemManger);
+		session.save(BranchManger);
 		temp.addIteam(it1);
 		temp.addIteam(it2);
 		temp.addIteam(it3);
@@ -193,6 +286,7 @@ public class SimpleServer extends AbstractServer {
 		temp.addIteam(it18);
 		temp.addIteam(it19);
 		temp.addIteam(it20);
+		session.flush();
 	}
 
 	public void connectData() {

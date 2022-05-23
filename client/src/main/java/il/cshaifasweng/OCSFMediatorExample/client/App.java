@@ -119,7 +119,7 @@ public class App extends Application {
 
             });
         }
-        else if ( type.equals("Manager")) {
+        else if ( type.equals("NetworkMarketingWorker")) {
             Platform.runLater(() -> {
                 try {
                     setRoot("manager");
@@ -129,6 +129,19 @@ public class App extends Application {
 
             });
         }
+    }
+
+    @Subscribe
+    public void onWarningEvent(WarningEvent event) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(AlertType.WARNING,
+                    String.format("Message: %s\nTimestamp: %s\n",
+                            event.getWarning().getMessage(),
+                            event.getWarning().getTime().toString())
+            );
+            alert.show();
+        });
+
     }
 
     @Override

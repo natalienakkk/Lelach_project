@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -18,13 +19,13 @@ import javafx.scene.control.Button;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-public class catalogControllerUser {
+public class CatalogController {
     @FXML public static List<Item> itemList = new ArrayList<Item>();
     @FXML public static List<Item> getItemList() { return itemList; }
-    @FXML public static void setItemList(List<Item> itemList) { catalogControllerUser.itemList = itemList; }
+    @FXML public static void setItemList(List<Item> itemList) { CatalogController.itemList = itemList; }
     @FXML public static String type;
     @FXML public static String getType() { return type; }
-    @FXML public static void setType(String type) { catalogControllerUser.type = type; }
+    @FXML public static void setType(String type) { CatalogController.type = type; }
     @FXML
     private ResourceBundle resources;
     @FXML
@@ -127,145 +128,157 @@ public class catalogControllerUser {
     }
 
     @FXML
-    void other(ActionEvent event) {
+    void other(ActionEvent event) throws IOException {
+        if (type.equals("Guest")) {
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("SingUp.fxml"));
+            Pane2.getChildren().setAll(pane);
+        } else if (type.equals("NetworkMarketingWorker")) {
+            //AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
+            //Pane2.getChildren().setAll(pane);
+        } else if (type.equals("Client")) {
+            //AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
+            //Pane2.getChildren().setAll(pane);
+
+        }
+
     }
 
     @FXML
     void other1(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
-        Pane2.getChildren().setAll(pane);
+        System.out.println("hahahahha \n");
+        if (type.equals("Guest")) {
+            System.out.println("hahahahha \n");
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("Login.fxml"));
+            Pane2.getChildren().setAll(pane);
+        } else if (type.equals("NetworkMarketingWorker")) {
+            //AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
+            //Pane2.getChildren().setAll(pane);
+        } else if (type.equals("Client")) {
+            //AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
+            //Pane2.getChildren().setAll(pane);
+
+        }
     }
 
     @FXML
     void button_5(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 5));
-        func();
+
     }
 
     @FXML
     void button_2(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 2));
-        func();
+
     }
 
     @FXML
     void button_4(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 4));
-        func();
+
     }
 
     @FXML
     void button_1(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 1));
-        func();
+
     }
 
     @FXML
     void button_3(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 3));
-        func();
+
     }
 
     @FXML
     void button_10(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 10));
-        func();
-    }
 
+    }
     @FXML
     void button_11(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 11));
-        func();
+
     }
 
     @FXML
     void button_12(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 12));
-        func();
+
     }
 
     @FXML
     void button_13(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 13));
-        func();
+
     }
 
     @FXML
     void button_14(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 14));
-        func();
+
     }
 
     @FXML
     void button_15(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 15));
-        func();
+
     }
 
     @FXML
     void button_16(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 16));
-        func();
+
     }
 
     @FXML
     void button_17(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 17));
-        func();
+
     }
 
     @FXML
     void button_18(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 18));
-        func();
+
     }
 
     @FXML
     void button_19(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 19));
-        func();
+
     }
 
     @FXML
     void button_20(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 20));
-        func();
+
     }
 
     @FXML
     void button_6(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 6));
-        func();
+
     }
 
     @FXML
     void button_7(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 7));
-        func();
+
     }
 
     @FXML
     void button_8(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 8));
-        func();
+
     }
 
     @FXML
     void button_9(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 9));
-        func();
     }
 
-    @FXML
-    public void func() throws IOException {
-//        if (type.equals("Guest")) {
-//            App.setRoot("flowers");
-//        } else if (type.equals("Manager")) {
-//            App.setRoot("manager");
-//        } else if (type.equals("Client")) {
-//            App.setRoot("client");
-//        }
-    }
+
 
     ArrayList<Button> buttons_list = new ArrayList<Button>();
     ArrayList<ImageView> photo_list = new ArrayList<ImageView>();
@@ -317,8 +330,6 @@ public class catalogControllerUser {
         assert photo_7 != null : "fx:id=\"photo_7\" was not injected: check your FXML file 'catalog.fxml'.";
         assert photo_8 != null : "fx:id=\"photo_8\" was not injected: check your FXML file 'catalog.fxml'.";
         assert photo_9 != null : "fx:id=\"photo_9\" was not injected: check your FXML file 'catalog.fxml'.";
-
-//        EventBus.getDefault().register(this);
         setType(App.getType());
         setItemList(App.getItemList());
         if(itemList == null){
@@ -333,11 +344,11 @@ public void setCatalog(){
 
         if (type != null) {
             if (type.equals("Guest")) {
-                other.setText("Sign in/up");
-                other1.setText("walashi");
-            } else if (type.equals("Manager")) {
-                other.setText("View things");
-                other1.setText("add/remove item");
+                other.setText("Sign Up");
+                other1.setText("Log In");
+            } else if (type.equals("NetworkMarketingWorker")) {
+                other1.setVisible(false);
+                other.setText("Add Item");
             } else if (type.equals("Client")) {
                 other.setText("My Profile");
                 other1.setText("Shopping Cart");

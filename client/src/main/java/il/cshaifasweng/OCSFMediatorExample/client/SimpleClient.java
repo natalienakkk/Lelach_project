@@ -17,30 +17,67 @@ public class SimpleClient extends AbstractClient {
 		String msgstring = ((Message) msg).getMessage();
 		if (msgstring.startsWith("#opencatalog"))
 		{
-			System.out.println("heeeeeeey10 \n");
+
 			if((List<Item>) ((Message) msg).getObject2() == null) {
 				System.out.println("simpleClient list is null");
 			}
-			System.out.println("heeeeeeey\n");
 			catalogEvent event = new catalogEvent((String) ((Message) msg).getObject() , (List<Item>) ((Message) msg).getObject2() );
 			EventBus.getDefault().post(event);
 		}
 		else if (msgstring.startsWith("#openuseritem"))
 		{
-			if (catalogControllerUser.getType().equals("Manager"))
+			if (CatalogController.getType().equals("NetworkMarketingWorker"))
 			{
 				itemEvent event1 = new itemEvent((Item) ((Message) msg).getObject());
 				EventBus.getDefault().post(event1);
 			}
-			else if (catalogControllerUser.getType().equals("Guest"))
+			else if (CatalogController.getType().equals("Guest"))
 			{
 				itemEvent event1 = new itemEvent((Item) ((Message) msg).getObject());
 				EventBus.getDefault().post(event1);
 			}
-			else if (catalogControllerUser.getType().equals("Client"))
+			else if (CatalogController.getType().equals("Client"))
 			{
 				itemEvent event1 = new itemEvent((Item) ((Message) msg).getObject());
 				EventBus.getDefault().post(event1);
+			}
+		}
+		else if(msgstring.equalsIgnoreCase("#SignUpWarning"))
+		{
+			EventBus.getDefault().post(new WarningEvent((Warning) ((Message) msg).getObject()));
+		}
+		else if(msgstring.equalsIgnoreCase("#MemberSignedUpSucces"))
+		{
+			EventBus.getDefault().post(new WarningEvent((Warning) ((Message) msg).getObject()));
+//			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//			alert.setTitle("SignedUpSuccess");
+//			alert.setContentText("Dear client, welcome to Lilach. you have been signed up successfully");
+//			alert.showAndWait();
+			try {
+				App.setRoot("HomePage"); /* change to cataloooooooooooggggggg */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(msgstring.equalsIgnoreCase("#LogInSucess"))
+		{
+			Registration user = (Registration) ((Message) msg).getObject();
+			catalogEvent event = new catalogEvent(user.getStatus(), (List<Item>) ((Message) msg).getObject2() );
+			EventBus.getDefault().post(event);
+		}
+		else if(msgstring.equalsIgnoreCase("#LoginWarning"))
+		{
+			EventBus.getDefault().post(new WarningEvent((Warning) ((Message) msg).getObject()));
+		}
+		else if(msgstring.equalsIgnoreCase("#BlockedAccount"))
+		{
+			EventBus.getDefault().post(new WarningEvent((Warning) ((Message) msg).getObject()));
+			try {
+				App.setRoot("HomePage");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
