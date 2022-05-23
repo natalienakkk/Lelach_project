@@ -54,6 +54,7 @@ public class ManagerController  {
         assert flower_type != null : "fx:id=\"flower_type\" was not injected: check your FXML file 'manager.fxml'.";
         assert priceee != null : "fx:id=\"priceee\" was not injected: check your FXML file 'manager.fxml'.";
         assert image != null : "fx:id=\"image\" was not injected: check your FXML file 'manager.fxml'.";
+        setItem(App.getItem());
         flower_name.setText(item.getName());
         flower_color.setText("Color : "+ item.getColor());
         flower_type.setText("Type : "+ item.getType());

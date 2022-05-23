@@ -2,6 +2,8 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 import javax.persistence.*;
 import javax.xml.namespace.QName;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "items")
@@ -20,6 +22,12 @@ public class Item implements Serializable {
     @JoinColumn(name = "items_id")
     private Catalog items;
 
+//    @ManyToMany(mappedBy = "items",
+//            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+//            targetEntity = ShoppingCart.class
+//    )
+
+    //private List<ShoppingCart> cartList = new ArrayList<ShoppingCart>();
     public Item() {
 
     }

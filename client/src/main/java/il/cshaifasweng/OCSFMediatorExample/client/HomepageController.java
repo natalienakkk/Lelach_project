@@ -1,7 +1,10 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,18 +22,19 @@ public class HomepageController {
     @FXML void Client_btn(ActionEvent event) throws IOException
     {
         SimpleClient.getClient().sendToServer(new Message("#opencatalog", "Client"));
-        App.setRoot("catalog");
+//        App.setRoot("catalog");
+
     }
     @FXML void Guest_btn(ActionEvent event) throws IOException
     {
         SimpleClient.getClient().sendToServer(new Message("#opencatalog", "Guest"));
-        App.setRoot("catalog");
+        //App.setRoot("catalog");
 
     }
     @FXML void Manager_btn(ActionEvent event) throws IOException
     {
         SimpleClient.getClient().sendToServer(new Message("#opencatalog", "Manager"));
-        App.setRoot("catalog");
+        //App.setRoot("catalog");
     }
     @FXML void initialize() {
         assert Guest_btn != null : "fx:id=\"Guest_btn\" was not injected: check your FXML file 'homepage.fxml'.";

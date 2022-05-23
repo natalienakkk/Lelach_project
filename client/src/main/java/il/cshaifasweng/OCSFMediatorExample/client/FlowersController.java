@@ -39,6 +39,7 @@ public class FlowersController {
         assert flower_price != null : "fx:id=\"flower_price\" was not injected: check your FXML file 'flowers.fxml'.";
         assert flower_type != null : "fx:id=\"flower_type\" was not injected: check your FXML file 'flowers.fxml'.";
         assert priceee != null : "fx:id=\"priceee\" was not injected: check your FXML file 'flowers.fxml'.";
+        setItem(App.getItem());
         flower_name.setText(item.getName());
         flower_color.setText("Color : "+ item.getColor());
         flower_type.setText("Type : "+ item.getType());

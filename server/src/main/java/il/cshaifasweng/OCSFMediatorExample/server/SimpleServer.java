@@ -3,7 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
-import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
+// import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
 
 //import javax.imageio.spi.ServiceRegistry;
 import javax.persistence.*;
@@ -52,9 +52,8 @@ public class SimpleServer extends AbstractServer {
 //				session.save(cart);
 //				session.flush();
 //				session.getTransaction().commit();
-//				List<ShoppingCart> cartlist = getAll(ShoppingCart.class);
 //				System.out.format(user_type+" \n");
-//				client.sendToClient(new Message("#opencatalog", user_type , itemList , cartlist.get(0)));
+//				client.sendToClient(new Message("#opencatalog", user_type , itemList , cart));
 //				System.out.format(user_type+" \n");
 //			}
 			client.sendToClient(new Message("#opencatalog" , user_type , itemList));
@@ -101,18 +100,21 @@ public class SimpleServer extends AbstractServer {
 		}
 		else if(msgString.startsWith("#addtocart"))
 		{
-			Message msg1 = ((Message) msg);
-			Item item = (Item) msg1.getObject();
-			int amount = (int) msg1.getObject2();
-			ShoppingCart cart = (ShoppingCart) msg1.getObject3();
-			session = sessionFactory.openSession();
-			session.beginTransaction();
+//			Message msg1 = ((Message) msg);
+//			Item item = (Item) msg1.getObject();
+//			Double amount = (Double) msg1.getObject2();
+//			System.out.format(""+amount + " " + item.getName() + " \n");
+//			ShoppingCart cart = (ShoppingCart) msg1.getObject3();
+//			session = sessionFactory.openSession();
+//			session.beginTransaction();
 //			cart.AddtoCart(item);
-//			cart.Addamount(amount);
-			session.save(cart);
-			session.flush();
-			session.getTransaction().commit();
-			session.close();
+//			System.out.format("A1: ");
+//			//cart.Addamount(amount);
+//			System.out.format("a: ");
+//			session.save(cart);
+//			session.flush();
+//			session.getTransaction().commit();
+//			session.close();
 
 		}
 	}
@@ -121,7 +123,7 @@ public class SimpleServer extends AbstractServer {
 		configuration.addAnnotatedClass(Catalog.class);
 		configuration.addAnnotatedClass(Item.class);
 		configuration.addAnnotatedClass((Message.class));
-		configuration.addAnnotatedClass((ShoppingCart.class));
+		//configuration.addAnnotatedClass((ShoppingCart.class));
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).build();

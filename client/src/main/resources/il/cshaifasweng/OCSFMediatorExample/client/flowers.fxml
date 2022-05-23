@@ -6,9 +6,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="Pane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.FlowersController">
+<AnchorPane fx:id="Pane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="770.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.FlowersController">
    <children>
-      <Text fx:id="flower_name" layoutX="206.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" textAlignment="CENTER" wrappingWidth="313.33673095703125">
+      <Text fx:id="flower_name" layoutX="217.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" textAlignment="CENTER" wrappingWidth="313.33673095703125">
          <font>
             <Font size="25.0" />
          </font>
@@ -39,6 +39,6 @@
          </font>
       </Text>
       <Button fx:id="back_to_catalog" layoutX="23.0" layoutY="33.0" mnemonicParsing="false" onAction="#back_to_catalog1" text="Back" />
-      <ImageView fx:id="flower_image" fitHeight="150.0" fitWidth="200.0" layoutX="274.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="flower_image" fitHeight="221.0" fitWidth="305.0" layoutX="243.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

@@ -15,8 +15,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 public class catalogControllerUser {
-    @FXML public static List<Item> itemList;
+    @FXML public static List<Item> itemList = new ArrayList<Item>();
     @FXML public static List<Item> getItemList() { return itemList; }
     @FXML public static void setItemList(List<Item> itemList) { catalogControllerUser.itemList = itemList; }
     @FXML public static String type;
@@ -255,13 +258,13 @@ public class catalogControllerUser {
 
     @FXML
     public void func() throws IOException {
-        if (type.equals("Guest")) {
-            App.setRoot("flowers");
-        } else if (type.equals("Manager")) {
-            App.setRoot("manager");
-        } else if (type.equals("Client")) {
-            App.setRoot("client");
-        }
+//        if (type.equals("Guest")) {
+//            App.setRoot("flowers");
+//        } else if (type.equals("Manager")) {
+//            App.setRoot("manager");
+//        } else if (type.equals("Client")) {
+//            App.setRoot("client");
+//        }
     }
 
     ArrayList<Button> buttons_list = new ArrayList<Button>();
@@ -314,17 +317,32 @@ public class catalogControllerUser {
         assert photo_7 != null : "fx:id=\"photo_7\" was not injected: check your FXML file 'catalog.fxml'.";
         assert photo_8 != null : "fx:id=\"photo_8\" was not injected: check your FXML file 'catalog.fxml'.";
         assert photo_9 != null : "fx:id=\"photo_9\" was not injected: check your FXML file 'catalog.fxml'.";
-        if (type == null) System.out.format("type is NULL \n");
-        else if (type.equals("Guest")) {
-            other.setText("Sign in/up");
-            other1.setText("walashi");
-        } else if (type.equals("Manager")) {
-            other.setText("View things");
-            other1.setText("add/remove item");
-        } else if (type.equals("Client")) {
-            other.setText("My Profile");
-            other1.setText("Shopping Cart");
-        } else System.out.format("fasfjkefef \n");
+
+//        EventBus.getDefault().register(this);
+        setType(App.getType());
+        setItemList(App.getItemList());
+        if(itemList == null){
+        System.out.println("is null");
+        }
+        setCatalog();
+
+    }
+
+
+public void setCatalog(){
+
+        if (type != null) {
+            if (type.equals("Guest")) {
+                other.setText("Sign in/up");
+                other1.setText("walashi");
+            } else if (type.equals("Manager")) {
+                other.setText("View things");
+                other1.setText("add/remove item");
+            } else if (type.equals("Client")) {
+                other.setText("My Profile");
+                other1.setText("Shopping Cart");
+            } else System.out.format("fasfjkefef \n");
+        }
         buttons_list.add(button_1);
         buttons_list.add(button_2);
         buttons_list.add(button_3);
@@ -365,11 +383,15 @@ public class catalogControllerUser {
         photo_list.add(photo_18);
         photo_list.add(photo_19);
         photo_list.add(photo_20);
-        for (int i = 0; i < itemList.size(); i++) {
+        System.out.format(itemList.size() + " Sizeeeee \n");
+        for (int i = 0; i < 20; i++) {
             buttons_list.get(i).setText(itemList.get(i).getName());
             File file = new File("C:\\Users\\Saher\\IdeaProjects\\saher-eissa\\client\\src\\main\\resources\\images\\" + itemList.get(i).getName() + ".jpg");
             Image image = new Image(file.toURI().toString());
             photo_list.get(i).setImage(image);
         }
     }
+
 }
+
+

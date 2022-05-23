@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 //import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
+import il.cshaifasweng.OCSFMediatorExample.entities.Message;
+import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,13 +24,13 @@ public class OrderCatalogController {
     @FXML public static void setItem(Item item) {
         OrderCatalogController.item = item;
     }
-//    @FXML public static ShoppingCart cart;
-//    @FXML public static ShoppingCart getCart() {
-//        return cart;
-//    }
-//    @FXML public static void setCart(ShoppingCart cart) {
-//        OrderCatalogController.cart = cart;
-//    }
+    @FXML public static ShoppingCart cart;
+    @FXML public static ShoppingCart getCart() {
+        return cart;
+    }
+    @FXML public static void setCart(ShoppingCart cart) {
+        OrderCatalogController.cart = cart;
+    }
     @FXML private ResourceBundle resources;
     @FXML private URL location;
     @FXML private AnchorPane Pane1;
@@ -43,7 +45,7 @@ public class OrderCatalogController {
     @FXML private Text priceee;
     @FXML private ImageView image;
     @FXML void addtocart(ActionEvent event) throws IOException {
-        //SimpleClient.getClient().sendToServer(new Message("#addtocart" , item , amount_picker.getValue(),cart));
+        SimpleClient.getClient().sendToServer(new Message("#addtocart" , item , amount_picker.getValue(), cart));
         App.setRoot("catalog");
     }
     @FXML void back_to_catalog1(ActionEvent event) throws IOException {
@@ -61,6 +63,7 @@ public class OrderCatalogController {
         assert flower_type != null : "fx:id=\"flower_type\" was not injected: check your FXML file 'client.fxml'.";
         assert priceee != null : "fx:id=\"priceee\" was not injected: check your FXML file 'client.fxml'.";
         assert image != null : "fx:id=\"image\" was not injected: check your FXML file 'client.fxml'.";
+        setItem(App.getItem());
         flower_name.setText(item.getName());
         flower_color.setText("Color : "+ item.getColor());
         flower_type.setText("Type : "+ item.getType());
