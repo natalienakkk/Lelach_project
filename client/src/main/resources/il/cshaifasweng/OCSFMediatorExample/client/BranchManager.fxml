@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pane1" prefHeight="293.0" prefWidth="498.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.BranchManagerController">
+    <children>
+        <Text fill="#b91592" layoutX="98.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports Type for Branch" textAlignment="CENTER" wrappingWidth="302.0">
+            <font>
+                <Font size="27.0" />
+            </font>
+        </Text>
+        <Text fill="#a11f78" layoutX="40.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint: Choose report type that you want to see">
+            <font>
+                <Font name="System Bold Italic" size="13.0" />
+            </font>
+        </Text>
+        <Text fill="#a11f78" layoutX="40.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint: Choose period ">
+            <font>
+                <Font name="System Bold Italic" size="13.0" />
+            </font>
+        </Text>
+        <DatePicker fx:id="start_date" layoutX="74.0" layoutY="177.0" onAction="#start_butt" />
+        <DatePicker fx:id="end_date" layoutX="74.0" layoutY="217.0" onAction="#end_butt" />
+        <Text fill="#ee0883" layoutX="40.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="start:">
+            <font>
+                <Font name="System Bold Italic" size="13.0" />
+            </font>
+        </Text>
+        <Text fill="#ee0883" layoutX="40.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="end:">
+            <font>
+                <Font name="System Bold Italic" size="13.0" />
+            </font>
+        </Text>
+        <Button fx:id="show_report" layoutX="325.0" layoutY="197.0" mnemonicParsing="false" onAction="#show_butt" text="Show Report" />
+        <ComboBox fx:id="Choose_button" layoutX="40.0" layoutY="109.0" onAction="#Report_Type_butt" prefWidth="150.0" promptText="Choose Report Type" />
+    </children>
+</AnchorPane>

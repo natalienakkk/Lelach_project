@@ -61,6 +61,16 @@ public class CatalogController {
     @FXML
     private Button button_20;
     @FXML
+    private Button button_21;
+    @FXML
+    private Button button_22;
+    @FXML
+    private Button button_23;
+    @FXML
+    private Button button_24;
+    @FXML
+    private Button button_25;
+    @FXML
     private Button button_3;
     @FXML
     private Button button_4;
@@ -101,6 +111,16 @@ public class CatalogController {
     @FXML
     private ImageView photo_20;
     @FXML
+    private ImageView photo_21;
+    @FXML
+    private ImageView photo_22;
+    @FXML
+    private ImageView photo_23;
+    @FXML
+    private ImageView photo_24;
+    @FXML
+    private ImageView photo_25;
+    @FXML
     private ImageView photo_3;
     @FXML
     private ImageView photo_4;
@@ -133,8 +153,8 @@ public class CatalogController {
             AnchorPane pane = FXMLLoader.load(getClass().getResource("SingUp.fxml"));
             Pane2.getChildren().setAll(pane);
         } else if (type.equals("NetworkMarketingWorker")) {
-            //AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
-            //Pane2.getChildren().setAll(pane);
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("NetworkMarketingWorker.fxml"));
+            Pane2.getChildren().setAll(pane);
         } else if (type.equals("Client")) {
             //AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
             //Pane2.getChildren().setAll(pane);
@@ -145,9 +165,7 @@ public class CatalogController {
 
     @FXML
     void other1(ActionEvent event) throws IOException {
-        System.out.println("hahahahha \n");
         if (type.equals("Guest")) {
-            System.out.println("hahahahha \n");
             AnchorPane pane = FXMLLoader.load(getClass().getResource("Login.fxml"));
             Pane2.getChildren().setAll(pane);
         } else if (type.equals("NetworkMarketingWorker")) {
@@ -253,6 +271,26 @@ public class CatalogController {
     void button_20(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#openuseritem", 20));
 
+    }@FXML
+    void button_21(ActionEvent event) throws IOException {
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 21));
+
+    }@FXML
+    void button_22(ActionEvent event) throws IOException {
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 22));
+
+    }@FXML
+    void button_23(ActionEvent event) throws IOException {
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 23));
+
+    }@FXML
+    void button_24(ActionEvent event) throws IOException {
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 24));
+
+    }@FXML
+    void button_25(ActionEvent event) throws IOException {
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 25));
+
     }
 
     @FXML
@@ -301,6 +339,11 @@ public class CatalogController {
         assert button_19 != null : "fx:id=\"button_19\" was not injected: check your FXML file 'catalog.fxml'.";
         assert button_2 != null : "fx:id=\"button_2\" was not injected: check your FXML file 'catalog.fxml'.";
         assert button_20 != null : "fx:id=\"button_20\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert button_21 != null : "fx:id=\"button_20\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert button_22 != null : "fx:id=\"button_20\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert button_23 != null : "fx:id=\"button_20\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert button_24 != null : "fx:id=\"button_20\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert button_25 != null : "fx:id=\"button_20\" was not injected: check your FXML file 'catalog.fxml'.";
         assert button_3 != null : "fx:id=\"button_3\" was not injected: check your FXML file 'catalog.fxml'.";
         assert button_4 != null : "fx:id=\"button_4\" was not injected: check your FXML file 'catalog.fxml'.";
         assert button_5 != null : "fx:id=\"button_5\" was not injected: check your FXML file 'catalog.fxml'.";
@@ -323,6 +366,11 @@ public class CatalogController {
         assert photo_19 != null : "fx:id=\"photo_19\" was not injected: check your FXML file 'catalog.fxml'.";
         assert photo_2 != null : "fx:id=\"photo_2\" was not injected: check your FXML file 'catalog.fxml'.";
         assert photo_20 != null : "fx:id=\"photo_20\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert photo_21 != null : "fx:id=\"photo_20\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert photo_22 != null : "fx:id=\"photo_20\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert photo_23 != null : "fx:id=\"photo_20\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert photo_24 != null : "fx:id=\"photo_20\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert photo_25 != null : "fx:id=\"photo_20\" was not injected: check your FXML file 'catalog.fxml'.";
         assert photo_3 != null : "fx:id=\"photo_3\" was not injected: check your FXML file 'catalog.fxml'.";
         assert photo_4 != null : "fx:id=\"photo_4\" was not injected: check your FXML file 'catalog.fxml'.";
         assert photo_5 != null : "fx:id=\"photo_5\" was not injected: check your FXML file 'catalog.fxml'.";
@@ -374,6 +422,11 @@ public void setCatalog(){
         buttons_list.add(button_18);
         buttons_list.add(button_19);
         buttons_list.add(button_20);
+        buttons_list.add(button_21);
+        buttons_list.add(button_22);
+        buttons_list.add(button_23);
+        buttons_list.add(button_24);
+        buttons_list.add(button_25);
         photo_list.add(photo_1);
         photo_list.add(photo_2);
         photo_list.add(photo_3);
@@ -394,12 +447,21 @@ public void setCatalog(){
         photo_list.add(photo_18);
         photo_list.add(photo_19);
         photo_list.add(photo_20);
-        System.out.format(itemList.size() + " Sizeeeee \n");
-        for (int i = 0; i < 20; i++) {
+        photo_list.add(photo_21);
+        photo_list.add(photo_22);
+        photo_list.add(photo_23);
+        photo_list.add(photo_24);
+        photo_list.add(photo_25);
+        for (int i = 0; i < itemList.size(); i++) {
             buttons_list.get(i).setText(itemList.get(i).getName());
             File file = new File("C:\\Users\\Saher\\IdeaProjects\\saher-eissa\\client\\src\\main\\resources\\images\\" + itemList.get(i).getName() + ".jpg");
             Image image = new Image(file.toURI().toString());
             photo_list.get(i).setImage(image);
+        }
+        for ( int j=itemList.size() ; j < 25 ; j++)
+        {
+            buttons_list.get(j).setVisible(false);
+            photo_list.get(j).setVisible(false);
         }
     }
 

@@ -80,6 +80,14 @@ public class SimpleClient extends AbstractClient {
 				e.printStackTrace();
 			}
 		}
+		else if(msgstring.equals("#list of report sent"))
+		{
+			EventBus.getDefault().post(new ReportEvent((String) ((Message) msg).getObject(),(String) ((Message) msg).getObject2(),(String) ((Message) msg).getObject3(),(List<Report>) ((Message) msg).getObject4()));
+		}
+		else if(msgstring.equals("#list of report sent to compare"))
+		{
+			EventBus.getDefault().post(new ReportEvent((String) ((Message) msg).getObject(),(String) ((Message) msg).getObject2(),(String) ((Message) msg).getObject3(),(String)((Message) msg).getObject4(),(String) ((Message) msg).getObject5(),(List<Report>) ((Message) msg).getObject6()));
+		}
 	}
 	public static SimpleClient getClient() {
 		if (client == null) { client = new SimpleClient("localhost", 3000); }

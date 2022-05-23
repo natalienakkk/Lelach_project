@@ -9,7 +9,7 @@
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.CatalogController">
    <content>
-      <AnchorPane fx:id="Pane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="770.0" style="-fx-background-color: grey;">
+      <AnchorPane fx:id="Pane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="770.0">
          <children>
             <Text fx:id="Header" fill="#5e2727" layoutX="299.0" layoutY="117.0" stroke="#a90d0d" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog">
                <font>
@@ -59,6 +59,16 @@
             <ImageView fx:id="photo_20" fitHeight="100.0" fitWidth="119.0" layoutX="629.0" layoutY="733.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="button_20" layoutX="619.0" layoutY="854.0" mnemonicParsing="false" onAction="#button_20" prefHeight="26.0" prefWidth="119.0" />
             <Button fx:id="other1" layoutX="381.0" layoutY="27.0" mnemonicParsing="false" onAction="#other1" prefHeight="26.0" prefWidth="170.0" />
+            <ImageView fx:id="photo_21" fitHeight="106.0" fitWidth="100.0" layoutX="43.0" layoutY="939.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="button_21" layoutX="42.0" layoutY="1060.0" mnemonicParsing="false" onAction="#button_21" prefHeight="26.0" prefWidth="101.0" />
+            <ImageView fx:id="photo_22" fitHeight="106.0" fitWidth="100.0" layoutX="187.0" layoutY="939.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="button_22" layoutX="186.0" layoutY="1060.0" mnemonicParsing="false" onAction="#button_22" prefHeight="26.0" prefWidth="101.0" />
+            <ImageView fx:id="photo_23" fitHeight="106.0" fitWidth="100.0" layoutX="332.0" layoutY="939.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="button_23" layoutX="331.0" layoutY="1060.0" mnemonicParsing="false" onAction="#button_23" prefHeight="26.0" prefWidth="101.0" />
+            <ImageView fx:id="photo_24" fitHeight="106.0" fitWidth="100.0" layoutX="478.0" layoutY="939.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="button_24" layoutX="477.0" layoutY="1060.0" mnemonicParsing="false" onAction="#button_24" prefHeight="26.0" prefWidth="101.0" />
+            <ImageView fx:id="photo_25" fitHeight="106.0" fitWidth="100.0" layoutX="629.0" layoutY="939.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="button_25" layoutX="628.0" layoutY="1060.0" mnemonicParsing="false" onAction="#button_25" prefHeight="26.0" prefWidth="101.0" />
          </children>
       </AnchorPane>
    </content>

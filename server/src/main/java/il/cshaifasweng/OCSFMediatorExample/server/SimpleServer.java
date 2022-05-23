@@ -197,6 +197,134 @@ public class SimpleServer extends AbstractServer {
 				e.printStackTrace();
 			}
 		}
+		else if(msgString.equals("#add new item"))
+		{
+
+			Item new_item= new Item();
+			Message msg_add = ((Message) msg);
+			new_item=(Item) msg_add.getObject();
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.save(new_item);
+			session.flush();
+			session.getTransaction().commit();
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Item> itemList=getAll(Item.class);
+			client.sendToClient(new Message("#opencatalog" ,"NetworkMarketingWorker", itemList));
+			session.close();
+		}
+		else if (msgString.startsWith("#apply discount"))
+		{
+			Message msgdiscount = ((Message) msg);
+			String discount_per = ((String) msgdiscount.getObject());
+			double discount = Double.parseDouble(discount_per);
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Item> itemsList = getAll(Item.class);
+			double new_price;
+			for (int i = 0; i < itemsList.size(); i++) {
+				new_price = (itemsList.get(i).getPrice()) * (1 - discount);
+				itemsList.get(i).setPrice(new_price);
+				session.save(itemsList.get(i));
+			}
+			session.getTransaction().commit();
+			session.flush();
+			session.close();
+
+		}
+		else if(msgString.startsWith("#block account"))
+		{
+			Message msgblock = ((Message) msg);
+			String username = ((String) msgblock.getObject());
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Registration> usernameList=getAll(Registration.class);
+			for(int i=0 ; i < usernameList.size() ; i++)
+			{
+				if (usernameList.get(i).getUserName().equals(username))
+				{
+					usernameList.get(i).setStatus("blocked client");
+					session.save(usernameList.get(i));
+				}
+			}
+			session.getTransaction().commit();
+			session.flush();
+			session.close();
+		}
+
+
+
+		else if (msgString.equals("#send message")) {
+			Message msgclient = ((Message) msg);
+			String username = ((String) msgclient.getObject());
+			String client_msg = ((String) msgclient.getObject2());
+			System.out.format(client_msg+"\n");
+			System.out.format(username);
+			SystemManagers_Messages message=new SystemManagers_Messages(client_msg,username);
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.save(message);
+			session.flush();
+			session.getTransaction().commit();
+		}
+		else if(msgString.equals("#update worker type"))
+		{
+			Message msgstatus = ((Message) msg);
+			String username = ((String) msgstatus.getObject());
+			String worker_status=((String)msgstatus.getObject2());
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Registration> usernameList=getAll(Registration.class);
+			int i = 0;
+			for(i=0 ; i < usernameList.size() ; i++)
+			{
+				if(usernameList.get(i).getUserName().equals(username))
+				{
+					usernameList.get(i).setStatus(worker_status);
+					session.save(usernameList.get(i));
+					break;
+				}
+			}
+			session.flush();
+			session.getTransaction().commit();
+			session.close();
+		}
+		else if(msgString.equals("#show Report"))
+		{
+			Message msg_report = ((Message) msg);
+			String Type  = ((String) msg_report.getObject());
+			String start=((String) msg_report.getObject2());
+			String end=((String) msg_report.getObject3());
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Report> report_list=getAll(Report.class);
+			try {
+				client.sendToClient(new Message("#list of report sent",Type,start,end,report_list));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			session.close();
+		}
+		else if(msgString.equals("#show Report to compare"))
+		{
+			Message msg_report = ((Message) msg);
+			String Type  = ((String) msg_report.getObject());
+			String first_start=((String) msg_report.getObject2());
+			String first_end=((String) msg_report.getObject3());
+			String second_start=((String) msg_report.getObject4());
+			String second_end=((String) msg_report.getObject5());
+			System.out.println("server "+Type+first_start+first_end+second_start+second_end);
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Report> report_list=getAll(Report.class);
+			try {
+				client.sendToClient(new Message("#list of report sent to compare",Type,first_start,first_end,second_start,second_end,report_list));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			session.close();
+		}
 	}
 	private static SessionFactory getSessionFactory() throws HibernateException {
 		Configuration configuration = new Configuration();
@@ -204,6 +332,8 @@ public class SimpleServer extends AbstractServer {
 		configuration.addAnnotatedClass(Item.class);
 		configuration.addAnnotatedClass((Message.class));
 		configuration.addAnnotatedClass((Registration.class));
+		configuration.addAnnotatedClass((SystemManagers_Messages.class));
+		configuration.addAnnotatedClass((Report.class));
 		//configuration.addAnnotatedClass((ShoppingCart.class));
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
@@ -235,10 +365,10 @@ public class SimpleServer extends AbstractServer {
 		Item it20 =new Item("Plant" , "Plant" , "White" , "@../../../../images/Plant.jpg" , 30);
 		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareen@gmail.com", "0505123456", "KareenGh", "123456789", "Client", "2233445566", "1/1/2023", "Store Account");
 		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "Natalie@gmail.com", "0524789000", "NatalieNK", "22nN90999", "Client", "1234561299", "5/8/2024", "Chain Account");
-		Registration CEO = new Registration("Rashil", "Mbariky", "4443336661", "", "", "Rashi", "anabajesh3ljam3a", "CEO", "", "", "");
+		Registration CEO = new Registration("Rashil", "Mbariky", "4443336661", "", "", "Rashi", "rashi", "CEO", "", "", "");
 		Registration NetworkMarketingWorker = new Registration("Eissa", "Wahesh", "", "", "", "Eissa", "11111", "NetworkMarketingWorker", "", "", "");
-		Registration SystemManger = new Registration("Elias", "Dow", "", "", "", "TheKing", "lampon", "SystemManger", "", "", "");
-		Registration BranchManger = new Registration("Saher", "Daoud", "", "", "", "Saher", "123456", "BranchManger", "", "", "");
+		Registration SystemManger = new Registration("Elias", "Dow", "", "", "", "Elisa", "lampon", "SystemManager", "", "", "");
+		Registration BranchManger = new Registration("Saher", "Daoud", "", "", "", "Saher", "123456", "BranchManager", "", "", "");
 		session.save(temp);
 		session.save(it1);
 		session.save(it2);

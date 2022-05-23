@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
+import il.cshaifasweng.OCSFMediatorExample.entities.Report;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +28,12 @@ public class App extends Application {
     private static List<Item> itemList;
     private static Item item;
     boolean isRegistered = false;
+    private static String type2;
+    private static String start_date;
+    private static String end_date;
+    private static String start_date2;
+    private static String end_date2;
+    private static List<Report> report_list;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -48,8 +55,7 @@ public class App extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.
-                load();
+        return fxmlLoader.load();
     }
 
     public static String getType() {
@@ -76,6 +82,55 @@ public class App extends Application {
         item = it;
     }
 
+    public static String getStart_date2() {
+        return start_date2;
+    }
+
+    public static void setStart_date2(String start_date2) {
+        App.start_date2 = start_date2;
+    }
+
+    public static String getEnd_date2() {
+        return end_date2;
+    }
+
+    public static void setEnd_date2(String end_date2) {
+        App.end_date2 = end_date2;
+    }
+
+
+    public static String getType1() {
+        return type2;
+    }
+
+    public void setType1(String type) {
+        this.type2 = type;
+    }
+
+    public static String getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public static String getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
+    }
+
+    public static List<Report> getReport_list() {
+        return report_list;
+    }
+
+    public void setReport_list(List<Report> report_list) {
+        this.report_list = report_list;
+    }
+
 
 
     @Subscribe
@@ -86,13 +141,54 @@ public class App extends Application {
         if(itemList==null){
             System.out.println("app item list is null");
         }
-        Platform.runLater(()-> {
-            try {
-                setRoot("catalog");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+        if ( (type.equals("NetworkMarketingWorker")) ) {
+            Platform.runLater(() -> {
+                try {
+                    setRoot("NetworkMarketingWorker");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            });
+        }
+        else if ( (type.equals("SystemManager")) ) {
+            Platform.runLater(() -> {
+                try {
+                    setRoot("SystemManager");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            });
+        }
+        else if ( (type.equals("BranchManager")) ) {
+            Platform.runLater(() -> {
+                try {
+                    setRoot("BranchManager");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            });
+        }
+        else if ( (type.equals("CEO")) ) {
+            Platform.runLater(() -> {
+                try {
+                    setRoot("CEO");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            });
+        }
+        else Platform.runLater(() -> {
+                try {
+                    setRoot("catalog");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            });
     }
 
     @Subscribe
@@ -142,6 +238,35 @@ public class App extends Application {
             alert.show();
         });
 
+    }
+
+    @Subscribe
+    public void onReportEvent(ReportEvent event) {
+        setType(event.getType());
+        setStart_date(event.getStart_date());
+        setEnd_date(event.getEnd_date());
+        setReport_list(event.getReport_list());
+        setStart_date2(event.getStart_date2());
+        setEnd_date2(event.getEnd_date2());
+
+        Platform.runLater(() -> {
+            if(event.getType().equals("Complain Report")) {
+                try {
+                    App.setRoot("ComplainReport");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else
+            {
+                try {
+                    App.setRoot("Report");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
     }
 
     @Override
