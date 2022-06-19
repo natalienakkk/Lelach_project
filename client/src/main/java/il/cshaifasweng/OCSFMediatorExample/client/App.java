@@ -2,6 +2,7 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.Report;
+import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +28,8 @@ public class App extends Application {
     private static String type;
     private static List<Item> itemList;
     private static Item item;
+//    private static Item item1;
+//    private static Double amount;
     boolean isRegistered = false;
     private static String type2;
     private static String start_date;
@@ -34,6 +37,7 @@ public class App extends Application {
     private static String start_date2;
     private static String end_date2;
     private static List<Report> report_list;
+    private static ShoppingCart cart;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -56,6 +60,30 @@ public class App extends Application {
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
+    }
+//
+//    public static Item getItem1() {
+//        return item1;
+//    }
+//
+//    public static void setItem1(Item item1) {
+//        App.item1 = item1;
+//    }
+//
+//    public static Double getAmount() {
+//        return amount;
+//    }
+//
+//    public void setAmount(Double amount) {
+//        this.amount = amount;
+//    }
+
+    public static ShoppingCart getCart() {
+        return cart;
+    }
+
+    public static void setCart(ShoppingCart cart1) {
+        App.cart = cart1;
     }
 
     public static String getType() {
@@ -131,13 +159,11 @@ public class App extends Application {
         this.report_list = report_list;
     }
 
-
-
     @Subscribe
     public void catalogEventFunc(catalogEvent event) {
-        System.out.println("in catalogEventFunc");
         setType(event.getType());
         setItemList(event.getItemList());
+        setCart(event.getCart());
         if(itemList==null){
             System.out.println("app item list is null");
         }
@@ -190,7 +216,6 @@ public class App extends Application {
 
             });
     }
-
     @Subscribe
     public void itemEventFunc(itemEvent event)
     {
@@ -226,7 +251,6 @@ public class App extends Application {
             });
         }
     }
-
     @Subscribe
     public void onWarningEvent(WarningEvent event) {
         Platform.runLater(() -> {
@@ -268,7 +292,12 @@ public class App extends Application {
 
         });
     }
-
+//     public void AddtocartFunc(AddToCartEvent event)
+//     {
+//         System.out.println(event.getItem().getName() + " in app.!!!");
+//         setItem1(event.getItem());
+//         setAmount(event.getAmount());
+//     }
     @Override
 	public void stop() throws Exception {
 		// TODO Auto-generated method stub

@@ -45,8 +45,9 @@ public class OrderCatalogController {
     @FXML private Text priceee;
     @FXML private ImageView image;
     @FXML void addtocart(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#addtocart" , item , amount_picker.getValue(), cart));
+        SimpleClient.getClient().sendToServer(new Message("#addtocart" , item , Double.valueOf(amount_picker.getValue()) , cart));
         App.setRoot("catalog");
+
     }
     @FXML void back_to_catalog1(ActionEvent event) throws IOException {
         App.setRoot("catalog");
@@ -64,6 +65,7 @@ public class OrderCatalogController {
         assert priceee != null : "fx:id=\"priceee\" was not injected: check your FXML file 'client.fxml'.";
         assert image != null : "fx:id=\"image\" was not injected: check your FXML file 'client.fxml'.";
         setItem(App.getItem());
+        setCart(App.getCart());
         flower_name.setText(item.getName());
         flower_color.setText("Color : "+ item.getColor());
         flower_type.setText("Type : "+ item.getType());

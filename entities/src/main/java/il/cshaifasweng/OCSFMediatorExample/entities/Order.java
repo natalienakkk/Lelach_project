@@ -13,6 +13,8 @@ public class Order implements Serializable {
     private Long id;
     private String date;
     private boolean card;
+    private int discount;
+    private boolean deliveryOp;
 
     public Order(String date, boolean card, String shopName, String orderId, String status) {
         this.date = date;
@@ -24,6 +26,9 @@ public class Order implements Serializable {
 
     private String shopName;
     private String orderId;
+    public void setDiscount(int discount) { this.discount = discount; }
+    public boolean isDeliveryOp() { return deliveryOp; }
+    public void setDeliveryOp(boolean deliveryOp) { this.deliveryOp = deliveryOp; }
     private String status;
 
     public Order() {

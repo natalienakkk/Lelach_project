@@ -26,8 +26,8 @@ public class Item implements Serializable {
 //            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
 //            targetEntity = ShoppingCart.class
 //    )
-
-    //private List<ShoppingCart> cartList = new ArrayList<ShoppingCart>();
+    @ManyToOne
+    private ShoppingCart cartList;
     public Item() {
 
     }
@@ -85,6 +85,11 @@ public class Item implements Serializable {
         this.type = type;
         this.color = color;
         this.picture = picture;
+        this.price = price;
+    }
+
+    public Item(String name , double price) {
+        this.name = name;
         this.price = price;
     }
 

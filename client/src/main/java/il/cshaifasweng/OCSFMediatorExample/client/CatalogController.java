@@ -172,8 +172,8 @@ public class CatalogController {
             //AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
             //Pane2.getChildren().setAll(pane);
         } else if (type.equals("Client")) {
-            //AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
-            //Pane2.getChildren().setAll(pane);
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
+            Pane2.getChildren().setAll(pane);
 
         }
     }

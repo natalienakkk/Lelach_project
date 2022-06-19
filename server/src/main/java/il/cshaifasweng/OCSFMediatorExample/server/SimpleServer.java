@@ -3,7 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.server;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
-// import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
+ import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
 
 //import javax.imageio.spi.ServiceRegistry;
 import javax.persistence.*;
@@ -22,6 +22,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.internal.build.AllowSysOut;
 import org.hibernate.service.ServiceRegistry;
 
 
@@ -47,15 +48,6 @@ public class SimpleServer extends AbstractServer {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<Item> itemList=getAll(Item.class);
-//			if (user_type.equals("Client")) {
-//				ShoppingCart cart = new ShoppingCart();
-//				session.save(cart);
-//				session.flush();
-//				session.getTransaction().commit();
-//				System.out.format(user_type+" \n");
-//				client.sendToClient(new Message("#opencatalog", user_type , itemList , cart));
-//				System.out.format(user_type+" \n");
-//			}
 			client.sendToClient(new Message("#opencatalog" , user_type , itemList));
 			session.close();
 		}
@@ -100,22 +92,26 @@ public class SimpleServer extends AbstractServer {
 		}
 		else if(msgString.startsWith("#addtocart"))
 		{
-//			Message msg1 = ((Message) msg);
-//			Item item = (Item) msg1.getObject();
-//			Double amount = (Double) msg1.getObject2();
-//			System.out.format(""+amount + " " + item.getName() + " \n");
-//			ShoppingCart cart = (ShoppingCart) msg1.getObject3();
-//			session = sessionFactory.openSession();
-//			session.beginTransaction();
-//			cart.AddtoCart(item);
-//			System.out.format("A1: ");
-//			//cart.Addamount(amount);
-//			System.out.format("a: ");
-//			session.save(cart);
-//			session.flush();
-//			session.getTransaction().commit();
-//			session.close();
-
+			System.out.println("nayakat1");
+			Message msg1 = ((Message) msg);
+			Item item = (Item) msg1.getObject();
+			double amount = (double) msg1.getObject2();
+			ShoppingCart cart1 = (ShoppingCart) msg1.getObject3();
+			System.out.println("nayakat1");
+			if (cart1.getItems().equals(null))
+			System.out.println("null");
+			else System.out.println("nayakaaaaaaaaaaaaaaaaaaaaaaaaat5");
+			System.out.println("nayakat2");
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			if(cart1 == null) System.out.println("null!!\n");
+			cart1.AddtoCart(item);
+			cart1.Addamount(amount);
+			session.save(cart1);
+			session.flush();
+			session.getTransaction().commit();
+			session.close();
+			System.out.println("nayakat3");
 		}
 		else if (msgString.startsWith("#warning")) {
 			Warning warning = new Warning("Warning from server!");
@@ -156,7 +152,6 @@ public class SimpleServer extends AbstractServer {
 				e.printStackTrace();
 			}
 		} else if (msgString.startsWith("#LoginRequest")) {
-			System.out.format("server1 \n");
 			Message msg1 = ((Message) msg);
 			User newLogin = (User) msg1.getObject();
 			session = sessionFactory.openSession();
@@ -167,18 +162,14 @@ public class SimpleServer extends AbstractServer {
 			try{
 				List<Registration> clients = getAll(Registration.class);
 				for (Registration registration : clients){
-					System.out.format("server5 \n");
 					if(registration.getUserName().equalsIgnoreCase(UserName)){
-						System.out.format("server4 \n");
 						if(registration.getPassword().equalsIgnoreCase(Password)){
-							System.out.format("server3 \n");
 							if(registration.getStatus().equalsIgnoreCase("blocked client")){
 								Warning new_warning = new Warning("You're account have been blocked. Please contact customer service");
 								client.sendToClient(new Message("#BlockedAccount", new_warning));
 								return;
 							}
 							else{
-								System.out.format("server2 \n");
 								client.sendToClient(new Message("#LogInSucess", registration , itemList));
 								return;
 							}
@@ -334,7 +325,7 @@ public class SimpleServer extends AbstractServer {
 		configuration.addAnnotatedClass((Registration.class));
 		configuration.addAnnotatedClass((SystemManagers_Messages.class));
 		configuration.addAnnotatedClass((Report.class));
-		//configuration.addAnnotatedClass((ShoppingCart.class));
+		configuration.addAnnotatedClass((ShoppingCart.class));
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).build();
@@ -363,7 +354,7 @@ public class SimpleServer extends AbstractServer {
 		Item it18 =new Item("SunFlower Bouquet" , "Bouquet" , "Yellow" , "@../../../../images/SunFlower Bouquet.jpg" ,  100);
 		Item it19 =new Item("Friendship Bouquet" , "Bouquet" , "White" , "@../../../../images/Friendship Bouquet.jpg" ,140 );
 		Item it20 =new Item("Plant" , "Plant" , "White" , "@../../../../images/Plant.jpg" , 30);
-		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareen@gmail.com", "0505123456", "KareenGh", "123456789", "Client", "2233445566", "1/1/2023", "Store Account");
+		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareen@gmail.com", "0505123456", "Client1", "1234", "Client", "2233445566", "1/1/2023", "Store Account");
 		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "Natalie@gmail.com", "0524789000", "NatalieNK", "22nN90999", "Client", "1234561299", "5/8/2024", "Chain Account");
 		Registration CEO = new Registration("Rashil", "Mbariky", "4443336661", "", "", "Rashi", "rashi", "CEO", "", "", "");
 		Registration NetworkMarketingWorker = new Registration("Eissa", "Wahesh", "", "", "", "Eissa", "11111", "NetworkMarketingWorker", "", "", "");

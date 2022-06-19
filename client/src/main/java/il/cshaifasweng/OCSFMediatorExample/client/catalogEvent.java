@@ -1,17 +1,26 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
+import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
 
 import java.util.List;
 
 public class catalogEvent {
     public String type;
     public List<Item> itemList;
+    public ShoppingCart cart;
 
     public catalogEvent(String type, List<Item> itemList) {
-        System.out.println("in catalogEvent");
         this.type = type;
         this.itemList = itemList;
+        if(itemList==null){
+            System.out.println("event list is null");
+        }
+    }
+    public catalogEvent(String type, List<Item> itemList, ShoppingCart cart) {
+        this.type = type;
+        this.itemList = itemList;
+        this.cart = cart;
         if(itemList==null){
             System.out.println("event list is null");
         }
@@ -31,5 +40,13 @@ public class catalogEvent {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public ShoppingCart getCart() {
+        return cart;
+    }
+
+    public void setCart(ShoppingCart cart1) {
+        this.cart = cart1;
     }
 }

@@ -17,13 +17,18 @@ public class SimpleClient extends AbstractClient {
 		String msgstring = ((Message) msg).getMessage();
 		if (msgstring.startsWith("#opencatalog"))
 		{
-
 			if((List<Item>) ((Message) msg).getObject2() == null) {
 				System.out.println("simpleClient list is null");
 			}
-			catalogEvent event = new catalogEvent((String) ((Message) msg).getObject() , (List<Item>) ((Message) msg).getObject2() );
+			catalogEvent event = new catalogEvent((String) ((Message) msg).getObject(), (List<Item>) ((Message) msg).getObject2());
 			EventBus.getDefault().post(event);
+
 		}
+//		else if(msgstring.startsWith("#addtocart"))
+//		{
+//			AddToCartEvent event = new AddToCartEvent((Item) ((Message) msg).getObject(), (Double) ((Message)msg).getObject2());
+//			EventBus.getDefault().post(event);
+//		}
 		else if (msgstring.startsWith("#openuseritem"))
 		{
 			if (CatalogController.getType().equals("NetworkMarketingWorker"))
@@ -63,8 +68,16 @@ public class SimpleClient extends AbstractClient {
 		else if(msgstring.equalsIgnoreCase("#LogInSucess"))
 		{
 			Registration user = (Registration) ((Message) msg).getObject();
-			catalogEvent event = new catalogEvent(user.getStatus(), (List<Item>) ((Message) msg).getObject2() );
-			EventBus.getDefault().post(event);
+			if((user.getStatus()).equals("Client")) {
+				ShoppingCart cart1 = new ShoppingCart();
+				System.out.println("login successss! ");
+				catalogEvent event = new catalogEvent(user.getStatus(), (List<Item>) ((Message) msg).getObject2(), cart1);
+				EventBus.getDefault().post(event);
+			}
+			else {
+				catalogEvent event = new catalogEvent(user.getStatus(), (List<Item>) ((Message) msg).getObject2());
+				EventBus.getDefault().post(event);
+			}
 		}
 		else if(msgstring.equalsIgnoreCase("#LoginWarning"))
 		{
