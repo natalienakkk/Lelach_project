@@ -29,6 +29,24 @@ public class SimpleClient extends AbstractClient {
 //			AddToCartEvent event = new AddToCartEvent((Item) ((Message) msg).getObject(), (Double) ((Message)msg).getObject2());
 //			EventBus.getDefault().post(event);
 //		}
+		else if(msgstring.startsWith("#submitorder"))
+		{
+
+			OrderEvent event = new OrderEvent((Order) ((Message) msg).getObject());
+			EventBus.getDefault().post(event);
+		}
+		else if (msgstring.startsWith("#getcart"))
+		{
+			System.out.println("im in simple client in getcart");
+			List<Item> b = ((List<Item>) ((Message) msg).getObject());
+			List<Double> c = (List<Double>) ((Message) msg).getObject2();
+			ShoppingCart a = new ShoppingCart();
+			a.setItems(b);
+			a.setAmount(c);
+			System.out.println(a.gettotalPrice(a) + " " + " nayakat");
+			ShoppingCartEvent event = new ShoppingCartEvent(a);
+			EventBus.getDefault().post(event);
+		}
 		else if (msgstring.startsWith("#openuseritem"))
 		{
 			if (CatalogController.getType().equals("NetworkMarketingWorker"))
@@ -69,10 +87,11 @@ public class SimpleClient extends AbstractClient {
 		{
 			Registration user = (Registration) ((Message) msg).getObject();
 			if((user.getStatus()).equals("Client")) {
-				ShoppingCart cart1 = new ShoppingCart();
 				System.out.println("login successss! ");
-				catalogEvent event = new catalogEvent(user.getStatus(), (List<Item>) ((Message) msg).getObject2(), cart1);
+				catalogEvent event = new catalogEvent(user.getStatus(), (List<Item>) ((Message) msg).getObject2());
+				UserEvent event1 = new UserEvent(user);
 				EventBus.getDefault().post(event);
+				EventBus.getDefault().post(event1);
 			}
 			else {
 				catalogEvent event = new catalogEvent(user.getStatus(), (List<Item>) ((Message) msg).getObject2());

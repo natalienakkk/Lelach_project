@@ -1,8 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Item;
-import il.cshaifasweng.OCSFMediatorExample.entities.Report;
-import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -37,7 +35,10 @@ public class App extends Application {
     private static String start_date2;
     private static String end_date2;
     private static List<Report> report_list;
-    private static ShoppingCart cart;
+    private static ShoppingCart cart5;
+    private static Registration User1;
+    private static Order order1;
+
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -78,12 +79,25 @@ public class App extends Application {
 //        this.amount = amount;
 //    }
 
-    public static ShoppingCart getCart() {
-        return cart;
+
+    public static Order getOrder1() { return order1; }
+
+    public static void setOrder1(Order order1) { App.order1 = order1; }
+
+    public static Registration getUser1() {
+        return User1;
     }
 
-    public static void setCart(ShoppingCart cart1) {
-        App.cart = cart1;
+    public static void setUser1(Registration user1) {
+        User1 = user1;
+    }
+
+    public static ShoppingCart getCart5() {
+        return cart5;
+    }
+
+    public static void setCart5(ShoppingCart cart5) {
+        App.cart5 = cart5;
     }
 
     public static String getType() {
@@ -160,10 +174,35 @@ public class App extends Application {
     }
 
     @Subscribe
+    public void shoppingcarteventfunc(ShoppingCartEvent event) {
+        setCart5(event.getCart());
+        System.out.println("im in app in shoppingcarteventfunc! ");
+        Platform.runLater(() -> {
+            try {
+                setRoot("cart");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Subscribe
+    public void OrderEventFunc(OrderEvent event)
+    {
+        setOrder1(event.getOrder());
+        Platform.runLater(() -> {
+            try {
+                setRoot("order");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        });
+    }
+    @Subscribe
     public void catalogEventFunc(catalogEvent event) {
         setType(event.getType());
         setItemList(event.getItemList());
-        setCart(event.getCart());
         if(itemList==null){
             System.out.println("app item list is null");
         }
@@ -216,6 +255,13 @@ public class App extends Application {
 
             });
     }
+    @Subscribe
+    public void UserEventFunc(UserEvent event) {
+        setUser1(event.getUser());
+
+    }
+
+
     @Subscribe
     public void itemEventFunc(itemEvent event)
     {

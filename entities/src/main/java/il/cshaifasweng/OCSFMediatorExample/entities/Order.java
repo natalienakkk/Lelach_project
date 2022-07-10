@@ -3,84 +3,120 @@ package il.cshaifasweng.OCSFMediatorExample.entities;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 @Entity
-@Table(name = "items")
+@Table(name = "orders")
 
 public class Order implements Serializable {
+
     private static final long serialVersionUID = 7144712553170938007L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String date;
-    private boolean card;
-    private int discount;
-    private boolean deliveryOp;
+    private String recievedate;
+    private String card;
+    private String deliveryOp;
+    private String clientid;
+    private String clientname;
+    private String receiveraddress;
+    private String receivername;
+    private String receivermail;
+    private String totalprice;
+    private String status;
+    private String note;
 
-    public Order(String date, boolean card, String shopName, String orderId, String status) {
+    @OneToOne
+    private ShoppingCart cart;
+
+    public Order(String date, String recievedate, String card, String deliveryOp, String clientid, String clientname, String totalprice, String status,ShoppingCart cart) {
         this.date = date;
+        this.recievedate = recievedate;
         this.card = card;
-        this.shopName = shopName;
-        this.orderId = orderId;
+        this.deliveryOp = deliveryOp;
+        this.clientid = clientid;
+        this.clientname = clientname;
+        this.totalprice = totalprice;
         this.status = status;
+        this.cart = cart;
     }
 
-    private String shopName;
-    private String orderId;
-    public void setDiscount(int discount) { this.discount = discount; }
-    public boolean isDeliveryOp() { return deliveryOp; }
-    public void setDeliveryOp(boolean deliveryOp) { this.deliveryOp = deliveryOp; }
-    private String status;
+    public Order(String date, String recievedate, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status, String note,ShoppingCart cart) {
+        this.date = date;
+        this.recievedate = recievedate;
+        this.card = card;
+        this.deliveryOp = deliveryOp;
+        this.clientid = clientid;
+        this.clientname = clientname;
+        this.receiveraddress = receiveraddress;
+        this.receivername = receivername;
+        this.receivermail = receivermail;
+        this.totalprice = totalprice;
+        this.status = status;
+        this.note = note;
+        this.cart = cart;
+    }
 
     public Order() {
 
     }
 
+    public ShoppingCart getCart() { return cart; }
 
-    public Long getId() {
-        return id;
-    }
+    public void setCart(ShoppingCart cart) { this.cart = cart; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public static long getSerialVersionUID() { return serialVersionUID; }
 
-    public String getDate() {
-        return date;
-    }
+    public Long getId() { return id; }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+    public void setId(Long id) { this.id = id; }
 
-    public boolean isCard() {
-        return card;
-    }
+    public String getDate() { return date; }
 
-    public void setCard(boolean card) {
-        this.card = card;
-    }
+    public void setDate(String date) { this.date = date; }
 
-    public String getShopName() {
-        return shopName;
-    }
+    public String getRecievedate() { return recievedate; }
 
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
+    public void setRecievedate(String recievedate) { this.recievedate = recievedate; }
 
-    public String getOrderId() {
-        return orderId;
-    }
+    public String getCard() { return card; }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
+    public void setCard(String card) { this.card = card; }
 
-    public String getStatus() {
-        return status;
-    }
+    public String getDeliveryOp() { return deliveryOp; }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public void setDeliveryOp(String deliveryOp) { this.deliveryOp = deliveryOp; }
+
+    public String getClientid() { return clientid; }
+
+    public void setClientid(String clientid) { this.clientid = clientid; }
+
+    public String getClientname() { return clientname; }
+
+    public void setClientname(String clientname) { this.clientname = clientname; }
+
+    public String getReceiveraddress() { return receiveraddress; }
+
+    public void setReceiveraddress(String receiveraddress) { this.receiveraddress = receiveraddress; }
+
+    public String getReceivername() { return receivername; }
+
+    public void setReceivername(String receivername) { this.receivername = receivername; }
+
+    public String getTotalprice() { return totalprice; }
+
+    public void setTotalprice(String totalprice) { this.totalprice = totalprice; }
+
+    public String getStatus() { return status; }
+
+    public void setStatus(String status) { this.status = status; }
+
+    public String getNote() { return note; }
+
+    public void setNote(String note) { this.note = note; }
+
+    public String getReceivermail() { return receivermail; }
+
+    public void setReceivermail(String receivermail) { this.receivermail = receivermail; }
 }

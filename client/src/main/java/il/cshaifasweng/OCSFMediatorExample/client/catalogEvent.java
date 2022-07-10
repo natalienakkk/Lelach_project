@@ -8,7 +8,7 @@ import java.util.List;
 public class catalogEvent {
     public String type;
     public List<Item> itemList;
-    public ShoppingCart cart;
+    public ShoppingCart cart ;
 
     public catalogEvent(String type, List<Item> itemList) {
         this.type = type;

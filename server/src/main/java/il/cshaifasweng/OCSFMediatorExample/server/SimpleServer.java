@@ -15,6 +15,7 @@ import javax.persistence.criteria.Root;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -31,7 +32,8 @@ import org.hibernate.service.ServiceRegistry;
 public class SimpleServer extends AbstractServer {
 	private static Session session;
 	private static SessionFactory sessionFactory = getSessionFactory();
-
+	int firsttime =0;
+	ShoppingCart cart1;
 	public SimpleServer(int port) {
 		super(port);
 
@@ -49,6 +51,16 @@ public class SimpleServer extends AbstractServer {
 			session.beginTransaction();
 			List<Item> itemList=getAll(Item.class);
 			client.sendToClient(new Message("#opencatalog" , user_type , itemList));
+			session.close();
+		}
+		else if(msgString.startsWith("#submitorder"))
+		{
+			Message msg1 = ((Message) msg);
+			Order order = (Order) msg1.getObject();
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.save(order);
+			client.sendToClient(new Message("#submitorder" , order));
 			session.close();
 		}
 		else if(msgString.startsWith("#update_price"))
@@ -90,28 +102,53 @@ public class SimpleServer extends AbstractServer {
 			}
 			session.close();
 		}
+
 		else if(msgString.startsWith("#addtocart"))
 		{
-			System.out.println("nayakat1");
 			Message msg1 = ((Message) msg);
 			Item item = (Item) msg1.getObject();
 			double amount = (double) msg1.getObject2();
-			ShoppingCart cart1 = (ShoppingCart) msg1.getObject3();
-			System.out.println("nayakat1");
-			if (cart1.getItems().equals(null))
-			System.out.println("null");
-			else System.out.println("nayakaaaaaaaaaaaaaaaaaaaaaaaaat5");
-			System.out.println("nayakat2");
 			session = sessionFactory.openSession();
 			session.beginTransaction();
+			//ShoppingCart cart1 = (ShoppingCart) msg1.getObject3();
+			if(firsttime == 0 ) {
+				cart1 = new ShoppingCart();
+				session.save(cart1);
+				firsttime++;
+				System.out.println(item.getName() + " a");
+			}
+			else
+			{
+				System.out.println(item.getName() + " b");
+			}
+
 			if(cart1 == null) System.out.println("null!!\n");
 			cart1.AddtoCart(item);
 			cart1.Addamount(amount);
+
+			List<ShoppingCart> a = getAll(ShoppingCart.class);
+
+			System.out.println(cart1.getItems().size());
 			session.save(cart1);
-			session.flush();
 			session.getTransaction().commit();
 			session.close();
-			System.out.println("nayakat3");
+
+		}
+		else if(msgString.startsWith("#getcart"))
+		{
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<ShoppingCart> a = getAll(ShoppingCart.class);
+			List<Item> b = new ArrayList<Item>();
+			List<Double> c = new ArrayList<Double>();
+			for(int j = 0; j<a.get(a.size()-1).getItems().size() ; j++)
+			{
+				b.add(a.get(a.size()-1).getItems().get(j));
+				c.add(a.get(a.size()-1).getAmount().get(j));
+			}
+			client.sendToClient(new Message("#getcart",b ,c));
+			session.close();
+
 		}
 		else if (msgString.startsWith("#warning")) {
 			Warning warning = new Warning("Warning from server!");
@@ -152,6 +189,7 @@ public class SimpleServer extends AbstractServer {
 				e.printStackTrace();
 			}
 		} else if (msgString.startsWith("#LoginRequest")) {
+			firsttime = 0;
 			Message msg1 = ((Message) msg);
 			User newLogin = (User) msg1.getObject();
 			session = sessionFactory.openSession();
@@ -171,6 +209,7 @@ public class SimpleServer extends AbstractServer {
 							}
 							else{
 								client.sendToClient(new Message("#LogInSucess", registration , itemList));
+
 								return;
 							}
 						}
@@ -326,6 +365,7 @@ public class SimpleServer extends AbstractServer {
 		configuration.addAnnotatedClass((SystemManagers_Messages.class));
 		configuration.addAnnotatedClass((Report.class));
 		configuration.addAnnotatedClass((ShoppingCart.class));
+		configuration.addAnnotatedClass((Order.class));
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).build();
@@ -334,25 +374,27 @@ public class SimpleServer extends AbstractServer {
 	private static void initializeData()
 	{
 		Catalog temp =new Catalog();
+//		Order order2 = new Order();
+//		session.save(order2);
 		Item it1 =new Item("Spray carnations","Carnations","Pink","@../../../../images/Spray carnations.jpg",50);
 		Item it2 =new Item("Delphinium" , "Plant " , "Blue" ,  "@../../../../images/Delphinium.jpg" ,20);
-		Item it3 =new Item("Zamia Coconut L" , "Plant" , "Green" , "@../../../../images/Zamia Coconut L.jpg" ,100);
-		Item it4 =new Item("Sensivaria medium" , "Plant" , "Green" , "@../../../../images/Sensivaria medium.jpg" , 55);
-		Item it5 =new Item("Bridal bouquet" , "White peonies" , "White" , "@../../../../images/Bridal bouquet.jpg" , 300);
+		Item it3 =new Item("Zamia Coconut L" , "Plant" , "Green" , "@../../../../images/Zamia Coconut L.jpg" ,50);
+		Item it4 =new Item("Sensivaria medium" , "Plant" , "Green" , "@../../../../images/Sensivaria medium.jpg" , 35);
+		Item it5 =new Item("Bridal bouquet" , "White peonies" , "White" , "@../../../../images/Bridal bouquet.jpg" , 200);
 		Item it6 =new Item("Blue Roses" , "Roses" , "Blue" , "@../../../../images/Blue Roses.jpg" , 80);
 		Item it7 =new Item("Red Roses" , "Roses" , "Red" , "@../../../../images/Red Roses.jpg" , 90);
 		Item it8 =new Item("Single Rose" , "Rose" , "Red" , "@../../../../images/Single Rose.jpg" , 10);
 		Item it9 =new Item("Posy Bouquet" , "Bouquet" , "Pink and White" , "@../../../../images/Posy Bouquet.jpg" , 70);
-		Item it10 =new Item("Basket Bouquet" , "Bouquet" , "Pink and White" , "@../../../../images/Basket Bouquet.jpg" ,130 );
+		Item it10 =new Item("Basket Bouquet" , "Bouquet" , "Pink and White" , "@../../../../images/Basket Bouquet.jpg" ,80 );
 		Item it11 =new Item("Fan Bouquet" , "Bouquet" , "White" , "@../../../../images/Fan Bouquet.jpg" ,55 );
-		Item it12 =new Item("Fiesta Bouquet" , "Bouquet" , "Red and Purple" , "@../../../../images/Fiesta Bouquet.jpg" ,110 );
-		Item it13 =new Item("Peony Bouquet" , "Bouquet" , "Pink and White" , "@../../../../images/Peony Bouquet.jpg" , 100);
-		Item it14 =new Item("Hello Sunshine" , "Sunflower" , "Yellow and White" , "@../../../../images/Hello Sunshine.jpg" ,80 );
-		Item it15 =new Item("Rainbow Roses" , "Roses" , "Rainbow" , "@../../../../images/Rainbow Roses.jpg" , 250);
+		Item it12 =new Item("Fiesta Bouquet" , "Bouquet" , "Red" , "@../../../../images/Fiesta Bouquet.jpg" ,110 );
+		Item it13 =new Item("Peony Bouquet" , "Bouquet" , "Pink and White" , "@../../../../images/Peony Bouquet.jpg" , 80);
+		Item it14 =new Item("Hello Sunshine" , "Sunflower" , "Yellow" , "@../../../../images/Hello Sunshine.jpg" ,80 );
+		Item it15 =new Item("Rainbow Roses" , "Roses" , "Rainbow" , "@../../../../images/Rainbow Roses.jpg" , 200);
 		Item it16 =new Item("Yellow Roses" , "Roses" , "Yellow" , "@../../../../images/Yellow Roses.jpg" ,70 );
 		Item it17 =new Item("White Roses" , "Roses" , "White" , "@../../../../images/White Roses.jpg" , 80);
-		Item it18 =new Item("SunFlower Bouquet" , "Bouquet" , "Yellow" , "@../../../../images/SunFlower Bouquet.jpg" ,  100);
-		Item it19 =new Item("Friendship Bouquet" , "Bouquet" , "White" , "@../../../../images/Friendship Bouquet.jpg" ,140 );
+		Item it18 =new Item("SunFlower Bouquet" , "Bouquet" , "Yellow" , "@../../../../images/SunFlower Bouquet.jpg" ,  90);
+		Item it19 =new Item("Friendship Bouquet" , "Bouquet" , "White" , "@../../../../images/Friendship Bouquet.jpg" ,90 );
 		Item it20 =new Item("Plant" , "Plant" , "White" , "@../../../../images/Plant.jpg" , 30);
 		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareen@gmail.com", "0505123456", "Client1", "1234", "Client", "2233445566", "1/1/2023", "Store Account");
 		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "Natalie@gmail.com", "0524789000", "NatalieNK", "22nN90999", "Client", "1234561299", "5/8/2024", "Chain Account");

@@ -16,6 +16,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import org.greenrobot.eventbus.Logger;
+
 public class OrderCatalogController {
     @FXML private static Item item;
     @FXML public static Item getItem() {
@@ -45,7 +47,7 @@ public class OrderCatalogController {
     @FXML private Text priceee;
     @FXML private ImageView image;
     @FXML void addtocart(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#addtocart" , item , Double.valueOf(amount_picker.getValue()) , cart));
+        SimpleClient.getClient().sendToServer(new Message("#addtocart" , item , Double.valueOf(amount_picker.getValue()) ));
         App.setRoot("catalog");
 
     }
@@ -65,7 +67,6 @@ public class OrderCatalogController {
         assert priceee != null : "fx:id=\"priceee\" was not injected: check your FXML file 'client.fxml'.";
         assert image != null : "fx:id=\"image\" was not injected: check your FXML file 'client.fxml'.";
         setItem(App.getItem());
-        setCart(App.getCart());
         flower_name.setText(item.getName());
         flower_color.setText("Color : "+ item.getColor());
         flower_type.setText("Type : "+ item.getType());

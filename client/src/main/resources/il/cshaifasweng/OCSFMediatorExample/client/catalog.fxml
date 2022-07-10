@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -27,7 +30,7 @@
             <ImageView fx:id="photo_1" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="photo_5" fitHeight="100.0" fitWidth="100.0" layoutX="629.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="other" layoutX="561.0" layoutY="27.0" mnemonicParsing="false" onAction="#other" prefHeight="26.0" prefWidth="170.0" />
-            <Button fx:id="Back" layoutX="29.0" layoutY="27.0" mnemonicParsing="false" onAction="#Back1" text="Back" />
+            <Button fx:id="Back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back1" text="Back" />
             <ImageView fx:id="photo_6" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="button_6" layoutX="63.0" layoutY="502.0" mnemonicParsing="false" onAction="#button_6" />
             <ImageView fx:id="photo_7" fitHeight="100.0" fitWidth="100.0" layoutX="192.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true" />
@@ -69,6 +72,32 @@
             <Button fx:id="button_24" layoutX="477.0" layoutY="1060.0" mnemonicParsing="false" onAction="#button_24" prefHeight="26.0" prefWidth="101.0" />
             <ImageView fx:id="photo_25" fitHeight="106.0" fitWidth="100.0" layoutX="629.0" layoutY="939.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="button_25" layoutX="628.0" layoutY="1060.0" mnemonicParsing="false" onAction="#button_25" prefHeight="26.0" prefWidth="101.0" />
+            <TitledPane fx:id="filter" animated="false" layoutX="14.0" layoutY="53.0" prefHeight="114.0" prefWidth="202.0" text="Filter Items ">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="89.0" prefWidth="201.0">
+                     <children>
+                        <Text layoutX="2.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price range :">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="94.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min           Max">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="minprice" layoutX="85.0" layoutY="12.0" onAction="#minprice" onKeyPressed="#minprice1" prefHeight="26.0" prefWidth="46.0" promptText="0" />
+                        <TextField fx:id="maxprice" layoutX="150.0" layoutY="12.0" onAction="#maxprice" onKeyPressed="#maxprice1" prefHeight="26.0" prefWidth="47.0" promptText="500" />
+                        <Text layoutX="2.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color :">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <ComboBox fx:id="colorpicker" layoutX="91.0" layoutY="58.0" onAction="#colorpicker" prefHeight="26.0" prefWidth="98.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </TitledPane>
          </children>
       </AnchorPane>
    </content>

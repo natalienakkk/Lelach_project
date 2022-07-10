@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.OrderController">
+   <children>
+      <Text layoutX="150.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thank you for your order!" wrappingWidth="469.3367919921875">
+         <font>
+            <Font name="System Bold Italic" size="38.0" />
+         </font>
+      </Text>
+      <Text layoutX="27.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of order :" wrappingWidth="112.71560668945312">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="27.0" layoutY="522.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status :" wrappingWidth="63.9156494140625">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="27.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card number :" wrappingWidth="112.71560668945312">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="26.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client name :" wrappingWidth="99.11566162109375">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="27.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client ID :" wrappingWidth="80.71560668945312">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="30.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery :" wrappingWidth="90.31564331054688">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="27.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receive date :" wrappingWidth="112.71560668945312">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="receiveraddress1" layoutX="27.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver address :" wrappingWidth="137.51565551757812">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="receivername1" layoutX="27.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver name :" wrappingWidth="112.71560668945312">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="507.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total price paid :" wrappingWidth="121.51553344726562">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="note1" layoutX="26.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note :" wrappingWidth="47.9156494140625">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="507.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order ID :" wrappingWidth="80.71560668945312">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="clientname" layoutX="133.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="clientid" layoutX="120.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="dateoforder" layoutX="150.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="receivedate" layoutX="140.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="cardnumber" layoutX="140.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="delivery" layoutX="108.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="receivername" layoutX="140.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="receiveraddress" layoutX="165.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="note" layoutX="81.0" layoutY="448.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="status" layoutX="96.0" layoutY="521.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="totalprice" layoutX="635.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="90.31564331054688">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="orderid" layoutX="587.0" layoutY="521.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="receiveremail1" layoutX="30.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver e-mail :" wrappingWidth="121.51553344726562">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="receiveremail" layoutX="150.0" layoutY="416.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Button fx:id="back" layoutX="635.0" layoutY="12.0" mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="122.0" text="Back To HomePage" />
+   </children>
+</AnchorPane>

@@ -6,12 +6,19 @@ import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
@@ -20,12 +27,16 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 public class CatalogController {
+    int Max = 500;
+    int Min = 0;
+    private static String color = null;
     @FXML public static List<Item> itemList = new ArrayList<Item>();
     @FXML public static List<Item> getItemList() { return itemList; }
     @FXML public static void setItemList(List<Item> itemList) { CatalogController.itemList = itemList; }
     @FXML public static String type;
     @FXML public static String getType() { return type; }
     @FXML public static void setType(String type) { CatalogController.type = type; }
+    private String[] colors = {"White","Red","Blue","Yellow","Pink","Green","Pink and White","Rainbow"};
     @FXML
     private ResourceBundle resources;
     @FXML
@@ -84,6 +95,14 @@ public class CatalogController {
     private Button button_8;
     @FXML
     private Button button_9;
+    @FXML
+    private ComboBox<String> colorpicker;
+    @FXML
+    private TitledPane filter;
+    @FXML
+    private TextField maxprice;
+    @FXML
+    private TextField minprice;
     @FXML
     private ImageView photo_1;
     @FXML
@@ -172,149 +191,389 @@ public class CatalogController {
             //AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
             //Pane2.getChildren().setAll(pane);
         } else if (type.equals("Client")) {
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
-            Pane2.getChildren().setAll(pane);
+            System.out.println("sending to server from catalogcontroller 1");
+            SimpleClient.getClient().sendToServer(new Message("#getcart"));
+            System.out.println("sending to server from catalogcontroller 2");
+//            AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
+//            Pane2.getChildren().setAll(pane);
 
         }
     }
 
     @FXML
     void button_5(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 5));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_5.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_2(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 2));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_2.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_4(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 4));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_4.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_1(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 1));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_1.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_3(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 3));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_3.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_10(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 10));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_10.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
     @FXML
     void button_11(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 11));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_11.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_12(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 12));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_12.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_13(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 13));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_13.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_14(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 14));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_14.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_15(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 15));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_15.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_16(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 16));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_16.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_17(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 17));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_17.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_18(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 18));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_18.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_19(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 19));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_19.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_20(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 20));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_20.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }@FXML
     void button_21(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 21));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_21.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }@FXML
     void button_22(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 22));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_22.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }@FXML
     void button_23(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 23));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_23.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }@FXML
     void button_24(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 24));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_24.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }@FXML
     void button_25(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 25));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_25.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_6(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 6));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_6.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_7(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 7));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_7.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_8(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 8));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_8.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
 
     }
 
     @FXML
     void button_9(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#openuseritem", 9));
+        long id = 50;
+        for(int k =0; k<itemList.size();k++) {
+            if(button_9.getText().equals(itemList.get(k).getName())) {
+                id = itemList.get(k).getId();
+                break;
+            }
+        }
+        int x =(int) id;
+        SimpleClient.getClient().sendToServer(new Message("#openuseritem", x));
     }
+
+    @FXML
+    void colorpicker(ActionEvent event) {
+        color=colorpicker.getSelectionModel().getSelectedItem();
+        setCatalog();
+    }
+
+    @FXML
+    void maxprice(ActionEvent event) {
+        Max = Integer.parseInt(maxprice.getText());
+        System.out.println(Max+" im in action event");
+        setCatalog();
+    }
+
+    @FXML
+    void maxprice1(KeyEvent event) {
+        if (event.getCode() ==  KeyCode.ENTER ) {
+            Max = Integer.parseInt(maxprice.getText());
+            System.out.println(Max+" im in keypressed event");
+        }
+    }
+    @FXML
+    void minprice(ActionEvent event) {
+        Min = Integer.parseInt(minprice.getText());
+        System.out.println(Min+" im in action event");
+        setCatalog();
+    }
+
+    @FXML
+    void minprice1(KeyEvent event) {
+        if (event.getCode() ==  KeyCode.ENTER ) {
+            Min = Integer.parseInt(minprice.getText());
+            System.out.println(Min+" im in keypressed event");
+        }
+    }
+
+
 
 
 
@@ -323,6 +582,10 @@ public class CatalogController {
 
     @FXML
     void initialize() throws InterruptedException {
+        assert colorpicker != null : "fx:id=\"colorpicker\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert filter != null : "fx:id=\"filter\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert maxprice != null : "fx:id=\"maxprice\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert minprice != null : "fx:id=\"minprice\" was not injected: check your FXML file 'catalog.fxml'.";
         assert Back != null : "fx:id=\"Back\" was not injected: check your FXML file 'catalog.fxml'.";
         assert Header != null : "fx:id=\"Header\" was not injected: check your FXML file 'catalog.fxml'.";
         assert Pane2 != null : "fx:id=\"Pane2\" was not injected: check your FXML file 'catalog.fxml'.";
@@ -378,12 +641,16 @@ public class CatalogController {
         assert photo_7 != null : "fx:id=\"photo_7\" was not injected: check your FXML file 'catalog.fxml'.";
         assert photo_8 != null : "fx:id=\"photo_8\" was not injected: check your FXML file 'catalog.fxml'.";
         assert photo_9 != null : "fx:id=\"photo_9\" was not injected: check your FXML file 'catalog.fxml'.";
+        colorpicker.getItems().addAll(colors);
         setType(App.getType());
         setItemList(App.getItemList());
         if(itemList == null){
         System.out.println("is null");
         }
+        color = "start";
         setCatalog();
+        filter.setExpanded(false);
+
 
     }
 
@@ -397,6 +664,7 @@ public void setCatalog(){
             } else if (type.equals("NetworkMarketingWorker")) {
                 other1.setVisible(false);
                 other.setText("Add Item");
+                filter.setVisible(false);
             } else if (type.equals("Client")) {
                 other.setText("My Profile");
                 other1.setText("Shopping Cart");
@@ -452,13 +720,49 @@ public void setCatalog(){
         photo_list.add(photo_23);
         photo_list.add(photo_24);
         photo_list.add(photo_25);
-        for (int i = 0; i < itemList.size(); i++) {
-            buttons_list.get(i).setText(itemList.get(i).getName());
-            File file = new File("C:\\Users\\Saher\\IdeaProjects\\saher-eissa\\client\\src\\main\\resources\\images\\" + itemList.get(i).getName() + ".jpg");
-            Image image = new Image(file.toURI().toString());
-            photo_list.get(i).setImage(image);
+        System.out.println(Min+" im in setcatalog");
+        int size=0;
+        int i;
+        for ( i = 0; i < itemList.size();i++) {
+            buttons_list.get(i).setVisible(true);
+            photo_list.get(i).setVisible(true);
+            if (itemList.get(i).getPrice() < Max && itemList.get(i).getPrice() > Min )
+            {
+                if(color.equals("start")) size++;
+                else {
+                    if(itemList.get(i).getColor().equals(color)) size++;
+                }
+            }
         }
-        for ( int j=itemList.size() ; j < 25 ; j++)
+        System.out.println(size);
+        int g=0;
+        for ( i = 0; i < size ;i++) {
+            for(;g<itemList.size();g++){
+                if(itemList.get(g).getPrice() < Max && itemList.get(g).getPrice() > Min ) {
+                    System.out.println(color+ " 11");
+                    if(color.equals("start")) {
+                        System.out.println(itemList.get(g).getName() + " " + itemList.get(g).getPrice() + " " + g);
+                        buttons_list.get(i).setText(itemList.get(g).getName());
+                        File file = new File("C:\\Users\\Saher\\IdeaProjects\\saher-eissa\\client\\src\\main\\resources\\images\\" + itemList.get(g).getName() + ".jpg");
+                        Image image = new Image(file.toURI().toString());
+                        photo_list.get(i).setImage(image);
+                        g++;
+                        break;
+                    }
+                    else {
+                        if(itemList.get(g).getColor().equals(color)){
+                            buttons_list.get(i).setText(itemList.get(g).getName());
+                            File file = new File("C:\\Users\\Saher\\IdeaProjects\\saher-eissa\\client\\src\\main\\resources\\images\\" + itemList.get(g).getName() + ".jpg");
+                            Image image = new Image(file.toURI().toString());
+                            photo_list.get(i).setImage(image);
+                            g++;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        for ( int j=i ; j < 25 ; j++)
         {
             buttons_list.get(j).setVisible(false);
             photo_list.get(j).setVisible(false);
