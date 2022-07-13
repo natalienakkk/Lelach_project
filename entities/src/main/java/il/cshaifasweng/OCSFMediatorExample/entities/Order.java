@@ -16,6 +16,7 @@ public class Order implements Serializable {
     private Long id;
     private String date;
     private String recievedate;
+    private String recievetime;
     private String card;
     private String deliveryOp;
     private String clientid;
@@ -56,6 +57,15 @@ public class Order implements Serializable {
         this.status = status;
         this.note = note;
         this.cart = cart;
+    }
+
+    public Order(Long id, String recievetime, String recievedate, String clientid, String totalprice, String status) {
+        this.id = id;
+        this.recievedate = recievedate;
+        this.clientid = clientid;
+        this.totalprice = totalprice;
+        this.status = status;
+        this.recievetime = recievetime;
     }
 
     public Order() {

@@ -24,8 +24,16 @@ public class Registration implements Serializable {
     private String ExpiryDate;
     private String AccountType;
     private Boolean Registered;
+    private double Refund;
 
-    public Registration(String firstName, String lastName, String ID, String email, String phoneNumber, String userName, String password, String status, String creditCard, String expiryDate, String accountType) {
+    public Registration(String firstName, String lastName, String userName, String status) {
+        FirstName = firstName;
+        LastName = lastName;
+        UserName = userName;
+        Status = status;
+    }
+
+    public Registration(String firstName, String lastName, String ID, String email, String phoneNumber, String userName, String password, String status, String creditCard, String expiryDate, String accountType, double refund) {
         FirstName = firstName;
         LastName = lastName;
         this.Client_ID = ID;
@@ -38,7 +46,11 @@ public class Registration implements Serializable {
         ExpiryDate = expiryDate;
         AccountType = accountType;
         setRegistered(false);
-//        Registered = registered;
+        Refund = refund;
+//        setRegistered(false);
+
+//      Registered = registered;
+//        purchases = new ArrayList<Purchase>();
     }
 
     public Registration() {

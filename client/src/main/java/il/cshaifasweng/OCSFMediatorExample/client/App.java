@@ -11,6 +11,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.greenrobot.eventbus.EventBus;
@@ -30,15 +31,20 @@ public class App extends Application {
 //    private static Double amount;
     boolean isRegistered = false;
     private static String type2;
-    private static String start_date;
-    private static String end_date;
-    private static String start_date2;
-    private static String end_date2;
+    private static LocalDate start_date;
+    private static LocalDate end_date;
+    private static LocalDate start_date2;
+    private static LocalDate end_date2;
     private static List<Report> report_list;
     private static ShoppingCart cart5;
     private static Registration User1;
     private static Order order1;
-
+    private static String username;
+    private static List<Registration>SystemManager_list;
+    private static String type_SystemManager;
+    private static List<Complain> complain_list;
+    private static List<ShoppingCart>shoppingcart_list;
+    private static List<Order>orderList;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -79,6 +85,84 @@ public class App extends Application {
 //        this.amount = amount;
 //    }
 
+
+    public static List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public static void setOrderList(List<Order> orderList) {
+        App.orderList = orderList;
+    }
+
+    public static LocalDate getStart_date() {
+        return start_date;
+    }
+
+    public static void setStart_date(LocalDate start_date) {
+        App.start_date = start_date;
+    }
+
+    public static LocalDate getEnd_date() {
+        return end_date;
+    }
+
+    public static void setEnd_date(LocalDate end_date) {
+        App.end_date = end_date;
+    }
+
+    public static LocalDate getStart_date2() {
+        return start_date2;
+    }
+
+    public static void setStart_date2(LocalDate start_date2) {
+        App.start_date2 = start_date2;
+    }
+
+    public static LocalDate getEnd_date2() {
+        return end_date2;
+    }
+
+    public static void setEnd_date2(LocalDate end_date2) {
+        App.end_date2 = end_date2;
+    }
+
+    public static List<ShoppingCart> getShoppingcart_list() {
+        return shoppingcart_list;
+    }
+
+    public static void setShoppingcart_list(List<ShoppingCart> shoppingcart_list) {
+        App.shoppingcart_list = shoppingcart_list;
+    }
+
+    public static List<Complain> getComplain_list() { return complain_list; }
+
+    public static void setComplain_list(List<Complain> complain_list) {
+        App.complain_list = complain_list;
+    }
+
+    public static String getUsername() {
+        return username;
+    }
+
+    public static void setUsername(String username) {
+        App.username = username;
+    }
+
+    public static List<Registration> getSystemManager_list() {
+        return SystemManager_list;
+    }
+
+    public static void setSystemManager_list(List<Registration> systemManager_list) {
+        SystemManager_list = systemManager_list;
+    }
+
+    public static String getType_SystemManager() {
+        return type_SystemManager;
+    }
+
+    public static void setType_SystemManager(String type_SystemManager) {
+        App.type_SystemManager = type_SystemManager;
+    }
 
     public static Order getOrder1() { return order1; }
 
@@ -124,21 +208,7 @@ public class App extends Application {
         item = it;
     }
 
-    public static String getStart_date2() {
-        return start_date2;
-    }
 
-    public static void setStart_date2(String start_date2) {
-        App.start_date2 = start_date2;
-    }
-
-    public static String getEnd_date2() {
-        return end_date2;
-    }
-
-    public static void setEnd_date2(String end_date2) {
-        App.end_date2 = end_date2;
-    }
 
 
     public static String getType1() {
@@ -149,21 +219,6 @@ public class App extends Application {
         this.type2 = type;
     }
 
-    public static String getStart_date() {
-        return start_date;
-    }
-
-    public void setStart_date(String start_date) {
-        this.start_date = start_date;
-    }
-
-    public static String getEnd_date() {
-        return end_date;
-    }
-
-    public void setEnd_date(String end_date) {
-        this.end_date = end_date;
-    }
 
     public static List<Report> getReport_list() {
         return report_list;
@@ -187,9 +242,24 @@ public class App extends Application {
     }
 
     @Subscribe
+    public void usernameEventFunc(UsernameEvent event){
+        setUsername(event.getUsername());
+        setSystemManager_list(event.getList());
+        setType_SystemManager(event.getType());
+        Platform.runLater(() -> {
+            try {
+                App.setRoot("ShowListForSystemManager");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Subscribe
     public void OrderEventFunc(OrderEvent event)
     {
         setOrder1(event.getOrder());
+        System.out.println(order1.getCart().getItems().get(0).getName() + " ordeeeeeeeeeeeeeeer");
         Platform.runLater(() -> {
             try {
                 setRoot("order");
@@ -246,6 +316,17 @@ public class App extends Application {
 
             });
         }
+        else if((type.equals("CustomerService")))
+        {
+            Platform.runLater(() -> {
+                try {
+                    setRoot("CustomerService_homepage");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            });
+        }
         else Platform.runLater(() -> {
                 try {
                     setRoot("catalog");
@@ -261,6 +342,31 @@ public class App extends Application {
 
     }
 
+    @Subscribe
+    public void SendUsernameEvent(SendUsernameEvent event){
+        setUsername(event.getUsername());
+//        Platform.runLater(() -> {
+//            try {
+//                App.setRoot("ShowListForSystemManager");
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
+    }
+
+
+    @Subscribe
+    public void ComplainEventFunc(ComplainEvent event){
+        setComplain_list(event.getComplain_list());
+        setOrderList(event.getOrderList());
+        Platform.runLater(() -> {
+            try {
+                App.setRoot("CustomerService");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
     @Subscribe
     public void itemEventFunc(itemEvent event)
@@ -313,19 +419,36 @@ public class App extends Application {
     @Subscribe
     public void onReportEvent(ReportEvent event) {
         setType(event.getType());
+        System.out.println("11");
         setStart_date(event.getStart_date());
+        System.out.println("22");
         setEnd_date(event.getEnd_date());
+        System.out.println("33");
         setReport_list(event.getReport_list());
+        System.out.println("44");
         setStart_date2(event.getStart_date2());
         setEnd_date2(event.getEnd_date2());
+        setComplain_list(event.getComplain_list());
+
 
         Platform.runLater(() -> {
+            System.out.println("eisaaaaaaaaaaaa");
             if(event.getType().equals("Complain Report")) {
                 try {
                     App.setRoot("ComplainReport");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+
+            else if (event.getType().equals("Complain Compare")){
+                System.out.println("eisaaaaaaaaaaaa");
+                try {
+                    App.setRoot("ComplainCompare");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
             else
             {

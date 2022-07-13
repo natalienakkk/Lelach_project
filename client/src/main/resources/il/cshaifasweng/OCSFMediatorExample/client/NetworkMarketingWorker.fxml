@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="pane1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.NetworkMarketingWorkerController">
+<AnchorPane fx:id="pane1" prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.NetworkMarketingWorkerController">
     <children>
         <Text layoutX="153.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome">
             <font>
@@ -16,7 +16,7 @@
         <Text fx:id="workername" layoutX="294.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="134.13671875" />
         <Button fx:id="showallitems_button" layoutX="14.0" layoutY="126.0" mnemonicParsing="false" onAction="#showallitems_butt" text="Show All Items" />
         <Button fx:id="additem_button" layoutX="344.0" layoutY="328.0" mnemonicParsing="false" onAction="#additem_butt" text="Add Item" />
-        <Button fx:id="apply_button" layoutX="271.0" layoutY="196.0" mnemonicParsing="false" onAction="#apply_butt" text="Apply" />
+        <Button fx:id="apply_button" layoutX="277.0" layoutY="195.0" mnemonicParsing="false" onAction="#apply_butt" text="Apply" />
         <Text fill="#a11f78" layoutX="12.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint: Enter discount percentage that u want to apply for sale ">
             <font>
                 <Font name="System Bold Italic" size="14.0" />
@@ -62,6 +62,17 @@
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Text>
-        <Text fx:id="worker_name" layoutX="309.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.13671875" />
+        <Text fx:id="worker_name" layoutX="277.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.13671875">
+            <font>
+                <Font name="System Bold Italic" size="27.0" />
+            </font></Text>
+        <Button fx:id="back_button" layoutX="15.0" layoutY="39.0" mnemonicParsing="false" onAction="#back_butt" text="Back to Homepage" />
+        <Button fx:id="delete_discount" layoutX="344.0" layoutY="196.0" mnemonicParsing="false" onAction="#delete_discount" prefHeight="25.0" prefWidth="194.0" text="delete discount " />
+        <Text layoutX="235.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%" wrappingWidth="19.40625">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Text>
+        <TextField fx:id="flower_image" layoutX="311.0" layoutY="361.0" prefHeight="25.0" prefWidth="345.0" />
     </children>
 </AnchorPane>

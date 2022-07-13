@@ -15,6 +15,8 @@ import javax.persistence.criteria.Root;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,31 +61,14 @@ public class SimpleServer extends AbstractServer {
 			Order order = (Order) msg1.getObject();
 			session = sessionFactory.openSession();
 			session.beginTransaction();
+			System.out.println(order.getCart().getItems().get(0).getName());
 			session.save(order);
-			client.sendToClient(new Message("#submitorder" , order));
-			session.close();
-		}
-		else if(msgString.startsWith("#update_price"))
-		{
+			System.out.println("3030303");
 
-			Message msg7 = ((Message) msg);
-			double price10 = (double) msg7.getObject();
-			long id10 = ((long) msg7.getObject2());
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-			List<Item> itemList=getAll(Item.class);
-			int i = 0;
-			for(i=0 ; i < itemList.size() ; i++)
-			{
-				if(itemList.get(i).getId() == id10 )
-				{
-					itemList.get(i).setPrice(price10);
-					session.save(itemList.get(i));
-					session.flush();
-					session.getTransaction().commit();
-					break;
-				}
-			}
+			client.sendToClient(new Message("#submitorder" , order));
+			session.flush();
+			session.getTransaction().commit();
+			System.out.println("303022222");
 			session.close();
 		}
 		else if(msgString.startsWith("#openuseritem"))
@@ -227,9 +212,71 @@ public class SimpleServer extends AbstractServer {
 				e.printStackTrace();
 			}
 		}
+		else if(msgString.equals("#update flower"))
+		{
+			Message msgupdate = ((Message) msg);
+			Long flower_id=((Long) msgupdate.getObject());
+			String type =((String) msgupdate.getObject2());
+			String info=((String) msgupdate.getObject3());
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Item> itemsList = getAll(Item.class);
+			for (int i = 0; i < itemsList.size(); i++){
+				if(itemsList.get(i).getId().equals(flower_id)) {
+					if (type.equals("color_update")) {
+						itemsList.get(i).setColor(info);
+						session.save(itemsList.get(i));
+						client.sendToClient(new Message("#information updated",itemsList.get(i)));
+						break;
+					}
+					else if(type.equals("name_update"))
+					{
+						itemsList.get(i).setName(info);
+						session.save(itemsList.get(i));
+						client.sendToClient(new Message("#information updated",itemsList.get(i)));
+						break;
+					}
+					else if(type.equals("type_update"))
+					{
+						itemsList.get(i).setType(info);
+						session.save(itemsList.get(i));
+						client.sendToClient(new Message("#information updated",itemsList.get(i)));
+						break;
+					}
+					else if(type.equals("price_update"))
+					{
+						itemsList.get(i).setPrice(Double.parseDouble(info));
+						session.save(itemsList.get(i));
+						client.sendToClient(new Message("#information updated",itemsList.get(i)));
+						break;
+					}
+				}
+			}
+			session.getTransaction().commit();
+			session.flush();
+			session.close();
+		}
+		if(msgString.equals("#delete item"))
+		{
+			Message msgupdate = ((Message) msg);
+			Long item_id=((Long) msgupdate.getObject());
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Item> itemsList = getAll(Item.class);
+			for (int i = 0; i < itemsList.size(); i++){
+				if(itemsList.get(i).getId().equals(item_id)) {
+					session.delete(itemsList.get(i));
+					System.out.println(i);
+					break;
+				}
+			}
+			itemsList = getAll(Item.class);
+			session.getTransaction().commit();
+			client.sendToClient(new Message("#item_deleted","NetworkMarketingWorker" , itemsList));
+			session.close();
+		}
 		else if(msgString.equals("#add new item"))
 		{
-
 			Item new_item= new Item();
 			Message msg_add = ((Message) msg);
 			new_item=(Item) msg_add.getObject();
@@ -247,8 +294,13 @@ public class SimpleServer extends AbstractServer {
 		else if (msgString.startsWith("#apply discount"))
 		{
 			Message msgdiscount = ((Message) msg);
-			String discount_per = ((String) msgdiscount.getObject());
-			double discount = Double.parseDouble(discount_per);
+			double discount = ((double) msgdiscount.getObject())/100;
+			if(discount<=0 || discount>=1)
+			{
+				Warning newWarning = new Warning("PLEASE enter a number between 1 and 100");
+				client.sendToClient(new Message("wrong discount",newWarning));
+				return;
+			}
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<Item> itemsList = getAll(Item.class);
@@ -263,41 +315,88 @@ public class SimpleServer extends AbstractServer {
 			session.close();
 
 		}
+
+		else if (msgString.equals("#delete discount"))
+		{
+			Message msgdelete_discount = ((Message) msg);
+			double discount=((double) msgdelete_discount.getObject())/100;
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Item> itemsList = getAll(Item.class);
+			double new_price;
+			for (int i = 0; i < itemsList.size(); i++) {
+				new_price = (itemsList.get(i).getPrice()) * (1/(1 - discount));
+				itemsList.get(i).setPrice(new_price);
+				session.save(itemsList.get(i));
+			}
+			session.getTransaction().commit();
+			session.flush();
+			session.close();
+		}
 		else if(msgString.startsWith("#block account"))
 		{
 			Message msgblock = ((Message) msg);
 			String username = ((String) msgblock.getObject());
 			session = sessionFactory.openSession();
 			session.beginTransaction();
+			int flag=0;
 			List<Registration> usernameList=getAll(Registration.class);
 			for(int i=0 ; i < usernameList.size() ; i++)
 			{
 				if (usernameList.get(i).getUserName().equals(username))
 				{
-					usernameList.get(i).setStatus("blocked client");
-					session.save(usernameList.get(i));
+					if(usernameList.get(i).getStatus().equals("Client")) {
+						flag = 1;
+						usernameList.get(i).setStatus("blocked client");
+						session.save(usernameList.get(i));
+						break;
+					}
 				}
+
 			}
 			session.getTransaction().commit();
-			session.flush();
+			//session.flush();
 			session.close();
-		}
 
+			if(flag==0)
+			{
+				Warning newWarning = new Warning("You have entered a wrong username");
+				client.sendToClient(new Message("wrong username",newWarning));
+			}
+
+		}
 
 
 		else if (msgString.equals("#send message")) {
 			Message msgclient = ((Message) msg);
 			String username = ((String) msgclient.getObject());
 			String client_msg = ((String) msgclient.getObject2());
-			System.out.format(client_msg+"\n");
-			System.out.format(username);
-			SystemManagers_Messages message=new SystemManagers_Messages(client_msg,username);
 			session = sessionFactory.openSession();
 			session.beginTransaction();
+			int flag=0;
+			List<Registration> usernameList = getAll(Registration.class);
+			for (int i = 0; i < usernameList.size(); i++) {
+				if (usernameList.get(i).getUserName().equals(username) && (usernameList.get(i).getStatus().equals("Client"))){
+					flag = 1;
+					break;
+				}
+			}
+			if(flag==0)
+			{
+				Warning newWarning = new Warning("You have entered a wrong username");
+				client.sendToClient(new Message("wrong username",newWarning));
+			}
+//			System.out.format(client_msg+"\n");
+//			System.out.format(username);
+			SystemManagers_Messages message = new SystemManagers_Messages(client_msg, username);
+			//	session = sessionFactory.openSession();
+			//	session.beginTransaction();
 			session.save(message);
 			session.flush();
 			session.getTransaction().commit();
 		}
+
+
 		else if(msgString.equals("#update worker type"))
 		{
 			Message msgstatus = ((Message) msg);
@@ -306,18 +405,36 @@ public class SimpleServer extends AbstractServer {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<Registration> usernameList=getAll(Registration.class);
-			int i = 0;
+			int i = 0,flag=0;
 			for(i=0 ; i < usernameList.size() ; i++)
 			{
 				if(usernameList.get(i).getUserName().equals(username))
 				{
-					usernameList.get(i).setStatus(worker_status);
-					session.save(usernameList.get(i));
-					break;
+					if(!(usernameList.get(i).getStatus().equals("Client"))) {
+						flag = 1;
+						usernameList.get(i).setStatus(worker_status);
+						session.save(usernameList.get(i));
+						break;
+					}
 				}
 			}
 			session.flush();
 			session.getTransaction().commit();
+			session.close();
+
+			if(flag==0)
+			{
+				Warning newWarning = new Warning("You have entered a wrong username");
+				client.sendToClient(new Message("wrong username",newWarning));
+			}
+		}
+		else if(msgString.equals("#send clients/workers list")){
+			Message msglist = ((Message) msg);
+			String type=(String)msglist.getObject();
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Registration> list=getAll(Registration.class);
+			client.sendToClient(new Message("list sent",type,list));
 			session.close();
 		}
 		else if(msgString.equals("#show Report"))
@@ -355,7 +472,87 @@ public class SimpleServer extends AbstractServer {
 			}
 			session.close();
 		}
-	}
+		else if(msgString.equals("#client complain"))
+		{
+			Message msg_complain = ((Message) msg);
+			String username  = ((String) msg_complain.getObject());
+			System.out.println(username);
+			String message=((String) msg_complain.getObject2());
+			String type =((String) msg_complain.getObject3());
+			String order_id =((String) msg_complain.getObject4());
+			LocalTime time=((LocalTime) msg_complain.getObject5());
+			LocalDate date=((LocalDate) msg_complain.getObject6());
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			if(order_id.equals("")) {
+				Complain new_complain=new Complain(username,date,time,"new complain",message,type);
+				session.save(new_complain);
+			}
+			else {
+				long orderID = Long.parseLong(order_id);
+				Complain new_complain = new Complain(username, date, time, "new complain", message, type,  orderID);
+				session.save(new_complain);
+			}
+			session.flush();
+			session.getTransaction().commit();
+			//client.sendToClient(new Message("#"));
+			session.close();
+		}
+
+		else if(msgString.equals("#complain list"))
+		{
+
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+
+			List<Complain> complainList=getAll(Complain.class);
+			List<Order> orderList=getAll(Order.class);
+
+			client.sendToClient(new Message("#list of complain sent",complainList,orderList));
+
+			session.close();
+		}
+
+		else if (msgString.equals("#complain finished"))
+		{
+			Complain complain=new Complain();
+			Message msg_complain1 = ((Message) msg);
+			complain  = ((Complain) msg_complain1.getObject());
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Complain> complainList=getAll(Complain.class);
+			for(int i=0;i<complainList.size();i++)
+			{ /*we should delete this from data base after we contact the customer*/
+				if(complainList.get(i).getId().equals(complain.getId())){
+					complainList.get(i).setAnswer(complain.getAnswer());
+					complainList.get(i).setRefund(complain.getRefund());
+					complainList.get(i).setStatus("complete");
+					session.save(complainList.get(i));
+					break;
+				}
+			}
+			session.getTransaction().commit();
+			session.flush();
+			session.close();
+		}
+		else if (msgString.equals("#delete complain")){
+			Complain complain=new Complain();
+			Message msg_complain1 = ((Message) msg);
+			complain  = ((Complain) msg_complain1.getObject());
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Complain> complainList=getAll(Complain.class);
+			for(int i=0;i<complainList.size();i++) {
+				if(complainList.get(i).getId().equals(complain.getId()))
+				{
+					session.delete(complainList.get(i));
+					break; }
+			}
+			session.getTransaction().commit();
+			session.flush();
+			session.close();
+		}
+}
 	private static SessionFactory getSessionFactory() throws HibernateException {
 		Configuration configuration = new Configuration();
 		configuration.addAnnotatedClass(Catalog.class);
@@ -366,6 +563,7 @@ public class SimpleServer extends AbstractServer {
 		configuration.addAnnotatedClass((Report.class));
 		configuration.addAnnotatedClass((ShoppingCart.class));
 		configuration.addAnnotatedClass((Order.class));
+		configuration.addAnnotatedClass((Complain.class));
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).build();
@@ -396,12 +594,13 @@ public class SimpleServer extends AbstractServer {
 		Item it18 =new Item("SunFlower Bouquet" , "Bouquet" , "Yellow" , "@../../../../images/SunFlower Bouquet.jpg" ,  90);
 		Item it19 =new Item("Friendship Bouquet" , "Bouquet" , "White" , "@../../../../images/Friendship Bouquet.jpg" ,90 );
 		Item it20 =new Item("Plant" , "Plant" , "White" , "@../../../../images/Plant.jpg" , 30);
-		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareen@gmail.com", "0505123456", "Client1", "1234", "Client", "2233445566", "1/1/2023", "Store Account");
-		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "Natalie@gmail.com", "0524789000", "NatalieNK", "22nN90999", "Client", "1234561299", "5/8/2024", "Chain Account");
-		Registration CEO = new Registration("Rashil", "Mbariky", "4443336661", "", "", "Rashi", "rashi", "CEO", "", "", "");
-		Registration NetworkMarketingWorker = new Registration("Eissa", "Wahesh", "", "", "", "Eissa", "11111", "NetworkMarketingWorker", "", "", "");
-		Registration SystemManger = new Registration("Elias", "Dow", "", "", "", "Elisa", "lampon", "SystemManager", "", "", "");
-		Registration BranchManger = new Registration("Saher", "Daoud", "", "", "", "Saher", "123456", "BranchManager", "", "", "");
+		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareen@gmail.com", "0505123456", "Client1", "1234", "Client", "2233445566", "1/1/2023", "Store Account",0);
+		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "Natalie@gmail.com", "0524789000", "NatalieNK", "22nN90999", "Client", "1234561299", "5/8/2024", "Chain Account",0);
+		Registration CEO = new Registration("Rashil", "Mbariky", "4443336661", "", "", "Rashi", "rashi", "CEO", "", "", "",0);
+		Registration NetworkMarketingWorker = new Registration("Eissa", "Wahesh", "", "", "", "Eissa", "11111", "NetworkMarketingWorker", "", "", "",0);
+		Registration customerservice=new Registration("nunu","nunu","","","","nunu","nunu","CustomerService","","","",0);
+		Registration SystemManger = new Registration("Elias", "Dow", "", "", "", "Elisa", "lampon", "SystemManager", "", "", "",0);
+		Registration BranchManger = new Registration("Saher", "Daoud", "", "", "", "Saher", "123456", "BranchManager", "", "", "",0);
 		session.save(temp);
 		session.save(it1);
 		session.save(it2);
@@ -429,6 +628,7 @@ public class SimpleServer extends AbstractServer {
 		session.save(NetworkMarketingWorker);
 		session.save(SystemManger);
 		session.save(BranchManger);
+		session.save(customerservice);
 		temp.addIteam(it1);
 		temp.addIteam(it2);
 		temp.addIteam(it3);

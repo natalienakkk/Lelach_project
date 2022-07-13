@@ -98,6 +98,7 @@
                   </AnchorPane>
               </content>
             </TitledPane>
+            <Button fx:id="complain" layoutX="258.0" layoutY="28.0" mnemonicParsing="false" onAction="#complain" text="Complain" />
          </children>
       </AnchorPane>
    </content>

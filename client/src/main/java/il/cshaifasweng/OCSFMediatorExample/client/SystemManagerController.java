@@ -17,6 +17,12 @@ import javafx.scene.text.Text;
 
 public class SystemManagerController {
 
+    @FXML private static String userName;
+
+    @FXML public static String getUserName() { return userName; }
+
+    @FXML public static void setUserName(String username) { SystemManagerController.userName = username; }
+
     @FXML
     private ResourceBundle resources;
 
@@ -57,11 +63,37 @@ public class SystemManagerController {
     @FXML
     private TextField status_text2;
 
+    @FXML
+    private Button workersList;
+
+    @FXML
+    private Button clientsList;
+
     String username;
     String worker_username;
     //String clientmessage;
     //String client_username;
     String new_status;
+
+    @FXML
+    void clientsList_butt(ActionEvent event) {
+        try {
+            SimpleClient.getClient().sendToServer(new Message("#send clients/workers list","clients"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void workersList_butt(ActionEvent event) {
+        try {
+            SimpleClient.getClient().sendToServer(new Message("#send clients/workers list","workers"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @FXML
     void blockaccount_butt(ActionEvent event) throws IOException {
@@ -106,7 +138,13 @@ public class SystemManagerController {
         assert message_button != null : "fx:id=\"message_button\" was not injected: check your FXML file 'SystemManager.fxml'.";
         assert status_text1 != null : "fx:id=\"status_text1\" was not injected: check your FXML file 'SystemManager.fxml'.";
         assert status_text2 != null : "fx:id=\"status_text2\" was not injected: check your FXML file 'SystemManager.fxml'.";
-        assert username_txt != null : "fx:id=\"username_txt\" was not injected: check your FXML file 'SystemManager.fxml'.";
+        assert clientsList != null : "fx:id=\"clientsList\" was not injected: check your FXML file 'SystemManager.fxml'.";
+        assert workersList != null : "fx:id=\"workersList\" was not injected: check your FXML file 'SystemManager.fxml'.";assert username_txt != null : "fx:id=\"username_txt\" was not injected: check your FXML file 'SystemManager.fxml'.";
+
+        //setUserName(App.getUsername());
+        System.out.println( getUserName());
+        manager_name.setText(getUserName());
+
     }
 
 }

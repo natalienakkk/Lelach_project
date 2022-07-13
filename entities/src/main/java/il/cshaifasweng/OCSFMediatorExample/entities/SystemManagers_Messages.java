@@ -14,7 +14,7 @@ public class SystemManagers_Messages implements Serializable {
     private String Message;
     private String client_username;
 
-    //    @ManyToOne
+    //   @ManyToOne
 //    @JoinColumn(name="message_id")
 //   private User messages;
 //

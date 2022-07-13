@@ -19,6 +19,12 @@ import javafx.scene.text.Text;
 
 public class NetworkMarketingWorkerController {
 
+    @FXML private static String username;
+
+    @FXML public static String getUsername() { return username; }
+
+    @FXML public static void setUsername(String username) { NetworkMarketingWorkerController.username = username; }
+
     @FXML
     private ResourceBundle resources;
 
@@ -53,24 +59,58 @@ public class NetworkMarketingWorkerController {
     private Text worker_name;
 
     @FXML
-    private Text workername;
-
-    @FXML
     private AnchorPane pane1;
 
+    @FXML
+    private Button back_button;
+
+    @FXML
+    private Button delete_discount;
+
+    @FXML
+    private TextField flower_image;
+
+    @FXML
+    private double discount;
 
     /******remember to change that**/
     String f_picture="fh";
 
+
+    @FXML
+    void delete_discount(ActionEvent event) {
+        delete_discount.setDisable(true);
+        try {
+            SimpleClient.getClient().sendToServer(new Message("#delete discount",discount));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void back_butt(ActionEvent event) {
+        try {
+            App.setRoot("homepage");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     void apply_butt(ActionEvent event) throws IOException {
-        System.out.format(discount_percent.getText());
-        SimpleClient.getClient().sendToServer(new Message("#apply discount",discount_percent.getText()));
+        delete_discount.setDisable(false);
+        discount=Double.parseDouble(discount_percent.getText());
+        discount_percent.clear();
+        SimpleClient.getClient().sendToServer(new Message("#apply discount",discount));
     }
 
     @FXML
     void additem_butt(ActionEvent event) throws IOException {
-        Item new_item=new Item(flower_name.getText(),flower_type.getText(),flower_color.getText(),f_picture,Double.parseDouble(flower_price.getText()));
+        Item new_item=new Item(flower_name.getText(),flower_type.getText(),flower_color.getText(),f_picture/*flower_image.getText()*/,Double.parseDouble(flower_price.getText()));
+        flower_name.clear();
+        flower_type.clear();
+        flower_color.clear();
+        flower_price.clear();
         SimpleClient.getClient().sendToServer(new Message("#add new item",new_item));
     }
 
@@ -94,8 +134,11 @@ public class NetworkMarketingWorkerController {
         assert flower_type != null : "fx:id=\"flower_type\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
         assert showallitems_button != null : "fx:id=\"showallitems_button\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
         assert worker_name != null : "fx:id=\"worker_name\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
-        assert workername != null : "fx:id=\"workername\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
+        // assert workername != null : "fx:id=\"workername\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
 
+        setUsername(App.getUsername());
+        worker_name.setText(getUsername());
+        delete_discount.setDisable(true);
     }
 
 }

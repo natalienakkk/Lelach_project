@@ -26,8 +26,10 @@ public class Item implements Serializable {
 //            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
 //            targetEntity = ShoppingCart.class
 //    )
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private ShoppingCart cartList;
+@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+private ShoppingCart cartList;
+
+
     public Item() {
 
     }

@@ -96,6 +96,8 @@ public class CatalogController {
     @FXML
     private Button button_9;
     @FXML
+    private Button complain;
+    @FXML
     private ComboBox<String> colorpicker;
     @FXML
     private TitledPane filter;
@@ -566,6 +568,11 @@ public class CatalogController {
     }
 
     @FXML
+    void complain(ActionEvent event) throws IOException {
+        App.setRoot("CustomerComplain");
+    }
+
+    @FXML
     void minprice1(KeyEvent event) {
         if (event.getCode() ==  KeyCode.ENTER ) {
             Min = Integer.parseInt(minprice.getText());
@@ -644,6 +651,10 @@ public class CatalogController {
         colorpicker.getItems().addAll(colors);
         setType(App.getType());
         setItemList(App.getItemList());
+        for(int i=0;i<itemList.size();i++)
+        {
+            itemList.get(i).getName();
+        }
         if(itemList == null){
         System.out.println("is null");
         }
@@ -739,9 +750,7 @@ public void setCatalog(){
         for ( i = 0; i < size ;i++) {
             for(;g<itemList.size();g++){
                 if(itemList.get(g).getPrice() < Max && itemList.get(g).getPrice() > Min ) {
-                    System.out.println(color+ " 11");
                     if(color.equals("start")) {
-                        System.out.println(itemList.get(g).getName() + " " + itemList.get(g).getPrice() + " " + g);
                         buttons_list.get(i).setText(itemList.get(g).getName());
                         File file = new File("C:\\Users\\Saher\\IdeaProjects\\saher-eissa\\client\\src\\main\\resources\\images\\" + itemList.get(g).getName() + ".jpg");
                         Image image = new Image(file.toURI().toString());

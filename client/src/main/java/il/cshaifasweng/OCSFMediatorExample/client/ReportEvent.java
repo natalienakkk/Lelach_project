@@ -1,30 +1,45 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.Complain;
 import il.cshaifasweng.OCSFMediatorExample.entities.Report;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ReportEvent {
     private String type;
-    private String start_date;
-    private String end_date;
+    private LocalDate start_date;
+    private LocalDate end_date;
     private List<Report> report_list;
-    private String start_date2;
-    private String end_date2;
+    private List<Complain>complain_list;
 
-    public String getStart_date2() {
+    private LocalDate start_date2;
+
+    public List<Complain> getComplain_list() { return complain_list; }
+
+    public ReportEvent(String type, LocalDate start_date, LocalDate end_date, List<Report> report_list, List<Complain> complain_list) {
+        this.type = type;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.report_list = report_list;
+        this.complain_list = complain_list;
+    }
+
+    private LocalDate end_date2;
+
+    public LocalDate getStart_date2() {
         return start_date2;
     }
 
-    public void setStart_date2(String start_date2) {
+    public void setStart_date2(LocalDate start_date2) {
         this.start_date2 = start_date2;
     }
 
-    public String getEnd_date2() {
+    public LocalDate getEnd_date2() {
         return end_date2;
     }
 
-    public void setEnd_date2(String end_date2) {
+    public void setEnd_date2(LocalDate end_date2) {
         this.end_date2 = end_date2;
     }
 
@@ -38,23 +53,31 @@ public class ReportEvent {
     }
 
 
-    public String getEnd_date() {
+    public LocalDate getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(String end_date) {
+    public void setEnd_date(LocalDate end_date) {
         this.end_date = end_date;
     }
 
 
-    public String getStart_date() {
+    public LocalDate getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(String start_date) {
+    public void setStart_date(LocalDate start_date) {
         this.start_date = start_date;
     }
 
+    public ReportEvent(String type, LocalDate start_date, LocalDate end_date, LocalDate start_date2, LocalDate end_date2, List<Complain> complain_list) {
+        this.type = type;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.complain_list = complain_list;
+        this.start_date2 = start_date2;
+        this.end_date2 = end_date2;
+    }
 
     public String getType() {
         return type;
@@ -65,7 +88,7 @@ public class ReportEvent {
 
 
 
-    public ReportEvent(String type, String start_date, String end_date, List<Report> report_list) {
+    public ReportEvent(String type, LocalDate start_date, LocalDate end_date, List<Report> report_list) {
         this.type = type;
         this.start_date = start_date;
         this.end_date = end_date;
@@ -73,12 +96,4 @@ public class ReportEvent {
     }
 
 
-    public ReportEvent(String type, String start_date, String end_date, String start_date2, String end_date2, List<Report> report_list) {
-        this.type = type;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.report_list = report_list;
-        this.start_date2 = start_date2;
-        this.end_date2 = end_date2;
-    }
 }
