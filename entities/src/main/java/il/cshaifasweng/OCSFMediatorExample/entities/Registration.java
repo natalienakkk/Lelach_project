@@ -152,4 +152,8 @@ public class Registration implements Serializable {
     public void setRegistered(Boolean registered) {
         Registered = registered;
     }
+
+    public double getRefund() { return Refund; }
+
+    public void setRefund(double refund) { Refund = refund; }
 }

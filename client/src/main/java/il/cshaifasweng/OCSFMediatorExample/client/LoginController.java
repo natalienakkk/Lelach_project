@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.PasswordField;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,7 +40,7 @@ public class LoginController {
     private AnchorPane Pane1;
 
     @FXML
-    private TextField PasswordButton;
+    private PasswordField PasswordButton;
 
     @FXML
     private TextField UserNameButton;

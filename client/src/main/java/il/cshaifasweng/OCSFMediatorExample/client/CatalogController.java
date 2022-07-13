@@ -12,9 +12,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -22,7 +20,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -161,6 +158,51 @@ public class CatalogController {
     private Button other1;
     @FXML
     private AnchorPane Pane2;
+
+    @FXML
+    private MenuItem CancelOrder;
+    @FXML
+    private ContextMenu ContextMenu;
+    @FXML
+    private MenuItem MakeComplain;
+    @FXML
+    private MenuItem MyComplains;
+    @FXML
+    private MenuItem Orders;
+
+    @FXML
+    void CancelOrderButton(ActionEvent event) throws IOException {
+/*//        SimpleClient.getClient().sendToServer(new Message("#OpenCancelOrder"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("CancelOrder.fxml"));
+        Pane2.getChildren().setAll(pane);*/
+        try {
+//            App.setRoot("CancelOrder");
+            SimpleClient.getClient().sendToServer(new Message("#OpenCancelOrder"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void ConetxtMenuButton(ActionEvent event) {
+
+    }
+
+    @FXML
+    void MakeComplainButton(ActionEvent event) {
+
+    }
+
+    @FXML
+    void MyComplainsButton(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OrdersButton(ActionEvent event) {
+
+    }
 
     @FXML
     void Back1(ActionEvent event) throws IOException {

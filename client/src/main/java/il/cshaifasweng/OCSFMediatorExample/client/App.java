@@ -45,6 +45,7 @@ public class App extends Application {
     private static List<Complain> complain_list;
     private static List<ShoppingCart>shoppingcart_list;
     private static List<Order>orderList;
+    private static Confirmation ConfirmationMSG;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -85,6 +86,14 @@ public class App extends Application {
 //        this.amount = amount;
 //    }
 
+
+    public static Confirmation getConfirmationMSG() {
+        return ConfirmationMSG;
+    }
+
+    public static void setConfirmationMSG(Confirmation confirmationMSG) {
+        ConfirmationMSG = confirmationMSG;
+    }
 
     public static List<Order> getOrderList() {
         return orderList;
@@ -267,6 +276,37 @@ public class App extends Application {
                 e.printStackTrace();
             }
 
+        });
+    }
+    @Subscribe
+    public void onConfirmationEvent(ConfirmationEvent event) {
+        setConfirmationMSG(event.getConfirmation());
+        Platform.runLater(() -> {
+            try {
+                App.setRoot("Confirmation");
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        });
+//        Platform.runLater(() -> {
+//            Alert alert = new Alert(AlertType.INFORMATION,
+//                    String.format("Message: %s\nTimestamp: %s\n",
+//                            event.getConfirmation().getMessage(),
+//                            event.getConfirmation().getTime().toString())
+//            );
+//            alert.show();
+//        });
+    }
+    @Subscribe
+    public void CancelOrderEventFunc(CancelOrderEvent event)
+    {
+        setOrderList(event.getMyOrdersList());
+        Platform.runLater(() -> {
+            try {
+                App.setRoot("CancelOrder");
+            } catch (IOException e){
+                e.printStackTrace();
+            }
         });
     }
     @Subscribe

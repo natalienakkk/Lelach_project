@@ -150,6 +150,34 @@ public class SimpleClient extends AbstractClient {
 			System.out.println(list.get(0).getCart().getItems().get(0).getName() + " orderrrr from client");
 			System.out.println("3essa1");
 		}
+		else if (msgstring.equals("#OrderCanceled"))
+		{
+			System.out.println("wslttt hoon");
+			EventBus.getDefault().post(new ConfirmationEvent((Confirmation) ((Message) msg).getObject()));
+
+//			EventBus.getDefault().post(new ConfirmationEvent((Confirmation) ((Message) msg).getObject()));
+
+//			CancelOrderController.setPurchaseList((List<Purchase>) ((Message)msg).getObject2());
+//			if ((((Message)msg).getObject().getClass()))
+//			try {
+//				App.setRoot("CancelOrder");
+//			} catch (IOException e){
+//				e.printStackTrace();
+//			}
+		}
+		else if(msgstring.equals("#MyOrdersList"))
+		{
+			List<Order> OrdersList = ((List<Order>) ((Message) msg).getObject());
+			for(Order order : OrdersList)
+			{
+				System.out.println(order.getRecievedate());
+				System.out.println(order.getStatus());
+				System.out.println(order.getTotalprice());
+				System.out.println(order.getId());
+			}
+			CancelOrderEvent event = new CancelOrderEvent((List<Order>) ((Message) msg).getObject());
+			EventBus.getDefault().post(event);
+		}
 	}
 	public static SimpleClient getClient() {
 		if (client == null) { client = new SimpleClient("localhost", 3000); }

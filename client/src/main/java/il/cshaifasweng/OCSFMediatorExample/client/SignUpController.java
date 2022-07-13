@@ -77,7 +77,7 @@ public class SignUpController implements Initializable {
         LocalDate Expiry_Date = ExpiryDate.getValue();
     }
 
-    void CheckInputs(String password, String ID1, String PhoneNum) {
+    boolean CheckInputs(String password, String ID1, String PhoneNum) {
 //        try {
 //            SimpleClient.getClient().sendToServer(new Message("#CheckID", ID1));
 //        } catch (IOException e) {
@@ -92,38 +92,51 @@ public class SignUpController implements Initializable {
 //            alert.showAndWait();
             alert.show();
             Password.setText("");
-        } else if (ID1.length() != 9 || !ID1.matches("[0-9]+")) {
+            return false;
+        }  if (ID1.length() != 9 || !ID1.matches("[0-9]+")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Illegal ID");
             alert.setContentText("Please enter your ID");
             alert.showAndWait();
             ID.setText("");
-        } else if (PhoneNum.length() != 10) {
+            return false;
+        }  if (PhoneNum.length() != 10) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Illegal Phone Number");
             alert.setContentText("Please enter your Phone Number");
             alert.showAndWait();
             PhoneNumber.setText("");
+            return false;
         }
+        return true;
     }
+
 
     @FXML
     void SignUp(ActionEvent event) {
 //        String password = Password.getText();
 //        String Id = ID.getText();
 //        String PhoneNum = PhoneNumber.getText();
-
-        CheckInputs(Password.getText(), ID.getText(), PhoneNumber.getText());
-        Registration newClient = new Registration(FirstName.getText(), LastName.getText(), ID.getText(),
-                Email.getText(), PhoneNumber.getText(), UserName.getText(), Password.getText(), "Client",
-                CreditCard.getText(), ExpiryDate.getValue().toString(), AccountType.getValue().toString());
-        try {
-            SimpleClient.getClient().sendToServer(new Message("#SignUpRequest", newClient));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if(Password.getText() == "" || FirstName.getText() == "" || LastName.getText()=="" || ID.getText()=="" ||
+                Email.getText() == "" || PhoneNumber.getText()=="" || UserName.getText()=="" ||  Password.getText()=="" ||
+                CreditCard.getText()== "" || ExpiryDate.getValue().toString() == "" || AccountType.getValue().toString() == "")
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Empty Fields");
+            alert.setContentText("Please fill out all required fields");
+            alert.showAndWait();
         }
-
+        else if(CheckInputs(Password.getText(), ID.getText(), PhoneNumber.getText())) {
+            Registration newClient = new Registration(FirstName.getText(), LastName.getText(), ID.getText(),
+                    Email.getText(), PhoneNumber.getText(), UserName.getText(), Password.getText(), "Client",
+                    CreditCard.getText(), ExpiryDate.getValue().toString(), AccountType.getValue().toString(), 0);
+            try {
+                SimpleClient.getClient().sendToServer(new Message("#SignUpRequest", newClient));
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML

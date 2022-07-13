@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
+import il.cshaifasweng.OCSFMediatorExample.server.Helpers.RefundCheck;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
  import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
@@ -66,8 +67,7 @@ public class SimpleServer extends AbstractServer {
 			System.out.println("3030303");
 
 			client.sendToClient(new Message("#submitorder" , order));
-			session.flush();
-			session.getTransaction().commit();
+
 			System.out.println("303022222");
 			session.close();
 		}
@@ -173,41 +173,81 @@ public class SimpleServer extends AbstractServer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else if (msgString.startsWith("#LoginRequest")) {
-			firsttime = 0;
+		}  else if (msgString.startsWith("#LoginRequest")) {
 			Message msg1 = ((Message) msg);
 			User newLogin = (User) msg1.getObject();
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			List<Item> itemList=getAll(Item.class);
+			List<Item> itemList = getAll(Item.class);
 			String UserName = newLogin.getUserName();
+			System.out.println(UserName);
 			String Password = newLogin.getPassword();
-			try{
+			int UserNameFound = -1;
+			try {
 				List<Registration> clients = getAll(Registration.class);
-				for (Registration registration : clients){
-					if(registration.getUserName().equalsIgnoreCase(UserName)){
-						if(registration.getPassword().equalsIgnoreCase(Password)){
-							if(registration.getStatus().equalsIgnoreCase("blocked client")){
+				for (Registration registration : clients) {
+//					System.out.println("akm mra bfot");
+//					System.out.println(registration.getUserName());
+//					System.out.println(UserName);
+					if (registration.getUserName().equalsIgnoreCase(UserName)) {
+						UserNameFound = 1;
+						if (registration.getPassword().equalsIgnoreCase(Password)) {
+							if (registration.getStatus().equalsIgnoreCase("blocked client")) {
 								Warning new_warning = new Warning("You're account have been blocked. Please contact customer service");
 								client.sendToClient(new Message("#BlockedAccount", new_warning));
 								return;
 							}
-							else{
-								client.sendToClient(new Message("#LogInSucess", registration , itemList));
+//							else if (registration.getRegistered().equals(true)) {
+//								Warning newWanrning = new Warning("You're already logged in from another computer");
+//								client.sendToClient(new Message("#LoginWarning", newWanrning));
+//								return;
+//							}
+							else {
+//								Registration client2 = (Registration) msg1.getObject();
+//								client2.getClient_ID();
+//
+//								Hibernate.initialize(registration.getPurchases());
+//								List<Purchase> tempList = registration.getPurchases();
 
-								return;
+//
+//								System.out.println(registration.getUserName() + " " + registration.getPassword() + " /n" + registration.getPurchases().size() + " "
+//								+ registration.getClient_ID() + " " + registration.getAccountType() + " " + registration.getCreditCard() + " " +
+//										registration.getEmail() + " " + registration.getExpiryDate() + " " + registration.getFirstName() + " "
+//								+ registration.getLastName()  + " " + registration.getPhoneNumber() + " " + registration.getStatus());
+
+//								Purchase tmp = new Purchase(registration,23,"asd",1516);
+//								tempList.add(tmp);
+//								System.out.println(tempList.size() + "" );
+//								for (Purchase purchase : tempList)
+//									System.out.println(purchase.getCard() + " " + "temp list is alright !");
+//								client.sendToClient(new Message("#LogInSucess", registration , itemList , tempList));
+								registration.setRegistered(true);
+								client.sendToClient(new Message("#LogInSucess", registration, itemList));
+
+								System.out.println("sent to client successfully");
+//								session.close(); ///////
+								session.update(registration);
+								session.flush();
+								session.getTransaction().commit();
 							}
-						}
-						else{
+						} else {
 							Warning new_warning = new Warning("You have entered invalid input. Please try again ");
 							client.sendToClient(new Message("#LoginWarning", new_warning));
 							return;
 						}
 					}
-
+//					else{
+//						System.out.println("Username wronggggggggg");
+//						Warning new_warning = new Warning("You have entered invalid input. Please try again ");
+//						client.sendToClient(new Message("#LoginWarning", new_warning));
+//
+//					}
 				}
-
-			}catch (Exception e){
+				if (UserNameFound != 1) {
+					Warning new_warning = new Warning("You have entered invalid input. Please try again ");
+					client.sendToClient(new Message("#LoginWarning", new_warning));
+				}
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -256,7 +296,7 @@ public class SimpleServer extends AbstractServer {
 			session.flush();
 			session.close();
 		}
-		if(msgString.equals("#delete item"))
+		else if(msgString.equals("#delete item"))
 		{
 			Message msgupdate = ((Message) msg);
 			Long item_id=((Long) msgupdate.getObject());
@@ -552,6 +592,105 @@ public class SimpleServer extends AbstractServer {
 			session.flush();
 			session.close();
 		}
+		else if (msgString.equals("#OpenCancelOrder")) {
+			Message msg1 = ((Message) msg);
+//			Registration client2 = (Registration) msg1.getObject();
+//			String CurrUser = client2.getClient_ID();
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Order> OrdersList = getAll(Order.class);
+//			for(Order order : OrdersList)
+//			{
+//				System.out.println(order.getRecievedate());
+//				System.out.println(order.getStatus());
+//				System.out.println(order.getTotalprice());
+//				System.out.println(order.getId());
+//			}
+//			List<Order> MyOrderList = null;
+//			for (Order order : OrdersList)
+//			{
+//				if(order.getClientid() == CurrUser)
+//				{
+//					MyOrderList.add(order);
+//					System.out.println("ggggggggggggggggg");
+//				}
+//			}
+			client.sendToClient(new Message("#MyOrdersList", OrdersList));
+
+		} else if (msgString.equals("#CancelOrder")) {
+			System.out.println("ana hoooooooooooooon");
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			Message msg1 = ((Message) msg);
+			Order order = (Order) msg1.getObject();
+			System.out.println(order.getStatus());
+			order.setStatus("Canceled");
+			Registration User = (Registration) msg1.getObject2();
+			String CurrUserID = order.getClientid();
+
+//            System.out.println(order.getTotalprice());
+//            System.out.println(order.getRecievetime());
+//            System.out.println(order.getRecievedate());
+//            System.out.println(CurrUserID);
+
+			List<Registration> regList = getAll(Registration.class);
+			for (Registration buyer : regList) {
+				if (buyer.getClient_ID().equalsIgnoreCase(CurrUserID)) {
+					System.out.println("ana bal if");
+					System.out.println(buyer.getClient_ID());
+					String Date = order.getRecievedate();
+					System.out.println(Date);
+					String Time = order.getRecievetime();
+					RefundCheck time = new RefundCheck();
+					int temp = time.Refund(Date, Time);
+					System.out.println(temp);
+					String RefundRespond = String.valueOf(User.getCreditCard());
+					RefundRespond = RefundRespond.substring(RefundRespond.length() - 4);
+//                    Confirmation Respond;
+					Confirmation Respond;
+
+					if (temp == 3) {
+						Respond = new Confirmation("accordingly to our refunding policy" +
+								" , you will get a full refund of your order that is : "
+								+ order.getTotalprice() +
+								" to your Credit Card that ends with the digits : ***" + RefundRespond);
+						buyer.setRefund(Double.parseDouble(order.getTotalprice()));
+
+						//refund accordingly to 3 hours or more before getting the package
+					} else if (temp == 1) {
+						Respond = new Confirmation("accordingly to our refunding policy ," +
+								" you will get a 50% refund of your order that is : "
+								+ (Double.parseDouble(order.getTotalprice()) / 2) +
+								"to your Credit Card that ends with the digits :"
+								+ RefundRespond);
+						//refund accordingly to 3 hours or more before getting the package
+						buyer.setRefund(Double.parseDouble(order.getTotalprice()) / 2);
+					} else {
+						Respond = new Confirmation("accordingly to our refund policy , you wont get a refund");
+					}
+
+					session.update(buyer);
+					session.update(order);
+					session.flush();
+					session.getTransaction().commit();
+
+					System.out.println(Respond.getMessage());
+
+					try {
+						client.sendToClient(new Message("#OrderCanceled", Respond));
+					} catch (IOException e) {
+
+					}
+
+					//Send Email With the information of the respond *_*
+					return;
+
+//						}
+//					}
+
+				}
+			}
+		}
 }
 	private static SessionFactory getSessionFactory() throws HibernateException {
 		Configuration configuration = new Configuration();
@@ -564,6 +703,8 @@ public class SimpleServer extends AbstractServer {
 		configuration.addAnnotatedClass((ShoppingCart.class));
 		configuration.addAnnotatedClass((Order.class));
 		configuration.addAnnotatedClass((Complain.class));
+		configuration.addAnnotatedClass((Confirmation.class));
+
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 				.applySettings(configuration.getProperties()).build();

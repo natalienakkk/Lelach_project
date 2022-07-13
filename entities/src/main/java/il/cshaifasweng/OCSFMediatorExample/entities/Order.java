@@ -129,4 +129,8 @@ public class Order implements Serializable {
     public String getReceivermail() { return receivermail; }
 
     public void setReceivermail(String receivermail) { this.receivermail = receivermail; }
+
+    public String getRecievetime() { return recievetime; }
+
+    public void setRecievetime(String recievetime) { this.recievetime = recievetime; }
 }
