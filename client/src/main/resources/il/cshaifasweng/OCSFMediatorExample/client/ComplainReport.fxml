@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ComplainReportController">
+   <children>
+      <BarChart fx:id="complain_barchart" layoutX="50.0" layoutY="30.0" prefHeight="392.0" prefWidth="500.0" title="complaints">
+        <xAxis>
+          <CategoryAxis fx:id="date" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="amount" label="amount of complaints" side="LEFT" />
+        </yAxis>
+      </BarChart>
+   </children>
+</AnchorPane>
