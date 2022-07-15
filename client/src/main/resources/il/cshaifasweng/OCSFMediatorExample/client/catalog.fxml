@@ -9,6 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+
 
 <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.CatalogController">
    <content>
@@ -29,8 +32,17 @@
             <ImageView fx:id="photo_2" fitHeight="100.0" fitWidth="100.0" layoutX="184.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="photo_1" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="photo_5" fitHeight="100.0" fitWidth="100.0" layoutX="629.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="other" layoutX="561.0" layoutY="27.0" mnemonicParsing="false" onAction="#other" prefHeight="26.0" prefWidth="170.0" />
-            
+            <Button fx:id="other" layoutX="561.0" layoutY="27.0" mnemonicParsing="false" onAction="#other" prefHeight="26.0" prefWidth="170.0">
+               <contextMenu>
+                  <ContextMenu fx:id="ContextMenu" onAction="#ConetxtMenuButton">
+                     <items>
+                        <MenuItem fx:id="Orders" mnemonicParsing="false" onAction="#OrdersButton" text="MyOrders" />
+                        <MenuItem fx:id="MyComplains" mnemonicParsing="false" onAction="#MyComplainsButton" text="MyComplains" />
+                        <MenuItem fx:id="MakeComplain" mnemonicParsing="false" onAction="#MakeComplainButton" text="MakeComplain" />
+                        <MenuItem fx:id="CancelOrder" mnemonicParsing="false" onAction="#CancelOrderButton" text="CancelOrder" />
+                     </items>
+                  </ContextMenu>
+               </contextMenu></Button>
             <Button fx:id="Back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#Back1" text="Back" />
             <ImageView fx:id="photo_6" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true" />
             <Button fx:id="button_6" layoutX="63.0" layoutY="502.0" mnemonicParsing="false" onAction="#button_6" />

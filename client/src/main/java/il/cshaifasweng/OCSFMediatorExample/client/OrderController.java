@@ -106,10 +106,26 @@ public class OrderController {
         receivedate.setText(order.getRecievedate());
         cardnumber.setText(order.getCard());
         delivery.setText(order.getDeliveryOp());
-        receivername.setText(order.getReceivername());
-        receiveraddress.setText(order.getReceiveraddress());
-        receiveremail.setText(order.getReceivermail());
-        note.setText(order.getNote());
+        if(delivery.getText().equals("Yes")) {
+            receivername.setText(order.getReceivername());
+            receiveraddress.setText(order.getReceiveraddress());
+            receiveremail.setText(order.getReceivermail());
+        }
+        else{
+            receivername.setVisible(false);
+            receivername1.setVisible(false);
+            receiveraddress.setVisible(false);
+            receiveraddress1.setVisible(false);
+            receiveremail.setVisible(false);
+            receiveremail1.setVisible(false);
+        }
+        if(order.getNote()!=null){
+            note.setText(order.getNote());
+        }
+        else {
+            note1.setVisible(false);
+            note.setVisible(false);
+        }
         status.setText(order.getStatus());
         totalprice.setText(order.getTotalprice());
         orderid.setText(order.getId() + " ");
