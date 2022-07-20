@@ -1,6 +1,7 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Complain;
+import il.cshaifasweng.OCSFMediatorExample.entities.Order;
 import il.cshaifasweng.OCSFMediatorExample.entities.Report;
 
 import java.time.LocalDate;
@@ -11,7 +12,24 @@ public class ReportEvent {
     private LocalDate start_date;
     private LocalDate end_date;
     private List<Report> report_list;
+    private List<Order> order_list;
     private List<Complain>complain_list;
+
+
+    public List<Order> getOrder_list() {
+        return order_list;
+    }
+
+    public void setOrder_list(List<Order> order_list) {
+        this.order_list = order_list;
+    }
+
+    public ReportEvent(String type, LocalDate start_date, LocalDate end_date, List<Order>order_list ) {
+        this.type = type;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.order_list = order_list;
+    }
 
     private LocalDate start_date2;
 
@@ -79,20 +97,20 @@ public class ReportEvent {
         this.end_date2 = end_date2;
     }
 
+    public ReportEvent(List<Order> order_list, LocalDate start_date, LocalDate end_date, LocalDate start_date2, LocalDate end_date2,String type) {
+        this.type = type;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.order_list = order_list;
+        this.start_date2 = start_date2;
+        this.end_date2 = end_date2;
+    }
+
     public String getType() {
         return type;
     }
     public void setType(String type) {
         this.type = type;
-    }
-
-
-
-    public ReportEvent(String type, LocalDate start_date, LocalDate end_date, List<Report> report_list) {
-        this.type = type;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.report_list = report_list;
     }
 
 

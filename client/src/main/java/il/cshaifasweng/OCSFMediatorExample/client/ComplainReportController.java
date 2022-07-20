@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Complain;
+import il.cshaifasweng.OCSFMediatorExample.entities.Order;
 import il.cshaifasweng.OCSFMediatorExample.entities.Report;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -17,6 +18,16 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 
 public class ComplainReportController {
+
+    @FXML private static List<Order> order_list;
+
+    @FXML public static List<Order> getOrder_list() {
+        return order_list;
+    }
+
+    @FXML public static void setOrder_list(List<Order> order_list) {
+        ComplainReportController.order_list = order_list;
+    }
 
     @FXML private static List<Complain> complian_list;
 
@@ -49,7 +60,8 @@ public class ComplainReportController {
     @FXML
     private CategoryAxis date;
 
-//    @FXML
+
+    //    @FXML
 //   private Button back_button;
 
     private int counter=0;
@@ -73,6 +85,7 @@ public class ComplainReportController {
         assert date != null : "fx:id=\"date\" was not injected: check your FXML file 'ComplainReport.fxml'.";
         //assert back_button != null : "fx:id=\"back_button\" was not injected: check your FXML file 'ComplainReport.fxml'.";
 
+
         setComplian_list(App.getComplain_list());
         setType(App.getType());
         setStart1(App.getStart_date());
@@ -80,6 +93,9 @@ public class ComplainReportController {
 
         if(type.equals("Complain Report")) {
             /*atzkr an2s iom huna*/
+            complain_barchart.setTitle("Complaints");
+            amount.setLabel("amount of complaints");
+            date.setLabel("date");
             LocalDate temp=start1.minusDays(1);
             XYChart.Series<String,Number> series=new XYChart.Series<>();
             for(int i=0;i<complian_list.size();i++)
@@ -104,6 +120,94 @@ public class ComplainReportController {
             }
             complain_barchart.getData().add(series);
         }
+
+        else if (type.equals("Revenue Report")){
+            complain_barchart.setTitle("Revenue");
+            amount.setLabel("revenue per day");
+            date.setLabel("date");
+            setOrder_list(App.getOrderList());
+            double totalRevenue=0;
+            /*atzkr an2s iom huna*/
+            LocalDate temp=start1.minusDays(1);
+            XYChart.Series<String,Number> series=new XYChart.Series<>();
+            for(int i=0;i<order_list.size();i++)
+            {
+                LocalDate date= LocalDate.parse(order_list.get(i).getDate());
+                // System.out.println("check 1 "+order_list.get(i).getDate().isAfter(start1.minusDays(1))+(order_list.get(i).getDate().isBefore(end1.plusDays(1))));
+                if((date.isAfter(start1.minusDays(1))) && (date.isBefore(end1.plusDays(1))) && !(date.isEqual(temp)))
+                {
+                    for(int j=0;j<order_list.size();j++)
+                    {
+                        LocalDate date1= LocalDate.parse(order_list.get(j).getDate());
+                        // System.out.println("check 2 "+order_list.get(j).getDate().isEqual(date));
+                        if(date1.isEqual(date))
+                        {
+                            totalRevenue+=Double.parseDouble(order_list.get(j).getTotalprice());
+                        }
+                    }
+                    System.out.println("print i="+i);
+                    series.getData().add(new XYChart.Data<>(order_list.get(i).getDate(),totalRevenue));
+                    totalRevenue=0;
+                    temp=date;
+                }
+            }
+            complain_barchart.getData().add(series);
+        }
+///elcart 3m ttl3 fadi /////////
+//        else if(type.equals("Orders Report"))
+//        {
+//            complain_barchart.setTitle("Orders");
+//            amount.setLabel("items per day");
+//            date.setLabel("item type");
+//            setOrder_list(App.getOrderList());
+//            int type1=0,type2=0,type3=0,type4=0;
+//            /*atzkr an2s iom huna*/
+//            LocalDate temp=start1.minusDays(1);
+//            XYChart.Series<String,Number> series1=new XYChart.Series<>();
+//            XYChart.Series<String,Number> series2=new XYChart.Series<>();
+//            XYChart.Series<String,Number> series3=new XYChart.Series<>();
+//            XYChart.Series<String,Number> series4=new XYChart.Series<>();
+//            for(int i=0;i<order_list.size();i++)
+//            {
+//                LocalDate date= LocalDate.parse(order_list.get(i).getDate());
+//                // System.out.println("check 1 "+order_list.get(i).getDate().isAfter(start1.minusDays(1))+(order_list.get(i).getDate().isBefore(end1.plusDays(1))));
+//                if((date.isAfter(start1.minusDays(1))) && (date.isBefore(end1.plusDays(1))) && !(date.isEqual(temp)))
+//                {
+//                    for(int j=0;j<order_list.size();j++)
+//                    {
+//                        LocalDate date1= LocalDate.parse(order_list.get(j).getDate());
+//                        // System.out.println("check 2 "+order_list.get(j).getDate().isEqual(date));
+//                        if(date1.isEqual(date))
+//                        {
+//                            for(int k=0;k<order_list.get(j).getCart().getItems().size();k++)
+//                            if(order_list.get(j).getCart().getItems().get(k).getType().equals("flower"))
+//                               type1++;
+//                            else if(order_list.get(j).getCart().getItems().get(k).getType().equals("plant"))
+//                                type2++;
+//                            else if(order_list.get(j).getCart().getItems().get(k).getType().equals("bouquet"))
+//                                type3++;
+//                            else if (order_list.get(j).getCart().getItems().get(k).getType().equals("rose"))
+//                               type4++;
+//
+//                        }
+//                    }
+//                    //System.out.println("print i="+i);
+//                    series1.getData().add(new XYChart.Data<>(order_list.get(i).getDate(),type1));
+//                    series2.getData().add(new XYChart.Data<>(order_list.get(i).getDate(),type2));
+//                    series3.getData().add(new XYChart.Data<>(order_list.get(i).getDate(),type3));
+//                    series4.getData().add(new XYChart.Data<>(order_list.get(i).getDate(),type4));
+//                    type1=0;
+//                    type2=0;
+//                    type3=0;
+//                    type4=0;
+//                    temp=date;
+//                }
+//            }
+//            complain_barchart.getData().add(series1);
+//            complain_barchart.getData().add(series2);
+//            complain_barchart.getData().add(series3);
+//            complain_barchart.getData().add(series4);
+//        }
 
     }
 

@@ -56,20 +56,20 @@ public class SimpleServer extends AbstractServer {
 			client.sendToClient(new Message("#opencatalog" , user_type , itemList));
 			session.close();
 		}
-		else if(msgString.startsWith("#submitorder"))
-		{
-			Message msg1 = ((Message) msg);
-			Order order = (Order) msg1.getObject();
+		else if(msgString.startsWith("#submitorder")) {
+			System.out.println("hey2");
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			System.out.println(order.getCart().getItems().get(0).getName());
+			Message msg1 = ((Message) msg);
+			Order order = (Order) msg1.getObject();
+			ShoppingCart cart = (ShoppingCart) msg1.getObject2();
+			//order.setCart(cart);
 			session.save(order);
 			System.out.println("3030303");
-
-			client.sendToClient(new Message("#submitorder" , order));
-
+			client.sendToClient(new Message("#submitorder", order , cart));
 			System.out.println("303022222");
 			session.close();
+			System.out.println("saherrrrrrrrrrrrrrrr");
 		}
 		else if(msgString.startsWith("#openuseritem"))
 		{
@@ -154,7 +154,7 @@ public class SimpleServer extends AbstractServer {
 				for (Registration registration : clients) {
 					if (registration.getClient_ID().equalsIgnoreCase(ID1)) {
 //                        System.out.print("foundddddddddddd\n");
-//							registration.setRegistered(true);
+//                   registration.setRegistered(true);
 						Warning new_warning = new Warning("Dear Client,you are already Signed up.\n Please go to Login.");
 						client.sendToClient(new Message("#SignUpWarning", new_warning));
 						return;
@@ -163,7 +163,8 @@ public class SimpleServer extends AbstractServer {
 						session.save(newSignUp);
 						session.flush();
 						session.getTransaction().commit();
-						Warning newWarning = new Warning("Dear " + newSignUp.getUserName() + " welcome to Lilach. you have been signed up successfully");
+						////////////////////////////////////////////////////
+						Confirmation newWarning = new Confirmation("Dear " + newSignUp.getUserName() + " welcome to Lilach. you have been signed up successfully");
 						client.sendToClient(new Message("#MemberSignedUpSucces", newWarning));
 						return;
 					}
@@ -173,7 +174,8 @@ public class SimpleServer extends AbstractServer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}  else if (msgString.startsWith("#LoginRequest")) {
+		}
+		else if (msgString.startsWith("#LoginRequest")) {
 			Message msg1 = ((Message) msg);
 			User newLogin = (User) msg1.getObject();
 			session = sessionFactory.openSession();
@@ -481,34 +483,61 @@ public class SimpleServer extends AbstractServer {
 		{
 			Message msg_report = ((Message) msg);
 			String Type  = ((String) msg_report.getObject());
-			String start=((String) msg_report.getObject2());
-			String end=((String) msg_report.getObject3());
+			LocalDate start=((LocalDate) msg_report.getObject2());
+			LocalDate end=((LocalDate) msg_report.getObject3());
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<Report> report_list=getAll(Report.class);
-			try {
-				client.sendToClient(new Message("#list of report sent",Type,start,end,report_list));
-			} catch (IOException e) {
-				e.printStackTrace();
+			List<Complain> complain_list=getAll(Complain.class);
+			List<Order> order_list=getAll(Order.class);
+			if(Type.equals("Complain Report"))
+				try {
+					client.sendToClient(new Message("#list of report sent",Type,start,end,report_list,complain_list));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			else if(Type.equals("Revenue Report") || Type.equals("Orders Report"))
+			{
+				client.sendToClient(new Message("#list of report sent2",Type,start,end,order_list));
 			}
 			session.close();
 		}
+
+
 		else if(msgString.equals("#show Report to compare"))
 		{
+			//System.out.println("natlieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 			Message msg_report = ((Message) msg);
-			String Type  = ((String) msg_report.getObject());
-			String first_start=((String) msg_report.getObject2());
-			String first_end=((String) msg_report.getObject3());
-			String second_start=((String) msg_report.getObject4());
-			String second_end=((String) msg_report.getObject5());
+			String Type = ((String) msg_report.getObject());
+			LocalDate first_start=((LocalDate) msg_report.getObject2());
+			LocalDate first_end=((LocalDate) msg_report.getObject3());
+			LocalDate second_start=((LocalDate) msg_report.getObject4());
+			LocalDate second_end=((LocalDate) msg_report.getObject5());
 			System.out.println("server "+Type+first_start+first_end+second_start+second_end);
+			System.out.println("natalie"+Type+first_start+first_end+second_start+second_end);
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			List<Report> report_list=getAll(Report.class);
-			try {
-				client.sendToClient(new Message("#list of report sent to compare",Type,first_start,first_end,second_start,second_end,report_list));
-			} catch (IOException e) {
-				e.printStackTrace();
+			List<Complain> complain_list=getAll(Complain.class);
+			List<Order> order_list=getAll(Order.class);
+//			if(Type.equals(null))
+//			{
+//				Warning newWarning = new Warning("PLEASE Choose type of Report");
+//				client.sendToClient(new Message("wrong type", newWarning));
+//			}
+			if(Type.equals("Complain Compare")) {
+				try {
+					client.sendToClient(new Message("#list of report sent to compare", Type, first_start, first_end, second_start, second_end, complain_list));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else if(Type.equals("Revenue Compare")){
+				System.out.println("revenue compare");
+				try {
+					client.sendToClient(new Message("#list of report sent to compare2", order_list , first_start, first_end, second_start, second_end ,Type));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			session.close();
 		}
@@ -516,7 +545,6 @@ public class SimpleServer extends AbstractServer {
 		{
 			Message msg_complain = ((Message) msg);
 			String username  = ((String) msg_complain.getObject());
-			System.out.println(username);
 			String message=((String) msg_complain.getObject2());
 			String type =((String) msg_complain.getObject3());
 			String order_id =((String) msg_complain.getObject4());
@@ -539,20 +567,41 @@ public class SimpleServer extends AbstractServer {
 			session.close();
 		}
 
+
 		else if(msgString.equals("#complain list"))
 		{
 
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-
 			List<Complain> complainList=getAll(Complain.class);
-			List<Order> orderList=getAll(Order.class);
-
-			client.sendToClient(new Message("#list of complain sent",complainList,orderList));
-
+			//List<Order> orderList=getAll(Order.class);
+			//client.sendToClient(new Message("#list of complain sent",complainList,orderList));
+			client.sendToClient(new Message("#list of complain sent",complainList));
 			session.close();
 		}
+		else if(msgString.equals("#send order"))
+		{
+			System.out.println("markkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
+			Message msg_order = ((Message) msg);
+			Long id=(Long) msg_order.getObject();
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Order> orderList=getAll(Order.class);
+			if(orderList.size()==0)
+				System.out.println("msh zabt");
+			for(int i=0;i<orderList.size();i++)
+			{
+				if(orderList.get(i).getId().equals(id))
+				{
+					System.out.println("msh zabt2222222222222222222");
+					client.sendToClient(new Message("#order sent",orderList.get(i)));
+					break;
+				}
+			}
+			session.getTransaction().commit();
+			session.close();
 
+		}
 		else if (msgString.equals("#complain finished"))
 		{
 			Complain complain=new Complain();
@@ -691,7 +740,33 @@ public class SimpleServer extends AbstractServer {
 				}
 			}
 		}
-}
+		else if(msgString.equals("#LogOut"))
+		{
+			session = sessionFactory.openSession();
+			Message msg1 = ((Message) msg);
+			Registration CurrUser = (Registration) msg1.getObject();
+			String CurrUserID = CurrUser.getClient_ID();
+			try{
+				List<Registration> regList = getAll(Registration.class);
+				for (Registration buyer : regList){
+					if(buyer.getClient_ID().equalsIgnoreCase(CurrUserID))
+					{
+						buyer.setRegistered(false);
+						session.beginTransaction();
+						session.update(buyer);
+						session.flush();
+						session.getTransaction().commit();
+						return;
+					}
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+
+	}
 	private static SessionFactory getSessionFactory() throws HibernateException {
 		Configuration configuration = new Configuration();
 		configuration.addAnnotatedClass(Catalog.class);
@@ -715,26 +790,26 @@ public class SimpleServer extends AbstractServer {
 		Catalog temp =new Catalog();
 //		Order order2 = new Order();
 //		session.save(order2);
-		Item it1 =new Item("Spray carnations","Carnations","Pink","@../../../../images/Spray carnations.jpg",50);
-		Item it2 =new Item("Delphinium" , "Plant " , "Blue" ,  "@../../../../images/Delphinium.jpg" ,20);
-		Item it3 =new Item("Zamia Coconut L" , "Plant" , "Green" , "@../../../../images/Zamia Coconut L.jpg" ,50);
-		Item it4 =new Item("Sensivaria medium" , "Plant" , "Green" , "@../../../../images/Sensivaria medium.jpg" , 35);
-		Item it5 =new Item("Bridal bouquet" , "White peonies" , "White" , "@../../../../images/Bridal bouquet.jpg" , 200);
-		Item it6 =new Item("Blue Roses" , "Roses" , "Blue" , "@../../../../images/Blue Roses.jpg" , 80);
-		Item it7 =new Item("Red Roses" , "Roses" , "Red" , "@../../../../images/Red Roses.jpg" , 90);
-		Item it8 =new Item("Single Rose" , "Rose" , "Red" , "@../../../../images/Single Rose.jpg" , 10);
-		Item it9 =new Item("Posy Bouquet" , "Bouquet" , "Pink and White" , "@../../../../images/Posy Bouquet.jpg" , 70);
-		Item it10 =new Item("Basket Bouquet" , "Bouquet" , "Pink and White" , "@../../../../images/Basket Bouquet.jpg" ,80 );
-		Item it11 =new Item("Fan Bouquet" , "Bouquet" , "White" , "@../../../../images/Fan Bouquet.jpg" ,55 );
-		Item it12 =new Item("Fiesta Bouquet" , "Bouquet" , "Red" , "@../../../../images/Fiesta Bouquet.jpg" ,110 );
-		Item it13 =new Item("Peony Bouquet" , "Bouquet" , "Pink and White" , "@../../../../images/Peony Bouquet.jpg" , 80);
-		Item it14 =new Item("Hello Sunshine" , "Sunflower" , "Yellow" , "@../../../../images/Hello Sunshine.jpg" ,80 );
-		Item it15 =new Item("Rainbow Roses" , "Roses" , "Rainbow" , "@../../../../images/Rainbow Roses.jpg" , 200);
-		Item it16 =new Item("Yellow Roses" , "Roses" , "Yellow" , "@../../../../images/Yellow Roses.jpg" ,70 );
-		Item it17 =new Item("White Roses" , "Roses" , "White" , "@../../../../images/White Roses.jpg" , 80);
-		Item it18 =new Item("SunFlower Bouquet" , "Bouquet" , "Yellow" , "@../../../../images/SunFlower Bouquet.jpg" ,  90);
-		Item it19 =new Item("Friendship Bouquet" , "Bouquet" , "White" , "@../../../../images/Friendship Bouquet.jpg" ,90 );
-		Item it20 =new Item("Plant" , "Plant" , "White" , "@../../../../images/Plant.jpg" , 30);
+		Item it1 =new Item("Spray carnations","Carnations","Pink","https://www.florikenblooms.co.ke/wp-content/uploads/2020/10/spraycarnations.png",50);
+		Item it2 =new Item("Delphinium" , "Plant " , "Blue" ,  "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2020/3/6/2/CI_Walters-Gardens_Cobalt-Dreams-delphinium.jpg.rend.hgtvcom.1280.1024.suffix/1583520085507.jpeg" ,20);
+		Item it3 =new Item("Zamia Coconut L" , "Plant" , "Green" , "https://www.nurseryvilla.com/wp-content/uploads/2019/05/Zamia-Palm-Plant-504x504.png" ,50);
+		Item it4 =new Item("Sensivaria medium" , "Plant" , "Green" , "https://www.studioplant.com/media/catalog/product/cache/76402474333a4497cbc043f2fd2ee788/f/a/faff1976-1.jpg" , 35);
+		Item it5 =new Item("Bridal bouquet" , "White peonies" , "White" , "https://cdn11.bigcommerce.com/s-0023c/images/stencil/1280x1280/products/1890/4811/babys_breath_and_white_roses__11891.1643427610.jpg?c=2" , 200);
+		Item it6 =new Item("Blue Roses" , "Roses" , "Blue" , "https://bulacanflowershop.com/images/detailed/8/lg_331-blue-roses-bouquet.jpg" , 80);
+		Item it7 =new Item("Red Roses" , "Roses" , "Red" , "https://fyf.tac-cdn.net/images/products/large/F-224.jpg?auto=webp&quality=60&width=690" , 90);
+		Item it8 =new Item("Single Rose" , "Rose" , "Red" , "https://www.giftstolebanon.com/3088-thickbox_default/single-rose.jpg" , 10);
+		Item it9 =new Item("Posy Bouquet" , "Bouquet" , "Pink and White" , "https://cdn.shopify.com/s/files/1/0254/1512/2990/products/posybouquet_1024x1024.jpg?v=1630006473" , 70);
+		Item it10 =new Item("Basket Bouquet" , "Bouquet" , "Pink and White" , "https://www.cassidysflowersandgifts.com/image/cache/data/Sympathy/FTD-S47-4553-300x300.jpg" ,80 );
+		Item it11 =new Item("Fan Bouquet" , "Bouquet" , "White" , "https://cdn.shopify.com/s/files/1/0290/0636/4777/products/CGYD_LOL_preset_ftd-hero-lv-new_600x.jpg?v=1618958911" ,55 );
+		Item it12 =new Item("Fiesta Bouquet" , "Bouquet" , "Red" , "https://italflorist.imgix.net/images/itemVariation/FiestaBouquetDeluxe-21090750624.jpg?auto=format&w=375&h=450&fit=crop" ,110 );
+		Item it13 =new Item("Peony Bouquet" , "Bouquet" , "Pink and White" , "https://flowersofbath.co.uk/wp-content/uploads/2021/06/image4-1.jpeg" , 80);
+		Item it14 =new Item("Hello Sunshine" , "Sunflower" , "Yellow" , "https://cdn.shopify.com/s/files/1/0290/0636/4777/products/CGYD_LOL_preset_ftd-hero-lv-new_600x.jpg?v=1618958911" ,80 );
+		Item it15 =new Item("Rainbow Roses" , "Roses" , "Rainbow" , "https://i2-prod.dailyrecord.co.uk/incoming/article6728570.ece/ALTERNATES/s1200c/Rainbow-Roses-Bouquet.jpg" , 200);
+		Item it16 =new Item("Yellow Roses" , "Roses" , "Yellow" , "https://asset.bloomnation.com/c_pad,d_vendor:global:catalog:product:image.png,f_auto,fl_preserve_transparency,q_auto/v1655349200/vendor/6279/catalog/product/1/e/1e4c46bb8f175398fbb5ced8c31fbeb1_48.jpg" ,70 );
+		Item it17 =new Item("White Roses" , "Roses" , "White" , "https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/E5435D_LOL_preset_proflowers-mx-tile-wide-lv-new.jpeg?v=1647430391" , 80);
+		Item it18 =new Item("SunFlower Bouquet" , "Bouquet" , "Yellow" , "https://res.cloudinary.com/dizexseir/image/upload/v1648724575/ProImages/syaxrui2tdjfa4w6ahex.jpg" ,  90);
+		Item it19 =new Item("Friendship Bouquet" , "Bouquet" , "White" , "https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/S9-4979D_LOL_preset_proflowers-mx-tile-wide-lv-new.jpeg?v=1647421834" ,90 );
+		Item it20 =new Item("Plant" , "Plant" , "White" , "https://www.ikea.com/om/en/images/products/fejka-artificial-potted-plant-with-pot-in-outdoor-succulent__0614211_pe686835_s5.jpg?f=s" , 30);
 		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareen@gmail.com", "0505123456", "Client1", "1234", "Client", "2233445566", "1/1/2023", "Store Account",0);
 		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "Natalie@gmail.com", "0524789000", "NatalieNK", "22nN90999", "Client", "1234561299", "5/8/2024", "Chain Account",0);
 		Registration CEO = new Registration("Rashil", "Mbariky", "4443336661", "", "", "Rashi", "rashi", "CEO", "", "", "",0);

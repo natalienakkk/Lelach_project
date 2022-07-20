@@ -10,12 +10,7 @@
 <AnchorPane fx:id="pane1" prefHeight="638.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.CEOController">
     <children>
         <Button fx:id="Branch_button" layoutX="48.0" layoutY="117.0" mnemonicParsing="false" onAction="#Branch_Butt" prefHeight="39.0" prefWidth="147.0" text="view branch Reports" />
-        <Text layoutX="173.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" wrappingWidth="147.0">
-            <font>
-                <Font size="27.0" />
-            </font>
-        </Text>
-        <Text fx:id="CEO_Name" layoutX="300.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="99.80419921875">
+        <Text fx:id="CEO_Name" layoutX="211.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="232.80419921875">
             <font>
                 <Font name="System Bold Italic" size="27.0" />
             </font>

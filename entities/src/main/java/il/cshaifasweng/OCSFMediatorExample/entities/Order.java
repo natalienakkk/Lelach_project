@@ -28,7 +28,10 @@ public class Order implements Serializable {
     private String status;
     private String note;
 
+
     @OneToOne
+            (cascade = CascadeType.ALL)
+    @JoinColumn(name = "Shoppingcart_id")
     private ShoppingCart cart;
 
     public Order(String date, String recievedate, String card, String deliveryOp, String clientid, String clientname, String totalprice, String status,ShoppingCart cart) {
@@ -58,6 +61,20 @@ public class Order implements Serializable {
         this.note = note;
         this.cart = cart;
     }
+    public Order(String date, String recievedate, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status, String note) {
+        this.date = date;
+        this.recievedate = recievedate;
+        this.card = card;
+        this.deliveryOp = deliveryOp;
+        this.clientid = clientid;
+        this.clientname = clientname;
+        this.receiveraddress = receiveraddress;
+        this.receivername = receivername;
+        this.receivermail = receivermail;
+        this.totalprice = totalprice;
+        this.status = status;
+        this.note = note;
+    }
     public Order(String date, String recievedate, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status, ShoppingCart cart) {
         this.date = date;
         this.recievedate = recievedate;
@@ -71,6 +88,19 @@ public class Order implements Serializable {
         this.totalprice = totalprice;
         this.status = status;
         this.cart = cart;
+    }
+    public Order(String date, String recievedate, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status) {
+        this.date = date;
+        this.recievedate = recievedate;
+        this.card = card;
+        this.deliveryOp = deliveryOp;
+        this.clientid = clientid;
+        this.clientname = clientname;
+        this.receiveraddress = receiveraddress;
+        this.receivername = receivername;
+        this.receivermail = receivermail;
+        this.totalprice = totalprice;
+        this.status = status;
     }
 
     public Order(Long id, String recievetime, String recievedate, String clientid, String totalprice, String status) {

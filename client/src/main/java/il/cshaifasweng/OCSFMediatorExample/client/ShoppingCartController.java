@@ -121,17 +121,17 @@ public class ShoppingCartController {
 //        else Del = false;
         if ( DeliveryTo2.getSelectionModel().getSelectedItem()==null)
         {
-            order = new Order(date.toString().substring(0,10),ReceiveDate.getValue().toString(),User2.getCreditCard(),DeliveryOP.getSelectionModel().getSelectedItem(),User2.getClient_ID(),User2.getUserName(),null,null,null,TotalPrice.getText(),"pending",Note2.getText(),cart);
+            order = new Order(date.toString().substring(0,10),ReceiveDate.getValue().toString(),User2.getCreditCard(),DeliveryOP.getSelectionModel().getSelectedItem(),User2.getClient_ID(),User2.getUserName(),null,null,null,TotalPrice.getText(),"pending",Note2.getText());
         }
         else if (DeliveryTo2.getSelectionModel().getSelectedItem().equals("Someone else")){
-            order = new Order(date.toString().substring(0,10),ReceiveDate.getValue().toString(),User2.getCreditCard(),DeliveryOP.getSelectionModel().getSelectedItem(),User2.getClient_ID(),User2.getUserName(),Receiveraddress2.getText(),Receivername2.getText(),Receiveremail2.getText(),TotalPrice.getText(),"pending",Note2.getText(),cart);
+            order = new Order(date.toString().substring(0,10),ReceiveDate.getValue().toString(),User2.getCreditCard(),DeliveryOP.getSelectionModel().getSelectedItem(),User2.getClient_ID(),User2.getUserName(),Receiveraddress2.getText(),Receivername2.getText(),Receiveremail2.getText(),TotalPrice.getText(),"pending",Note2.getText());
         }
         else if (DeliveryTo2.getSelectionModel().getSelectedItem().equals("Myself"))
         {
-            order = new Order(date.toString().substring(0,10),ReceiveDate.getValue().toString(),User2.getCreditCard(),DeliveryOP.getSelectionModel().getSelectedItem(),User2.getClient_ID(),User2.getUserName(),"Haifa",User2.getFirstName(),User2.getEmail(),TotalPrice.getText(),"pending",cart);
+            order = new Order(date.toString().substring(0,10),ReceiveDate.getValue().toString(),User2.getCreditCard(),DeliveryOP.getSelectionModel().getSelectedItem(),User2.getClient_ID(),User2.getUserName(),"Haifa",User2.getFirstName(),User2.getEmail(),TotalPrice.getText(),"pending");
         }
-
-        SimpleClient.getClient().sendToServer(new Message("#submitorder" , order ));
+        System.out.println("heyyyyyyyyyyyyyyyyy");
+        SimpleClient.getClient().sendToServer(new Message("#submitorder" , order , cart ));
     }
 
     @FXML

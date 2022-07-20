@@ -106,11 +106,12 @@ public class NetworkMarketingWorkerController {
 
     @FXML
     void additem_butt(ActionEvent event) throws IOException {
-        Item new_item=new Item(flower_name.getText(),flower_type.getText(),flower_color.getText(),f_picture/*flower_image.getText()*/,Double.parseDouble(flower_price.getText()));
+        Item new_item=new Item(flower_name.getText(),flower_type.getText(),flower_color.getText(),flower_image.getText(),Double.parseDouble(flower_price.getText()));
         flower_name.clear();
         flower_type.clear();
         flower_color.clear();
         flower_price.clear();
+        flower_image.clear();
         SimpleClient.getClient().sendToServer(new Message("#add new item",new_item));
     }
 

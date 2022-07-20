@@ -13,9 +13,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 public class BranchManagerController {
 
+    @FXML private static String username;
+
+    @FXML public static String getUsername() { return username; }
+
+    @FXML public static void setUsername(String username) { BranchManagerController.username = username; }
 
     @FXML
     private AnchorPane pane1;
@@ -38,9 +44,11 @@ public class BranchManagerController {
     @FXML
     private DatePicker start_date;
 
+    @FXML
+    private Text branch_name;
+
     String Type;
     LocalDate start,end;
-    String end1,start1;
 
 
     @FXML
@@ -51,14 +59,14 @@ public class BranchManagerController {
     @FXML
     void end_butt(ActionEvent event) {
         end=end_date.getValue();
-        end1=end.toString();
+        //end1=end.toString();
     }
 
     @FXML
     void show_butt(ActionEvent event) {
         System.out.println(Type+start+end);
         try {
-            SimpleClient.getClient().sendToServer(new Message("#show Report",Type,start1,end1));
+            SimpleClient.getClient().sendToServer(new Message("#show Report",Type,start,end));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -67,7 +75,7 @@ public class BranchManagerController {
     @FXML
     void start_butt(ActionEvent event) {
         start=start_date.getValue();
-        start1=start.toString();
+        //start1=start.toString();
 
     }
 
@@ -81,7 +89,8 @@ public class BranchManagerController {
         Choose_button.getItems().add("Revenue Report");
         Choose_button.getItems().add("Complain Report");
         Choose_button.getItems().add("Orders Report");
-
+        setUsername(App.getUsername());
+        branch_name.setText("Welcome " + username);
     }
 
 }

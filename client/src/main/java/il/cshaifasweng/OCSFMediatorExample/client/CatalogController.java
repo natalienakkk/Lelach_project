@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
+import il.cshaifasweng.OCSFMediatorExample.entities.Registration;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -40,8 +41,10 @@ public class CatalogController {
     private URL location;
     @FXML
     private Text Header;
+    //////////////////////////////
     @FXML
-    private Button Back;
+    private Button LogOutBtn;
+    //////////////////////////////
     @FXML
     private Button button_1;
     @FXML
@@ -169,7 +172,17 @@ public class CatalogController {
     private MenuItem MyComplains;
     @FXML
     private MenuItem Orders;
+    ////////////////////////////////////////////////
+    private static Registration CurrUser;
 
+    public static Registration getCurrUser() {
+        return CurrUser;
+    }
+
+    public static void setCurrUser(Registration currUser) {
+        CurrUser = currUser;
+    }
+    ////////////////////////////////////////////
     @FXML
     void CancelOrderButton(ActionEvent event) throws IOException {
 /*//        SimpleClient.getClient().sendToServer(new Message("#OpenCancelOrder"));
@@ -190,8 +203,8 @@ public class CatalogController {
     }
 
     @FXML
-    void MakeComplainButton(ActionEvent event) {
-
+    void MakeComplainButton(ActionEvent event) throws IOException {
+        App.setRoot("CustomerComplain");
     }
 
     @FXML
@@ -203,12 +216,26 @@ public class CatalogController {
     void OrdersButton(ActionEvent event) {
 
     }
+///////////////////////////////////
+//
+//    @FXML
+//    void Back1(ActionEvent event) throws IOException {
+//        AnchorPane pane = FXMLLoader.load(getClass().getResource("homepage.fxml"));
+//        Pane2.getChildren().setAll(pane);
+//    }
+
 
     @FXML
-    void Back1(ActionEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("homepage.fxml"));
-        Pane2.getChildren().setAll(pane);
+    void LogOut(ActionEvent event) {
+        try {
+            SimpleClient.getClient().sendToServer(new Message("#LogOut" , CurrUser));
+            App.setRoot("homepage");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
+/////////////////////////////////////////////////
 
     @FXML
     void other(ActionEvent event) throws IOException {
@@ -609,10 +636,7 @@ public class CatalogController {
         setCatalog();
     }
 
-    @FXML
-    void complain(ActionEvent event) throws IOException {
-        App.setRoot("CustomerComplain");
-    }
+
 
     @FXML
     void minprice1(KeyEvent event) {
@@ -635,7 +659,7 @@ public class CatalogController {
         assert filter != null : "fx:id=\"filter\" was not injected: check your FXML file 'catalog.fxml'.";
         assert maxprice != null : "fx:id=\"maxprice\" was not injected: check your FXML file 'catalog.fxml'.";
         assert minprice != null : "fx:id=\"minprice\" was not injected: check your FXML file 'catalog.fxml'.";
-        assert Back != null : "fx:id=\"Back\" was not injected: check your FXML file 'catalog.fxml'.";
+        assert LogOutBtn != null : "fx:id=\"LogOutBtn\" was not injected: check your FXML file 'catalog.fxml'.";
         assert Header != null : "fx:id=\"Header\" was not injected: check your FXML file 'catalog.fxml'.";
         assert Pane2 != null : "fx:id=\"Pane2\" was not injected: check your FXML file 'catalog.fxml'.";
         assert button_1 != null : "fx:id=\"button_1\" was not injected: check your FXML file 'catalog.fxml'.";
@@ -698,17 +722,19 @@ public class CatalogController {
             itemList.get(i).getName();
         }
         if(itemList == null){
-        System.out.println("is null");
+            System.out.println("is null");
         }
         color = "start";
         setCatalog();
         filter.setExpanded(false);
 
-
+///////////////////////////////////////////
+        setCurrUser(App.getUser1());
+////////////////////////////////////////////////
     }
 
 
-public void setCatalog(){
+    public void setCatalog(){
 
         if (type != null) {
             if (type.equals("Guest")) {
@@ -788,14 +814,14 @@ public void setCatalog(){
             }
         }
         System.out.println(size);
+
         int g=0;
         for ( i = 0; i < size ;i++) {
             for(;g<itemList.size();g++){
                 if(itemList.get(g).getPrice() < Max && itemList.get(g).getPrice() > Min ) {
                     if(color.equals("start")) {
                         buttons_list.get(i).setText(itemList.get(g).getName());
-                        File file = new File("C:\\Users\\Saher\\IdeaProjects\\saher-eissa\\client\\src\\main\\resources\\images\\" + itemList.get(g).getName() + ".jpg");
-                        Image image = new Image(file.toURI().toString());
+                        Image image = new Image(itemList.get(g).getPicture());
                         photo_list.get(i).setImage(image);
                         g++;
                         break;
@@ -803,8 +829,7 @@ public void setCatalog(){
                     else {
                         if(itemList.get(g).getColor().equals(color)){
                             buttons_list.get(i).setText(itemList.get(g).getName());
-                            File file = new File("C:\\Users\\Saher\\IdeaProjects\\saher-eissa\\client\\src\\main\\resources\\images\\" + itemList.get(g).getName() + ".jpg");
-                            Image image = new Image(file.toURI().toString());
+                            Image image = new Image(itemList.get(g).getPicture());
                             photo_list.get(i).setImage(image);
                             g++;
                             break;

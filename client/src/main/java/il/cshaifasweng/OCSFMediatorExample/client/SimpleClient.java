@@ -30,7 +30,10 @@ public class SimpleClient extends AbstractClient {
 //		}
 		else if(msgstring.startsWith("#submitorder"))
 		{
+			System.out.println("sssssssssssddhgdfdfdfgddtctutuvsxfgdcfhgjsdfgjsfdgsdgf");
 			Order order = (Order) ((Message) msg).getObject();
+			ShoppingCart cart = (ShoppingCart) ((Message) msg).getObject2();
+			order.setCart(cart);
 			OrderEvent event = new OrderEvent((Order) ((Message) msg).getObject());
 			EventBus.getDefault().post(event);
 		}
@@ -129,11 +132,19 @@ public class SimpleClient extends AbstractClient {
 		}
 		else if(msgstring.equals("#list of report sent"))
 		{
+			System.out.println("wsl report blclient");
 			EventBus.getDefault().post(new ReportEvent((String) ((Message) msg).getObject(),(LocalDate) ((Message) msg).getObject2(),(LocalDate) ((Message) msg).getObject3(),(List<Report>) ((Message) msg).getObject4(),(List<Complain>) ((Message) msg).getObject5()));
+		}
+		else if(msgstring.equals("#list of report sent2")) {
+			EventBus.getDefault().post(new ReportEvent((String) ((Message) msg).getObject(), (LocalDate) ((Message) msg).getObject2(), (LocalDate) ((Message) msg).getObject3(), (List<Order>) ((Message) msg).getObject4()));
 		}
 		else if(msgstring.equals("#list of report sent to compare"))
 		{
 			EventBus.getDefault().post(new ReportEvent((String) ((Message) msg).getObject(),(LocalDate) ((Message) msg).getObject2(),(LocalDate) ((Message) msg).getObject3(),(LocalDate)((Message) msg).getObject4(),(LocalDate) ((Message) msg).getObject5(),(List<Complain>) ((Message) msg).getObject6()));
+		}
+		else if(msgstring.equals("#list of report sent to compare2"))
+		{
+			EventBus.getDefault().post(new ReportEvent((List<Order>) ((Message) msg).getObject(),(LocalDate) ((Message) msg).getObject2(),(LocalDate) ((Message) msg).getObject3(),(LocalDate)((Message) msg).getObject4(),(LocalDate) ((Message) msg).getObject5(),(String) ((Message) msg).getObject6()));
 		}
 		else if (msgstring.equals("wrong username"))
 		{
@@ -145,9 +156,10 @@ public class SimpleClient extends AbstractClient {
 		else if(msgstring.equals("#list of complain sent"))
 		{
 			System.out.println("3essa");
-			EventBus.getDefault().post(new ComplainEvent((List<Complain>) ((Message) msg).getObject(),(List<Order>) ((Message) msg).getObject2()));
-			List<Order> list = (List<Order>) ((Message) msg).getObject2();
-			System.out.println(list.get(0).getCart().getItems().get(0).getName() + " orderrrr from client");
+			//EventBus.getDefault().post(new ComplainEvent((List<Complain>) ((Message) msg).getObject(),(List<Order>) ((Message) msg).getObject2()));
+			EventBus.getDefault().post(new ComplainEvent((List<Complain>) ((Message) msg).getObject()));
+			//List<Order> list = (List<Order>) ((Message) msg).getObject2();
+			//System.out.println(list.get(0).getCart().getItems().get(0).getName() + " orderrrr from client");
 			System.out.println("3essa1");
 		}
 		else if (msgstring.equals("#OrderCanceled"))
@@ -178,6 +190,31 @@ public class SimpleClient extends AbstractClient {
 			CancelOrderEvent event = new CancelOrderEvent((List<Order>) ((Message) msg).getObject());
 			EventBus.getDefault().post(event);
 		}
+		else if (msgstring.equals("#order sent"))
+		{
+			System.out.println("fotnaaaaaaaaaaaaaaaaaaaaaaaaa");
+			Order order =(Order)((Message) msg).getObject();
+			System.out.println("zbt "+order.getId());
+			EventBus.getDefault().post(new ComplainEvent((Order)((Message) msg).getObject()));
+		}
+		else if(msgstring.equalsIgnoreCase("#MemberSignedUpSucces"))
+		{
+			//////////////////////////////////////////
+			EventBus.getDefault().post(new ConfirmationEvent((Confirmation) ((Message) msg).getObject()));
+
+//       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//       alert.setTitle("SignedUpSuccess");
+//       alert.setContentText("Dear client, welcome to Lilach. you have been signed up successfully");
+//       alert.showAndWait();
+			try {
+				App.setRoot("HomePage"); /* change to catalog??? */
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+
 	}
 	public static SimpleClient getClient() {
 		if (client == null) { client = new SimpleClient("localhost", 3000); }

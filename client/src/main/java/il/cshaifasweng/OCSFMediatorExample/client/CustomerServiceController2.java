@@ -144,28 +144,29 @@ public class CustomerServiceController2 {
         assert type != null : "fx:id=\"type\" was not injected: check your FXML file 'CustomerService2.fxml'.";
         assert username != null : "fx:id=\"username\" was not injected: check your FXML file 'CustomerService2.fxml'.";
         CustomerServiceController2.setComplain(CustomerServiceController.getComplain());
-        CustomerServiceController2.setOrder2(CustomerServiceController.getList3());
+        setOrder2(App.getOrderList2());
+
         complain_message.setText(complain.getMessage());
         username.setText(complain.getUsername());
         type.setText(complain.getComplain_type());
         complain_message.setText(complain.getMessage());
         if(complain.getOrderID()!=null) {
-            int id1 = complain.getOrderID().intValue();
+            int id1 = complain.getOrderID().intValue()-1;
             String id = Long.toString(complain.getOrderID());
             orderId.setText(id);
-//            price.setText(order2.get(id1).getTotalprice());
-//            String details1 = "";
-//
-//            for (int i=0;i<order2.get(id1).getCart().getItems().size();i++)
-//            {
-//                if(i==order2.get(id1).getCart().getItems().size())
-//                {
-//                    details1 = details1+order2.get(id1).getCart().getAmount().get(i)+ " x " +order2.get(id1).getCart().getItems().get(i).getName();
-//                }
-//                else
-//                details1 = details1+order2.get(id1).getCart().getAmount().get(i)+ "x" +order2.get(id1).getCart().getItems().get(i).getName()+ " + " ;
-//            }
-//            details.setText(details1.substring(0,details1.length()-3));
+            price.setText(order2.get(id1).getTotalprice());
+            String details1 = "";
+
+            for (int i=0;i<order2.get(id1).getCart().getItems().size();i++)
+            {
+                if(i==order2.get(id1).getCart().getItems().size())
+                {
+                    details1 = details1+order2.get(id1).getCart().getAmount().get(i)+ " x " +order2.get(id1).getCart().getItems().get(i).getName();
+                }
+                else
+                details1 = details1+order2.get(id1).getCart().getAmount().get(i)+ "x" +order2.get(id1).getCart().getItems().get(i).getName()+ " + " ;
+            }
+            details.setText(details1.substring(0,details1.length()-3));
         }
 
 

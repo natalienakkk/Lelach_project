@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.greenrobot.eventbus.EventBus;
@@ -45,6 +46,7 @@ public class App extends Application {
     private static List<Complain> complain_list;
     private static List<ShoppingCart>shoppingcart_list;
     private static List<Order>orderList;
+    private static List<Order>orderList2 = new ArrayList<Order>();
     private static Confirmation ConfirmationMSG;
 
     @Override
@@ -86,6 +88,14 @@ public class App extends Application {
 //        this.amount = amount;
 //    }
 
+
+    public static List<Order> getOrderList2() {
+        return orderList2;
+    }
+
+    public static void setOrderList2(Order orderList2) {
+        App.orderList2.add(orderList2);
+    }
 
     public static Confirmation getConfirmationMSG() {
         return ConfirmationMSG;
@@ -268,6 +278,7 @@ public class App extends Application {
     public void OrderEventFunc(OrderEvent event)
     {
         setOrder1(event.getOrder());
+        setOrderList2(event.getOrder());
         System.out.println(order1.getCart().getItems().get(0).getName() + " ordeeeeeeeeeeeeeeer");
         Platform.runLater(() -> {
             try {
@@ -280,23 +291,16 @@ public class App extends Application {
     }
     @Subscribe
     public void onConfirmationEvent(ConfirmationEvent event) {
-        setConfirmationMSG(event.getConfirmation());
         Platform.runLater(() -> {
-            try {
-                App.setRoot("Confirmation");
-            } catch (IOException e){
-                e.printStackTrace();
-            }
+            Alert alert = new Alert(AlertType.INFORMATION,
+                    String.format("Message: %s\nTimestamp: %s\n",
+                            event.getConfirmation().getMessage(),
+                            event.getConfirmation().getTime().toString())
+            );
+            alert.show();
         });
-//        Platform.runLater(() -> {
-//            Alert alert = new Alert(AlertType.INFORMATION,
-//                    String.format("Message: %s\nTimestamp: %s\n",
-//                            event.getConfirmation().getMessage(),
-//                            event.getConfirmation().getTime().toString())
-//            );
-//            alert.show();
-//        });
     }
+
     @Subscribe
     public void CancelOrderEventFunc(CancelOrderEvent event)
     {
@@ -398,7 +402,10 @@ public class App extends Application {
     @Subscribe
     public void ComplainEventFunc(ComplainEvent event){
         setComplain_list(event.getComplain_list());
-        setOrderList(event.getOrderList());
+        if(complain_list==null)
+            System.out.println("we have a problem");
+        //setOrderList(event.getOrderList());
+        //setOrderList(event.getOrderList());
         Platform.runLater(() -> {
             try {
                 App.setRoot("CustomerService");
@@ -461,6 +468,7 @@ public class App extends Application {
         setType(event.getType());
         System.out.println("11");
         setStart_date(event.getStart_date());
+        System.out.println(start_date);
         System.out.println("22");
         setEnd_date(event.getEnd_date());
         System.out.println("33");
@@ -469,11 +477,10 @@ public class App extends Application {
         setStart_date2(event.getStart_date2());
         setEnd_date2(event.getEnd_date2());
         setComplain_list(event.getComplain_list());
-
+        setOrderList(event.getOrder_list());
 
         Platform.runLater(() -> {
-            System.out.println("eisaaaaaaaaaaaa");
-            if(event.getType().equals("Complain Report")) {
+            if(event.getType().equals("Complain Report") || event.getType().equals("Revenue Report") || event.getType().equals("Orders Report")) {
                 try {
                     App.setRoot("ComplainReport");
                 } catch (IOException e) {
@@ -481,22 +488,13 @@ public class App extends Application {
                 }
             }
 
-            else if (event.getType().equals("Complain Compare")){
-                System.out.println("eisaaaaaaaaaaaa");
+            else if (event.getType().equals("Complain Compare") || event.getType().equals("Revenue Compare") ){
                 try {
                     App.setRoot("ComplainCompare");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-            }
-            else
-            {
-                try {
-                    App.setRoot("Report");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
 
         });

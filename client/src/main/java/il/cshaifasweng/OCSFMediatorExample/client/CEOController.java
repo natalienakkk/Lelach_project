@@ -19,6 +19,12 @@ import java.time.LocalDate;
 
 public class CEOController {
 
+    @FXML private static String username;
+
+    @FXML public static String getUsername() { return username; }
+
+    @FXML public static void setUsername(String username) { CEOController.username = username; }
+
     @FXML
     private ResourceBundle resources;
 
@@ -63,7 +69,6 @@ public class CEOController {
 
     String Type;
     LocalDate start,end,first_start,second_start,first_end,second_end;
-    String end1,start1,first_start1,second_start1,first_end1,second_end1;
 
     @FXML
     void Branch_Butt(ActionEvent event) throws IOException {
@@ -77,48 +82,54 @@ public class CEOController {
 
     @FXML
     void CompareReports_butt(ActionEvent event) {
-        try {
-            SimpleClient.getClient().sendToServer(new Message("#show Report to compare",Type,first_start1,first_end1,second_start1,second_end1));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (Type.equals("Complain Report")) {
+            System.out.println("natalie" + Type + first_start + first_end + second_start + second_end);
+            try {
+                SimpleClient.getClient().sendToServer(new Message("#show Report to compare", "Complain Compare", first_start, first_end, second_start, second_end));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(Type.equals("Revenue Report")){
+            System.out.println("natalie" + Type + first_start + first_end + second_start + second_end);
+            try {
+                SimpleClient.getClient().sendToServer(new Message("#show Report to compare", "Revenue Compare", first_start, first_end, second_start, second_end));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
+
 
     @FXML
     void end_butt(ActionEvent event) {
         end=end_date.getValue();
-        end1=end.toString();
     }
 
     @FXML
     void firstr_end_butt(ActionEvent event) {
         first_end=firstr_end.getValue();
-        first_end1=first_end.toString();
-
     }
 
     @FXML
     void firstr_start_butt(ActionEvent event) {
         first_start=firstr_start.getValue();
-        first_start1=first_start.toString();
     }
 
     @FXML
     void secondr_end_butt(ActionEvent event) {
         second_end=secondr_end.getValue();
-        second_end1=second_end.toString();
     }
 
     @FXML
     void secondr_start_butt(ActionEvent event) {
         second_start=secondr_start.getValue();
-        second_start1=second_start.toString();
     }
 
     @FXML
     void show_butt(ActionEvent event) throws IOException {
         try {
-            SimpleClient.getClient().sendToServer(new Message("#show Report",Type,start1,end1));
+            SimpleClient.getClient().sendToServer(new Message("#show Report",Type,start,end));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,7 +138,6 @@ public class CEOController {
     @FXML
     void start_butt(ActionEvent event) {
         start=start_date.getValue();
-        start1=start.toString();
     }
 
     @FXML
@@ -146,6 +156,9 @@ public class CEOController {
         assert start_date != null : "fx:id=\"start_date\" was not injected: check your FXML file 'CEO.fxml'.";
         Choose_button.getItems().add("Revenue Report");
         Choose_button.getItems().add("Orders Report");
+        Choose_button.getItems().add("Complain Report");
+        setUsername(App.getUsername());
+        CEO_Name.setText("Welcome "+username);
     }
 
 }
