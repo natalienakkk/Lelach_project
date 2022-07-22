@@ -38,9 +38,7 @@ public class HomepageController {
 
     @FXML
     void GuestButton(ActionEvent event) throws IOException {
-        System.out.println("why");
         SimpleClient.getClient().sendToServer(new Message("#opencatalog", "Guest"));
-        System.out.println("here");
     }
 
     @FXML

@@ -13,6 +13,7 @@ public class SimpleClient extends AbstractClient {
 		super(host, port);
 	}
 	@Override protected void handleMessageFromServer(Object msg) {
+		System.out.println("im in client");
 		String msgstring = ((Message) msg).getMessage();
 		if (msgstring.startsWith("#opencatalog"))
 		{
@@ -28,7 +29,7 @@ public class SimpleClient extends AbstractClient {
 //			AddToCartEvent event = new AddToCartEvent((Item) ((Message) msg).getObject(), (Double) ((Message)msg).getObject2());
 //			EventBus.getDefault().post(event);
 //		}
-		else if(msgstring.startsWith("#submitorder"))
+		else if(msgstring.equals("#submitorder"))
 		{
 			System.out.println("sssssssssssddhgdfdfdfgddtctutuvsxfgdcfhgjsdfgjsfdgsdgf");
 			Order order = (Order) ((Message) msg).getObject();
@@ -40,13 +41,8 @@ public class SimpleClient extends AbstractClient {
 		else if (msgstring.startsWith("#getcart"))
 		{
 			System.out.println("im in simple client in getcart");
-			List<Item> b = ((List<Item>) ((Message) msg).getObject());
-			List<Double> c = (List<Double>) ((Message) msg).getObject2();
-			ShoppingCart a = new ShoppingCart();
-			a.setItems(b);
-			a.setAmount(c);
-			System.out.println(a.gettotalPrice(a) + " " + " nayakat");
-			ShoppingCartEvent event = new ShoppingCartEvent(a);
+			ShoppingCart cart = ((ShoppingCart) ((Message)msg).getObject());
+			ShoppingCartEvent event = new ShoppingCartEvent(cart);
 			EventBus.getDefault().post(event);
 		}
 		else if (msgstring.startsWith("#openuseritem"))
@@ -71,6 +67,12 @@ public class SimpleClient extends AbstractClient {
 		{
 			EventBus.getDefault().post(new WarningEvent((Warning) ((Message) msg).getObject()));
 		}
+		else if(msgstring.equals("#submitorderwarning"))
+		{
+			System.out.println("nayakat2");
+			EventBus.getDefault().post(new WarningEvent((Warning) ((Message) msg).getObject()));
+		}
+
 		else if(msgstring.equalsIgnoreCase("#MemberSignedUpSucces"))
 		{
 			EventBus.getDefault().post(new WarningEvent((Warning) ((Message) msg).getObject()));
@@ -87,7 +89,9 @@ public class SimpleClient extends AbstractClient {
 		}
 		else if(msgstring.equalsIgnoreCase("#LogInSucess"))
 		{
+			System.out.println("1");
 			Registration user = (Registration) ((Message) msg).getObject();
+			System.out.println("2");
 			if((user.getStatus()).equals("Client")) {
 				System.out.println("login successss! ");
 				catalogEvent event = new catalogEvent(user.getStatus(), (List<Item>) ((Message) msg).getObject2());
@@ -212,6 +216,18 @@ public class SimpleClient extends AbstractClient {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		else if(msgstring.equals("#list of complain sent2"))
+		{
+			EventBus.getDefault().post(new ComplainEvent((List<Complain>) ((Message) msg).getObject(),(String)((Message) msg).getObject2()));
+		}
+		else if(msgstring.equals("#list of order sent"))
+		{
+			EventBus.getDefault().post(new ComplainEvent((String)((Message) msg).getObject2(),(List<Order>) ((Message) msg).getObject()));
+		}
+		else if(msgstring.equals("#list of message sent"))
+		{
+			EventBus.getDefault().post(new MessagesEvent((List<SystemManagers_Messages>) ((Message) msg).getObject(),(String)((Message) msg).getObject2()));
 		}
 
 

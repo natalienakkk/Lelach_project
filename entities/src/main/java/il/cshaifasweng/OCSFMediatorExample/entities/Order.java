@@ -27,6 +27,7 @@ public class Order implements Serializable {
     private String totalprice;
     private String status;
     private String note;
+    private String items1;
 
 
     @OneToOne
@@ -44,6 +45,14 @@ public class Order implements Serializable {
         this.totalprice = totalprice;
         this.status = status;
         this.cart = cart;
+    }
+    public Order( String status, Long id, String recievedate ,String totalprice, String date, String items1) {
+        this.id = id;
+        this.date = date;
+        this.recievedate = recievedate;
+        this.totalprice = totalprice;
+        this.status = status;
+        this.items1 = items1;
     }
 
     public Order(String date, String recievedate, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status, String note,ShoppingCart cart) {
@@ -114,6 +123,14 @@ public class Order implements Serializable {
 
     public Order() {
 
+    }
+
+    public String getItems1() {
+        return items1;
+    }
+
+    public void setItems1(String items1) {
+        this.items1 = items1;
     }
 
     public ShoppingCart getCart() { return cart; }

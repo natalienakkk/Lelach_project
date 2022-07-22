@@ -24,7 +24,16 @@ public class Complain implements Serializable {
     private String complain_type;
     private double refund;
     private String answer;
+
+    public Complain(String message,String status, double refund, String answer) {
+        this.status = status;
+        this.message = message;
+        this.refund = refund;
+        this.answer = answer;
+    }
+
     private String username;
+
 
     public Complain(String complain_type, LocalDate date, LocalTime time, String status, String username, Long orderID, String message) {
         this.username=username;

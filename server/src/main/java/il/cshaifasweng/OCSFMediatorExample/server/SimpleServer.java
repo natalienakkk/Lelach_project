@@ -1,20 +1,21 @@
 package il.cshaifasweng.OCSFMediatorExample.server;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
+//import il.cshaifasweng.OCSFMediatorExample.entities.Image;
 import il.cshaifasweng.OCSFMediatorExample.server.Helpers.RefundCheck;
+import il.cshaifasweng.OCSFMediatorExample.server.Helpers.SendEmail;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
  import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
 
 //import javax.imageio.spi.ServiceRegistry;
-import javax.persistence.*;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 
-
+import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -26,7 +27,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.internal.build.AllowSysOut;
 import org.hibernate.service.ServiceRegistry;
 
 
@@ -36,6 +36,7 @@ public class SimpleServer extends AbstractServer {
 	private static Session session;
 	private static SessionFactory sessionFactory = getSessionFactory();
 	int firsttime =0;
+	int firsttime1 =0;
 	ShoppingCart cart1;
 	public SimpleServer(int port) {
 		super(port);
@@ -48,28 +49,56 @@ public class SimpleServer extends AbstractServer {
 		String msgString = msg.toString();
 		if(msgString.equals("#opencatalog"))
 		{
+			System.out.println("here1");
 			Message msg3 = ((Message) msg);
 			String user_type = (String) msg3.getObject();
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<Item> itemList=getAll(Item.class);
+			List<ShoppingCart> a = new ArrayList<ShoppingCart>();
+			for(int i=0;i<itemList.size();i++)
+			{
+				itemList.get(i).setCartList(a);
+			}
+			System.out.println("here2");
 			client.sendToClient(new Message("#opencatalog" , user_type , itemList));
 			session.close();
 		}
 		else if(msgString.startsWith("#submitorder")) {
-			System.out.println("hey2");
+			//SendEmail.SendEmail("eissa_wahesh@hotmail.com","m3lm 3esa","3esa ya mlk el entities");
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			Message msg1 = ((Message) msg);
 			Order order = (Order) msg1.getObject();
+			Order order1 = new Order();
 			ShoppingCart cart = (ShoppingCart) msg1.getObject2();
-			//order.setCart(cart);
-			session.save(order);
-			System.out.println("3030303");
-			client.sendToClient(new Message("#submitorder", order , cart));
-			System.out.println("303022222");
+			System.out.println("in sumbitorder" + order.getDeliveryOp());
+			if( cart.getItems().size()==0)
+			{
+				System.out.println("nayakat");
+				Warning new_warning = new Warning("Dear Client,youre cart is empty!");
+				client.sendToClient(new Message("#submitorderwarning", new_warning));
+			}
+			else if( order.getRecievedate().equals("a"))
+			{
+				System.out.println("nayakat1");
+				Warning new_warning = new Warning("Dear Client,you should pick a recieve date!");
+				client.sendToClient(new Message("#submitorderwarning", new_warning));
+			}
+			System.out.println("in sumbitorder 2 " + order.getDeliveryOp());
+
+			 if( order.getDeliveryOp().equals("None"))
+			{
+				System.out.println("nayakat2");
+				Warning new_warning = new Warning("Dear Client, you should fill the Delivery option!");
+				client.sendToClient(new Message("#submitorderwarning", new_warning));
+			}
+			else {
+				//order.setCart(cart);
+				session.save(order);
+				client.sendToClient(new Message("#submitorder", order, cart));
+			}
 			session.close();
-			System.out.println("saherrrrrrrrrrrrrrrr");
 		}
 		else if(msgString.startsWith("#openuseritem"))
 		{
@@ -81,6 +110,8 @@ public class SimpleServer extends AbstractServer {
 			{
 				if(Itemlist.get(i).getId() == flowerid)
 				{
+					List<ShoppingCart> a = new ArrayList<ShoppingCart>();
+					Itemlist.get(i).setCartList(a);
 					client.sendToClient(new Message("#openuseritem" , Itemlist.get(i)));
 					break;
 				}
@@ -90,6 +121,7 @@ public class SimpleServer extends AbstractServer {
 
 		else if(msgString.startsWith("#addtocart"))
 		{
+			System.out.println("3esaaaaaaaaaaaaaaaaaaa");
 			Message msg1 = ((Message) msg);
 			Item item = (Item) msg1.getObject();
 			double amount = (double) msg1.getObject2();
@@ -100,7 +132,9 @@ public class SimpleServer extends AbstractServer {
 				cart1 = new ShoppingCart();
 				session.save(cart1);
 				firsttime++;
+				firsttime1++;
 				System.out.println(item.getName() + " a");
+
 			}
 			else
 			{
@@ -110,28 +144,42 @@ public class SimpleServer extends AbstractServer {
 			if(cart1 == null) System.out.println("null!!\n");
 			cart1.AddtoCart(item);
 			cart1.Addamount(amount);
+			cart1.gettotalPrice(cart1);
 
-			List<ShoppingCart> a = getAll(ShoppingCart.class);
-
-			System.out.println(cart1.getItems().size());
-			session.save(cart1);
+			//List<ShoppingCart> a = getAll(ShoppingCart.class);
+//			for (int i = 0 ;i<a.size() ; i++)
+//			{
+//				a.get(i).gettotalPrice(a.get(i));
+//			}
+			session.update(cart1);
 			session.getTransaction().commit();
 			session.close();
+			System.out.println(cart1.getItems().get(0).getName()+ " 7bebebebe");
 
 		}
 		else if(msgString.startsWith("#getcart"))
 		{
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			List<ShoppingCart> a = getAll(ShoppingCart.class);
-			List<Item> b = new ArrayList<Item>();
-			List<Double> c = new ArrayList<Double>();
-			for(int j = 0; j<a.get(a.size()-1).getItems().size() ; j++)
+			if(firsttime1==0)
 			{
-				b.add(a.get(a.size()-1).getItems().get(j));
-				c.add(a.get(a.size()-1).getAmount().get(j));
+				ShoppingCart cart = new ShoppingCart();
+				client.sendToClient(new Message("#getcart",cart ));
 			}
-			client.sendToClient(new Message("#getcart",b ,c));
+			else {
+				System.out.println(cart1.getItems().get(0).getName());
+				List<Item> a = new ArrayList<Item>();
+				List<Double> b = new ArrayList<Double>();
+				for (int i = 0; i < cart1.getItems().size(); i++) {
+					a.add(cart1.getItems().get(i));
+					b.add(cart1.getAmount().get(i));
+				}
+				cart1.setItems(a);
+				cart1.setAmount(b);
+				client.sendToClient(new Message("#getcart", cart1));
+			}
+			session.update(cart1);
+			session.getTransaction().commit();
 			session.close();
 
 		}
@@ -176,6 +224,8 @@ public class SimpleServer extends AbstractServer {
 			}
 		}
 		else if (msgString.startsWith("#LoginRequest")) {
+			firsttime =0;
+			firsttime1 =0;
 			Message msg1 = ((Message) msg);
 			User newLogin = (User) msg1.getObject();
 			session = sessionFactory.openSession();
@@ -188,9 +238,6 @@ public class SimpleServer extends AbstractServer {
 			try {
 				List<Registration> clients = getAll(Registration.class);
 				for (Registration registration : clients) {
-//					System.out.println("akm mra bfot");
-//					System.out.println(registration.getUserName());
-//					System.out.println(UserName);
 					if (registration.getUserName().equalsIgnoreCase(UserName)) {
 						UserNameFound = 1;
 						if (registration.getPassword().equalsIgnoreCase(Password)) {
@@ -199,35 +246,15 @@ public class SimpleServer extends AbstractServer {
 								client.sendToClient(new Message("#BlockedAccount", new_warning));
 								return;
 							}
-//							else if (registration.getRegistered().equals(true)) {
-//								Warning newWanrning = new Warning("You're already logged in from another computer");
-//								client.sendToClient(new Message("#LoginWarning", newWanrning));
-//								return;
-//							}
 							else {
-//								Registration client2 = (Registration) msg1.getObject();
-//								client2.getClient_ID();
-//
-//								Hibernate.initialize(registration.getPurchases());
-//								List<Purchase> tempList = registration.getPurchases();
-
-//
-//								System.out.println(registration.getUserName() + " " + registration.getPassword() + " /n" + registration.getPurchases().size() + " "
-//								+ registration.getClient_ID() + " " + registration.getAccountType() + " " + registration.getCreditCard() + " " +
-//										registration.getEmail() + " " + registration.getExpiryDate() + " " + registration.getFirstName() + " "
-//								+ registration.getLastName()  + " " + registration.getPhoneNumber() + " " + registration.getStatus());
-
-//								Purchase tmp = new Purchase(registration,23,"asd",1516);
-//								tempList.add(tmp);
-//								System.out.println(tempList.size() + "" );
-//								for (Purchase purchase : tempList)
-//									System.out.println(purchase.getCard() + " " + "temp list is alright !");
-//								client.sendToClient(new Message("#LogInSucess", registration , itemList , tempList));
 								registration.setRegistered(true);
+								List<ShoppingCart> a = new ArrayList<ShoppingCart>();
+								for(int i=0;i<itemList.size();i++)
+								{
+									itemList.get(i).setCartList(a);
+								}
 								client.sendToClient(new Message("#LogInSucess", registration, itemList));
-
 								System.out.println("sent to client successfully");
-//								session.close(); ///////
 								session.update(registration);
 								session.flush();
 								session.getTransaction().commit();
@@ -238,12 +265,6 @@ public class SimpleServer extends AbstractServer {
 							return;
 						}
 					}
-//					else{
-//						System.out.println("Username wronggggggggg");
-//						Warning new_warning = new Warning("You have entered invalid input. Please try again ");
-//						client.sendToClient(new Message("#LoginWarning", new_warning));
-//
-//					}
 				}
 				if (UserNameFound != 1) {
 					Warning new_warning = new Warning("You have entered invalid input. Please try again ");
@@ -764,7 +785,42 @@ public class SimpleServer extends AbstractServer {
 				e.printStackTrace();
 			}
 		}
+		else if(msgString.equals("#send complain list2"))
+		{
+			Complain complain=new Complain();
+			Message msg_complain1 = ((Message) msg);
+			String type_profile=((String) msg_complain1.getObject());
+			System.out.println("type="+type_profile);
+			complain  = ((Complain) msg_complain1.getObject2());
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Complain> complainList=getAll(Complain.class);
+			client.sendToClient(new Message("#list of complain sent2", complainList,type_profile));
+			session.close();
 
+		}
+		else if(msgString.equals("#send order list"))
+		{
+			Message msg_order1 = ((Message) msg);
+			String type_profile=((String) msg_order1.getObject());
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<Order> orderList=getAll(Order.class);
+			client.sendToClient(new Message("#list of order sent", orderList,type_profile));
+			session.close();
+
+		}
+
+
+		else if(msgString.equals("#send message list")){
+			Message msg_messages = ((Message) msg);
+			String type_profile=((String) msg_messages.getObject());
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			List<SystemManagers_Messages> messagesList=getAll(SystemManagers_Messages.class);
+			client.sendToClient(new Message("#list of message sent", messagesList,type_profile));
+			session.close();
+		}
 
 	}
 	private static SessionFactory getSessionFactory() throws HibernateException {
@@ -779,6 +835,7 @@ public class SimpleServer extends AbstractServer {
 		configuration.addAnnotatedClass((Order.class));
 		configuration.addAnnotatedClass((Complain.class));
 		configuration.addAnnotatedClass((Confirmation.class));
+//		configuration.addAnnotatedClass((Image.class));
 
 
 		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
@@ -790,28 +847,28 @@ public class SimpleServer extends AbstractServer {
 		Catalog temp =new Catalog();
 //		Order order2 = new Order();
 //		session.save(order2);
-		Item it1 =new Item("Spray carnations","Carnations","Pink","https://www.florikenblooms.co.ke/wp-content/uploads/2020/10/spraycarnations.png",50);
-		Item it2 =new Item("Delphinium" , "Plant " , "Blue" ,  "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2020/3/6/2/CI_Walters-Gardens_Cobalt-Dreams-delphinium.jpg.rend.hgtvcom.1280.1024.suffix/1583520085507.jpeg" ,20);
-		Item it3 =new Item("Zamia Coconut L" , "Plant" , "Green" , "https://www.nurseryvilla.com/wp-content/uploads/2019/05/Zamia-Palm-Plant-504x504.png" ,50);
-		Item it4 =new Item("Sensivaria medium" , "Plant" , "Green" , "https://www.studioplant.com/media/catalog/product/cache/76402474333a4497cbc043f2fd2ee788/f/a/faff1976-1.jpg" , 35);
-		Item it5 =new Item("Bridal bouquet" , "White peonies" , "White" , "https://cdn11.bigcommerce.com/s-0023c/images/stencil/1280x1280/products/1890/4811/babys_breath_and_white_roses__11891.1643427610.jpg?c=2" , 200);
-		Item it6 =new Item("Blue Roses" , "Roses" , "Blue" , "https://bulacanflowershop.com/images/detailed/8/lg_331-blue-roses-bouquet.jpg" , 80);
-		Item it7 =new Item("Red Roses" , "Roses" , "Red" , "https://fyf.tac-cdn.net/images/products/large/F-224.jpg?auto=webp&quality=60&width=690" , 90);
-		Item it8 =new Item("Single Rose" , "Rose" , "Red" , "https://www.giftstolebanon.com/3088-thickbox_default/single-rose.jpg" , 10);
-		Item it9 =new Item("Posy Bouquet" , "Bouquet" , "Pink and White" , "https://cdn.shopify.com/s/files/1/0254/1512/2990/products/posybouquet_1024x1024.jpg?v=1630006473" , 70);
-		Item it10 =new Item("Basket Bouquet" , "Bouquet" , "Pink and White" , "https://www.cassidysflowersandgifts.com/image/cache/data/Sympathy/FTD-S47-4553-300x300.jpg" ,80 );
-		Item it11 =new Item("Fan Bouquet" , "Bouquet" , "White" , "https://cdn.shopify.com/s/files/1/0290/0636/4777/products/CGYD_LOL_preset_ftd-hero-lv-new_600x.jpg?v=1618958911" ,55 );
-		Item it12 =new Item("Fiesta Bouquet" , "Bouquet" , "Red" , "https://italflorist.imgix.net/images/itemVariation/FiestaBouquetDeluxe-21090750624.jpg?auto=format&w=375&h=450&fit=crop" ,110 );
-		Item it13 =new Item("Peony Bouquet" , "Bouquet" , "Pink and White" , "https://flowersofbath.co.uk/wp-content/uploads/2021/06/image4-1.jpeg" , 80);
-		Item it14 =new Item("Hello Sunshine" , "Sunflower" , "Yellow" , "https://cdn.shopify.com/s/files/1/0290/0636/4777/products/CGYD_LOL_preset_ftd-hero-lv-new_600x.jpg?v=1618958911" ,80 );
-		Item it15 =new Item("Rainbow Roses" , "Roses" , "Rainbow" , "https://i2-prod.dailyrecord.co.uk/incoming/article6728570.ece/ALTERNATES/s1200c/Rainbow-Roses-Bouquet.jpg" , 200);
-		Item it16 =new Item("Yellow Roses" , "Roses" , "Yellow" , "https://asset.bloomnation.com/c_pad,d_vendor:global:catalog:product:image.png,f_auto,fl_preserve_transparency,q_auto/v1655349200/vendor/6279/catalog/product/1/e/1e4c46bb8f175398fbb5ced8c31fbeb1_48.jpg" ,70 );
-		Item it17 =new Item("White Roses" , "Roses" , "White" , "https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/E5435D_LOL_preset_proflowers-mx-tile-wide-lv-new.jpeg?v=1647430391" , 80);
-		Item it18 =new Item("SunFlower Bouquet" , "Bouquet" , "Yellow" , "https://res.cloudinary.com/dizexseir/image/upload/v1648724575/ProImages/syaxrui2tdjfa4w6ahex.jpg" ,  90);
-		Item it19 =new Item("Friendship Bouquet" , "Bouquet" , "White" , "https://cdn.shopify.com/s/files/1/0507/3754/5401/t/1/assets/S9-4979D_LOL_preset_proflowers-mx-tile-wide-lv-new.jpeg?v=1647421834" ,90 );
-		Item it20 =new Item("Plant" , "Plant" , "White" , "https://www.ikea.com/om/en/images/products/fejka-artificial-potted-plant-with-pot-in-outdoor-succulent__0614211_pe686835_s5.jpg?f=s" , 30);
+		Item it1 =new Item("Spray carnations","Carnations","Pink","https://i.imgur.com/0qOfEEC.jpg",50);
+		Item it2 =new Item("Delphinium" , "Plant " , "Blue" ,  "https://i.imgur.com/eSD610W.jpg" ,20);
+		Item it3 =new Item("Zamia Coconut L" , "Plant" , "Green" , "https://i.imgur.com/G9NtSl0.jpg" ,50);
+		Item it4 =new Item("Sensivaria medium" , "Plant" , "Green" , "https://i.imgur.com/XYUVYpZ.jpg" , 35);
+		Item it5 =new Item("Bridal bouquet" , "White peonies" , "White" , "https://i.imgur.com/m9g1cV8.jpg" , 200);
+		Item it6 =new Item("Blue Roses" , "Roses" , "Blue" , "https://i.imgur.com/r39JG1a.jpg" , 80);
+		Item it7 =new Item("Red Roses" , "Roses" , "Red" , "https://i.imgur.com/Y1vvH5M.jpg" , 90);
+		Item it8 =new Item("Single Rose" , "Rose" , "Red" , "https://i.imgur.com/3NN6EMT.jpg" , 10);
+		Item it9 =new Item("Posy Bouquet" , "Bouquet" , "Pink and White" , "https://i.imgur.com/Dm11VEd.jpg" , 70);
+		Item it10 =new Item("Basket Bouquet" , "Bouquet" , "Pink and White" , "https://i.imgur.com/nqyDAZf.jpg" ,80 );
+		Item it11 =new Item("Fan Bouquet" , "Bouquet" , "White" , "https://i.imgur.com/yOhsmmX.jpg" ,55 );
+		Item it12 =new Item("Fiesta Bouquet" , "Bouquet" , "Red" , "https://i.imgur.com/lMdWuAr.jpg" ,110 );
+		Item it13 =new Item("Peony Bouquet" , "Bouquet" , "Pink and White" , "https://i.imgur.com/N5w0OgF.jpg" , 80);
+		Item it14 =new Item("Hello Sunshine" , "Sunflower" , "Yellow" , "https://i.imgur.com/zcdZCDa.jpg" ,80 );
+		Item it15 =new Item("Rainbow Roses" , "Roses" , "Rainbow" , "https://i.imgur.com/AZtBTBS.jpgv" , 200);
+		Item it16 =new Item("Yellow Roses" , "Roses" , "Yellow" , "https://i.imgur.com/yXWBDiF.jpg" ,70 );
+		Item it17 =new Item("White Roses" , "Roses" , "White" , "https://i.imgur.com/e88m9CS.jpg" , 80);
+		Item it18 =new Item("SunFlower Bouquet" , "Bouquet" , "Yellow" , "https://i.imgur.com/Z0o5nP6.jpg" ,  90);
+		Item it19 =new Item("Friendship Bouquet" , "Bouquet" , "White" , "https://i.imgur.com/siBJ0h8.jpg" ,90 );
+		Item it20 =new Item("Plant" , "Plant" , "White" , "https://i.imgur.com/CZw9zf2.jpg" , 30);
 		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareen@gmail.com", "0505123456", "Client1", "1234", "Client", "2233445566", "1/1/2023", "Store Account",0);
-		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "Natalie@gmail.com", "0524789000", "NatalieNK", "22nN90999", "Client", "1234561299", "5/8/2024", "Chain Account",0);
+		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "Natalie@gmail.com", "0524789000", "Client2", "1234", "Client", "1234561299", "5/8/2024", "Chain Account",0);
 		Registration CEO = new Registration("Rashil", "Mbariky", "4443336661", "", "", "Rashi", "rashi", "CEO", "", "", "",0);
 		Registration NetworkMarketingWorker = new Registration("Eissa", "Wahesh", "", "", "", "Eissa", "11111", "NetworkMarketingWorker", "", "", "",0);
 		Registration customerservice=new Registration("nunu","nunu","","","","nunu","nunu","CustomerService","","","",0);

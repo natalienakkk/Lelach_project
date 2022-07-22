@@ -33,7 +33,8 @@ public class ShoppingCartController {
     private Registration User2;
     public Registration getUser2() { return User2; }
     public void setUser2(Registration user2) { User2 = user2; }
-
+    public int flag5=0;
+    public int flag6=0;
     private String[] Delivery = {"Yes" , "No" };
     private String[] DeliveryTo3 = {"Myself" , "Someone else" };
 
@@ -95,6 +96,9 @@ public class ShoppingCartController {
     private URL location;
 
     @FXML
+    private Text Note3;
+
+    @FXML
     private TableColumn<TableViewSC, String> col1;
 
     @FXML
@@ -114,24 +118,35 @@ public class ShoppingCartController {
 
     @FXML
     void order(ActionEvent event) throws IOException {
-        Order order=null;
-        LocalDateTime date = LocalDateTime.now();
-        boolean Del = true;
-//        if(DeliveryOP.getSelectionModel().getSelectedItem().equals("yes")) Del = true;
-//        else Del = false;
-        if ( DeliveryTo2.getSelectionModel().getSelectedItem()==null)
+        Order order = null;
+        if(cart.getItems().size()==0)
         {
-            order = new Order(date.toString().substring(0,10),ReceiveDate.getValue().toString(),User2.getCreditCard(),DeliveryOP.getSelectionModel().getSelectedItem(),User2.getClient_ID(),User2.getUserName(),null,null,null,TotalPrice.getText(),"pending",Note2.getText());
+            SimpleClient.getClient().sendToServer(new Message("#submitorder", order, cart));
         }
-        else if (DeliveryTo2.getSelectionModel().getSelectedItem().equals("Someone else")){
-            order = new Order(date.toString().substring(0,10),ReceiveDate.getValue().toString(),User2.getCreditCard(),DeliveryOP.getSelectionModel().getSelectedItem(),User2.getClient_ID(),User2.getUserName(),Receiveraddress2.getText(),Receivername2.getText(),Receiveremail2.getText(),TotalPrice.getText(),"pending",Note2.getText());
+        else if(flag5==0){
+            order = new Order();
+            order.setRecievedate("a");
+            SimpleClient.getClient().sendToServer(new Message("#submitorder", order, cart));
         }
-        else if (DeliveryTo2.getSelectionModel().getSelectedItem().equals("Myself"))
-        {
-            order = new Order(date.toString().substring(0,10),ReceiveDate.getValue().toString(),User2.getCreditCard(),DeliveryOP.getSelectionModel().getSelectedItem(),User2.getClient_ID(),User2.getUserName(),"Haifa",User2.getFirstName(),User2.getEmail(),TotalPrice.getText(),"pending");
+        else if(flag6==0){
+            System.out.println("flag6 == 0");
+            order = new Order();
+            order.setDeliveryOp("None");
+            SimpleClient.getClient().sendToServer(new Message("#submitorder", order, cart));
         }
-        System.out.println("heyyyyyyyyyyyyyyyyy");
-        SimpleClient.getClient().sendToServer(new Message("#submitorder" , order , cart ));
+
+        else {
+            LocalDateTime date = LocalDateTime.now();
+            if (DeliveryTo2.getSelectionModel().getSelectedItem() == null) {
+                order = new Order(date.toString().substring(0, 10), ReceiveDate.getValue().toString(), User2.getCreditCard(), DeliveryOP.getSelectionModel().getSelectedItem(), User2.getClient_ID(), User2.getUserName(), null, null, null, TotalPrice.getText(), "pending", Note2.getText());
+            } else if (DeliveryTo2.getSelectionModel().getSelectedItem().equals("Someone else")) {
+                order = new Order(date.toString().substring(0, 10), ReceiveDate.getValue().toString(), User2.getCreditCard(), DeliveryOP.getSelectionModel().getSelectedItem(), User2.getClient_ID(), User2.getUserName(), Receiveraddress2.getText(), Receivername2.getText(), Receiveremail2.getText(), TotalPrice.getText(), "pending", Note2.getText());
+            } else if (DeliveryTo2.getSelectionModel().getSelectedItem().equals("Myself")) {
+                order = new Order(date.toString().substring(0, 10), ReceiveDate.getValue().toString(), User2.getCreditCard(), DeliveryOP.getSelectionModel().getSelectedItem(), User2.getClient_ID(), User2.getUserName(), "Haifa", User2.getFirstName(), User2.getEmail(), TotalPrice.getText(), "pending");
+            }
+            System.out.println("heyyyyyyyyyyyyyyyyy");
+            SimpleClient.getClient().sendToServer(new Message("#submitorder", order, cart));
+        }
     }
 
     @FXML
@@ -141,13 +156,14 @@ public class ShoppingCartController {
     int flag = 0;
     @FXML
     void DeliveryOP(ActionEvent event) {
+        flag6++;
         if (DeliveryOP.getSelectionModel().getSelectedItem().equals("Yes")) {
             DeliveryTo2.setVisible(true);
             DeliveryTo1.setVisible(true);
             TotalPrice.setText((cart.gettotalPrice(cart)+20)+" ");
             flag = 1;
         }
-        else
+        else if(DeliveryOP.getSelectionModel().getSelectedItem().equals("No"))
         {
             DeliveryTo2.setVisible(false);
             DeliveryTo1.setVisible(false);
@@ -157,6 +173,8 @@ public class ShoppingCartController {
             Receiveremail2.setVisible(false);
             Receivername1.setVisible(false);
             Receivername2.setVisible(false);
+            Note.setVisible(false);
+            Note3.setVisible(false);
             if (flag == 1) TotalPrice.setText((cart.gettotalPrice(cart))+" ");
         }
     }
@@ -180,6 +198,8 @@ public class ShoppingCartController {
             Receiveremail2.setVisible(false);
             Receivername1.setVisible(false);
             Receivername2.setVisible(false);
+            Note.setVisible(true);
+            Note3.setVisible(true);
         }
     }
 
@@ -199,13 +219,15 @@ public class ShoppingCartController {
 
     @FXML
     void ReceiveDate(ActionEvent event) {
-
+        flag5++;
     }
 
     public ObservableList<TableViewSC> showitems() {
         ObservableList<TableViewSC> items = FXCollections.observableArrayList();
         for(int i=0; i < cart.getItems().size() ; i++ )
         {
+            System.out.println(cart.getItems().get(i).getName() + " 1");
+            System.out.println(cart.getItems().get(i).getPrice() + " 2");
             items.add(new TableViewSC(cart.getItems().get(i).getName(),cart.getItems().get(i).getPrice(),cart.getAmount().get(i),cart.getItems().get(i).getPrice()*cart.getAmount().get(i)));
         }
         return items;
@@ -243,9 +265,13 @@ public class ShoppingCartController {
         DeliveryTo1.setVisible(false);
         Note1.setVisible(false);
         Note2.setVisible(false);
+        Note.setVisible(false);
+        Note3.setVisible(false);
+
         setCart(App.getCart5());
         setUser2(App.getUser1());
         subsc.setVisible(false);
+
         if ( User2.getAccountType().equals("One year subscription") && cart.gettotalPrice(cart)>50 )
         {
             TotalPrice.setText((cart.gettotalPrice(cart)*0.9)+ " ");
@@ -255,11 +281,13 @@ public class ShoppingCartController {
         DeliveryOP.getItems().addAll(Delivery);
         Note.getItems().addAll(Delivery);
         DeliveryTo2.getItems().addAll(DeliveryTo3);
+        System.out.println("3esosososo" + cart.getItems().size());
         for(int i=0 ; i < cart.getItems().size() ; i++)
         {
             System.out.println(cart.getItems().get(i).getName());
             System.out.println(cart.getAmount().get(i));
         }
+        System.out.println("3esosososo2");
 //        for(int i=0 ; i<cart.getItems().size() ; i++)
 //        {
 //            System.out.println(cart.getItems().get(i).getName());

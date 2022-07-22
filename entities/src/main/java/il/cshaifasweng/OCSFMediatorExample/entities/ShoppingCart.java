@@ -22,11 +22,12 @@ public class ShoppingCart implements Serializable {
 //            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
 //            targetEntity = Item.class
 //    )
-@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-private List<Item> items= new ArrayList<Item>();
+    //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "cartList", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Item> items= new ArrayList<Item>();
 
-    @OneToOne (mappedBy = "cart" )
-    private Order order;
+    @OneToOne (mappedBy = "cart" , cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Order order ;
 
     @ElementCollection private List<Double> amount = new ArrayList<Double>();
     public ShoppingCart() { }
@@ -71,5 +72,13 @@ private List<Item> items= new ArrayList<Item>();
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

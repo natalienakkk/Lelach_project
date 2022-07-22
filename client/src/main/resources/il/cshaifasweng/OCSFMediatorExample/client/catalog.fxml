@@ -39,6 +39,7 @@
                         <MenuItem fx:id="MyComplains" mnemonicParsing="false" onAction="#MyComplainsButton" text="MyComplains" />
                         <MenuItem fx:id="MakeComplain" mnemonicParsing="false" onAction="#MakeComplainButton" text="MakeComplain" />
                         <MenuItem fx:id="CancelOrder" mnemonicParsing="false" onAction="#CancelOrderButton" text="CancelOrder" />
+                        <MenuItem fx:id="MyMessages" mnemonicParsing="false" onAction="#MessageButton" text="MyMessages" />
                      </items>
                   </ContextMenu>
                </contextMenu></Button>

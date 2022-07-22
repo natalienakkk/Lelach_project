@@ -26,6 +26,10 @@ public class SystemManagers_Messages implements Serializable {
 //        this.messages = messages;
 //    }
 
+    public SystemManagers_Messages(String message) {
+        Message = message;
+    }
+
     public SystemManagers_Messages() {
     }
 

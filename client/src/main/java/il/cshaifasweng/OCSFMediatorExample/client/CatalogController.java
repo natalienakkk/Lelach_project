@@ -209,12 +209,31 @@ public class CatalogController {
 
     @FXML
     void MyComplainsButton(ActionEvent event) {
+        try {
+            SimpleClient.getClient().sendToServer(new Message("#send complain list2", "profile"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
+
     @FXML
     void OrdersButton(ActionEvent event) {
+        try {
+            SimpleClient.getClient().sendToServer(new Message("#send order list", "profile order"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @FXML
+    public void MessageButton(ActionEvent actionEvent) {
+        try {
+            SimpleClient.getClient().sendToServer(new Message("#send message list","profile message"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 ///////////////////////////////////
 //
@@ -815,22 +834,35 @@ public class CatalogController {
         }
         System.out.println(size);
 
+
         int g=0;
+//        List<Image> imageList = new ArrayList<Image>();
+//        for ( int y = 0; y < size ;y++) {
+//            imageList.add(new Image(itemList.get(y).getPicture()));
+//        }
+
+
+        System.out.println("Done !");
+        System.out.println("Done !");
+        System.out.println("Done !");
+        System.out.println("Done !");
+        System.out.println("Done !");
+
         for ( i = 0; i < size ;i++) {
             for(;g<itemList.size();g++){
                 if(itemList.get(g).getPrice() < Max && itemList.get(g).getPrice() > Min ) {
                     if(color.equals("start")) {
                         buttons_list.get(i).setText(itemList.get(g).getName());
-                        Image image = new Image(itemList.get(g).getPicture());
-                        photo_list.get(i).setImage(image);
+                        //Image image = new Image(itemList.get(g).getPicture());
+                        //photo_list.get(i).setImage(image);
                         g++;
                         break;
                     }
                     else {
                         if(itemList.get(g).getColor().equals(color)){
                             buttons_list.get(i).setText(itemList.get(g).getName());
-                            Image image = new Image(itemList.get(g).getPicture());
-                            photo_list.get(i).setImage(image);
+                            //Image image = new Image(itemList.get(g).getPicture());
+                            //photo_list.get(i).setImage(image);
                             g++;
                             break;
                         }

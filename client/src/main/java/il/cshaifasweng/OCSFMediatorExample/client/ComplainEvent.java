@@ -1,9 +1,6 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Complain;
-import il.cshaifasweng.OCSFMediatorExample.entities.Order;
-import il.cshaifasweng.OCSFMediatorExample.entities.Report;
-import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,6 +9,21 @@ import java.util.List;
 public class ComplainEvent {
 
     private List<Complain> complain_list;
+    private String type;
+
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public ComplainEvent(List<Complain> complain_list, String type) {
+        this.complain_list = complain_list;
+        this.type = type;
+    }
 
     public ComplainEvent(List<Complain> complain_list) {
         this.complain_list = complain_list;
@@ -56,7 +68,11 @@ public class ComplainEvent {
         this.orderList = orderList;
     }
 
-    // public ComplainEvent(List<Complain> complain_list) { this.complain_list = complain_list; }
+    public ComplainEvent( String type,List<Order> orderList) {
+        this.type = type;
+        this.orderList = orderList;
+    }
+// public ComplainEvent(List<Complain> complain_list) { this.complain_list = complain_list; }
 
     public List<Complain> getComplain_list() { return complain_list; }
 

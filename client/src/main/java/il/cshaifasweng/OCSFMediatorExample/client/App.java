@@ -48,6 +48,10 @@ public class App extends Application {
     private static List<Order>orderList;
     private static List<Order>orderList2 = new ArrayList<Order>();
     private static Confirmation ConfirmationMSG;
+    private static String type_profile;
+    private static List<SystemManagers_Messages>message_list;
+
+
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -87,7 +91,21 @@ public class App extends Application {
 //    public void setAmount(Double amount) {
 //        this.amount = amount;
 //    }
+    public static List<SystemManagers_Messages> getMessage_list() {
+        return message_list;
+    }
 
+    public static void setMessage_list(List<SystemManagers_Messages> message_list) {
+        App.message_list = message_list;
+    }
+
+    public static String getType_profile() {
+        return type_profile;
+    }
+
+    public static void setType_profile(String type_profile) {
+        App.type_profile = type_profile;
+    }
 
     public static List<Order> getOrderList2() {
         return orderList2;
@@ -250,7 +268,8 @@ public class App extends Application {
     @Subscribe
     public void shoppingcarteventfunc(ShoppingCartEvent event) {
         setCart5(event.getCart());
-        System.out.println("im in app in shoppingcarteventfunc! ");
+
+        System.out.println("im in app in shoppingcarteventfunc! " + cart5.getItems().size());
         Platform.runLater(() -> {
             try {
                 setRoot("cart");
@@ -259,7 +278,6 @@ public class App extends Application {
             }
         });
     }
-
     @Subscribe
     public void usernameEventFunc(UsernameEvent event){
         setUsername(event.getUsername());
@@ -402,15 +420,40 @@ public class App extends Application {
     @Subscribe
     public void ComplainEventFunc(ComplainEvent event){
         setComplain_list(event.getComplain_list());
+        setType_profile(event.getType());
+        System.out.println("type="+type);
         if(complain_list==null)
             System.out.println("we have a problem");
-        //setOrderList(event.getOrderList());
+        setOrder1(event.getOrder());
         //setOrderList(event.getOrderList());
         Platform.runLater(() -> {
-            try {
-                App.setRoot("CustomerService");
-            } catch (IOException e) {
-                e.printStackTrace();
+            if(type.equals("CustomerService")) {
+                try {
+                    App.setRoot("CustomerService");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if(type_profile.equals("profile")) {
+                try {
+                    App.setRoot("Profile");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if(type_profile.equals("profile order")){
+                try {
+                    App.setRoot("Profile2");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else if(type_profile.equals("profile message")){
+                try {
+                    App.setRoot("Profile3");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -499,7 +542,19 @@ public class App extends Application {
 
         });
     }
-//     public void AddtocartFunc(AddToCartEvent event)
+    @Subscribe
+    public void MessageEventFunc(MessagesEvent event){
+        setMessage_list(event.getList());
+        Platform.runLater(() -> {
+            try {
+                setRoot("Profile3");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    //     public void AddtocartFunc(AddToCartEvent event)
 //     {
 //         System.out.println(event.getItem().getName() + " in app.!!!");
 //         setItem1(event.getItem());

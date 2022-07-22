@@ -1,6 +1,5 @@
 package il.cshaifasweng.OCSFMediatorExample.entities;
 import javax.persistence.*;
-import javax.xml.namespace.QName;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +25,24 @@ public class Item implements Serializable {
 //            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
 //            targetEntity = ShoppingCart.class
 //    )
-@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-private ShoppingCart cartList;
+    //@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //private ShoppingCart cartList;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "items_shoppingcart",
+            joinColumns = {@JoinColumn(name = "item_id")},
+            inverseJoinColumns = {@JoinColumn(name = "shoppingcart_id")}
+    )
+    private List<ShoppingCart> cartList= new ArrayList<ShoppingCart>();
+
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER,targetEntity = Image.class)
+//    private Image image;
 
     public Item() {
 
     }
+
 
     public String getName() {
         return name;
@@ -104,5 +114,11 @@ private ShoppingCart cartList;
         this.items = items;
     }
 
+    public List<ShoppingCart> getCartList() {
+        return cartList;
+    }
 
+    public void setCartList(List<ShoppingCart> cartList) {
+        this.cartList = cartList;
+    }
 }

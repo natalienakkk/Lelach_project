@@ -50,54 +50,54 @@
             <TableColumn fx:id="col4" prefWidth="110.39998779296877" text="Price" />
         </columns>
       </TableView>
-      <Text layoutX="15.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery :" wrappingWidth="63.736724853515625">
+      <Text layoutX="15.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery :" wrappingWidth="63.736724853515625">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <ComboBox fx:id="DeliveryOP" layoutX="90.0" layoutY="420.0" onAction="#DeliveryOP" prefHeight="26.0" prefWidth="64.0" />
-      <Text fx:id="DeliveryTo1" layoutX="166.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery to :" wrappingWidth="82.93672180175781">
+      <ComboBox fx:id="DeliveryOP" layoutX="90.0" layoutY="342.0" onAction="#DeliveryOP" prefHeight="26.0" prefWidth="64.0" />
+      <Text fx:id="DeliveryTo1" layoutX="166.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery to :" wrappingWidth="82.93672180175781">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <ComboBox fx:id="DeliveryTo2" layoutX="249.0" layoutY="420.0" onAction="#DeliveryTo2" prefHeight="26.0" prefWidth="114.0" />
-      <Text fx:id="Receivername1" layoutX="15.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver's name :" wrappingWidth="114.39999999999986">
+      <ComboBox fx:id="DeliveryTo2" layoutX="249.0" layoutY="342.0" onAction="#DeliveryTo2" prefHeight="26.0" prefWidth="114.0" />
+      <Text fx:id="Receivername1" layoutX="15.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver's name :" wrappingWidth="114.39999999999986">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="Receivername2" layoutX="144.0" layoutY="457.0" prefHeight="26.0" prefWidth="126.0" />
-      <Text fx:id="Receiveraddress1" layoutX="15.0" layoutY="505.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver's address :" wrappingWidth="126.39999999999986">
+      <TextField fx:id="Receivername2" layoutX="144.0" layoutY="379.0" prefHeight="26.0" prefWidth="126.0" />
+      <Text fx:id="Receiveraddress1" layoutX="10.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Receiver's address :" wrappingWidth="137.33673095703125">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="Receiveraddress2" layoutX="146.0" layoutY="486.0" prefHeight="26.0" prefWidth="150.0" />
-      <Text fx:id="Receiveremail1" layoutX="15.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver's Email :" wrappingWidth="114.39999999999986">
+      <TextField fx:id="Receiveraddress2" layoutX="146.0" layoutY="408.0" prefHeight="26.0" prefWidth="150.0" />
+      <Text fx:id="Receiveremail1" layoutX="15.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver's Email :" wrappingWidth="114.39999999999986">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="Receiveremail2" layoutX="146.0" layoutY="512.0" prefHeight="26.0" prefWidth="316.0" />
+      <TextField fx:id="Receiveremail2" layoutX="146.0" layoutY="434.0" prefHeight="26.0" prefWidth="316.0" />
       <DatePicker fx:id="ReceiveDate" layoutX="133.0" layoutY="309.0" onAction="#ReceiveDate" />
       <Text layoutX="15.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receive Date :" wrappingWidth="114.39999999999986">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="Note1" layoutX="261.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note  to Receiver :" wrappingWidth="137.33673095703125">
+      <Text fx:id="Note1" layoutX="10.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Note to Receiver :" wrappingWidth="137.33673095703125">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <ComboBox fx:id="Note" layoutX="189.0" layoutY="362.0" onAction="#Note" prefHeight="26.0" prefWidth="64.0" />
-      <Text layoutX="14.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note to the receiver?" wrappingWidth="168.53675842285156">
+      <ComboBox fx:id="Note" layoutX="166.0" layoutY="467.0" onAction="#Note" prefHeight="26.0" prefWidth="64.0" />
+      <Text fx:id="Note3" layoutX="14.0" layoutY="486.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note to the receiver?" wrappingWidth="168.53675842285156">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="Note2" layoutX="398.0" layoutY="362.0" prefHeight="26.0" prefWidth="348.0" />
+      <TextField fx:id="Note2" layoutX="144.0" layoutY="500.0" prefHeight="42.0" prefWidth="294.0" />
       <Text layoutX="471.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price :" wrappingWidth="83.20000000000005">
          <font>
             <Font size="15.0" />
