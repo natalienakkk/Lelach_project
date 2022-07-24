@@ -1,8 +1,10 @@
 package il.cshaifasweng.OCSFMediatorExample.client;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -11,9 +13,12 @@ import javafx.beans.Observable;
 import javafx.beans.property.Property;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.AnchorPane;
@@ -86,6 +91,7 @@ public class ShoppingCartController {
     @FXML
     private Button Back;
 
+
     @FXML
     private ResourceBundle resources;
 
@@ -111,6 +117,9 @@ public class ShoppingCartController {
     private TableColumn<TableViewSC, Double> col4;
 
     @FXML
+    private TableColumn<TableViewSC, Button> col5;
+
+    @FXML
     private TableView<TableViewSC> table;
 
     @FXML
@@ -118,20 +127,20 @@ public class ShoppingCartController {
 
     @FXML
     void order(ActionEvent event) throws IOException {
-        Order order = null;
+        Order order = new Order();
         if(cart.getItems().size()==0)
         {
+            System.out.println("3es3es");
             SimpleClient.getClient().sendToServer(new Message("#submitorder", order, cart));
         }
         else if(flag5==0){
-            order = new Order();
             order.setRecievedate("a");
             SimpleClient.getClient().sendToServer(new Message("#submitorder", order, cart));
         }
         else if(flag6==0){
             System.out.println("flag6 == 0");
-            order = new Order();
             order.setDeliveryOp("None");
+            order.setRecievedate("b");
             SimpleClient.getClient().sendToServer(new Message("#submitorder", order, cart));
         }
 
@@ -222,16 +231,40 @@ public class ShoppingCartController {
         flag5++;
     }
 
+    List<Button> buttonList = new ArrayList<Button>();
+
+
     public ObservableList<TableViewSC> showitems() {
         ObservableList<TableViewSC> items = FXCollections.observableArrayList();
         for(int i=0; i < cart.getItems().size() ; i++ )
         {
+
+            Button b = new Button();
+            buttonList.add(b);
+            int finalI = i;
+            buttonList.get(i).setOnAction(event ->
+            {
+                try {
+                    SimpleClient.getClient().sendToServer(new Message("#deletefromcart", cart , finalI));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                cart.getItems().remove(finalI);
+                table.setItems(showitems());
+                table.getColumns().addAll();
+                TotalPrice.setText(cart.gettotalPrice(cart)+ " ");
+
+            });
+            buttonList.get(i).setText("Delete");
+
             System.out.println(cart.getItems().get(i).getName() + " 1");
             System.out.println(cart.getItems().get(i).getPrice() + " 2");
-            items.add(new TableViewSC(cart.getItems().get(i).getName(),cart.getItems().get(i).getPrice(),cart.getAmount().get(i),cart.getItems().get(i).getPrice()*cart.getAmount().get(i)));
+
+            items.add(new TableViewSC(cart.getItems().get(i).getName(),cart.getItems().get(i).getPrice(),cart.getAmount().get(i),cart.getItems().get(i).getPrice()*cart.getAmount().get(i),buttonList.get(i)));
         }
         return items;
     }
+
     @FXML
     void initialize() {
         assert Back != null : "fx:id=\"Back\" was not injected: check your FXML file 'cart.fxml'.";
@@ -281,13 +314,6 @@ public class ShoppingCartController {
         DeliveryOP.getItems().addAll(Delivery);
         Note.getItems().addAll(Delivery);
         DeliveryTo2.getItems().addAll(DeliveryTo3);
-        System.out.println("3esosososo" + cart.getItems().size());
-        for(int i=0 ; i < cart.getItems().size() ; i++)
-        {
-            System.out.println(cart.getItems().get(i).getName());
-            System.out.println(cart.getAmount().get(i));
-        }
-        System.out.println("3esosososo2");
 //        for(int i=0 ; i<cart.getItems().size() ; i++)
 //        {
 //            System.out.println(cart.getItems().get(i).getName());
@@ -296,6 +322,7 @@ public class ShoppingCartController {
         col2.setCellValueFactory(new PropertyValueFactory<TableViewSC,Double>("Price"));
         col3.setCellValueFactory(new PropertyValueFactory<TableViewSC,Double>("Amount"));
         col4.setCellValueFactory(new PropertyValueFactory<TableViewSC,Double>("Total_Price"));
+        col5.setCellValueFactory(new PropertyValueFactory<TableViewSC,Button>("button"));
         table.setItems(showitems());
         table.getColumns().addAll();
     }

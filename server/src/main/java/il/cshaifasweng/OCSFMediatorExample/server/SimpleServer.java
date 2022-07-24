@@ -64,6 +64,21 @@ public class SimpleServer extends AbstractServer {
 			client.sendToClient(new Message("#opencatalog" , user_type , itemList));
 			session.close();
 		}
+
+		else if(msgString.startsWith("#deletefromcart")) {
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			Message msg3 = ((Message) msg);
+			//ShoppingCart cart = (ShoppingCart) msg3.getObject();
+			int i = (int) msg3.getObject2();
+			cart1.RemovefromCart(i);
+			cart1.getAmount().remove(i);
+			cart1.gettotalPrice(cart1);
+			session.update(cart1);
+			session.getTransaction().commit();
+			session.flush();
+			session.close();
+		}
 		else if(msgString.startsWith("#submitorder")) {
 			//SendEmail.SendEmail("eissa_wahesh@hotmail.com","m3lm 3esa","3esa ya mlk el entities");
 			session = sessionFactory.openSession();
@@ -72,30 +87,38 @@ public class SimpleServer extends AbstractServer {
 			Order order = (Order) msg1.getObject();
 			Order order1 = new Order();
 			ShoppingCart cart = (ShoppingCart) msg1.getObject2();
-			System.out.println("in sumbitorder" + order.getDeliveryOp());
+			order.setCart(cart);
+			List<ShoppingCart> a = new ArrayList<ShoppingCart>();
+			for(int i=0;i<cart.getItems().size();i++)
+			{
+				order.getCart().getItems().set(i,cart.getItems().get(i));
+			}
+			//order.getCart().setItems(cart.getItems());
+			order.getCart().setAmount(cart.getAmount());
+			order.getCart().gettotalPrice(cart);
+//			for(int i =0; i<cart.getItems().size();i++)
+//			{
+//
+//			}
 			if( cart.getItems().size()==0)
 			{
-				System.out.println("nayakat");
 				Warning new_warning = new Warning("Dear Client,youre cart is empty!");
 				client.sendToClient(new Message("#submitorderwarning", new_warning));
 			}
 			else if( order.getRecievedate().equals("a"))
 			{
-				System.out.println("nayakat1");
 				Warning new_warning = new Warning("Dear Client,you should pick a recieve date!");
 				client.sendToClient(new Message("#submitorderwarning", new_warning));
 			}
-			System.out.println("in sumbitorder 2 " + order.getDeliveryOp());
-
-			 if( order.getDeliveryOp().equals("None"))
+			else if( order.getDeliveryOp().equals("None"))
 			{
-				System.out.println("nayakat2");
 				Warning new_warning = new Warning("Dear Client, you should fill the Delivery option!");
 				client.sendToClient(new Message("#submitorderwarning", new_warning));
 			}
 			else {
-				//order.setCart(cart);
+				System.out.println(order.getCart().getItems().get(0).getName());
 				session.save(order);
+				session.update(cart);
 				client.sendToClient(new Message("#submitorder", order, cart));
 			}
 			session.close();
@@ -121,6 +144,7 @@ public class SimpleServer extends AbstractServer {
 
 		else if(msgString.startsWith("#addtocart"))
 		{
+
 			System.out.println("3esaaaaaaaaaaaaaaaaaaa");
 			Message msg1 = ((Message) msg);
 			Item item = (Item) msg1.getObject();
@@ -180,6 +204,7 @@ public class SimpleServer extends AbstractServer {
 			}
 			session.update(cart1);
 			session.getTransaction().commit();
+			session.flush();
 			session.close();
 
 		}
@@ -449,11 +474,8 @@ public class SimpleServer extends AbstractServer {
 				Warning newWarning = new Warning("You have entered a wrong username");
 				client.sendToClient(new Message("wrong username",newWarning));
 			}
-//			System.out.format(client_msg+"\n");
-//			System.out.format(username);
 			SystemManagers_Messages message = new SystemManagers_Messages(client_msg, username);
-			//	session = sessionFactory.openSession();
-			//	session.beginTransaction();
+
 			session.save(message);
 			session.flush();
 			session.getTransaction().commit();
@@ -527,7 +549,6 @@ public class SimpleServer extends AbstractServer {
 
 		else if(msgString.equals("#show Report to compare"))
 		{
-			//System.out.println("natlieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 			Message msg_report = ((Message) msg);
 			String Type = ((String) msg_report.getObject());
 			LocalDate first_start=((LocalDate) msg_report.getObject2());
@@ -540,11 +561,6 @@ public class SimpleServer extends AbstractServer {
 			session.beginTransaction();
 			List<Complain> complain_list=getAll(Complain.class);
 			List<Order> order_list=getAll(Order.class);
-//			if(Type.equals(null))
-//			{
-//				Warning newWarning = new Warning("PLEASE Choose type of Report");
-//				client.sendToClient(new Message("wrong type", newWarning));
-//			}
 			if(Type.equals("Complain Compare")) {
 				try {
 					client.sendToClient(new Message("#list of report sent to compare", Type, first_start, first_end, second_start, second_end, complain_list));
@@ -664,27 +680,10 @@ public class SimpleServer extends AbstractServer {
 		}
 		else if (msgString.equals("#OpenCancelOrder")) {
 			Message msg1 = ((Message) msg);
-//			Registration client2 = (Registration) msg1.getObject();
-//			String CurrUser = client2.getClient_ID();
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<Order> OrdersList = getAll(Order.class);
-//			for(Order order : OrdersList)
-//			{
-//				System.out.println(order.getRecievedate());
-//				System.out.println(order.getStatus());
-//				System.out.println(order.getTotalprice());
-//				System.out.println(order.getId());
-//			}
-//			List<Order> MyOrderList = null;
-//			for (Order order : OrdersList)
-//			{
-//				if(order.getClientid() == CurrUser)
-//				{
-//					MyOrderList.add(order);
-//					System.out.println("ggggggggggggggggg");
-//				}
-//			}
+
 			client.sendToClient(new Message("#MyOrdersList", OrdersList));
 
 		} else if (msgString.equals("#CancelOrder")) {
@@ -806,7 +805,14 @@ public class SimpleServer extends AbstractServer {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<Order> orderList=getAll(Order.class);
+			List<ShoppingCart> shoppingCartList=getAll(ShoppingCart.class);
+			orderList.get(0).setCart(shoppingCartList.get(0));
+			orderList.get(0).getCart().setAmount(shoppingCartList.get(0).getAmount());
+			orderList.get(0).getCart().gettotalPrice(shoppingCartList.get(0));
+			session.update(orderList.get(0));
+			System.out.println(" im in simpleserver in send order list" + orderList.get(0).getCart().getAmount().size());
 			client.sendToClient(new Message("#list of order sent", orderList,type_profile));
+
 			session.close();
 
 		}

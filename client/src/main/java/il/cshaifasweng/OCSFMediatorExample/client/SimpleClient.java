@@ -223,6 +223,9 @@ public class SimpleClient extends AbstractClient {
 		}
 		else if(msgstring.equals("#list of order sent"))
 		{
+			System.out.println("im in simpleclient in list of order sent");
+			List<Order> orderList = (List<Order>) ((Message) msg).getObject();
+			System.out.println(orderList.get(0).getCart().getItems().size()+ "   oooo:P");
 			EventBus.getDefault().post(new ComplainEvent((String)((Message) msg).getObject2(),(List<Order>) ((Message) msg).getObject()));
 		}
 		else if(msgstring.equals("#list of message sent"))

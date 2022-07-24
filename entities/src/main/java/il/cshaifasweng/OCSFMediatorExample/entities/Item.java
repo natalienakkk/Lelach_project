@@ -18,7 +18,6 @@ public class Item implements Serializable {
     private double price;
 
     @ManyToOne
-    @JoinColumn(name = "items_id")
     private Catalog items;
 
 //    @ManyToMany(mappedBy = "items",
@@ -34,6 +33,11 @@ public class Item implements Serializable {
             joinColumns = {@JoinColumn(name = "item_id")},
             inverseJoinColumns = {@JoinColumn(name = "shoppingcart_id")}
     )
+    //@JoinColumn(name = "Shoppingcart_id")
+//    @ManyToMany(mappedBy = "garages", cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+//            targetEntity = ShoppingCart.class
+//    )
+
     private List<ShoppingCart> cartList= new ArrayList<ShoppingCart>();
 
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER,targetEntity = Image.class)

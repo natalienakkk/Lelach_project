@@ -24,6 +24,7 @@ public class ShoppingCart implements Serializable {
 //    )
     //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ManyToMany(mappedBy = "cartList", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    //@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = Item.class)
     private List<Item> items= new ArrayList<Item>();
 
     @OneToOne (mappedBy = "cart" , cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
@@ -36,7 +37,6 @@ public class ShoppingCart implements Serializable {
         int price = 0;
         for (int i = 0; i< items.size() ; i++) {
             price += items.get(i).getPrice() * amount.get(i);
-            System.out.println("item " + i + " name: " + items.get(i).getName() );
         }
         this.totalPrice = price;
         return price;
@@ -51,9 +51,9 @@ public class ShoppingCart implements Serializable {
         items.add(item);
         itemsNum++;
     }
-    public void RemovefromCart (Item item)
+    public void RemovefromCart (int i)
     {
-        items.remove(item);
+        items.remove(items.get(i));
         itemsNum--;
     }
     public void Addamount (double a){ amount.add(a); }
