@@ -193,7 +193,7 @@ public class CustomerServiceController {
         assert username != null : "fx:id=\"username\" was not injected: check your FXML file 'CustomerService.fxml'.";
         assert complain_id != null : "fx:id=\"complain_id\" was not injected: check your FXML file 'CustomerService.fxml'.";
         setList(App.getComplain_list());
-        setList3(App.getOrderList2());
+        setList3(App.getOrderList());
 
         username.setCellValueFactory(new PropertyValueFactory<Complain,String>("username"));
         time.setCellValueFactory(new PropertyValueFactory<Complain,LocalTime>("time"));

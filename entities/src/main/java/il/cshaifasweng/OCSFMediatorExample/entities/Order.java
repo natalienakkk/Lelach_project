@@ -30,6 +30,7 @@ public class Order implements Serializable {
     private String items1;
 
 
+
     @OneToOne
             (cascade = CascadeType.ALL)
     @JoinColumn(name = "Shoppingcart_id")
@@ -194,4 +195,6 @@ public class Order implements Serializable {
     public String getRecievetime() { return recievetime; }
 
     public void setRecievetime(String recievetime) { this.recievetime = recievetime; }
+
+
 }

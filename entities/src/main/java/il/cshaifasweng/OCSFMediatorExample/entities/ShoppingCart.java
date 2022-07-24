@@ -18,16 +18,18 @@ public class ShoppingCart implements Serializable {
     private Long id;
     private double totalPrice;
     private int itemsNum;
+    private String usernamee;
 //    @OneToMany(
 //            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
 //            targetEntity = Item.class
 //    )
     //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @ManyToMany(mappedBy = "cartList", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    //@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = Item.class)
+    //@ManyToMany(mappedBy = "cartList", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = Item.class)
     private List<Item> items= new ArrayList<Item>();
 
-    @OneToOne (mappedBy = "cart" , cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToOne (mappedBy = "cart")
     private Order order ;
 
     @ElementCollection private List<Double> amount = new ArrayList<Double>();
@@ -54,6 +56,7 @@ public class ShoppingCart implements Serializable {
     public void RemovefromCart (int i)
     {
         items.remove(items.get(i));
+        amount.remove(amount.get(i));
         itemsNum--;
     }
     public void Addamount (double a){ amount.add(a); }
@@ -81,4 +84,18 @@ public class ShoppingCart implements Serializable {
     public void setOrder(Order order) {
         this.order = order;
     }
+
+    public int getItemsNum() {
+        return itemsNum;
+    }
+
+    public void setItemsNum(int itemsNum) {
+        this.itemsNum = itemsNum;
+    }
+
+    public String getUsernamee() { return usernamee; }
+
+    public void setUsernamee(String usernamee) { this.usernamee = usernamee; }
+
+
 }

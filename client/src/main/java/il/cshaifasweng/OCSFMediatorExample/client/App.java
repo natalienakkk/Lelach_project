@@ -293,8 +293,7 @@ public class App extends Application {
     }
 
     @Subscribe
-    public void OrderEventFunc(OrderEvent event)
-    {
+    public void OrderEventFunc(OrderEvent event) {
         setOrder1(event.getOrder());
         setOrderList2(event.getOrder());
         System.out.println(order1.getCart().getItems().get(0).getName() + " ordeeeeeeeeeeeeeeer");
@@ -424,8 +423,8 @@ public class App extends Application {
         System.out.println("type="+type);
         if(complain_list==null)
             System.out.println("we have a problem");
-        setOrder1(event.getOrder());
-        //setOrderList(event.getOrderList());
+        //setOrder1(event.getOrder());
+        setOrderList(event.getOrderList());
         Platform.runLater(() -> {
             if(type.equals("CustomerService")) {
                 try {

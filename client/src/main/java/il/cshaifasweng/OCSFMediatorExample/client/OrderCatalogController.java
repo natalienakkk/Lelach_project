@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 //import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
+import il.cshaifasweng.OCSFMediatorExample.entities.Registration;
 import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,6 +34,9 @@ public class OrderCatalogController {
     @FXML public static void setCart(ShoppingCart cart) {
         OrderCatalogController.cart = cart;
     }
+    public static Registration User;
+    public static Registration getUser() { return User; }
+    public static void setUser(Registration user) { User = user; }
     @FXML private ResourceBundle resources;
     @FXML private URL location;
     @FXML private AnchorPane Pane1;
@@ -47,7 +51,7 @@ public class OrderCatalogController {
     @FXML private Text priceee;
     @FXML private ImageView image;
     @FXML void addtocart(ActionEvent event) throws IOException {
-        SimpleClient.getClient().sendToServer(new Message("#addtocart" , item , Double.valueOf(amount_picker.getValue()) ));
+        SimpleClient.getClient().sendToServer(new Message("#addtocart" , item , Double.valueOf(amount_picker.getValue()) ,User.getUserName()));
         App.setRoot("catalog");
 
     }
@@ -67,6 +71,8 @@ public class OrderCatalogController {
         assert priceee != null : "fx:id=\"priceee\" was not injected: check your FXML file 'client.fxml'.";
         assert image != null : "fx:id=\"image\" was not injected: check your FXML file 'client.fxml'.";
         setItem(App.getItem());
+        setUser(App.getUser1());
+
         flower_name.setText(item.getName());
         flower_color.setText("Color : "+ item.getColor());
         flower_type.setText("Type : "+ item.getType());

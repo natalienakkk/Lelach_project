@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.LongStream;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -37,7 +38,6 @@ public class SimpleServer extends AbstractServer {
 	private static SessionFactory sessionFactory = getSessionFactory();
 	int firsttime =0;
 	int firsttime1 =0;
-	ShoppingCart cart1;
 	public SimpleServer(int port) {
 		super(port);
 
@@ -47,8 +47,7 @@ public class SimpleServer extends AbstractServer {
 	protected void handleMessageFromClient(Object msg, ConnectionToClient client) throws IOException {
 
 		String msgString = msg.toString();
-		if(msgString.equals("#opencatalog"))
-		{
+		if(msgString.equals("#opencatalog")) {
 			System.out.println("here1");
 			Message msg3 = ((Message) msg);
 			String user_type = (String) msg3.getObject();
@@ -64,15 +63,14 @@ public class SimpleServer extends AbstractServer {
 			client.sendToClient(new Message("#opencatalog" , user_type , itemList));
 			session.close();
 		}
-
 		else if(msgString.startsWith("#deletefromcart")) {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			Message msg3 = ((Message) msg);
-			//ShoppingCart cart = (ShoppingCart) msg3.getObject();
+			ShoppingCart cart1 = (ShoppingCart) msg3.getObject();
 			int i = (int) msg3.getObject2();
+			//cart1.RemovefromCart(i);
 			cart1.RemovefromCart(i);
-			cart1.getAmount().remove(i);
 			cart1.gettotalPrice(cart1);
 			session.update(cart1);
 			session.getTransaction().commit();
@@ -123,8 +121,7 @@ public class SimpleServer extends AbstractServer {
 			}
 			session.close();
 		}
-		else if(msgString.startsWith("#openuseritem"))
-		{
+		else if(msgString.startsWith("#openuseritem")) {
 			Message msg2 = ((Message) msg);
 			int flowerid = (int) msg2.getObject();
 			session = sessionFactory.openSession();
@@ -141,34 +138,79 @@ public class SimpleServer extends AbstractServer {
 			}
 			session.close();
 		}
-
-		else if(msgString.startsWith("#addtocart"))
-		{
-
-			System.out.println("3esaaaaaaaaaaaaaaaaaaa");
+		else if(msgString.startsWith("#addtocart")) {
+			session = sessionFactory.openSession();
+			session.beginTransaction();
+			ShoppingCart cart1= null;
 			Message msg1 = ((Message) msg);
 			Item item = (Item) msg1.getObject();
 			double amount = (double) msg1.getObject2();
-			session = sessionFactory.openSession();
-			session.beginTransaction();
-			//ShoppingCart cart1 = (ShoppingCart) msg1.getObject3();
-			if(firsttime == 0 ) {
-				cart1 = new ShoppingCart();
-				session.save(cart1);
-				firsttime++;
-				firsttime1++;
-				System.out.println(item.getName() + " a");
+			String username = (String) msg1.getObject3();
+			int ind=-1;
+			List<FirstTime> firstTimes = getAll(FirstTime.class);
+			for(int i =0;i<firstTimes.size();i++)
+			{
+				if(firstTimes.get(i).getUsername().equals(username))
+				{
+					ind =i;
+				}
+			}
 
+			//ShoppingCart cart1 = (ShoppingCart) msg1.getObject3();
+			if(firstTimes.get(ind).getFirsttime() == 0 ) {
+				System.out.println("nayaaaaaaakaaaaaaaaaaaaattttttttttttt");
+				cart1 = new ShoppingCart();
+				cart1.AddtoCart(item);
+				cart1.Addamount(amount);
+				cart1.gettotalPrice(cart1);
+				cart1.setUsernamee(username);
+				session.save(cart1);
+				firstTimes.get(ind).setFirsttime(1);
+				firstTimes.get(ind).setFirsttime1(1);
+				session.update(firstTimes.get(ind));
+				System.out.println(item.getName() + " a");
 			}
 			else
 			{
-				System.out.println(item.getName() + " b");
+				List<ShoppingCart> cartList = getAll(ShoppingCart.class);
+				int flag0 = 0;
+				int index = 0;
+
+				cart1 = cartList.get(cartList.size() - 1);
+
+				for(int i =cartList.size()-1; i>=0;i--)
+				{
+					System.out.println("in the for loop in add to cart");
+					if(cartList.get(i).getUsernamee().equals(username))
+					{
+						System.out.println("in the if in addtocart");
+						cart1 = cartList.get(i);
+						break;}
+
+				}
+				for( int j=0;j<cartList.get(cartList.size()-1).getItems().size();j++) {
+					if (item.getName().equals(cartList.get(cartList.size() - 1).getItems().get(j).getName()))
+					{
+						flag0 = 1;
+						index =j;
+					}
+				}
+				if(flag0==0) {
+						cart1.AddtoCart(item);
+						cart1.Addamount(amount);
+						cart1.gettotalPrice(cart1);
+				}
+				else if(flag0==1)
+				{
+					cart1.getAmount().set(index,cart1.getAmount().get(index)+amount);
+					cart1.gettotalPrice(cart1);
+				}
+
+
 			}
 
 			if(cart1 == null) System.out.println("null!!\n");
-			cart1.AddtoCart(item);
-			cart1.Addamount(amount);
-			cart1.gettotalPrice(cart1);
+
 
 			//List<ShoppingCart> a = getAll(ShoppingCart.class);
 //			for (int i = 0 ;i<a.size() ; i++)
@@ -178,20 +220,41 @@ public class SimpleServer extends AbstractServer {
 			session.update(cart1);
 			session.getTransaction().commit();
 			session.close();
-			System.out.println(cart1.getItems().get(0).getName()+ " 7bebebebe");
 
 		}
-		else if(msgString.startsWith("#getcart"))
-		{
+		else if(msgString.startsWith("#getcart")) {
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			if(firsttime1==0)
+			ShoppingCart cart1=null;
+			Message msg1 = ((Message) msg);
+			String username = (String) msg1.getObject();
+			List<ShoppingCart> cartList = getAll(ShoppingCart.class);
+			for(int i =cartList.size()-1; i>=0;i--)
+			{
+				if(cartList.get(i).getUsernamee().equals(username))
+				{
+					cart1 = cartList.get(i);
+					break;}
+
+			}
+			int ind=-1;
+			List<FirstTime> firstTimes = getAll(FirstTime.class);
+			for(int i =0;i<firstTimes.size();i++)
+			{
+				if(firstTimes.get(i).getUsername().equals(username))
+				{
+					ind =i;
+				}
+			}
+			if(firstTimes.get(ind).getFirsttime1() ==0)
 			{
 				ShoppingCart cart = new ShoppingCart();
 				client.sendToClient(new Message("#getcart",cart ));
 			}
 			else {
 				System.out.println(cart1.getItems().get(0).getName());
+				Order ord = new Order();
+				cart1.setOrder(ord);
 				List<Item> a = new ArrayList<Item>();
 				List<Double> b = new ArrayList<Double>();
 				for (int i = 0; i < cart1.getItems().size(); i++) {
@@ -200,7 +263,14 @@ public class SimpleServer extends AbstractServer {
 				}
 				cart1.setItems(a);
 				cart1.setAmount(b);
-				client.sendToClient(new Message("#getcart", cart1));
+				List<ShoppingCart> c = new ArrayList<ShoppingCart>();
+				for(int i=0;i<cart1.getItems().size();i++)
+				{
+					cart1.getItems().get(i).setCartList(c);
+				}
+//				cart1.setItems(cart2.getItems());
+//				cart1.setAmount(cart2.getAmount());
+				client.sendToClient(new Message("#getcart",cart1));
 			}
 			session.update(cart1);
 			session.getTransaction().commit();
@@ -216,7 +286,8 @@ public class SimpleServer extends AbstractServer {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		} else if (msgString.startsWith("#SignUpRequest")) {
+		}
+		else if (msgString.startsWith("#SignUpRequest")) {
 			//Registration newSignUp = new Registration();
 			Message msg1 = ((Message) msg);
 			Registration newSignUp = (Registration) msg1.getObject();
@@ -249,14 +320,28 @@ public class SimpleServer extends AbstractServer {
 			}
 		}
 		else if (msgString.startsWith("#LoginRequest")) {
-			firsttime =0;
-			firsttime1 =0;
 			Message msg1 = ((Message) msg);
 			User newLogin = (User) msg1.getObject();
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<Item> itemList = getAll(Item.class);
+			int flago = 0;
 			String UserName = newLogin.getUserName();
+			List<FirstTime> firstTimes = getAll(FirstTime.class);
+			for(int i =0; i<firstTimes.size();i++)
+			{
+				if(firstTimes.get(i).getUsername().equals(UserName))
+				{
+					firstTimes.get(i).setFirsttime(0);
+					firstTimes.get(i).setFirsttime1(0);
+					flago=1;
+					session.update(firstTimes.get(i));
+				}
+			}
+			if(flago==0) {
+				FirstTime firstTime = new FirstTime(0, 0, UserName);
+				session.save(firstTime);
+			}
 			System.out.println(UserName);
 			String Password = newLogin.getPassword();
 			int UserNameFound = -1;
@@ -278,6 +363,14 @@ public class SimpleServer extends AbstractServer {
 								{
 									itemList.get(i).setCartList(a);
 								}
+//								List<ShoppingCart> cartList = getAll(ShoppingCart.class);
+//								for(int i=cartList.size()-1;i>=0;i--)
+//								{
+//									if(cartList.get(i).getUsernamee().equals(UserName)) {
+//										cartList.get(i).setFirstime1(0);
+//										cartList.get(i).setFirstime(0);
+//									}
+//								}
 								client.sendToClient(new Message("#LogInSucess", registration, itemList));
 								System.out.println("sent to client successfully");
 								session.update(registration);
@@ -300,8 +393,7 @@ public class SimpleServer extends AbstractServer {
 				e.printStackTrace();
 			}
 		}
-		else if(msgString.equals("#update flower"))
-		{
+		else if(msgString.equals("#update flower")) {
 			Message msgupdate = ((Message) msg);
 			Long flower_id=((Long) msgupdate.getObject());
 			String type =((String) msgupdate.getObject2());
@@ -344,8 +436,7 @@ public class SimpleServer extends AbstractServer {
 			session.flush();
 			session.close();
 		}
-		else if(msgString.equals("#delete item"))
-		{
+		else if(msgString.equals("#delete item")) {
 			Message msgupdate = ((Message) msg);
 			Long item_id=((Long) msgupdate.getObject());
 			session = sessionFactory.openSession();
@@ -363,8 +454,7 @@ public class SimpleServer extends AbstractServer {
 			client.sendToClient(new Message("#item_deleted","NetworkMarketingWorker" , itemsList));
 			session.close();
 		}
-		else if(msgString.equals("#add new item"))
-		{
+		else if(msgString.equals("#add new item")) {
 			Item new_item= new Item();
 			Message msg_add = ((Message) msg);
 			new_item=(Item) msg_add.getObject();
@@ -379,8 +469,7 @@ public class SimpleServer extends AbstractServer {
 			client.sendToClient(new Message("#opencatalog" ,"NetworkMarketingWorker", itemList));
 			session.close();
 		}
-		else if (msgString.startsWith("#apply discount"))
-		{
+		else if (msgString.startsWith("#apply discount")) {
 			Message msgdiscount = ((Message) msg);
 			double discount = ((double) msgdiscount.getObject())/100;
 			if(discount<=0 || discount>=1)
@@ -403,9 +492,7 @@ public class SimpleServer extends AbstractServer {
 			session.close();
 
 		}
-
-		else if (msgString.equals("#delete discount"))
-		{
+		else if (msgString.equals("#delete discount")) {
 			Message msgdelete_discount = ((Message) msg);
 			double discount=((double) msgdelete_discount.getObject())/100;
 			session = sessionFactory.openSession();
@@ -421,8 +508,7 @@ public class SimpleServer extends AbstractServer {
 			session.flush();
 			session.close();
 		}
-		else if(msgString.startsWith("#block account"))
-		{
+		else if(msgString.startsWith("#block account")) {
 			Message msgblock = ((Message) msg);
 			String username = ((String) msgblock.getObject());
 			session = sessionFactory.openSession();
@@ -453,8 +539,6 @@ public class SimpleServer extends AbstractServer {
 			}
 
 		}
-
-
 		else if (msgString.equals("#send message")) {
 			Message msgclient = ((Message) msg);
 			String username = ((String) msgclient.getObject());
@@ -480,10 +564,7 @@ public class SimpleServer extends AbstractServer {
 			session.flush();
 			session.getTransaction().commit();
 		}
-
-
-		else if(msgString.equals("#update worker type"))
-		{
+		else if(msgString.equals("#update worker type")) {
 			Message msgstatus = ((Message) msg);
 			String username = ((String) msgstatus.getObject());
 			String worker_status=((String)msgstatus.getObject2());
@@ -522,8 +603,7 @@ public class SimpleServer extends AbstractServer {
 			client.sendToClient(new Message("list sent",type,list));
 			session.close();
 		}
-		else if(msgString.equals("#show Report"))
-		{
+		else if(msgString.equals("#show Report")) {
 			Message msg_report = ((Message) msg);
 			String Type  = ((String) msg_report.getObject());
 			LocalDate start=((LocalDate) msg_report.getObject2());
@@ -545,10 +625,7 @@ public class SimpleServer extends AbstractServer {
 			}
 			session.close();
 		}
-
-
-		else if(msgString.equals("#show Report to compare"))
-		{
+		else if(msgString.equals("#show Report to compare")) {
 			Message msg_report = ((Message) msg);
 			String Type = ((String) msg_report.getObject());
 			LocalDate first_start=((LocalDate) msg_report.getObject2());
@@ -578,8 +655,7 @@ public class SimpleServer extends AbstractServer {
 			}
 			session.close();
 		}
-		else if(msgString.equals("#client complain"))
-		{
+		else if(msgString.equals("#client complain")) {
 			Message msg_complain = ((Message) msg);
 			String username  = ((String) msg_complain.getObject());
 			String message=((String) msg_complain.getObject2());
@@ -603,21 +679,41 @@ public class SimpleServer extends AbstractServer {
 			//client.sendToClient(new Message("#"));
 			session.close();
 		}
-
-
-		else if(msgString.equals("#complain list"))
-		{
+		else if(msgString.equals("#complain list")) {
 
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<Complain> complainList=getAll(Complain.class);
-			//List<Order> orderList=getAll(Order.class);
+
+			List<Order> orderList=getAll(Order.class);
+			for(int u = 0 ; u<orderList.size();u++)
+			{
+				Order ord = new Order();
+				orderList.get(u).getCart().setOrder(ord);
+				System.out.println(orderList.get(u).getCart().getAmount().size());
+				System.out.println(orderList.get(u).getCart().gettotalPrice(orderList.get(u).getCart()));
+				List<Item> a = new ArrayList<Item>();
+				List<Double> b = new ArrayList<Double>();
+				for (int i = 0; i < orderList.get(u).getCart().getItems().size(); i++) {
+					a.add(orderList.get(u).getCart().getItems().get(i));
+					b.add(orderList.get(u).getCart().getAmount().get(i));
+				}
+				orderList.get(u).getCart().setItems(a);
+				orderList.get(u).getCart().setAmount(b);
+				List<ShoppingCart> c = new ArrayList<ShoppingCart>();
+				for(int i=0;i<orderList.get(u).getCart().getItems().size();i++)
+				{
+					orderList.get(u).getCart().getItems().get(i).setCartList(c);
+				}
+			}
+
+
+
 			//client.sendToClient(new Message("#list of complain sent",complainList,orderList));
-			client.sendToClient(new Message("#list of complain sent",complainList));
+			client.sendToClient(new Message("#list of complain sent",complainList,orderList));
 			session.close();
 		}
-		else if(msgString.equals("#send order"))
-		{
+		else if(msgString.equals("#send order")) {
 			System.out.println("markkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
 			Message msg_order = ((Message) msg);
 			Long id=(Long) msg_order.getObject();
@@ -639,8 +735,7 @@ public class SimpleServer extends AbstractServer {
 			session.close();
 
 		}
-		else if (msgString.equals("#complain finished"))
-		{
+		else if (msgString.equals("#complain finished")) {
 			Complain complain=new Complain();
 			Message msg_complain1 = ((Message) msg);
 			complain  = ((Complain) msg_complain1.getObject());
@@ -682,11 +777,32 @@ public class SimpleServer extends AbstractServer {
 			Message msg1 = ((Message) msg);
 			session = sessionFactory.openSession();
 			session.beginTransaction();
-			List<Order> OrdersList = getAll(Order.class);
+			List<Order> orderList = getAll(Order.class);
 
-			client.sendToClient(new Message("#MyOrdersList", OrdersList));
+			for(int u = 0 ; u<orderList.size();u++)
+			{
+				Order ord = new Order();
+				orderList.get(u).getCart().setOrder(ord);
+				System.out.println(orderList.get(u).getCart().getAmount().size());
+				System.out.println(orderList.get(u).getCart().gettotalPrice(orderList.get(u).getCart()));
+				List<Item> a = new ArrayList<Item>();
+				List<Double> b = new ArrayList<Double>();
+				for (int i = 0; i < orderList.get(u).getCart().getItems().size(); i++) {
+					a.add(orderList.get(u).getCart().getItems().get(i));
+					b.add(orderList.get(u).getCart().getAmount().get(i));
+				}
+				orderList.get(u).getCart().setItems(a);
+				orderList.get(u).getCart().setAmount(b);
+				List<ShoppingCart> c = new ArrayList<ShoppingCart>();
+				for(int i=0;i<orderList.get(u).getCart().getItems().size();i++)
+				{
+					orderList.get(u).getCart().getItems().get(i).setCartList(c);
+				}
+			}
+			client.sendToClient(new Message("#MyOrdersList", orderList));
 
-		} else if (msgString.equals("#CancelOrder")) {
+		}
+		else if (msgString.equals("#CancelOrder")) {
 			System.out.println("ana hoooooooooooooon");
 			session = sessionFactory.openSession();
 			session.beginTransaction();
@@ -737,7 +853,10 @@ public class SimpleServer extends AbstractServer {
 					} else {
 						Respond = new Confirmation("accordingly to our refund policy , you wont get a refund");
 					}
-
+					System.out.println(order.getStatus());
+					System.out.println(order.getStatus());
+					System.out.println(order.getStatus());
+					System.out.println(order.getStatus());
 					session.update(buyer);
 					session.update(order);
 					session.flush();
@@ -760,8 +879,7 @@ public class SimpleServer extends AbstractServer {
 				}
 			}
 		}
-		else if(msgString.equals("#LogOut"))
-		{
+		else if(msgString.equals("#LogOut")) {
 			session = sessionFactory.openSession();
 			Message msg1 = ((Message) msg);
 			Registration CurrUser = (Registration) msg1.getObject();
@@ -784,8 +902,7 @@ public class SimpleServer extends AbstractServer {
 				e.printStackTrace();
 			}
 		}
-		else if(msgString.equals("#send complain list2"))
-		{
+		else if(msgString.equals("#send complain list2")) {
 			Complain complain=new Complain();
 			Message msg_complain1 = ((Message) msg);
 			String type_profile=((String) msg_complain1.getObject());
@@ -798,26 +915,55 @@ public class SimpleServer extends AbstractServer {
 			session.close();
 
 		}
-		else if(msgString.equals("#send order list"))
-		{
+		else if(msgString.equals("#send order list")) {
 			Message msg_order1 = ((Message) msg);
 			String type_profile=((String) msg_order1.getObject());
+			String username =((String) msg_order1.getObject2());
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<Order> orderList=getAll(Order.class);
 			List<ShoppingCart> shoppingCartList=getAll(ShoppingCart.class);
-			orderList.get(0).setCart(shoppingCartList.get(0));
-			orderList.get(0).getCart().setAmount(shoppingCartList.get(0).getAmount());
-			orderList.get(0).getCart().gettotalPrice(shoppingCartList.get(0));
-			session.update(orderList.get(0));
-			System.out.println(" im in simpleserver in send order list" + orderList.get(0).getCart().getAmount().size());
-			client.sendToClient(new Message("#list of order sent", orderList,type_profile));
+//			orderList.get(0).setCart(shoppingCartList.get(0));
+//			orderList.get(0).getCart().setAmount(shoppingCartList.get(0).getAmount());
+//			orderList.get(0).getCart().gettotalPrice(shoppingCartList.get(0));
+//			session.update(orderList.get(0));
+
+			for(int u = 0 ; u<orderList.size();u++)
+			{
+				Order ord = new Order();
+				orderList.get(u).getCart().setOrder(ord);
+				System.out.println(orderList.get(u).getCart().getAmount().size());
+				System.out.println(orderList.get(u).getCart().gettotalPrice(orderList.get(u).getCart()));
+				List<Item> a = new ArrayList<Item>();
+				List<Double> b = new ArrayList<Double>();
+				for (int i = 0; i < orderList.get(u).getCart().getItems().size(); i++) {
+					a.add(orderList.get(u).getCart().getItems().get(i));
+					b.add(orderList.get(u).getCart().getAmount().get(i));
+				}
+				orderList.get(u).getCart().setItems(a);
+				orderList.get(u).getCart().setAmount(b);
+				List<ShoppingCart> c = new ArrayList<ShoppingCart>();
+				for(int i=0;i<orderList.get(u).getCart().getItems().size();i++)
+				{
+					orderList.get(u).getCart().getItems().get(i).setCartList(c);
+				}
+			}
+			List<Order> orderList1 = new ArrayList<Order>();
+			for(int i=0;i<orderList.size();i++)
+			{
+				if(orderList.get(i).getClientname().equals(username))
+				{
+					orderList1.add(orderList.get(i));
+				}
+			}
+
+
+			System.out.println(" im in simpleserver in send order list" + orderList1.get(0).getCart().getAmount().size());
+			client.sendToClient(new Message("#list of order sent", orderList1,type_profile));
 
 			session.close();
 
 		}
-
-
 		else if(msgString.equals("#send message list")){
 			Message msg_messages = ((Message) msg);
 			String type_profile=((String) msg_messages.getObject());
@@ -831,7 +977,7 @@ public class SimpleServer extends AbstractServer {
 	}
 	private static SessionFactory getSessionFactory() throws HibernateException {
 		Configuration configuration = new Configuration();
-		configuration.addAnnotatedClass(Catalog.class);
+		//configuration.addAnnotatedClass(Catalog.class);
 		configuration.addAnnotatedClass(Item.class);
 		configuration.addAnnotatedClass((Message.class));
 		configuration.addAnnotatedClass((Registration.class));
@@ -841,6 +987,7 @@ public class SimpleServer extends AbstractServer {
 		configuration.addAnnotatedClass((Order.class));
 		configuration.addAnnotatedClass((Complain.class));
 		configuration.addAnnotatedClass((Confirmation.class));
+		configuration.addAnnotatedClass((FirstTime.class));
 //		configuration.addAnnotatedClass((Image.class));
 
 
@@ -850,7 +997,7 @@ public class SimpleServer extends AbstractServer {
 	}
 	private static void initializeData()
 	{
-		Catalog temp =new Catalog();
+		//Catalog temp =new Catalog();
 //		Order order2 = new Order();
 //		session.save(order2);
 		Item it1 =new Item("Spray carnations","Carnations","Pink","https://i.imgur.com/0qOfEEC.jpg",50);
@@ -873,14 +1020,15 @@ public class SimpleServer extends AbstractServer {
 		Item it18 =new Item("SunFlower Bouquet" , "Bouquet" , "Yellow" , "https://i.imgur.com/Z0o5nP6.jpg" ,  90);
 		Item it19 =new Item("Friendship Bouquet" , "Bouquet" , "White" , "https://i.imgur.com/siBJ0h8.jpg" ,90 );
 		Item it20 =new Item("Plant" , "Plant" , "White" , "https://i.imgur.com/CZw9zf2.jpg" , 30);
-		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareen@gmail.com", "0505123456", "Client1", "1234", "Client", "2233445566", "1/1/2023", "Store Account",0);
-		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "Natalie@gmail.com", "0524789000", "Client2", "1234", "Client", "1234561299", "5/8/2024", "Chain Account",0);
+		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareen@gmail.com", "0505123456", "client1", "1234", "Client", "2233445566", "1/1/2023", "Store Account",0);
+		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "Natalie@gmail.com", "0524789000", "client2", "1234", "Client", "1234561299", "5/8/2024", "Chain Account",0);
+		Registration client3 = new Registration("Natal", "Nakka", "234789776", "Natalie2@gmail.com", "0524789000", "client3", "1234", "Client", "1234561299", "5/8/2024", "Chain Account",0);
 		Registration CEO = new Registration("Rashil", "Mbariky", "4443336661", "", "", "Rashi", "rashi", "CEO", "", "", "",0);
 		Registration NetworkMarketingWorker = new Registration("Eissa", "Wahesh", "", "", "", "Eissa", "11111", "NetworkMarketingWorker", "", "", "",0);
 		Registration customerservice=new Registration("nunu","nunu","","","","nunu","nunu","CustomerService","","","",0);
 		Registration SystemManger = new Registration("Elias", "Dow", "", "", "", "Elisa", "lampon", "SystemManager", "", "", "",0);
 		Registration BranchManger = new Registration("Saher", "Daoud", "", "", "", "Saher", "123456", "BranchManager", "", "", "",0);
-		session.save(temp);
+		//session.save(temp);
 		session.save(it1);
 		session.save(it2);
 		session.save(it3);
@@ -903,31 +1051,32 @@ public class SimpleServer extends AbstractServer {
 		session.save(it20);
 		session.save(client1);
 		session.save(client2);
+		session.save(client3);
 		session.save(CEO);
 		session.save(NetworkMarketingWorker);
 		session.save(SystemManger);
 		session.save(BranchManger);
 		session.save(customerservice);
-		temp.addIteam(it1);
-		temp.addIteam(it2);
-		temp.addIteam(it3);
-		temp.addIteam(it4);
-		temp.addIteam(it5);
-		temp.addIteam(it6);
-		temp.addIteam(it7);
-		temp.addIteam(it8);
-		temp.addIteam(it9);
-		temp.addIteam(it10);
-		temp.addIteam(it11);
-		temp.addIteam(it12);
-		temp.addIteam(it13);
-		temp.addIteam(it14);
-		temp.addIteam(it15);
-		temp.addIteam(it16);
-		temp.addIteam(it17);
-		temp.addIteam(it18);
-		temp.addIteam(it19);
-		temp.addIteam(it20);
+//		temp.addIteam(it1);
+//		temp.addIteam(it2);
+//		temp.addIteam(it3);
+//		temp.addIteam(it4);
+//		temp.addIteam(it5);
+//		temp.addIteam(it6);
+//		temp.addIteam(it7);
+//		temp.addIteam(it8);
+//		temp.addIteam(it9);
+//		temp.addIteam(it10);
+//		temp.addIteam(it11);
+//		temp.addIteam(it12);
+//		temp.addIteam(it13);
+//		temp.addIteam(it14);
+//		temp.addIteam(it15);
+//		temp.addIteam(it16);
+//		temp.addIteam(it17);
+//		temp.addIteam(it18);
+//		temp.addIteam(it19);
+//		temp.addIteam(it20);
 		session.flush();
 	}
 

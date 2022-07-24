@@ -144,7 +144,7 @@ public class CustomerServiceController2 {
         assert type != null : "fx:id=\"type\" was not injected: check your FXML file 'CustomerService2.fxml'.";
         assert username != null : "fx:id=\"username\" was not injected: check your FXML file 'CustomerService2.fxml'.";
         CustomerServiceController2.setComplain(CustomerServiceController.getComplain());
-        setOrder2(App.getOrderList2());
+        setOrder2(App.getOrderList());
 
         complain_message.setText(complain.getMessage());
         username.setText(complain.getUsername());

@@ -221,7 +221,7 @@ public class CatalogController {
     @FXML
     void OrdersButton(ActionEvent event) {
         try {
-            SimpleClient.getClient().sendToServer(new Message("#send order list", "profile order"));
+            SimpleClient.getClient().sendToServer(new Message("#send order list", "profile order" , getCurrUser().getUserName()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -281,8 +281,8 @@ public class CatalogController {
             //AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
             //Pane2.getChildren().setAll(pane);
         } else if (type.equals("Client")) {
-            System.out.println("sending to server from catalogcontroller 1");
-            SimpleClient.getClient().sendToServer(new Message("#getcart"));
+            System.out.println("sending to server from catalogcontroller 1 " + getCurrUser().getUserName());
+            SimpleClient.getClient().sendToServer(new Message("#getcart" , getCurrUser().getUserName()));
             System.out.println("sending to server from catalogcontroller 2");
 //            AnchorPane pane = FXMLLoader.load(getClass().getResource("cart.fxml"));
 //            Pane2.getChildren().setAll(pane);
@@ -840,13 +840,6 @@ public class CatalogController {
 //        for ( int y = 0; y < size ;y++) {
 //            imageList.add(new Image(itemList.get(y).getPicture()));
 //        }
-
-
-        System.out.println("Done !");
-        System.out.println("Done !");
-        System.out.println("Done !");
-        System.out.println("Done !");
-        System.out.println("Done !");
 
         for ( i = 0; i < size ;i++) {
             for(;g<itemList.size();g++){

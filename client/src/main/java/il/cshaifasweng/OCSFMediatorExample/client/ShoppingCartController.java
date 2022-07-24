@@ -249,7 +249,10 @@ public class ShoppingCartController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                cart.getItems().remove(finalI);
+//                cart.getItems().remove(finalI);
+//                cart.getAmount().remove(finalI);
+//                cart.setItemsNum(cart.getItemsNum()-1);
+                cart.RemovefromCart(finalI);
                 table.setItems(showitems());
                 table.getColumns().addAll();
                 TotalPrice.setText(cart.gettotalPrice(cart)+ " ");
@@ -259,9 +262,10 @@ public class ShoppingCartController {
 
             System.out.println(cart.getItems().get(i).getName() + " 1");
             System.out.println(cart.getItems().get(i).getPrice() + " 2");
+                items.add(new TableViewSC(cart.getItems().get(i).getName(), cart.getItems().get(i).getPrice(), cart.getAmount().get(i), cart.getItems().get(i).getPrice() * cart.getAmount().get(i), buttonList.get(i)));
 
-            items.add(new TableViewSC(cart.getItems().get(i).getName(),cart.getItems().get(i).getPrice(),cart.getAmount().get(i),cart.getItems().get(i).getPrice()*cart.getAmount().get(i),buttonList.get(i)));
         }
+
         return items;
     }
 

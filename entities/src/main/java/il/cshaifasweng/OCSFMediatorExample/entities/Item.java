@@ -17,8 +17,8 @@ public class Item implements Serializable {
     private String picture;
     private double price;
 
-    @ManyToOne
-    private Catalog items;
+//    @ManyToOne
+//    private Catalog items;
 
 //    @ManyToMany(mappedBy = "items",
 //            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
@@ -27,17 +27,14 @@ public class Item implements Serializable {
     //@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //private ShoppingCart cartList;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinTable(
-            name = "items_shoppingcart",
-            joinColumns = {@JoinColumn(name = "item_id")},
-            inverseJoinColumns = {@JoinColumn(name = "shoppingcart_id")}
-    )
-    //@JoinColumn(name = "Shoppingcart_id")
-//    @ManyToMany(mappedBy = "garages", cascade = {CascadeType.PERSIST, CascadeType.MERGE},
-//            targetEntity = ShoppingCart.class
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+//    @JoinTable(
+//            name = "items_shoppingcart",
+//            joinColumns = {@JoinColumn(name = "item_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "shoppingcart_id")}
 //    )
-
+    //@JoinColumn(name = "Shoppingcart_id")
+    @ManyToMany(mappedBy = "items", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = ShoppingCart.class)
     private List<ShoppingCart> cartList= new ArrayList<ShoppingCart>();
 
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER,targetEntity = Image.class)
@@ -110,13 +107,13 @@ public class Item implements Serializable {
     }
 
 
-    public Catalog getItems() {
-        return items;
-    }
-
-    public void setItems(Catalog items) {
-        this.items = items;
-    }
+//    public Catalog getItems() {
+//        return items;
+//    }
+//
+//    public void setItems(Catalog items) {
+//        this.items = items;
+//    }
 
     public List<ShoppingCart> getCartList() {
         return cartList;

@@ -103,7 +103,7 @@ public class Profile2Controller {
         assert totalPrice != null : "fx:id=\"totalPrice\" was not injected: check your FXML file 'Profile2.fxml'.";
 
         setUsername(App.getUser1());
-        setOrder_list(App.getOrderList2());
+        setOrder_list(App.getOrderList());
         orderId.setCellValueFactory(new PropertyValueFactory<Order, Long>("id"));
         status.setCellValueFactory(new PropertyValueFactory<Order, String>("status"));
         recieveDate.setCellValueFactory(new PropertyValueFactory<Order, String>("recievedate"));
