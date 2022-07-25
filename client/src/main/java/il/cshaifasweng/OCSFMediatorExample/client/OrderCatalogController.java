@@ -81,8 +81,16 @@ public class OrderCatalogController {
         SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,100);
         valueFactory.setValue(1);
         amount_picker.setValueFactory(valueFactory);
-        File file = new File("C:\\Users\\Saher\\IdeaProjects\\saher-eissa\\client\\src\\main\\resources\\images\\"+item.getName()+".jpg");
-        Image image1 = new Image(file.toURI().toString());
+        File file = new File("client\\src\\main\\resources\\il\\cshaifasweng\\OCSFMediatorExample\\client\\images\\" +item.getName()+".jpg");
+
+        File file2 = null;
+        try {
+            file2 = new File(file.getCanonicalFile().toURI());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(file2.getAbsolutePath());
+        Image image1 = new Image(file2.toURI().toString());
         image.setImage(image1);
 
     }
