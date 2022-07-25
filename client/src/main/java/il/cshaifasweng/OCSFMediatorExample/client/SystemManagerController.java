@@ -104,10 +104,9 @@ public class SystemManagerController {
 
     @FXML
     void message_butt(ActionEvent event) throws IOException{
-//        client_username=username_txt.getText();
-//        clientmessage=message.getText();
-        //System.out.println("info"+client_username+clientmessage);
         SimpleClient.getClient().sendToServer(new Message("#send message",username_txt.getText(),message.getText()));
+        username_txt.clear();
+        message.clear();
     }
 
     @FXML

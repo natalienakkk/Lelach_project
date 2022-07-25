@@ -423,7 +423,6 @@ public class App extends Application {
         System.out.println("type="+type);
         if(complain_list==null)
             System.out.println("we have a problem");
-        //setOrder1(event.getOrder());
         setOrderList(event.getOrderList());
         Platform.runLater(() -> {
             if(type.equals("CustomerService")) {

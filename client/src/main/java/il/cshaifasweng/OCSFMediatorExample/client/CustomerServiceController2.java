@@ -123,11 +123,7 @@ public class CustomerServiceController2 {
             e.printStackTrace();
         }
 
-        try {
-            App.setRoot("CustomerService");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @FXML

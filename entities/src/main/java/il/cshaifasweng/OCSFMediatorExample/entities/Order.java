@@ -36,17 +36,17 @@ public class Order implements Serializable {
     @JoinColumn(name = "Shoppingcart_id")
     private ShoppingCart cart;
 
-    public Order(String date, String recievedate, String card, String deliveryOp, String clientid, String clientname, String totalprice, String status,ShoppingCart cart) {
-        this.date = date;
-        this.recievedate = recievedate;
-        this.card = card;
-        this.deliveryOp = deliveryOp;
-        this.clientid = clientid;
-        this.clientname = clientname;
-        this.totalprice = totalprice;
-        this.status = status;
-        this.cart = cart;
-    }
+//    public Order(String date, String recievedate, String card, String deliveryOp, String clientid, String clientname, String totalprice, String status,ShoppingCart cart) {
+//        this.date = date;
+//        this.recievedate = recievedate;
+//        this.card = card;
+//        this.deliveryOp = deliveryOp;
+//        this.clientid = clientid;
+//        this.clientname = clientname;
+//        this.totalprice = totalprice;
+//        this.status = status;
+//        this.cart = cart;
+//    }
     public Order( String status, Long id, String recievedate ,String totalprice, String date, String items1) {
         this.id = id;
         this.date = date;
@@ -56,7 +56,7 @@ public class Order implements Serializable {
         this.items1 = items1;
     }
 
-    public Order(String date, String recievedate, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status, String note,ShoppingCart cart) {
+    public Order(String date, String recievedate ,String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status, ShoppingCart cart,String Note) {
         this.date = date;
         this.recievedate = recievedate;
         this.card = card;
@@ -71,9 +71,10 @@ public class Order implements Serializable {
         this.note = note;
         this.cart = cart;
     }
-    public Order(String date, String recievedate, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status, String note) {
+    public Order(String date, String recievedate,String recievetime, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status, String note) {
         this.date = date;
         this.recievedate = recievedate;
+        this.recievetime = recievetime;
         this.card = card;
         this.deliveryOp = deliveryOp;
         this.clientid = clientid;
@@ -85,9 +86,10 @@ public class Order implements Serializable {
         this.status = status;
         this.note = note;
     }
-    public Order(String date, String recievedate, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status, ShoppingCart cart) {
+    public Order(String date, String recievedate,String recievetime, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status, ShoppingCart cart) {
         this.date = date;
         this.recievedate = recievedate;
+        this.recievetime = recievetime;
         this.card = card;
         this.deliveryOp = deliveryOp;
         this.clientid = clientid;
@@ -99,9 +101,10 @@ public class Order implements Serializable {
         this.status = status;
         this.cart = cart;
     }
-    public Order(String date, String recievedate, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status) {
+    public Order(String date, String recievedate,String recievetime, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status) {
         this.date = date;
         this.recievedate = recievedate;
+        this.recievetime = recievetime;
         this.card = card;
         this.deliveryOp = deliveryOp;
         this.clientid = clientid;

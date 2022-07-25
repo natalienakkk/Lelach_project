@@ -845,17 +845,25 @@ public class CatalogController {
             for(;g<itemList.size();g++){
                 if(itemList.get(g).getPrice() < Max && itemList.get(g).getPrice() > Min ) {
                     if(color.equals("start")) {
+                        File file = new File("client\\src\\main\\resources\\il\\cshaifasweng\\OCSFMediatorExample\\client\\images\\" +itemList.get(g).getName()+".jpg");
+                        File file2 = null;
+                        try {
+                            file2 = new File(file.getCanonicalFile().toURI());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(file2.getAbsolutePath());
                         buttons_list.get(i).setText(itemList.get(g).getName());
-                        //Image image = new Image(itemList.get(g).getPicture());
-                        //photo_list.get(i).setImage(image);
+                        Image image = new Image(file2.toURI().toString());
+                        photo_list.get(i).setImage(image);
                         g++;
                         break;
                     }
                     else {
                         if(itemList.get(g).getColor().equals(color)){
                             buttons_list.get(i).setText(itemList.get(g).getName());
-                            //Image image = new Image(itemList.get(g).getPicture());
-                            //photo_list.get(i).setImage(image);
+                            Image image = new Image(itemList.get(g).getPicture());
+                            photo_list.get(i).setImage(image);
                             g++;
                             break;
                         }

@@ -32,51 +32,6 @@ public class CustomerServiceController {
 
     @FXML public static void setList3(List<Order> list3) { CustomerServiceController.list3 = list3; }
 
-
-
-//    @FXML private static String Type;
-//
-//    @FXML public static String getType() { return Type; }
-//
-//    @FXML public static void setType(String type) { CustomerServiceController.Type = type; }
-//
-//    @FXML private static String Message ;
-//
-//    @FXML public static String getMessage() { return Message; }
-//
-//    @FXML public static void setMessage(String message) { Message = message; }
-//
-//    @FXML private static String Status ;
-//
-//    @FXML public static String getStatus() { return Status; }
-//
-//    @FXML public static void setStatus(String status) { Status = status; }
-//
-//    @FXML private static String Username ;
-//
-//    @FXML public static String getUsername() { return Username; }
-//
-//    @FXML public static void setUsername(String username) { Username = username; }
-//
-//    @FXML private static Long orderID ;
-//
-//    @FXML public static Long getOrderID() { return orderID; }
-//
-//    @FXML public static void setOrderID(Long orderID) { CustomerServiceController.orderID = orderID; }
-//
-//    @FXML private static LocalDate Date ;
-//
-//    @FXML public static LocalDate getDate() { return Date; }
-//
-//    @FXML public static void setDate(LocalDate date) { Date = date; }
-//
-//    @FXML private static LocalTime Time ;
-//
-//    @FXML public static LocalTime getTime() { return Time; }
-//
-//   @FXML public static void setTime(LocalTime time) { Time = time; }
-
-
     @FXML
     private ResourceBundle resources;
 

@@ -151,16 +151,6 @@ public class SimpleClient extends AbstractClient {
 		else if (msgstring.equals("#OrderCanceled")) {
 			System.out.println("wslttt hoon");
 			EventBus.getDefault().post(new ConfirmationEvent((Confirmation) ((Message) msg).getObject()));
-
-//			EventBus.getDefault().post(new ConfirmationEvent((Confirmation) ((Message) msg).getObject()));
-
-//			CancelOrderController.setPurchaseList((List<Purchase>) ((Message)msg).getObject2());
-//			if ((((Message)msg).getObject().getClass()))
-//			try {
-//				App.setRoot("CancelOrder");
-//			} catch (IOException e){
-//				e.printStackTrace();
-//			}
 		}
 		else if(msgstring.equals("#MyOrdersList")) {
 			List<Order> OrdersList = ((List<Order>) ((Message) msg).getObject());

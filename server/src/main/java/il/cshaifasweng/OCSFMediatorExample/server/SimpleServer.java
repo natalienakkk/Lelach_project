@@ -78,7 +78,6 @@ public class SimpleServer extends AbstractServer {
 			session.close();
 		}
 		else if(msgString.startsWith("#submitorder")) {
-			//SendEmail.SendEmail("eissa_wahesh@hotmail.com","m3lm 3esa","3esa ya mlk el entities");
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			Message msg1 = ((Message) msg);
@@ -114,10 +113,25 @@ public class SimpleServer extends AbstractServer {
 				client.sendToClient(new Message("#submitorderwarning", new_warning));
 			}
 			else {
+				String details1 = "";
+
+				for (int j=0;j<order.getCart().getItems().size();j++) {
+					if (j == order.getCart().getItems().size()-1) {
+						details1 = details1 + order.getCart().getAmount().get(j) + " x " + order.getCart().getItems().get(j).getName();
+					} else
+						details1 = details1 + order.getCart().getAmount().get(j) + "x" + order.getCart().getItems().get(j).getName() + " + ";
+				}
 				System.out.println(order.getCart().getItems().get(0).getName());
 				session.save(order);
 				session.update(cart);
+				String t ="Dear Mr/Mrs " + order.getClientname() + '\n'
+						+"Thank you for your Purchase!"+'\n'
+						+"Your order Contains :" + details1 + '\n'
+						+"Your Recive Date is : " + order.getRecievedate() + " " + order.getRecievetime() + '\n'
+						+"Order ID : " + order.getId();
 				client.sendToClient(new Message("#submitorder", order, cart));
+				SendEmail.SendEmail("saherdaoud2000@windowslive.com","Order Summary",t);
+				SendEmail.SendEmail("eissa_wahesh@hotmail.com","Order Summary",t);
 			}
 			session.close();
 		}
@@ -747,11 +761,31 @@ public class SimpleServer extends AbstractServer {
 				if(complainList.get(i).getId().equals(complain.getId())){
 					complainList.get(i).setAnswer(complain.getAnswer());
 					complainList.get(i).setRefund(complain.getRefund());
-					complainList.get(i).setStatus("complete");
-					session.save(complainList.get(i));
+					complainList.get(i).setStatus("completed");
+					session.update(complainList.get(i));
 					break;
 				}
 			}
+			List<Order> orderList=getAll(Order.class);
+			for(int u = 0 ; u<orderList.size();u++)
+			{
+				Order ord = new Order();
+				orderList.get(u).getCart().setOrder(ord);
+				List<Item> a = new ArrayList<Item>();
+				List<Double> b = new ArrayList<Double>();
+				for (int i = 0; i < orderList.get(u).getCart().getItems().size(); i++) {
+					a.add(orderList.get(u).getCart().getItems().get(i));
+					b.add(orderList.get(u).getCart().getAmount().get(i));
+				}
+				orderList.get(u).getCart().setItems(a);
+				orderList.get(u).getCart().setAmount(b);
+				List<ShoppingCart> c = new ArrayList<ShoppingCart>();
+				for(int i=0;i<orderList.get(u).getCart().getItems().size();i++)
+				{
+					orderList.get(u).getCart().getItems().get(i).setCartList(c);
+				}
+			}
+			client.sendToClient(new Message("#list of complain sent",complainList,orderList));
 			session.getTransaction().commit();
 			session.flush();
 			session.close();
@@ -1000,7 +1034,7 @@ public class SimpleServer extends AbstractServer {
 		//Catalog temp =new Catalog();
 //		Order order2 = new Order();
 //		session.save(order2);
-		Item it1 =new Item("Spray carnations","Carnations","Pink","https://i.imgur.com/0qOfEEC.jpg",50);
+		Item it1 =new Item("Spray carnations","Carnations","Pink","",50);
 		Item it2 =new Item("Delphinium" , "Plant " , "Blue" ,  "https://i.imgur.com/eSD610W.jpg" ,20);
 		Item it3 =new Item("Zamia Coconut L" , "Plant" , "Green" , "https://i.imgur.com/G9NtSl0.jpg" ,50);
 		Item it4 =new Item("Sensivaria medium" , "Plant" , "Green" , "https://i.imgur.com/XYUVYpZ.jpg" , 35);

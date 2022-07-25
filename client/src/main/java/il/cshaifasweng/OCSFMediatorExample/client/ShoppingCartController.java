@@ -40,6 +40,8 @@ public class ShoppingCartController {
     public void setUser2(Registration user2) { User2 = user2; }
     public int flag5=0;
     public int flag6=0;
+    public int flag7=0;
+    public int flag8=0;
     private String[] Delivery = {"Yes" , "No" };
     private String[] DeliveryTo3 = {"Myself" , "Someone else" };
 
@@ -126,6 +128,13 @@ public class ShoppingCartController {
     private Text subsc;
 
     @FXML
+    private TextField timeh;
+
+    @FXML
+    private TextField timem;
+
+
+    @FXML
     void order(ActionEvent event) throws IOException {
         Order order = new Order();
         if(cart.getItems().size()==0)
@@ -147,11 +156,11 @@ public class ShoppingCartController {
         else {
             LocalDateTime date = LocalDateTime.now();
             if (DeliveryTo2.getSelectionModel().getSelectedItem() == null) {
-                order = new Order(date.toString().substring(0, 10), ReceiveDate.getValue().toString(), User2.getCreditCard(), DeliveryOP.getSelectionModel().getSelectedItem(), User2.getClient_ID(), User2.getUserName(), null, null, null, TotalPrice.getText(), "pending", Note2.getText());
+                order = new Order(date.toString().substring(0, 10), ReceiveDate.getValue().toString(),timeh.getText()+":"+timem.getText(), User2.getCreditCard(), DeliveryOP.getSelectionModel().getSelectedItem(), User2.getClient_ID(), User2.getUserName(), null, null, null, TotalPrice.getText(), "pending", Note2.getText());
             } else if (DeliveryTo2.getSelectionModel().getSelectedItem().equals("Someone else")) {
-                order = new Order(date.toString().substring(0, 10), ReceiveDate.getValue().toString(), User2.getCreditCard(), DeliveryOP.getSelectionModel().getSelectedItem(), User2.getClient_ID(), User2.getUserName(), Receiveraddress2.getText(), Receivername2.getText(), Receiveremail2.getText(), TotalPrice.getText(), "pending", Note2.getText());
+                order = new Order(date.toString().substring(0, 10), ReceiveDate.getValue().toString(),timeh.getText()+":"+timem.getText(), User2.getCreditCard(), DeliveryOP.getSelectionModel().getSelectedItem(), User2.getClient_ID(), User2.getUserName(), Receiveraddress2.getText(), Receivername2.getText(), Receiveremail2.getText(), TotalPrice.getText(), "pending", Note2.getText());
             } else if (DeliveryTo2.getSelectionModel().getSelectedItem().equals("Myself")) {
-                order = new Order(date.toString().substring(0, 10), ReceiveDate.getValue().toString(), User2.getCreditCard(), DeliveryOP.getSelectionModel().getSelectedItem(), User2.getClient_ID(), User2.getUserName(), "Haifa", User2.getFirstName(), User2.getEmail(), TotalPrice.getText(), "pending");
+                order = new Order(date.toString().substring(0, 10), ReceiveDate.getValue().toString(),timeh.getText()+":"+timem.getText(), User2.getCreditCard(), DeliveryOP.getSelectionModel().getSelectedItem(), User2.getClient_ID(), User2.getUserName(), "Haifa", User2.getFirstName(), User2.getEmail(), TotalPrice.getText(), "pending");
             }
             System.out.println("heyyyyyyyyyyyyyyyyy");
             SimpleClient.getClient().sendToServer(new Message("#submitorder", order, cart));
@@ -230,6 +239,11 @@ public class ShoppingCartController {
     void ReceiveDate(ActionEvent event) {
         flag5++;
     }
+    @FXML
+    void recivetime1(ActionEvent event) { flag7++; }
+
+    @FXML
+    void recivetime2(ActionEvent event) { flag8++;}
 
     List<Button> buttonList = new ArrayList<Button>();
 
