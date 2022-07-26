@@ -4,7 +4,6 @@ import il.cshaifasweng.OCSFMediatorExample.entities.*;
 //import il.cshaifasweng.OCSFMediatorExample.entities.Image;
 import il.cshaifasweng.OCSFMediatorExample.server.Helpers.MyThread;
 import il.cshaifasweng.OCSFMediatorExample.server.Helpers.RefundCheck;
-import il.cshaifasweng.OCSFMediatorExample.server.Helpers.SendEmail;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.AbstractServer;
 import il.cshaifasweng.OCSFMediatorExample.server.ocsf.ConnectionToClient;
  import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
@@ -16,13 +15,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 
-import java.awt.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.LongStream;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -1237,7 +1234,6 @@ public class SimpleServer extends AbstractServer {
 //		List<Order> order_list=getAll(Order.class);
 //		for(Order orders : order_list)
 //		{
-//			System.out.println("akm mra bfot");
 //			String DelDate = orders.getRecievedate();
 //			String DelTime = orders.getRecievetime();
 //
@@ -1245,7 +1241,6 @@ public class SimpleServer extends AbstractServer {
 //			int temp = time.Delivery(DelDate, DelTime);
 //			if(temp == 1 && orders.getStatus().equalsIgnoreCase("pending"))
 //			{
-//				System.out.println("ana bal ifff");
 //				orders.setStatus("Delivered");
 //				session.update(orders);
 //				session.getTransaction().commit();
@@ -1253,9 +1248,8 @@ public class SimpleServer extends AbstractServer {
 //				Thread thread = new Thread(new MyThread(orders.getClientmail(), "Order Delivered", f));
 //				thread.start();
 //			}
-//
 //			session.flush();
-//		}
+
 
 
 	}

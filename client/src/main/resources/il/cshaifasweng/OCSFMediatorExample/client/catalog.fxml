@@ -21,7 +21,7 @@
    <content>
       <AnchorPane fx:id="Pane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="838.0" style="-fx-background-color: white;">
          <children>
-            <Text fx:id="Header" layoutX="331.0" layoutY="118.0" stroke="#a90d0d" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog">
+            <Text fx:id="Header" layoutX="331.0" layoutY="118.0" onMouseClicked="#refresh" stroke="#a90d0d" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog">
                <font>
                   <Font name="Georgia Italic" size="50.0" />
                </font>
@@ -949,7 +949,7 @@
                   </LinearGradient>
                </fill>
             </Text>
-            <Button fx:id="refresh" layoutX="280.0" layoutY="28.0" mnemonicParsing="false" onKeyPressed="#refresh" text="Button" />
+            <Button fx:id="design" layoutX="220.0" layoutY="53.0" mnemonicParsing="false" onAction="#design1" text="Design Item" />
          </children>
       </AnchorPane>
    </content>

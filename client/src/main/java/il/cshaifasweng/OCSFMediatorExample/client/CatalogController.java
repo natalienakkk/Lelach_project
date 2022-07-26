@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
@@ -45,6 +46,8 @@ public class CatalogController {
     @FXML
     private Button LogOutBtn;
     //////////////////////////////
+    @FXML
+    private Button design;
     @FXML
     private Button button_1;
     @FXML
@@ -173,6 +176,7 @@ public class CatalogController {
     private MenuItem MyComplains;
     @FXML
     private MenuItem Orders;
+
     ////////////////////////////////////////////////
     private static Registration CurrUser;
 
@@ -666,8 +670,17 @@ public class CatalogController {
         }
     }
 
+    @FXML
+    void refresh(MouseEvent event) throws IOException {
+            SimpleClient.getClient().sendToServer(new Message("#opencatalog" , "Client" , itemList));
+
+    }
 
 
+    @FXML
+    void design1(ActionEvent event) throws IOException {
+
+    }
 
 
     ArrayList<Button> buttons_list = new ArrayList<Button>();
@@ -759,7 +772,6 @@ public class CatalogController {
 
 
     public void setCatalog(){
-
         if (type != null) {
             if (type.equals("Guest")) {
                 other.setText("Sign Up");
