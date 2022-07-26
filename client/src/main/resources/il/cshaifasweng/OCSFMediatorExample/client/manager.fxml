@@ -2,55 +2,215 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="Pane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ManagerController">
+<AnchorPane fx:id="Pane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ManagerController">
    <children>
-      <Text fx:id="flower_id" layoutX="14.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID : " wrappingWidth="206.93670654296875">
+      <ImageView fitHeight="558.0" fitWidth="838.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@HomePage.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="flower_id" fill="#c70e3a" layoutX="51.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID : " wrappingWidth="206.4000000000001">
          <font>
-            <Font size="20.0" />
+            <Font name="FrankRuehl" size="20.0" />
          </font>
       </Text>
-      <Text fx:id="flower_price" layoutX="14.0" layoutY="515.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price: " wrappingWidth="206.93670654296875">
+      <Text fx:id="flower_price" fill="#c70e3a" layoutX="51.0" layoutY="513.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price: " wrappingWidth="206.40000000000003">
          <font>
-            <Font size="20.0" />
+            <Font name="FrankRuehl" size="20.0" />
          </font>
       </Text>
-      <Text fx:id="flower_color" layoutX="14.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color: " wrappingWidth="206.93670654296875">
+      <Text fx:id="flower_color" fill="#c70e3a" layoutX="50.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color: " wrappingWidth="271.73670959472656">
          <font>
-            <Font size="20.0" />
+            <Font name="FrankRuehl" size="20.0" />
          </font>
       </Text>
-      <Text fx:id="flower_type" layoutX="14.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" wrappingWidth="206.93670654296875">
+      <Text fx:id="flower_type" fill="#c70e3a" layoutX="50.0" layoutY="439.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" wrappingWidth="261.3367462158203">
          <font>
-            <Font size="20.0" />
+            <Font name="FrankRuehl" size="20.0" />
          </font>
       </Text>
       <TextField fx:id="price_update" layoutX="337.0" layoutY="494.0" prefHeight="25.0" prefWidth="170.0" promptText="Edit price here" />
-      <Button fx:id="back_button" layoutX="25.0" layoutY="21.0" mnemonicParsing="false" onAction="#back_butt" text="Back to catalog" />
-      <ImageView fx:id="image" fitHeight="173.0" fitWidth="231.0" layoutX="245.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="priceee1" layoutX="485.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="62.93670654296875">
+      <Button fx:id="back_button" layoutX="7.0" layoutY="6.0" mnemonicParsing="false" onAction="#back_butt" text="Back to catalog">
          <font>
-            <Font size="20.0" />
+            <Font name="Times New Roman Italic" size="15.0" />
          </font>
-      </Text>
-      <Button fx:id="delete_button" layoutX="613.0" layoutY="46.0" mnemonicParsing="false" onAction="#delete_butt" prefHeight="33.0" prefWidth="97.0" text="delete item" />
-      <Button fx:id="type_button" layoutX="521.0" layoutY="418.0" mnemonicParsing="false" onAction="#type_butt" text="update" />
-      <Button fx:id="color_button" layoutX="521.0" layoutY="456.0" mnemonicParsing="false" onAction="#color_butt" text="update" />
-      <Button fx:id="price_button" layoutX="521.0" layoutY="494.0" mnemonicParsing="false" onAction="#price_butt" text="update" />
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.6628787932973919" startX="0.284090902317654">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
+      <ImageView fx:id="image" fitHeight="182.0" fitWidth="231.0" layoutX="257.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <InnerShadow>
+               <color>
+                  <Color red="0.7803921699523926" green="0.054901961237192154" blue="0.22745098173618317" />
+               </color>
+            </InnerShadow>
+         </effect></ImageView>
+      <Button fx:id="delete_button" layoutX="711.0" layoutY="22.0" mnemonicParsing="false" onAction="#delete_butt" prefHeight="33.0" prefWidth="97.0" text="delete item">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="15.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.6628787932973919" startX="0.284090902317654">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.7803921699523926" green="0.054901961237192154" blue="0.22745098173618317" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <Button fx:id="type_button" layoutX="521.0" layoutY="418.0" mnemonicParsing="false" onAction="#type_butt" text="update">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7803921699523926" green="0.054901961237192154" blue="0.22745098173618317" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font name="Times New Roman Bold Italic" size="14.0" />
+         </font></Button>
+      <Button fx:id="color_button" layoutX="521.0" layoutY="456.0" mnemonicParsing="false" onAction="#color_butt" text="update">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7803921699523926" green="0.054901961237192154" blue="0.22745098173618317" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font name="Times New Roman Bold Italic" size="14.0" />
+         </font></Button>
+      <Button fx:id="price_button" layoutX="521.0" layoutY="494.0" mnemonicParsing="false" onAction="#price_butt" text="update">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7803921699523926" green="0.054901961237192154" blue="0.22745098173618317" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font name="Times New Roman Bold Italic" size="14.0" />
+         </font></Button>
       <TextField fx:id="color_update" layoutX="337.0" layoutY="456.0" prefHeight="25.0" prefWidth="170.0" promptText="Edit color here " />
       <TextField fx:id="name_update" layoutX="337.0" layoutY="381.0" prefHeight="25.0" prefWidth="170.0" promptText="Edit name here" />
       <TextField fx:id="type_update" layoutX="337.0" layoutY="418.0" prefHeight="25.0" prefWidth="170.0" promptText="Edit type here" />
-      <Button fx:id="name_button" layoutX="521.0" layoutY="381.0" mnemonicParsing="false" onAction="#name_butt" text="update" />
-      <Button fx:id="image_button" layoutX="613.0" layoutY="94.0" mnemonicParsing="false" onAction="#image_butt" prefHeight="30.0" prefWidth="97.0" text="edit image " />
-      <Text fx:id="flower_name" layoutX="14.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="297.93670654296875">
+      <Button fx:id="name_button" layoutX="521.0" layoutY="381.0" mnemonicParsing="false" onAction="#name_butt" text="update">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7803921699523926" green="0.054901961237192154" blue="0.22745098173618317" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
          <font>
-            <Font size="20.0" />
+            <Font name="Times New Roman Bold Italic" size="14.0" />
+         </font></Button>
+      <Button fx:id="image_button" layoutX="711.0" layoutY="68.0" mnemonicParsing="false" onAction="#image_butt" prefHeight="30.0" prefWidth="97.0" text="edit image ">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="15.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.6628787932973919" startX="0.284090902317654">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.7803921699523926" green="0.054901961237192154" blue="0.22745098173618317" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <Text fx:id="flower_name" fill="#c70e3a" layoutX="51.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="292.60003662109375">
+         <font>
+            <Font name="FrankRuehl" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="image_edit" layoutX="500.0" layoutY="136.0" prefHeight="25.0" prefWidth="246.0" />
+      <TextField fx:id="image_edit" layoutX="492.0" layoutY="70.0" prefHeight="26.0" prefWidth="206.0" promptText="Enter URL" />
    </children>
 </AnchorPane>

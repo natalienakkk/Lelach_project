@@ -854,16 +854,8 @@ public class CatalogController {
                     }
                     else {
                         if(itemList.get(g).getColor().equals(color)){
-                            pic = itemList.get(g).getPicture();
-                            File file = new File( pic);
-                            File file2 = null;
-                            try {
-                                file2 = new File(file.getCanonicalFile().toURI());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
                             buttons_list.get(i).setText(itemList.get(g).getName());
-                            Image image = new Image(file2.toURI().toString());
+                            Image image = new Image(itemList.get(g).getPicture());
                             photo_list.get(i).setImage(image);
                             g++;
                             break;

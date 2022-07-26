@@ -65,7 +65,7 @@ public class App extends Application {
         }
     	client = SimpleClient.getClient();
     	client.openConnection();
-        scene = new Scene(loadFXML("homepage"), 770, 550);
+        scene = new Scene(loadFXML("homepage"), 838, 558);
         stage.setScene(scene);
         stage.show();
     }

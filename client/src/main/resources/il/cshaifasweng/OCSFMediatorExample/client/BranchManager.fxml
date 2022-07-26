@@ -3,42 +3,193 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="pane1" prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.BranchManagerController">
+<AnchorPane fx:id="pane1" prefHeight="558.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.BranchManagerController">
     <children>
-        <Text fx:id="branch_name" fill="#b91592" layoutX="98.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="302.0">
+        <ImageView fitHeight="558.0" fitWidth="838.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@SignUpBackground.jpg" />
+            </image>
+        </ImageView>
+        <Text layoutX="24.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint: Choose report type that you want to see and the wanted branch">
             <font>
-                <Font size="27.0" />
+                <Font name="System Bold Italic" size="16.0" />
             </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
         </Text>
-        <Text fill="#a11f78" layoutX="40.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint: Choose report type that you want to see">
+        <Text layoutX="24.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint: Choose period ">
             <font>
-                <Font name="System Bold Italic" size="13.0" />
+                <Font name="System Bold Italic" size="16.0" />
             </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
         </Text>
-        <Text fill="#a11f78" layoutX="40.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint: Choose period ">
+        <DatePicker fx:id="start_date" layoutX="66.0" layoutY="235.0" onAction="#start_butt" />
+        <DatePicker fx:id="end_date" layoutX="66.0" layoutY="281.0" onAction="#end_butt" />
+        <Text layoutX="24.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="start:">
             <font>
-                <Font name="System Bold Italic" size="13.0" />
+                <Font name="Verdana Italic" size="13.5" />
             </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
         </Text>
-        <DatePicker fx:id="start_date" layoutX="74.0" layoutY="177.0" onAction="#start_butt" />
-        <DatePicker fx:id="end_date" layoutX="74.0" layoutY="217.0" onAction="#end_butt" />
-        <Text fill="#ee0883" layoutX="40.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="start:">
+        <Text layoutX="24.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="end:">
             <font>
-                <Font name="System Bold Italic" size="13.0" />
+                <Font name="Verdana Italic" size="13.5" />
             </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
         </Text>
-        <Text fill="#ee0883" layoutX="40.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="end:">
+        <Button fx:id="show_report" layoutX="278.0" layoutY="256.0" mnemonicParsing="false" onAction="#show_butt" prefHeight="28.0" prefWidth="108.0" text="Show Report">
             <font>
-                <Font name="System Bold Italic" size="13.0" />
+                <Font name="Times New Roman Italic" size="15.0" />
             </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.7473683953285217" green="0.0941130593419075" blue="0.5840545892715454" />
+                    </color>
+                </DropShadow>
+            </effect></Button>
+        <ComboBox fx:id="Choose_button" layoutX="24.0" layoutY="125.0" onAction="#Report_Type_butt" prefWidth="150.0" promptText="Choose Report Type">
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.7803921699523926" green="0.11372549086809158" blue="0.6666666865348816" />
+                    </color>
+                </DropShadow>
+            </effect></ComboBox>
+        <Button fx:id="logout" layoutX="7.0" layoutY="6.0" mnemonicParsing="false" onAction="#logout1" text="Logout">
+            <font>
+                <Font name="Times New Roman Italic" size="15.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="0.3181818452748385" startX="0.3797348484848485" startY="0.6846590909090909">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
+        <Text fx:id="branch_name" layoutX="199.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="408.8000183105469" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="199.0">
+            <font>
+                <Font name="Georgia Italic" size="40.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="0.7083333766821659" endY="0.1931818741740602" startX="0.22443180373220734" startY="0.6202651226159298">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
         </Text>
-        <Button fx:id="show_report" layoutX="325.0" layoutY="197.0" mnemonicParsing="false" onAction="#show_butt" text="Show Report" />
-        <ComboBox fx:id="Choose_button" layoutX="40.0" layoutY="109.0" onAction="#Report_Type_butt" prefWidth="150.0" promptText="Choose Report Type" />
-        <ComboBox fx:id="store_name" layoutX="238.0" layoutY="109.0" onAction="#choose_store" prefWidth="150.0" promptText="Choose Branch" />
-        <Button fx:id="logout" layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#logout1" text="LogOut" />
+        <ComboBox fx:id="store_name" layoutX="232.0" layoutY="125.0" onAction="#choose_store" prefWidth="150.0" promptText="Choose Branch">
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.7803921699523926" green="0.11372549086809158" blue="0.6666666865348816" />
+                    </color>
+                </DropShadow>
+            </effect></ComboBox>
     </children>
 </AnchorPane>

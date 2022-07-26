@@ -183,6 +183,8 @@ public class ManagerController {
         flower_type.setText("Type : "+ item.getType());
         flower_id.setText("ID : "+ item.getId());
         flower_price.setText("Price : " +item.getPrice());
+        Image image1 = new Image(item.getPicture());
+        image.setImage(image1);
     }
 
     @FXML

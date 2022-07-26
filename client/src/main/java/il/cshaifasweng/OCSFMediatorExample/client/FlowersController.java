@@ -45,15 +45,7 @@ public class FlowersController {
         flower_type.setText("Type : "+ item.getType());
         flower_id.setText("ID : "+ item.getId());
         priceee.setText(item.getPrice()+"");
-        File file = new File("client\\src\\main\\resources\\il\\cshaifasweng\\OCSFMediatorExample\\client\\images\\" +item.getName()+".jpg");
-
-        File file2 = null;
-        try {
-            file2 = new File(file.getCanonicalFile().toURI());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Image image1 = new Image(file2.toURI().toString());
+        Image image1 = new Image(item.getPicture());
         flower_image.setImage(image1);
 
     }

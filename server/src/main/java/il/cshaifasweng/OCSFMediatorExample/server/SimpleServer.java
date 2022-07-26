@@ -391,14 +391,20 @@ public class SimpleServer extends AbstractServer {
 			try {
 				List<Registration> clients = getAll(Registration.class);
 				for (Registration registration : clients) {
-					if (registration.getUserName().equalsIgnoreCase(UserName)) {
+					if (registration.getUserName().equals(UserName)) {
 						UserNameFound = 1;
-						if (registration.getPassword().equalsIgnoreCase(Password)) {
+						if (registration.getPassword().equals(Password)) {
 							if (registration.getStatus().equalsIgnoreCase("blocked client")) {
 								Warning new_warning = new Warning("You're account have been blocked. Please contact customer service");
 								client.sendToClient(new Message("#BlockedAccount", new_warning));
 								return;
-							} else {
+							}
+							else if (registration.getRegistered().equals(true)) {
+								Warning newWarning = new Warning("You're already logged in from another computer");
+								client.sendToClient(new Message("#LoginWarning", newWarning));
+								return;
+							}
+							else {
 								registration.setRegistered(true);
 								List<ShoppingCart> a = new ArrayList<ShoppingCart>();
 								for (int i = 0; i < itemList.size(); i++) {
@@ -434,6 +440,7 @@ public class SimpleServer extends AbstractServer {
 				e.printStackTrace();
 			}
 		}
+
 		else if (msgString.equals("#update flower")) {
 			Message msgupdate = ((Message) msg);
 			Long flower_id = ((Long) msgupdate.getObject());
@@ -1212,6 +1219,32 @@ public class SimpleServer extends AbstractServer {
 			client.sendToClient(new Message("#list of message sent", messagesList,type_profile));
 			session.close();
 		}
+
+		session = sessionFactory.openSession();
+		session.beginTransaction();
+		List<Order> order_list=getAll(Order.class);
+		for(Order orders : order_list)
+		{
+			System.out.println("akm mra bfot");
+			String DelDate = orders.getRecievedate();
+			String DelTime = orders.getRecievetime();
+
+			RefundCheck time = new RefundCheck();
+			int temp = time.Delivery(DelDate, DelTime);
+			if(temp == 1 && orders.getStatus().equalsIgnoreCase("pending"))
+			{
+				System.out.println("ana bal ifff");
+				orders.setStatus("Delivered");
+				session.update(orders);
+				session.getTransaction().commit();
+				String f = "Your order have been delivered successfully, order number: " + orders.getId();
+				Thread thread = new Thread(new MyThread(orders.getClientmail(), "Order Delivered", f));
+				thread.start();
+			}
+
+			session.flush();
+		}
+
 
 	}
 	private static SessionFactory getSessionFactory() throws HibernateException {

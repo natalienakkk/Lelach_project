@@ -160,14 +160,14 @@ public class SignUpController implements Initializable {
                 newClient = new Registration(FirstName.getText(), LastName.getText(), ID.getText(),
                         Email.getText(), PhoneNumber.getText(), UserName.getText(), Password.getText(),
                         "Client", CreditCard.getText(), ExpiryDate.getValue().toString(),
-                        AccountType.getValue().toString(),true , 0, StoreSelection.getValue());
+                        AccountType.getValue().toString(),false , 0, StoreSelection.getValue());
 
             }
             else
             {
                 newClient = new Registration(FirstName.getText(), LastName.getText(), ID.getText(),
                         Email.getText(), PhoneNumber.getText(), UserName.getText(), Password.getText(), "Client",
-                        CreditCard.getText(), ExpiryDate.getValue().toString(), AccountType.getValue().toString(), 0);
+                        CreditCard.getText(), ExpiryDate.getValue().toString(), AccountType.getValue().toString(), false, 0);
 
             }
             try {

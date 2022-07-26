@@ -3,6 +3,7 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -296,6 +297,7 @@ public class ShoppingCartController {
 
     @FXML void ReceiveDate(ActionEvent event) {
         flag5++;
+        LocalDate Expiry_Date = ReceiveDate.getValue();
     }
     @FXML void recivetime1(KeyEvent event) { flag7++; }
     @FXML void recivetime2(KeyEvent event) { flag8++; }
@@ -412,6 +414,15 @@ public class ShoppingCartController {
         col5.setCellValueFactory(new PropertyValueFactory<TableViewSC,Button>("button"));
         table.setItems(showitems());
         table.getColumns().addAll();
+
+        ReceiveDate.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+                setDisable(empty || date.compareTo(today) < 0 );
+            }
+        });
+
     }
 
 

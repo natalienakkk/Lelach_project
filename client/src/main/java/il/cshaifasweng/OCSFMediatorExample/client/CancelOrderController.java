@@ -215,7 +215,7 @@ public class CancelOrderController {
         }
         else
         {
-            if (order.getStatus().equalsIgnoreCase("Canceled"))
+            if (order1.getStatus().equals("Canceled") || order1.getStatus().equals("Delivered"))
             {
                 Warning New_Warning = new Warning("This Order Cannot Be canceled!");
                 EventBus.getDefault().post(new WarningEvent((Warning) New_Warning));
@@ -279,7 +279,7 @@ public class CancelOrderController {
             if(MyOrdersList.get(i).getClientid().equals(unregClient.getClient_ID()))
             {
                 System.out.println("ana fo2");
-                if(MyOrdersList.get(i).getStatus().equals("pending"))
+                if(MyOrdersList.get(i).getStatus().equals("pending") ||MyOrdersList.get(i).getStatus().equals("Delivered") )
                 {
                     System.out.println("ana t7t");
                     PurchaseList.add(new Order(MyOrdersList.get(i).getId(), MyOrdersList.get(i).getRecievetime(), MyOrdersList.get(i).getRecievedate(), MyOrdersList.get(i).getClientid(), MyOrdersList.get(i).getTotalprice(), MyOrdersList.get(i).getStatus()));

@@ -91,6 +91,23 @@ public class Registration implements Serializable {
         SelectedStore = selectedStore;
     }
 
+    public Registration(String firstName, String lastName, String client_ID, String email, String phoneNumber, String userName, String password, String status, String creditCard, String expiryDate, String accountType, Boolean registered, double refund) {
+        FirstName = firstName;
+        LastName = lastName;
+        Client_ID = client_ID;
+        Email = email;
+        PhoneNumber = phoneNumber;
+        UserName = userName;
+        Password = password;
+        Status = status;
+        CreditCard = creditCard;
+        ExpiryDate = expiryDate;
+        AccountType = accountType;
+        Registered = registered;
+        Refund = refund;
+    }
+
+
     public Registration() {
 
     }
