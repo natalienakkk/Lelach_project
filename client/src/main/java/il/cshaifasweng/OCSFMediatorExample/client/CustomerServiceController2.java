@@ -19,6 +19,9 @@ import javafx.scene.text.Text;
 public class CustomerServiceController2 {
 
     @FXML
+    private Text refund_hide;
+
+    @FXML
     private ResourceBundle resources;
 
     @FXML
@@ -26,9 +29,6 @@ public class CustomerServiceController2 {
 
     @FXML
     private Button back_button;
-
-    @FXML
-    private Button cancel_button;
 
     @FXML
     private TextArea complain_message;
@@ -97,19 +97,6 @@ public class CustomerServiceController2 {
 
     }
 
-    @FXML
-    void cancel(ActionEvent event) {
-        try {
-            SimpleClient.getClient().sendToServer(new Message("#delete complain",complain));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            App.setRoot("CustomerService_homepage");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     @FXML
     void finish(ActionEvent event) {
@@ -123,13 +110,16 @@ public class CustomerServiceController2 {
             e.printStackTrace();
         }
 
-
+        try {
+            App.setRoot("CustomerService");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void initialize() {
         assert back_button != null : "fx:id=\"back_button\" was not injected: check your FXML file 'CustomerService2.fxml'.";
-        assert cancel_button != null : "fx:id=\"cancel_button\" was not injected: check your FXML file 'CustomerService2.fxml'.";
         assert complain_message != null : "fx:id=\"complain_message\" was not injected: check your FXML file 'CustomerService2.fxml'.";
         assert details != null : "fx:id=\"details\" was not injected: check your FXML file 'CustomerService2.fxml'.";
         assert finish_button != null : "fx:id=\"finish_button\" was not injected: check your FXML file 'CustomerService2.fxml'.";
@@ -160,7 +150,7 @@ public class CustomerServiceController2 {
                     details1 = details1+order2.get(id1).getCart().getAmount().get(i)+ " x " +order2.get(id1).getCart().getItems().get(i).getName();
                 }
                 else
-                details1 = details1+order2.get(id1).getCart().getAmount().get(i)+ "x" +order2.get(id1).getCart().getItems().get(i).getName()+ " + " ;
+                    details1 = details1+order2.get(id1).getCart().getAmount().get(i)+ "x" +order2.get(id1).getCart().getItems().get(i).getName()+ " + " ;
             }
             details.setText(details1.substring(0,details1.length()-3));
         }
@@ -170,6 +160,8 @@ public class CustomerServiceController2 {
             order_hide.setVisible(false);
             price_hide.setVisible(false);
             details_hide.setVisible(false);
+            refund_hide.setVisible(false);
+            refund.setVisible(false);
         }
 
     }

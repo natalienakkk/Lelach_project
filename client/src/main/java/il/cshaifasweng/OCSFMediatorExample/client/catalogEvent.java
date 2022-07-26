@@ -9,6 +9,21 @@ public class catalogEvent {
     public String type;
     public List<Item> itemList;
     public ShoppingCart cart ;
+    public String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public catalogEvent(String type, List<Item> itemList, String message) {
+        this.type = type;
+        this.itemList = itemList;
+        this.message = message;
+    }
 
     public catalogEvent(String type, List<Item> itemList) {
         this.type = type;

@@ -44,6 +44,10 @@ public class ShoppingCart implements Serializable {
         return price;
     }
 
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     public Long getId() {
         return id;
     }

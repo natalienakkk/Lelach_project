@@ -8,7 +8,7 @@ public class RefundCheck {
     public int Refund (String Date , String Time)
     {
         System.out.println("ana bal refund");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Date += " " + Time;
         System.out.println(Date);
         LocalDateTime RemainingTime = LocalDateTime.parse(Date, formatter);

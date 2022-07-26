@@ -107,10 +107,102 @@ public class CancelOrderController {
     }
 }
 
+//    @FXML
+//    void CancelPurchase (ActionEvent event)
+//    {
+//        Order order = HistoryTable.getSelectionModel().getSelectedItem();
+//        List<Order> orderList= getMyOrdersList();
+//        for(int i=0; i< orderList.size();i++)
+//        {
+//            if(orderList.get(i).getId() == order.getId())
+//            {
+//                order = orderList.get(i);
+//                break;
+//            }
+//        }
+//        System.out.println("asA???????????/");
+//        System.out.println(order.getTotalprice());
+//        System.out.println(order.getRecievetime());
+//        System.out.println(order.getRecievedate());
+//        if(order == null)
+//        {
+//            Warning New_Warning = new Warning("You Didnt Select An Order!");
+//            EventBus.getDefault().post(new WarningEvent((Warning) New_Warning));
+//            return;
+//        }
+//        else
+//        {
+//            if (order.getStatus().equalsIgnoreCase("Canceled"))
+//            {
+//                Warning New_Warning = new Warning("This Order Cannot Be canceled!");
+//                EventBus.getDefault().post(new WarningEvent((Warning) New_Warning));
+//                return;
+//            }
+//            else
+//            {
+//               order.setStatus("Canceled");
+//               HistoryTable.refresh();
+//                try {
+//                    SimpleClient.getClient().sendToServer(new Message("#CancelOrder", order, unregClient));
+//                } catch (IOException e){
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+////        ObservableList<Order> orders = HistoryTable.getSelectionModel().getSelectedItems();
+////        if(orders.isEmpty())
+////        {
+////            Warning New_Warning = new Warning("You're Order History Is Empty!");
+////            EventBus.getDefault().post(new WarningEvent((Warning) New_Warning));
+////            return;
+////        }
+////        else if(orders == null)
+////        {
+////            Warning New_Warning = new Warning("You Didnt Select An Order!");
+////            EventBus.getDefault().post(new WarningEvent((Warning) New_Warning));
+////            return;
+////        }
+////        else
+////        {
+////            for(int i=0 ; i < MyOrdersList.size() ; i++)
+////            {
+////                if(MyOrdersList.get(i).getId().equals(orders.get(0).getId()))
+////                {
+////                    MyOrder = orders.get(0);
+////                    System.out.println(MyOrder.getClientid());
+////                }
+////            }
+////            if (MyOrder.getStatus().contains("Canceled"))
+////            {
+////                Warning New_Warning = new Warning("This Order Cannot Be canceled!");
+////                EventBus.getDefault().post(new WarningEvent((Warning) New_Warning));
+////                return;
+////            }
+////            else
+////            {
+////                try {
+////                    SimpleClient.getClient().sendToServer(new Message("#CancelOrder", MyOrder.getClientid()));
+////                } catch (IOException e){
+////                    e.printStackTrace();
+////                }
+////            }
+////        }
+//    }
+
     @FXML
     void CancelPurchase (ActionEvent event)
     {
-        Order order = HistoryTable.getSelectionModel().getSelectedItem();
+        Order order1 = HistoryTable.getSelectionModel().getSelectedItem();
+        Order order= new Order();
+        List<Order> orderList= getMyOrdersList();
+        for(int i=0; i< orderList.size();i++)
+        {
+            if(orderList.get(i).getId() == order1.getId())
+            {
+                order = orderList.get(i);
+                break;
+            }
+        }
         System.out.println("asA???????????/");
         System.out.println(order.getTotalprice());
         System.out.println(order.getRecievetime());
@@ -131,8 +223,8 @@ public class CancelOrderController {
             }
             else
             {
-               order.setStatus("Canceled");
-               HistoryTable.refresh();
+                order1.setStatus("Canceled");
+                HistoryTable.refresh();
                 try {
                     SimpleClient.getClient().sendToServer(new Message("#CancelOrder", order, unregClient));
                 } catch (IOException e){
@@ -179,7 +271,6 @@ public class CancelOrderController {
 //            }
 //        }
     }
-
     public ObservableList<Order> populateTable()
     {
         ObservableList<Order> PurchaseList = FXCollections.observableArrayList();
@@ -187,8 +278,10 @@ public class CancelOrderController {
         {
             if(MyOrdersList.get(i).getClientid().equals(unregClient.getClient_ID()))
             {
+                System.out.println("ana fo2");
                 if(MyOrdersList.get(i).getStatus().equals("pending"))
                 {
+                    System.out.println("ana t7t");
                     PurchaseList.add(new Order(MyOrdersList.get(i).getId(), MyOrdersList.get(i).getRecievetime(), MyOrdersList.get(i).getRecievedate(), MyOrdersList.get(i).getClientid(), MyOrdersList.get(i).getTotalprice(), MyOrdersList.get(i).getStatus()));
                 }
             }

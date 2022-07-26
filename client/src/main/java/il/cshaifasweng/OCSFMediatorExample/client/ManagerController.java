@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -80,12 +81,12 @@ public class ManagerController {
     private TextField type_update;
 
     @FXML
-    void back_butt(ActionEvent event) {
-        try {
-            App.setRoot("catalog");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private TextField image_edit;
+
+    @FXML
+    void back_butt(ActionEvent event) throws IOException {
+        SimpleClient.getClient().sendToServer(new Message("#show all items"));
+        update();
     }
 
     @FXML
@@ -96,6 +97,7 @@ public class ManagerController {
             e.printStackTrace();
         }
         color_update.clear();
+        update();
     }
 
     @FXML
@@ -105,12 +107,19 @@ public class ManagerController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        update();
 
     }
 
     @FXML
     void image_butt(ActionEvent event) {
-
+        try {
+            SimpleClient.getClient().sendToServer(new Message("#update flower",item.getId(),"image_update",image_edit.getText()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        image_edit.clear();
+        update();
     }
 
     @FXML
@@ -121,6 +130,7 @@ public class ManagerController {
             e.printStackTrace();
         }
         name_update.clear();
+        update();
     }
 
     @FXML
@@ -131,6 +141,7 @@ public class ManagerController {
             e.printStackTrace();
         }
         price_update.clear();
+        update();
 
     }
 
@@ -142,11 +153,11 @@ public class ManagerController {
             e.printStackTrace();
         }
         type_update.clear();
+        update();
 
     }
 
-    @FXML
-    void initialize() {
+    public void update(){
         assert Pane1 != null : "fx:id=\"Pane1\" was not injected: check your FXML file 'manager.fxml'.";
         assert back_button != null : "fx:id=\"back_button\" was not injected: check your FXML file 'manager.fxml'.";
         assert color_button != null : "fx:id=\"color_button\" was not injected: check your FXML file 'manager.fxml'.";
@@ -172,7 +183,11 @@ public class ManagerController {
         flower_type.setText("Type : "+ item.getType());
         flower_id.setText("ID : "+ item.getId());
         flower_price.setText("Price : " +item.getPrice());
+    }
 
+    @FXML
+    void initialize() {
+        update();
     }
 
 }

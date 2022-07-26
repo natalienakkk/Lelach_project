@@ -39,8 +39,13 @@ public class SimpleClient extends AbstractClient {
 		else if (msgstring.startsWith("#getcart")) {
 			System.out.println("im in simple client in getcart");
 			ShoppingCart cart = ((ShoppingCart) ((Message)msg).getObject());
+			Registration user = ((Registration) ((Message)msg).getObject2());
 			ShoppingCartEvent event = new ShoppingCartEvent(cart);
 			EventBus.getDefault().post(event);
+			if(!user.equals(null)) {
+				UserEvent event1 = new UserEvent(user);
+				EventBus.getDefault().post(event1);
+			}
 		}
 		else if (msgstring.startsWith("#openuseritem")) {
 			if (CatalogController.getType().equals("NetworkMarketingWorker"))
@@ -92,7 +97,9 @@ public class SimpleClient extends AbstractClient {
 			}
 			else {
 				catalogEvent event = new catalogEvent(user.getStatus(), (List<Item>) ((Message) msg).getObject2());
+				UserEvent event1 = new UserEvent(user);
 				EventBus.getDefault().post(event);
+				EventBus.getDefault().post(event1);
 			}
 		}
 		else if(msgstring.equalsIgnoreCase("#LoginWarning")) {
@@ -121,20 +128,28 @@ public class SimpleClient extends AbstractClient {
 			}
 
 		}
-		else if(msgstring.equals("#list of report sent")) {
+		else if(msgstring.equals("#list of report sent"))
+		{
 			System.out.println("wsl report blclient");
-			EventBus.getDefault().post(new ReportEvent((String) ((Message) msg).getObject(),(LocalDate) ((Message) msg).getObject2(),(LocalDate) ((Message) msg).getObject3(),(List<Report>) ((Message) msg).getObject4(),(List<Complain>) ((Message) msg).getObject5()));
+			EventBus.getDefault().post(new ReportEvent((String) ((Message) msg).getObject(),(LocalDate) ((Message) msg).getObject2(),(LocalDate) ((Message) msg).getObject3(),(List<Report>) ((Message) msg).getObject4(),(List<Complain>) ((Message) msg).getObject5(),(String) ((Message) msg).getObject6(),(List<Registration>) ((Message) msg).getObject7()));
 		}
 		else if(msgstring.equals("#list of report sent2")) {
-			EventBus.getDefault().post(new ReportEvent((String) ((Message) msg).getObject(), (LocalDate) ((Message) msg).getObject2(), (LocalDate) ((Message) msg).getObject3(), (List<Order>) ((Message) msg).getObject4()));
+			System.out.println("ya 7bebebebbebebbe");
+			EventBus.getDefault().post(new ReportEvent((String) ((Message) msg).getObject(), (LocalDate) ((Message) msg).getObject2(), (LocalDate) ((Message) msg).getObject3(), (List<Order>) ((Message) msg).getObject4(),(String) ((Message) msg).getObject5(),(List<Registration>) ((Message) msg).getObject6()));
 		}
-		else if(msgstring.equals("#list of report sent to compare")) {
-			EventBus.getDefault().post(new ReportEvent((String) ((Message) msg).getObject(),(LocalDate) ((Message) msg).getObject2(),(LocalDate) ((Message) msg).getObject3(),(LocalDate)((Message) msg).getObject4(),(LocalDate) ((Message) msg).getObject5(),(List<Complain>) ((Message) msg).getObject6()));
+		else if(msgstring.equals("#list of report sent to compare"))
+		{
+			EventBus.getDefault().post(new ReportEvent((String) ((Message) msg).getObject(),(LocalDate) ((Message) msg).getObject2(),(LocalDate) ((Message) msg).getObject3(),(LocalDate)((Message) msg).getObject4(),(LocalDate) ((Message) msg).getObject5(),(List<Complain>) ((Message) msg).getObject6(),(String) ((Message) msg).getObject7(),(List<Registration>) ((Message) msg).getObject8()));
 		}
-		else if(msgstring.equals("#list of report sent to compare2")) {
-			EventBus.getDefault().post(new ReportEvent((List<Order>) ((Message) msg).getObject(),(LocalDate) ((Message) msg).getObject2(),(LocalDate) ((Message) msg).getObject3(),(LocalDate)((Message) msg).getObject4(),(LocalDate) ((Message) msg).getObject5(),(String) ((Message) msg).getObject6()));
+		else if(msgstring.equals("#list of report sent to compare2"))
+		{
+			EventBus.getDefault().post(new ReportEvent((List<Order>) ((Message) msg).getObject(),(LocalDate) ((Message) msg).getObject2(),(LocalDate) ((Message) msg).getObject3(),(LocalDate)((Message) msg).getObject4(),(LocalDate) ((Message) msg).getObject5(),(String) ((Message) msg).getObject6(),(String) ((Message) msg).getObject7(),(List<Registration>) ((Message) msg).getObject8()));
 		}
 		else if (msgstring.equals("wrong username")) {
+			EventBus.getDefault().post(new WarningEvent((Warning) ((Message) msg).getObject()));
+		}
+		else if (msgstring.equals("wrong discount"))
+		{
 			EventBus.getDefault().post(new WarningEvent((Warning) ((Message) msg).getObject()));
 		}
 		else if(msgstring.equals("list sent")){
@@ -196,6 +211,12 @@ public class SimpleClient extends AbstractClient {
 		}
 		else if(msgstring.equals("#list of message sent")) {
 			EventBus.getDefault().post(new MessagesEvent((List<SystemManagers_Messages>) ((Message) msg).getObject(),(String)((Message) msg).getObject2()));
+		}
+		else if(msgstring.equalsIgnoreCase("#natalie"))
+		{
+			System.out.println("rashillllllllllllllllllll");
+			System.out.println("client"+(String) ((Message) msg).getObject3());
+			EventBus.getDefault().post(new catalogEvent((String) ((Message) msg).getObject(), (List<Item>) ((Message) msg).getObject2(),(String) ((Message) msg).getObject3()));
 		}
 
 

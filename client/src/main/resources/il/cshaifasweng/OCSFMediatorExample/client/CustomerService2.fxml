@@ -46,12 +46,11 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Text layoutX="48.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refund:">
+      <Text fx:id="refund_hide" layoutX="48.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refund:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Button fx:id="cancel_button" layoutX="423.0" layoutY="477.0" mnemonicParsing="false" onAction="#cancel" text="Cancel Complain" />
       <Text fx:id="details_hide" layoutX="47.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="order details:" wrappingWidth="103.0859375">
          <font>
             <Font name="System Bold" size="15.0" />

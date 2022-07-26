@@ -14,6 +14,8 @@ public class Message implements Serializable {
     private Object object4;
     private Object object5;
     private Object object6;
+    private Object object7;
+    private Object object8;
 
 
 
@@ -62,6 +64,45 @@ public class Message implements Serializable {
         this.object4 = obj4;
         this.object5=obj5;
         this.object6=obj6;
+    }
+
+    public Message(String msg ,Object object, Object object2, Object object3, Object object4, Object object5, Object object6, Object object7, Object object8) {
+        this.message = msg;
+        this.object = object;
+        this.object2 = object2;
+        this.object3 = object3;
+        this.object4 = object4;
+        this.object5 = object5;
+        this.object6 = object6;
+        this.object7 = object7;
+        this.object8 = object8;
+    }
+
+    public Message(String msg,Object object, Object object2, Object object3, Object object4, Object object5, Object object6, Object object7) {
+        this.message = msg;
+        this.object = object;
+        this.object2 = object2;
+        this.object3 = object3;
+        this.object4 = object4;
+        this.object5 = object5;
+        this.object6 = object6;
+        this.object7 = object7;
+    }
+
+    public Object getObject7() {
+        return object7;
+    }
+
+    public void setObject7(Object object7) {
+        this.object7 = object7;
+    }
+
+    public Object getObject8() {
+        return object8;
+    }
+
+    public void setObject8(Object object8) {
+        this.object8 = object8;
     }
 
     public Message(String msg) {

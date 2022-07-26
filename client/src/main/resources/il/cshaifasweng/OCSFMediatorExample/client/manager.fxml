@@ -51,5 +51,6 @@
             <Font size="20.0" />
          </font>
       </Text>
+      <TextField fx:id="image_edit" layoutX="500.0" layoutY="136.0" prefHeight="25.0" prefWidth="246.0" />
    </children>
 </AnchorPane>

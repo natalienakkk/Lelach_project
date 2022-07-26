@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="pane1" prefHeight="293.0" prefWidth="498.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.BranchManagerController">
+<AnchorPane fx:id="pane1" prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.BranchManagerController">
     <children>
         <Text fx:id="branch_name" fill="#b91592" layoutX="98.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="302.0">
             <font>
@@ -38,5 +38,7 @@
         </Text>
         <Button fx:id="show_report" layoutX="325.0" layoutY="197.0" mnemonicParsing="false" onAction="#show_butt" text="Show Report" />
         <ComboBox fx:id="Choose_button" layoutX="40.0" layoutY="109.0" onAction="#Report_Type_butt" prefWidth="150.0" promptText="Choose Report Type" />
+        <ComboBox fx:id="store_name" layoutX="238.0" layoutY="109.0" onAction="#choose_store" prefWidth="150.0" promptText="Choose Branch" />
+        <Button fx:id="logout" layoutX="25.0" layoutY="25.0" mnemonicParsing="false" onAction="#logout1" text="LogOut" />
     </children>
 </AnchorPane>

@@ -94,5 +94,8 @@
         </Text>
         <Button fx:id="CompareReports" layoutX="557.0" layoutY="496.0" mnemonicParsing="false" onAction="#CompareReports_butt" text="Compare Reports" />
         <ComboBox fx:id="Choose_button" layoutX="47.0" layoutY="237.0" onAction="#Report_Type_butt" prefWidth="150.0" promptText="Choose Report Type" />
+        <Button fx:id="logout" layoutX="26.0" layoutY="17.0" mnemonicParsing="false" onAction="#logout1" text="LogOut" />
+        <ComboBox fx:id="store_name" layoutX="47.0" layoutY="589.0" onAction="#choose_store" prefWidth="150.0" promptText="Choose Branch" />
+        <Text layoutX="47.0" layoutY="570.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint(4): choose if you want to compare reports between branches or between Lelach reports" />
     </children>
 </AnchorPane>

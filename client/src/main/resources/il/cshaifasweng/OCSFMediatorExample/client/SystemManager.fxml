@@ -9,12 +9,7 @@
 <AnchorPane fx:id="pane1" prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.SystemManagerController">
     <children>
         <Button fx:id="blockaccount_button" layoutX="337.0" layoutY="108.0" mnemonicParsing="false" onAction="#blockaccount_butt" prefHeight="36.0" prefWidth="107.0" text="block account" />
-        <Text layoutX="174.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome">
-            <font>
-                <Font name="System Bold Italic" size="27.0" />
-            </font>
-        </Text>
-        <Text fx:id="manager_name" layoutX="300.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="134.13671875">
+        <Text fx:id="SM_name" layoutX="197.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="281.0">
             <font>
                 <Font name="System Bold Italic" size="27.0" />
             </font>
@@ -63,5 +58,6 @@
         <Button fx:id="clientsList" layoutX="23.0" layoutY="428.0" mnemonicParsing="false" onAction="#clientsList_butt" prefHeight="25.0" prefWidth="159.0" text="show client list" />
         <Button fx:id="workersList" layoutX="237.0" layoutY="428.0" mnemonicParsing="false" onAction="#workersList_butt" text="show workers list" />
         <Button fx:id="back" layoutX="10.0" layoutY="13.0" mnemonicParsing="false" onAction="#back" text="Back To Homepage" />
+        <Button fx:id="unblock" layoutX="463.0" layoutY="107.0" mnemonicParsing="false" onAction="#unblock" prefHeight="36.0" prefWidth="107.0" text="unblock account" />
     </children>
 </AnchorPane>

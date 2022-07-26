@@ -89,7 +89,6 @@ public class OrderCatalogController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(file2.getAbsolutePath());
         Image image1 = new Image(file2.toURI().toString());
         image.setImage(image1);
 

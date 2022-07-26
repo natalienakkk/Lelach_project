@@ -24,8 +24,37 @@ public class Complain implements Serializable {
     private String complain_type;
     private double refund;
     private String answer;
+    private String shopname;
+    private LocalDate deadline_date;
+    private LocalTime deadline_time;
 
-    public Complain(String message,String status, double refund, String answer) {
+    public LocalDate getDeadline_date() {
+        return deadline_date;
+    }
+
+    public void setDeadline_date(LocalDate deadline_date) {
+        this.deadline_date = deadline_date;
+    }
+
+    public LocalTime getDeadline_time() {
+        return deadline_time;
+    }
+
+    public void setDeadline_time(LocalTime deadline_time) {
+        this.deadline_time = deadline_time;
+    }
+
+
+
+    public String getShopname() {
+        return shopname;
+    }
+
+    public void setShopname(String shopname) {
+        this.shopname = shopname;
+    }
+
+    public Complain(String message, String status, double refund, String answer) {
         this.status = status;
         this.message = message;
         this.refund = refund;
@@ -45,6 +74,19 @@ public class Complain implements Serializable {
         this.orderID=orderID;
     }
 
+
+    public Complain(String complain_type, LocalDate date, LocalTime time, String status, String username,Long id, Long orderID,String message,LocalDate deadline_date,LocalTime deadline_time) {
+        this.username=username;
+        this.date = date;
+        this.time = time;
+        this.status = status;
+        this.message = message;
+        this.complain_type = complain_type;
+        this.orderID=orderID;
+        this.id=id;
+        this.deadline_date=deadline_date;
+        this.deadline_time=deadline_time;
+    }
 
     public Complain(String complain_type, LocalDate date, LocalTime time, String status, String username,Long id, Long orderID,String message) {
         this.username=username;

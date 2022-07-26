@@ -6,12 +6,14 @@ import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Item;
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
+import il.cshaifasweng.OCSFMediatorExample.entities.Registration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -24,6 +26,10 @@ public class NetworkMarketingWorkerController {
     @FXML public static String getUsername() { return username; }
 
     @FXML public static void setUsername(String username) { NetworkMarketingWorkerController.username = username; }
+
+
+    @FXML
+    private Text NW_name;
 
     @FXML
     private ResourceBundle resources;
@@ -55,8 +61,6 @@ public class NetworkMarketingWorkerController {
     @FXML
     private Button showallitems_button;
 
-    @FXML
-    private Text worker_name;
 
     @FXML
     private AnchorPane pane1;
@@ -72,6 +76,8 @@ public class NetworkMarketingWorkerController {
 
     @FXML
     private double discount;
+
+    int flag=0;
 
     /******remember to change that**/
     String f_picture="fh";
@@ -98,7 +104,9 @@ public class NetworkMarketingWorkerController {
     }
     @FXML
     void apply_butt(ActionEvent event) throws IOException {
-        delete_discount.setDisable(false);
+        if((Double.parseDouble(discount_percent.getText()))<100 && (Double.parseDouble(discount_percent.getText()))>0) {
+            delete_discount.setDisable(false);
+        }
         discount=Double.parseDouble(discount_percent.getText());
         discount_percent.clear();
         SimpleClient.getClient().sendToServer(new Message("#apply discount",discount));
@@ -120,12 +128,29 @@ public class NetworkMarketingWorkerController {
     @FXML
     void showallitems_butt(ActionEvent event) throws IOException {
         SimpleClient.getClient().sendToServer(new Message("#show all items"));
-        ScrollPane pane = FXMLLoader.load(getClass().getResource("catalog.fxml"));
-        pane1.getChildren().setAll(pane);
+        update();
     }
+    Registration username1;
+
+    public Registration getUsername1() { return username1; }
+
+    public void setUsername1(Registration username1) { this.username1 = username1; }
+    @FXML
+    private Button logout;
+
 
     @FXML
-    void initialize() {
+    void logout1(ActionEvent event) {
+        try {
+            SimpleClient.getClient().sendToServer(new Message("#LogOut" , username1));
+            App.setRoot("homepage");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void update(){
         assert additem_button != null : "fx:id=\"additem_button\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
         assert apply_button != null : "fx:id=\"apply_button\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
         assert discount_percent != null : "fx:id=\"discount_percent\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
@@ -134,12 +159,17 @@ public class NetworkMarketingWorkerController {
         assert flower_price != null : "fx:id=\"flower_price\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
         assert flower_type != null : "fx:id=\"flower_type\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
         assert showallitems_button != null : "fx:id=\"showallitems_button\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
-        assert worker_name != null : "fx:id=\"worker_name\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
-        // assert workername != null : "fx:id=\"workername\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
+        assert NW_name != null : "fx:id=\"NW_name\" was not injected: check your FXML file 'NetworkMarketingWorker.fxml'.";
 
-        setUsername(App.getUsername());
-        worker_name.setText(getUsername());
+        setUsername1(App.getUser1());
+        NW_name.setText("Welcome " +getUsername1().getUserName());
         delete_discount.setDisable(true);
+    }
+
+    @FXML
+    void initialize() {
+        update();
+
     }
 
 }

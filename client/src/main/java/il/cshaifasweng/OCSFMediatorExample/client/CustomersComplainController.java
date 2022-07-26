@@ -29,6 +29,9 @@ public class CustomersComplainController {
     private Button back_button;
 
     @FXML
+    private Text Name;
+
+    @FXML
     private Text order1;
 
     @FXML
@@ -60,12 +63,9 @@ public class CustomersComplainController {
 
     @FXML
     void complain_butt(ActionEvent event) {
-        System.out.println("hello"+order_id.getText());
-        System.out.println(username.getUserName());
-        if(order_id.getText().equals(""))
-            System.out.println("bye");
         try {
-            SimpleClient.getClient().sendToServer(new Message("#client complain",username.getUserName(),complain.getText(),complain_type.getSelectionModel().getSelectedItem(),order_id.getText(),time,date));
+            SimpleClient.getClient().sendToServer(new Message("#client complain", username.getUserName(), complain.getText(), complain_type.getSelectionModel().getSelectedItem(), order_id.getText(), time, date));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -113,6 +113,7 @@ public class CustomersComplainController {
         setUsername(App.getUser1());
         complain.clear();
         order_id.clear();
+        Name.setText("Welcome "+username.getUserName());
 
     }
 

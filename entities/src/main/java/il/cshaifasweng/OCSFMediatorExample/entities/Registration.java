@@ -25,12 +25,33 @@ public class Registration implements Serializable {
     private String AccountType;
     private Boolean Registered;
     private double Refund;
+    private String SelectedStore;
 
-    public Registration(String firstName, String lastName, String userName, String status) {
+    public Registration(String userName, String lastName, String firstName, String status) {
         FirstName = firstName;
         LastName = lastName;
         UserName = userName;
         Status = status;
+    }
+    public Registration(String firstName, String lastName, String ID, String email, String phoneNumber, String userName, String password, String status, String creditCard, String expiryDate, String accountType, double refund,String selectedStore) {
+        FirstName = firstName;
+        LastName = lastName;
+        this.Client_ID = ID;
+        Email = email;
+        PhoneNumber = phoneNumber;
+        UserName = userName;
+        Password = password;
+        Status = status;
+        CreditCard = creditCard;
+        ExpiryDate = expiryDate;
+        AccountType = accountType;
+        setRegistered(false);
+        Refund = refund;
+//        setRegistered(false);
+        this.SelectedStore=selectedStore;
+
+//      Registered = registered;
+//        purchases = new ArrayList<Purchase>();
     }
 
     public Registration(String firstName, String lastName, String ID, String email, String phoneNumber, String userName, String password, String status, String creditCard, String expiryDate, String accountType, double refund) {
@@ -51,6 +72,23 @@ public class Registration implements Serializable {
 
 //      Registered = registered;
 //        purchases = new ArrayList<Purchase>();
+    }
+
+    public Registration(String firstName, String lastName, String client_ID, String email, String phoneNumber, String userName, String password, String status, String creditCard, String expiryDate, String accountType, Boolean registered, double refund, String selectedStore) {
+        FirstName = firstName;
+        LastName = lastName;
+        Client_ID = client_ID;
+        Email = email;
+        PhoneNumber = phoneNumber;
+        UserName = userName;
+        Password = password;
+        Status = status;
+        CreditCard = creditCard;
+        ExpiryDate = expiryDate;
+        AccountType = accountType;
+        Registered = registered;
+        Refund = refund;
+        SelectedStore = selectedStore;
     }
 
     public Registration() {
@@ -156,4 +194,8 @@ public class Registration implements Serializable {
     public double getRefund() { return Refund; }
 
     public void setRefund(double refund) { Refund = refund; }
+
+    public String getSelectedStore() { return SelectedStore; }
+
+    public void setSelectedStore(String selectedStore) { SelectedStore = selectedStore; }
 }

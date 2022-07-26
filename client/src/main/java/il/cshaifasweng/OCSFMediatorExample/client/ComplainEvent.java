@@ -11,7 +11,6 @@ public class ComplainEvent {
     private List<Complain> complain_list;
     private String type;
 
-
     public String getType() {
         return type;
     }

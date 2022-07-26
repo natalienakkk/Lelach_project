@@ -137,7 +137,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Text fx:id="receiveremail" layoutX="150.0" layoutY="416.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+      <Text fx:id="receiveremail" layoutX="152.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="502.3157043457031">
          <font>
             <Font size="16.0" />
          </font>

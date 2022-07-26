@@ -7,11 +7,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+
 
 public class SignUpController implements Initializable {
 
@@ -23,6 +25,9 @@ public class SignUpController implements Initializable {
 
     @FXML
     private ChoiceBox<String> AccountType;
+
+    @FXML
+    private Tooltip AccountTypeToolTip;
 
     private String[] Accounts = {"Store Account", "Chain Account: Shop in any Store", "One year subscription: Pay 100nis and get 10% discount in every purchase over 50nis"};
 
@@ -63,6 +68,24 @@ public class SignUpController implements Initializable {
     private TextField UserName;
 
     @FXML
+    private Text SelectStoreText;
+
+    @FXML
+    private ChoiceBox<String> StoreSelection;
+
+    private String[] Stores = {"Lelach, Haifa" , "Lelach, Tel Aviv"};
+
+    @FXML
+    private TextArea ChainAccountText;
+
+    @FXML
+    private CheckBox SubscriptionCheck;
+
+    @FXML
+    private TextArea SubscriptionText;
+
+
+    @FXML
     void Back(ActionEvent event) throws IOException {
         try {
             App.setRoot("HomePage");
@@ -71,6 +94,7 @@ public class SignUpController implements Initializable {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     void ExpiryDate(ActionEvent event) {
@@ -114,6 +138,8 @@ public class SignUpController implements Initializable {
 
     @FXML
     void SignUp(ActionEvent event) {
+        AccountType.setTooltip(AccountTypeToolTip);
+        System.out.println(StoreSelection.getValue());
 //        String password = Password.getText();
 //        String Id = ID.getText();
 //        String PhoneNum = PhoneNumber.getText();
@@ -126,10 +152,24 @@ public class SignUpController implements Initializable {
             alert.setContentText("Please fill out all required fields");
             alert.showAndWait();
         }
-        else if(CheckInputs(Password.getText(), ID.getText(), PhoneNumber.getText())) {
-            Registration newClient = new Registration(FirstName.getText(), LastName.getText(), ID.getText(),
-                    Email.getText(), PhoneNumber.getText(), UserName.getText(), Password.getText(), "Client",
-                    CreditCard.getText(), ExpiryDate.getValue().toString(), AccountType.getValue().toString(), 0);
+        else if(CheckInputs(Password.getText(), ID.getText(), PhoneNumber.getText()))
+        {
+            Registration newClient;
+            if(AccountType.getValue().equalsIgnoreCase("Store Account"))
+            {
+                newClient = new Registration(FirstName.getText(), LastName.getText(), ID.getText(),
+                        Email.getText(), PhoneNumber.getText(), UserName.getText(), Password.getText(),
+                        "Client", CreditCard.getText(), ExpiryDate.getValue().toString(),
+                        AccountType.getValue().toString(),true , 0, StoreSelection.getValue());
+
+            }
+            else
+            {
+                newClient = new Registration(FirstName.getText(), LastName.getText(), ID.getText(),
+                        Email.getText(), PhoneNumber.getText(), UserName.getText(), Password.getText(), "Client",
+                        CreditCard.getText(), ExpiryDate.getValue().toString(), AccountType.getValue().toString(), 0);
+
+            }
             try {
                 SimpleClient.getClient().sendToServer(new Message("#SignUpRequest", newClient));
             } catch (IOException e) {
@@ -151,13 +191,63 @@ public class SignUpController implements Initializable {
         assert Password != null : "fx:id=\"Password\" was not injected: check your FXML file 'SignUp.fxml'.";
         assert PhoneNumber != null : "fx:id=\"PhoneNumber\" was not injected: check your FXML file 'SignUp.fxml'.";
         assert UserName != null : "fx:id=\"UserName\" was not injected: check your FXML file 'SignUp.fxml'.";
+        assert AccountTypeToolTip != null : "fx:id=\"AccountTypeToolTip\" was not injected: check your FXML file 'SingUp.fxml'.";
+        assert StoreSelection != null : "fx:id=\"StoreSelection\" was not injected: check your FXML file 'SingUp.fxml'.";
+        assert SubscriptionCheck != null : "fx:id=\"SubscriptionCheck\" was not injected: check your FXML file 'SingUp.fxml'.";
+        assert SubscriptionText != null : "fx:id=\"SubscriptionText\" was not injected: check your FXML file 'SingUp.fxml'.";
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        String SelectedAccount;
+
+        SelectStoreText.setVisible(false);
+        StoreSelection.setVisible(false);
+        ChainAccountText.setVisible(false);
+        SubscriptionCheck.setVisible(false);
+        SubscriptionText.setVisible(false);
+
         AccountType.getItems().addAll(Accounts);
-//        SelectedAccount = AccountType.getValue();
+        StoreSelection.getItems().addAll(Stores);
+
+        AccountType.setOnAction((event) -> {
+            String AccountSelection = AccountType.getValue();
+//            System.out.println("   ChoiceBox.getValue(): " + AccountSelection);
+            if(AccountSelection.equalsIgnoreCase("Store Account"))
+            {
+                System.out.println("   ChoiceBox.getValue(): " + AccountSelection);
+                SelectStoreText.setVisible(true);
+                StoreSelection.setVisible(true);
+                ChainAccountText.setVisible(false);
+                SubscriptionCheck.setVisible(false);
+                SubscriptionText.setVisible(false);
+            }
+            else if(AccountSelection.equalsIgnoreCase("Chain Account: Shop in any Store"))
+            {
+                System.out.println("   ChoiceBox.getValue(): " + AccountSelection);
+                ChainAccountText.setVisible(true);
+                SelectStoreText.setVisible(false);
+                StoreSelection.setVisible(false);
+                SubscriptionCheck.setVisible(false);
+                SubscriptionText.setVisible(false);
+            }
+            else if(AccountSelection.equalsIgnoreCase("One year subscription: Pay 100nis and get 10% discount in every purchase over 50nis"))
+            {
+                System.out.println("   ChoiceBox.getValue(): " + AccountSelection);
+                SubscriptionText.setVisible(true);
+                SubscriptionCheck.setVisible(true);
+                SelectStoreText.setVisible(false);
+                StoreSelection.setVisible(false);
+                ChainAccountText.setVisible(false);
+            }
+        });
+
+        ExpiryDate.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+                setDisable(empty || date.compareTo(today) < 0 );
+            }
+        });
     }
 }

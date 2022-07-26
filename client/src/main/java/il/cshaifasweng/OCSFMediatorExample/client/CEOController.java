@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
+import il.cshaifasweng.OCSFMediatorExample.entities.Registration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,7 +68,10 @@ public class CEOController {
     @FXML
     private DatePicker start_date;
 
-    String Type;
+    @FXML
+    private ComboBox<String> store_name;
+
+    String Type,storeName;
     LocalDate start,end,first_start,second_start,first_end,second_end;
 
     @FXML
@@ -82,18 +86,24 @@ public class CEOController {
 
     @FXML
     void CompareReports_butt(ActionEvent event) {
+        //System.out.println(storeName);
         if (Type.equals("Complain Report")) {
-            System.out.println("natalie" + Type + first_start + first_end + second_start + second_end);
             try {
-                SimpleClient.getClient().sendToServer(new Message("#show Report to compare", "Complain Compare", first_start, first_end, second_start, second_end));
+                SimpleClient.getClient().sendToServer(new Message("#show Report to compare", "Complain Compare", first_start, first_end, second_start, second_end,storeName));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         else if(Type.equals("Revenue Report")){
-            System.out.println("natalie" + Type + first_start + first_end + second_start + second_end);
             try {
-                SimpleClient.getClient().sendToServer(new Message("#show Report to compare", "Revenue Compare", first_start, first_end, second_start, second_end));
+                SimpleClient.getClient().sendToServer(new Message("#show Report to compare", "Revenue Compare", first_start, first_end, second_start, second_end,storeName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(Type.equals("Orders Report")){
+            try {
+                SimpleClient.getClient().sendToServer(new Message("#show Report to compare", "Orders Compare", first_start, first_end, second_start, second_end,storeName));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -129,7 +139,7 @@ public class CEOController {
     @FXML
     void show_butt(ActionEvent event) throws IOException {
         try {
-            SimpleClient.getClient().sendToServer(new Message("#show Report",Type,start,end));
+            SimpleClient.getClient().sendToServer(new Message("#show Report",Type,start,end,"Lelach"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -138,6 +148,31 @@ public class CEOController {
     @FXML
     void start_butt(ActionEvent event) {
         start=start_date.getValue();
+    }
+
+    Registration username1;
+
+    public Registration getUsername1() { return username1; }
+
+    public void setUsername1(Registration username1) { this.username1 = username1; }
+
+    @FXML
+    private Button logout;
+
+
+    @FXML
+    void logout1(ActionEvent event) {
+        try {
+            SimpleClient.getClient().sendToServer(new Message("#LogOut" , username1));
+            App.setRoot("homepage");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void choose_store(ActionEvent event) {
+        storeName = store_name.getSelectionModel().getSelectedItem();
     }
 
     @FXML
@@ -153,12 +188,17 @@ public class CEOController {
         assert secondr_end != null : "fx:id=\"secondr_end\" was not injected: check your FXML file 'CEO.fxml'.";
         assert secondr_start != null : "fx:id=\"secondr_start\" was not injected: check your FXML file 'CEO.fxml'.";
         assert show_report != null : "fx:id=\"show_report\" was not injected: check your FXML file 'CEO.fxml'.";
+        assert logout != null : "fx:id=\"logout\" was not injected: check your FXML file 'BranchManager.fxml'.";
+        assert store_name != null : "fx:id=\"store_name\" was not injected: check your FXML file 'CEO.fxml'.";
         assert start_date != null : "fx:id=\"start_date\" was not injected: check your FXML file 'CEO.fxml'.";
         Choose_button.getItems().add("Revenue Report");
         Choose_button.getItems().add("Orders Report");
         Choose_button.getItems().add("Complain Report");
-        setUsername(App.getUsername());
-        CEO_Name.setText("Welcome "+username);
+        store_name.getItems().add("Lelach, Haifa");
+        store_name.getItems().add("Lelach, Tel Aviv");
+        store_name.getItems().add("Lelach");
+        setUsername1(App.getUser1());
+        CEO_Name.setText("Welcome "+username1.getUserName());
     }
 
 }

@@ -21,6 +21,7 @@ public class Order implements Serializable {
     private String deliveryOp;
     private String clientid;
     private String clientname;
+    private String clientmail;
     private String receiveraddress;
     private String receivername;
     private String receivermail;
@@ -71,7 +72,7 @@ public class Order implements Serializable {
         this.note = note;
         this.cart = cart;
     }
-    public Order(String date, String recievedate,String recievetime, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status, String note) {
+    public Order(String date, String recievedate,String recievetime, String card, String deliveryOp, String clientid, String clientname, String clientmail,String receiveraddress, String receivername,String receivermail, String totalprice, String status, String note) {
         this.date = date;
         this.recievedate = recievedate;
         this.recievetime = recievetime;
@@ -79,6 +80,7 @@ public class Order implements Serializable {
         this.deliveryOp = deliveryOp;
         this.clientid = clientid;
         this.clientname = clientname;
+        this.clientmail = clientmail;
         this.receiveraddress = receiveraddress;
         this.receivername = receivername;
         this.receivermail = receivermail;
@@ -101,7 +103,7 @@ public class Order implements Serializable {
         this.status = status;
         this.cart = cart;
     }
-    public Order(String date, String recievedate,String recievetime, String card, String deliveryOp, String clientid, String clientname, String receiveraddress, String receivername,String receivermail, String totalprice, String status) {
+    public Order(String date, String recievedate,String recievetime, String card, String deliveryOp, String clientid, String clientname,String clientmail, String receiveraddress, String receivername,String receivermail, String totalprice, String status) {
         this.date = date;
         this.recievedate = recievedate;
         this.recievetime = recievetime;
@@ -109,6 +111,7 @@ public class Order implements Serializable {
         this.deliveryOp = deliveryOp;
         this.clientid = clientid;
         this.clientname = clientname;
+        this.clientmail = clientmail;
         this.receiveraddress = receiveraddress;
         this.receivername = receivername;
         this.receivermail = receivermail;
@@ -199,5 +202,7 @@ public class Order implements Serializable {
 
     public void setRecievetime(String recievetime) { this.recievetime = recievetime; }
 
+    public String getClientmail() { return clientmail; }
 
+    public void setClientmail(String clientmail) { this.clientmail = clientmail; }
 }

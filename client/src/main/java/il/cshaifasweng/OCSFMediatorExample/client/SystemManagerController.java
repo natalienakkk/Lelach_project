@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import il.cshaifasweng.OCSFMediatorExample.entities.Message;
+import il.cshaifasweng.OCSFMediatorExample.entities.Registration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +51,8 @@ public class SystemManagerController {
     @FXML
     private Button back;
 
+    @FXML
+    private Button unblock;
 
     @FXML
     private Button message_button;
@@ -69,10 +72,11 @@ public class SystemManagerController {
     @FXML
     private Button clientsList;
 
+    @FXML
+    private Text SM_name;
+
     String username;
-    String worker_username;
-    //String clientmessage;
-    //String client_username;
+    String worker_username,message1;
     String new_status;
 
     @FXML
@@ -98,22 +102,37 @@ public class SystemManagerController {
     @FXML
     void blockaccount_butt(ActionEvent event) throws IOException {
         username=block_text.getText();
-        System.out.println(username);
+        block_text.clear();
         SimpleClient.getClient().sendToServer(new Message("#block account",username));
     }
 
+
+    @FXML
+    void unblock(ActionEvent event) {
+        username=block_text.getText();
+        block_text.clear();
+        try {
+            SimpleClient.getClient().sendToServer(new Message("#unblock account",username));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     @FXML
     void message_butt(ActionEvent event) throws IOException{
-        SimpleClient.getClient().sendToServer(new Message("#send message",username_txt.getText(),message.getText()));
+        username=username_txt.getText();
+        message1=message.getText();
         username_txt.clear();
         message.clear();
+        SimpleClient.getClient().sendToServer(new Message("#send message",username,message1));
     }
 
     @FXML
     void Type_butt(ActionEvent event) throws IOException{
         worker_username=status_text1.getText();
         new_status=status_text2.getText();
-        System.out.println("info"+ worker_username+new_status);
+        status_text1.clear();
+        status_text2.clear();
         SimpleClient.getClient().sendToServer(new Message("#update worker type",worker_username,new_status));
     }
 
@@ -123,7 +142,11 @@ public class SystemManagerController {
         pane1.getChildren().setAll(pane);
     }
 
+    Registration username1;
 
+    public Registration getUsername1() { return username1; }
+
+    public void setUsername1(Registration username1) { this.username1 = username1; }
 
     @FXML
     void initialize() {
@@ -140,9 +163,9 @@ public class SystemManagerController {
         assert clientsList != null : "fx:id=\"clientsList\" was not injected: check your FXML file 'SystemManager.fxml'.";
         assert workersList != null : "fx:id=\"workersList\" was not injected: check your FXML file 'SystemManager.fxml'.";assert username_txt != null : "fx:id=\"username_txt\" was not injected: check your FXML file 'SystemManager.fxml'.";
 
-        //setUserName(App.getUsername());
+        setUsername1(App.getUser1());
         System.out.println( getUserName());
-        manager_name.setText(getUserName());
+        SM_name.setText("Welcome "+username1.getUserName());
 
     }
 

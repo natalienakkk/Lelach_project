@@ -50,6 +50,9 @@ public class App extends Application {
     private static Confirmation ConfirmationMSG;
     private static String type_profile;
     private static List<SystemManagers_Messages>message_list;
+    private static String shopname;
+    private static List<Registration>registrations;
+
 
 
 
@@ -245,7 +248,13 @@ public class App extends Application {
         item = it;
     }
 
+    public static List<Registration> getRegistrations() { return registrations; }
 
+    public static void setRegistrations(List<Registration> registrations) { App.registrations = registrations; }
+
+    public static String getShopname() { return shopname; }
+
+    public static void setShopname(String shopname) { App.shopname = shopname; }
 
 
     public static String getType1() {
@@ -332,20 +341,38 @@ public class App extends Application {
     }
     @Subscribe
     public void catalogEventFunc(catalogEvent event) {
+        int flag=0;
+        if(event.getType().equals("1NetworkMarketingWorker")) {
+            event.setType("NetworkMarketingWorker");
+            flag=1;
+        }
         setType(event.getType());
         setItemList(event.getItemList());
         if(itemList==null){
             System.out.println("app item list is null");
         }
         if ( (type.equals("NetworkMarketingWorker")) ) {
-            Platform.runLater(() -> {
-                try {
-                    setRoot("NetworkMarketingWorker");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            if(flag==0) {
+                Platform.runLater(() -> {
+                    try {
+                        setRoot("NetworkMarketingWorker");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-            });
+                });
+            }
+            else
+            {
+                Platform.runLater(() -> {
+                    try {
+                        setRoot("catalog");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                });
+            }
         }
         else if ( (type.equals("SystemManager")) ) {
             Platform.runLater(() -> {
@@ -507,18 +534,15 @@ public class App extends Application {
     @Subscribe
     public void onReportEvent(ReportEvent event) {
         setType(event.getType());
-        System.out.println("11");
         setStart_date(event.getStart_date());
-        System.out.println(start_date);
-        System.out.println("22");
         setEnd_date(event.getEnd_date());
-        System.out.println("33");
         setReport_list(event.getReport_list());
-        System.out.println("44");
         setStart_date2(event.getStart_date2());
         setEnd_date2(event.getEnd_date2());
         setComplain_list(event.getComplain_list());
         setOrderList(event.getOrder_list());
+        setShopname(event.getShop_name());
+        setRegistrations(event.getRegistrations());
 
         Platform.runLater(() -> {
             if(event.getType().equals("Complain Report") || event.getType().equals("Revenue Report") || event.getType().equals("Orders Report")) {
@@ -529,7 +553,7 @@ public class App extends Application {
                 }
             }
 
-            else if (event.getType().equals("Complain Compare") || event.getType().equals("Revenue Compare") ){
+            else if (event.getType().equals("Complain Compare") || event.getType().equals("Revenue Compare") || event.getType().equals("Orders Compare") ){
                 try {
                     App.setRoot("ComplainCompare");
                 } catch (IOException e) {

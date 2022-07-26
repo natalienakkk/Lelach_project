@@ -8,12 +8,11 @@
 
 <AnchorPane fx:id="pane1" prefHeight="550.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.NetworkMarketingWorkerController">
     <children>
-        <Text layoutX="153.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome">
+        <Text layoutX="235.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0">
             <font>
                 <Font name="System Bold Italic" size="27.0" />
             </font>
         </Text>
-        <Text fx:id="workername" layoutX="294.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="134.13671875" />
         <Button fx:id="showallitems_button" layoutX="14.0" layoutY="126.0" mnemonicParsing="false" onAction="#showallitems_butt" text="Show All Items" />
         <Button fx:id="additem_button" layoutX="344.0" layoutY="328.0" mnemonicParsing="false" onAction="#additem_butt" text="Add Item" />
         <Button fx:id="apply_button" layoutX="277.0" layoutY="195.0" mnemonicParsing="false" onAction="#apply_butt" text="Apply" />
@@ -62,11 +61,11 @@
                 <Font name="System Bold Italic" size="13.0" />
             </font>
         </Text>
-        <Text fx:id="worker_name" layoutX="277.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="81.13671875">
+        <Text fx:id="NW_name" layoutX="219.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="315.13671875">
             <font>
                 <Font name="System Bold Italic" size="27.0" />
             </font></Text>
-        <Button fx:id="back_button" layoutX="15.0" layoutY="39.0" mnemonicParsing="false" onAction="#back_butt" text="Back to Homepage" />
+        <Button fx:id="logout" layoutX="15.0" layoutY="39.0" mnemonicParsing="false" onAction="#logout1" text="logout" />
         <Button fx:id="delete_discount" layoutX="344.0" layoutY="196.0" mnemonicParsing="false" onAction="#delete_discount" prefHeight="25.0" prefWidth="194.0" text="delete discount " />
         <Text layoutX="235.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\%" wrappingWidth="19.40625">
             <font>

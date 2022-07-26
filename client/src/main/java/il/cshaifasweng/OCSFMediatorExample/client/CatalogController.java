@@ -25,7 +25,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 public class CatalogController {
-    int Max = 500;
+    int Max = 5000000;
     int Min = 0;
     private static String color = null;
     @FXML public static List<Item> itemList = new ArrayList<Item>();
@@ -761,7 +761,7 @@ public class CatalogController {
                 other1.setText("Log In");
             } else if (type.equals("NetworkMarketingWorker")) {
                 other1.setVisible(false);
-                other.setText("Add Item");
+                other.setText("Edit Catalog");
                 filter.setVisible(false);
             } else if (type.equals("Client")) {
                 other.setText("My Profile");
@@ -840,29 +840,30 @@ public class CatalogController {
 //        for ( int y = 0; y < size ;y++) {
 //            imageList.add(new Image(itemList.get(y).getPicture()));
 //        }
+        String pic =null;
 
         for ( i = 0; i < size ;i++) {
             for(;g<itemList.size();g++){
                 if(itemList.get(g).getPrice() < Max && itemList.get(g).getPrice() > Min ) {
                     if(color.equals("start")) {
-                        File file = new File("client\\src\\main\\resources\\il\\cshaifasweng\\OCSFMediatorExample\\client\\images\\" +itemList.get(g).getName()+".jpg");
-                        File file2 = null;
-                        try {
-                            file2 = new File(file.getCanonicalFile().toURI());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        System.out.println(file2.getAbsolutePath());
                         buttons_list.get(i).setText(itemList.get(g).getName());
-                        Image image = new Image(file2.toURI().toString());
+                        Image image = new Image(itemList.get(g).getPicture());
                         photo_list.get(i).setImage(image);
                         g++;
                         break;
                     }
                     else {
                         if(itemList.get(g).getColor().equals(color)){
+                            pic = itemList.get(g).getPicture();
+                            File file = new File( pic);
+                            File file2 = null;
+                            try {
+                                file2 = new File(file.getCanonicalFile().toURI());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             buttons_list.get(i).setText(itemList.get(g).getName());
-                            Image image = new Image(itemList.get(g).getPicture());
+                            Image image = new Image(file2.toURI().toString());
                             photo_list.get(i).setImage(image);
                             g++;
                             break;

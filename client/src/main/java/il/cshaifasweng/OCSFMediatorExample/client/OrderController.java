@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import il.cshaifasweng.OCSFMediatorExample.entities.Message;
 import il.cshaifasweng.OCSFMediatorExample.entities.Order;
+import il.cshaifasweng.OCSFMediatorExample.entities.Registration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,7 +17,6 @@ public class OrderController {
     private static Order order;
     public static Order getOrder() { return order; }
     public static void setOrder(Order order) { OrderController.order = order; }
-
     @FXML
     private ResourceBundle resources;
 
@@ -76,9 +77,26 @@ public class OrderController {
     @FXML
     private Button back;
 
+    private static Registration CurrUser;
+
+    public static Registration getCurrUser() {
+        return CurrUser;
+    }
+
+    public static void setCurrUser(Registration currUser) {
+        CurrUser = currUser;
+    }
+
     @FXML
     void back(ActionEvent event) throws IOException {
-        App.setRoot("homepage");
+        try {
+            CurrUser.getUserName();
+            SimpleClient.getClient().sendToServer(new Message("#LogOut" , CurrUser));
+            App.setRoot("homepage");
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -100,7 +118,8 @@ public class OrderController {
         assert status != null : "fx:id=\"status\" was not injected: check your FXML file 'order.fxml'.";
         assert totalprice != null : "fx:id=\"totalprice\" was not injected: check your FXML file 'order.fxml'.";
         setOrder(App.getOrder1());
-        clientname.setText(order.getClientname());
+        setCurrUser(App.getUser1());
+        clientname.setText(order.getReceivername());
         clientid.setText(order.getClientid());
         dateoforder.setText(order.getDate());
         receivedate.setText(order.getRecievedate());
@@ -118,6 +137,8 @@ public class OrderController {
             receiveraddress1.setVisible(false);
             receiveremail.setVisible(false);
             receiveremail1.setVisible(false);
+            note.setVisible(false);
+            note1.setVisible(false);
         }
         if(order.getNote()!=null){
             note.setText(order.getNote());
@@ -128,6 +149,7 @@ public class OrderController {
         }
         status.setText(order.getStatus());
         totalprice.setText(order.getTotalprice());
+
         orderid.setText(order.getId() + " ");
 
     }

@@ -32,6 +32,7 @@ public class CustomerServiceController {
 
     @FXML public static void setList3(List<Order> list3) { CustomerServiceController.list3 = list3; }
 
+
     @FXML
     private ResourceBundle resources;
 
@@ -65,9 +66,13 @@ public class CustomerServiceController {
     @FXML
     private Button continue_button;
 
+    @FXML
+    private TableColumn<Complain, LocalDate> deadline_date;
+
+    @FXML
+    private TableColumn<Complain, LocalTime> deadline_time;
 
 
-    //@FXML
     public static Complain complain;
     public static Order order1;
 
@@ -98,14 +103,13 @@ public class CustomerServiceController {
                     setOrder1(list3.get(i));
                 }
             }
-        }
-
-
-        try {
+            try {
             App.setRoot("CustomerService2");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        }
+
     }
 
     public static Complain getComplain() {
@@ -131,7 +135,7 @@ public class CustomerServiceController {
         ObservableList<Complain> List = FXCollections.observableArrayList();
         for (int i = 0; i < list.size(); i++) {
             if(list.get(i).getStatus().equals("new complain"))
-                List.add(new Complain(list.get(i).getComplain_type(), list.get(i).getDate(), list.get(i).getTime(), list.get(i).getStatus(),list.get(i).getUsername(),list.get(i).getId(),list.get(i).getOrderID(),list.get(i).getMessage()));
+                List.add(new Complain(list.get(i).getComplain_type(), list.get(i).getDate(), list.get(i).getTime(), list.get(i).getStatus(),list.get(i).getUsername(),list.get(i).getId(),list.get(i).getOrderID(),list.get(i).getMessage(),list.get(i).getDate().plusDays(1),list.get(i).getTime().plusHours(24)));
         }
         return List;
     }
@@ -157,6 +161,8 @@ public class CustomerServiceController {
         type.setCellValueFactory(new PropertyValueFactory<Complain,String>("complain_type"));
         order_id.setCellValueFactory(new PropertyValueFactory<Complain,Long>("orderID"));
         complain_id.setCellValueFactory(new PropertyValueFactory<Complain,Long>("id"));
+        deadline_time.setCellValueFactory(new PropertyValueFactory<Complain,LocalTime>("deadline_time"));
+        deadline_date.setCellValueFactory(new PropertyValueFactory<Complain,LocalDate>("deadline_date"));
         complain_table.setItems(getList2());
         complain_table.getColumns().addAll();
 
