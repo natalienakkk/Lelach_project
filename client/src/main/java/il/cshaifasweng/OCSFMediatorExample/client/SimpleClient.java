@@ -2,6 +2,8 @@ package il.cshaifasweng.OCSFMediatorExample.client;
 import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.greenrobot.eventbus.EventBus;
 import java.awt.event.ItemEvent;
 import java.io.IOException;

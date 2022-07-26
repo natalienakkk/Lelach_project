@@ -102,6 +102,10 @@ public class ShoppingCartController {
     @FXML
     private Button Back;
 
+    @FXML
+    private Text refund;
+
+
 
     @FXML
     private ResourceBundle resources;
@@ -207,6 +211,7 @@ public class ShoppingCartController {
             TotalPrice.setText((totalpricefinal)+" ");
             flag = 1;
             Note.setValue(" ");
+            DeliveryTo2.setValue(" ");
             if (DeliveryTo2.getSelectionModel().getSelectedItem().equals("Someone else"))
             {
                 Receiveraddress1.setVisible(true);
@@ -372,6 +377,7 @@ public class ShoppingCartController {
         Receivername2.setVisible(false);
         DeliveryTo2.setVisible(false);
         DeliveryTo1.setVisible(false);
+        refund.setVisible(false);
         Note1.setVisible(false);
         Note2.setVisible(false);
         Note.setVisible(false);
@@ -394,11 +400,16 @@ public class ShoppingCartController {
             }
             else totalpricefinal = cart.gettotalPrice(cart)-a;
         }
+        if(a!=0)
+        {
+            refund.setVisible(true);
+        }
         if ( User2.getAccountType().equals("One year subscription") && cart.gettotalPrice(cart)>50 )
         {
             totalpricefinal = (int) (totalpricefinal*0.9);
             subsc.setVisible(true);
         }
+
         TotalPrice.setText(totalpricefinal+"");
         DeliveryOP.getItems().addAll(Delivery);
         Note.getItems().addAll(Delivery);

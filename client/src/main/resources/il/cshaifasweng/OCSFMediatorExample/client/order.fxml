@@ -13,7 +13,7 @@
 
 <AnchorPane prefHeight="558.0" prefWidth="838.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.OrderController">
    <children>
-      <ImageView fitHeight="558.0" fitWidth="838.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="558.0" fitWidth="838.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@ThankUBackground.jpg" />
          </image>
@@ -338,7 +338,7 @@
             <Font name="System Italic" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="note" layoutX="85.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+      <Text fx:id="note" layoutX="74.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="690.3157196044922">
          <font>
             <Font name="System Italic" size="17.0" />
          </font>
@@ -379,7 +379,7 @@
             </LinearGradient>
          </fill>
       </Text>
-      <Text fx:id="receiveremail" layoutX="171.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+      <Text fx:id="receiveremail" layoutX="171.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="463.9156799316406">
          <font>
             <Font name="System Italic" size="17.0" />
          </font>
