@@ -5,10 +5,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import il.cshaifasweng.OCSFMediatorExample.entities.Complain;
-import il.cshaifasweng.OCSFMediatorExample.entities.Order;
-import il.cshaifasweng.OCSFMediatorExample.entities.Registration;
-import il.cshaifasweng.OCSFMediatorExample.entities.ShoppingCart;
+import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +17,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 
 public class Profile2Controller {
+
+//    private List<Item> items1;
+//    public List<Item> getItems1() { return items1; }
+//    public void setItems1(List<Item> items) { this.items1 = items; }
 
     @FXML private static List<Order> order_list;
 
@@ -58,12 +59,9 @@ public class Profile2Controller {
     private TableColumn<Order, String> totalPrice;
 
     @FXML
-    void back(ActionEvent event) {
-        try {
-            App.setRoot("catalog");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    void back(ActionEvent event) throws IOException {
+        //SimpleClient.getClient().sendToServer(new Message("#opencatalog", "Client", items1));
+        App.setRoot("catalog");
     }
 
     Registration username;
@@ -129,7 +127,7 @@ public class Profile2Controller {
         assert recieveDate != null : "fx:id=\"recieveDate\" was not injected: check your FXML file 'Profile2.fxml'.";
         assert status != null : "fx:id=\"status\" was not injected: check your FXML file 'Profile2.fxml'.";
         assert totalPrice != null : "fx:id=\"totalPrice\" was not injected: check your FXML file 'Profile2.fxml'.";
-
+        //setItems1(App.getItemList());
         setUsername(App.getUser1());
         setOrder_list(App.getOrderList());
         orderId.setCellValueFactory(new PropertyValueFactory<Order, Long>("id"));

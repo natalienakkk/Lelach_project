@@ -26,7 +26,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 public class CatalogController {
     int Max = 5000000;
-    int Min = 0;
+    int Min = -1;
     private static String color = null;
     @FXML public static List<Item> itemList = new ArrayList<Item>();
     @FXML public static List<Item> getItemList() { return itemList; }
@@ -161,7 +161,8 @@ public class CatalogController {
     private Button other1;
     @FXML
     private AnchorPane Pane2;
-
+    @FXML
+    private Text welcome;
     @FXML
     private MenuItem CancelOrder;
     @FXML
@@ -749,6 +750,10 @@ public class CatalogController {
 
 ///////////////////////////////////////////
         setCurrUser(App.getUser1());
+        if(CurrUser.getSelectedStore().equals("Lelach, Haifa"))
+            welcome.setText("Welcome "+ CurrUser.getUserName() + " " +"to our shop Lelach,Haifa");
+        else if(CurrUser.getSelectedStore().equals("Lelach, Tel Aviv"))
+            welcome.setText("Welcome "+ CurrUser.getUserName() + " " +"to our shop Lelach,Tel Aviv");
 ////////////////////////////////////////////////
     }
 

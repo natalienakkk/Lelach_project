@@ -160,7 +160,9 @@ public class ComplainReportController {
                         for (int j = 0; j < order_list.size(); j++) {
                             LocalDate date1 = LocalDate.parse(order_list.get(j).getDate());
                             if (date1.isEqual(date)) {
-                                totalRevenue += Double.parseDouble(order_list.get(j).getTotalprice());
+                                if(!(order_list.get(j).getStatus().equals("Canceled"))) {
+                                    totalRevenue += Double.parseDouble(order_list.get(j).getTotalprice());
+                                }
                             }
                         }
                         series.getData().add(new XYChart.Data<>(order_list.get(i).getDate(), totalRevenue));
@@ -192,13 +194,13 @@ public class ComplainReportController {
                             LocalDate date1 = LocalDate.parse(order_list.get(j).getDate());
                             if (date1.isEqual(date)) {
                                 for (int k = 0; k < order_list.get(j).getCart().getItems().size(); k++) {
-                                    if (order_list.get(j).getCart().getItems().get(k).getType().equals("flower"))
+                                    if (order_list.get(j).getCart().getItems().get(k).getType().equals("flower") && !(order_list.get(j).getStatus().equals("Canceled")))
                                         type1 += order_list.get(j).getCart().getAmount().get(k);
-                                    else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Plant"))
+                                    else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Plant")&& !(order_list.get(j).getStatus().equals("Canceled")))
                                         type2 += order_list.get(j).getCart().getAmount().get(k);
-                                    else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Bouquet"))
+                                    else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Bouquet")&& !(order_list.get(j).getStatus().equals("Canceled")))
                                         type3 += order_list.get(j).getCart().getAmount().get(k);
-                                    else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Rose"))
+                                    else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Rose")&& !(order_list.get(j).getStatus().equals("Canceled")))
                                         type4 += order_list.get(j).getCart().getAmount().get(k);
                                 }
                             }
@@ -268,8 +270,10 @@ public class ComplainReportController {
                                 for(int k=0;k<registrations.size();k++)
                                 {
                                     if(order_list.get(j).getClientname().equals(registrations.get(k).getUserName())) {
-                                        if (registrations.get(k).getSelectedStore().equals("Lelach, Haifa"))
-                                            totalRevenue += Double.parseDouble(order_list.get(j).getTotalprice());
+                                        if (registrations.get(k).getSelectedStore().equals("Lelach, Haifa")) {
+                                            if(!(order_list.get(j).getStatus().equals("Canceled")))
+                                                totalRevenue += Double.parseDouble(order_list.get(j).getTotalprice());
+                                        }
                                     }
                                 }
 
@@ -307,13 +311,13 @@ public class ComplainReportController {
                                     if(order_list.get(j).getClientname().equals(registrations.get(t).getUserName())) {
                                         if (registrations.get(t).getSelectedStore().equals("Lelach, Haifa")) {
                                             for (int k = 0; k < order_list.get(j).getCart().getItems().size(); k++) {
-                                                if (order_list.get(j).getCart().getItems().get(k).getType().equals("flower"))
+                                                if (order_list.get(j).getCart().getItems().get(k).getType().equals("flower") && !(order_list.get(j).getStatus().equals("Canceled")))
                                                     type1 += order_list.get(j).getCart().getAmount().get(k);
-                                                else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Plant"))
+                                                else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Plant") && !(order_list.get(j).getStatus().equals("Canceled")))
                                                     type2 += order_list.get(j).getCart().getAmount().get(k);
-                                                else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Bouquet"))
+                                                else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Bouquet") && !(order_list.get(j).getStatus().equals("Canceled")))
                                                     type3 += order_list.get(j).getCart().getAmount().get(k);
-                                                else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Rose"))
+                                                else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Rose") && !(order_list.get(j).getStatus().equals("Canceled")))
                                                     type4 += order_list.get(j).getCart().getAmount().get(k);
                                             }
                                         }
@@ -386,7 +390,7 @@ public class ComplainReportController {
                             if (date1.isEqual(date)) {
                                 for(int k=0;k<registrations.size();k++)
                                 {
-                                    if(order_list.get(j).getClientname().equals(registrations.get(k).getUserName())) {
+                                    if(order_list.get(j).getClientname().equals(registrations.get(k).getUserName()) && !(order_list.get(j).getStatus().equals("Canceled"))) {
                                         if (registrations.get(k).getSelectedStore().equals("Lelach, Tel Aviv"))
                                             totalRevenue += Double.parseDouble(order_list.get(j).getTotalprice());
                                     }
@@ -424,16 +428,16 @@ public class ComplainReportController {
                             if (date1.isEqual(date)) {
                                 for(int t=0;t<registrations.size();t++)
                                 {
-                                    if(order_list.get(j).getClientname().equals(registrations.get(t).getUserName())) {
+                                    if(order_list.get(j).getClientname().equals(registrations.get(t).getUserName()) && !(order_list.get(j).getStatus().equals("Canceled"))) {
                                         if (registrations.get(t).getSelectedStore().equals("Lelach, Tel Aviv")) {
                                             for (int k = 0; k < order_list.get(j).getCart().getItems().size(); k++) {
-                                                if (order_list.get(j).getCart().getItems().get(k).getType().equals("flower"))
+                                                if (order_list.get(j).getCart().getItems().get(k).getType().equals("flower") && !(order_list.get(j).getStatus().equals("Canceled")))
                                                     type1 += order_list.get(j).getCart().getAmount().get(k);
-                                                else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Plant"))
+                                                else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Plant") && !(order_list.get(j).getStatus().equals("Canceled")))
                                                     type2 += order_list.get(j).getCart().getAmount().get(k);
-                                                else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Bouquet"))
+                                                else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Bouquet") && !(order_list.get(j).getStatus().equals("Canceled")))
                                                     type3 += order_list.get(j).getCart().getAmount().get(k);
-                                                else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Rose"))
+                                                else if (order_list.get(j).getCart().getItems().get(k).getType().equals("Rose") && !(order_list.get(j).getStatus().equals("Canceled")))
                                                     type4 += order_list.get(j).getCart().getAmount().get(k);
                                             }
                                         }

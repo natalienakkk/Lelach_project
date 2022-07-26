@@ -496,13 +496,19 @@ public class SimpleServer extends AbstractServer {
 			for (int i = 0; i < itemsList.size(); i++) {
 				if (itemsList.get(i).getId().equals(item_id)) {
 					session.delete(itemsList.get(i));
-					System.out.println(i);
+					session.getTransaction().commit();
 					break;
 				}
 			}
+			session.close();
+			session = sessionFactory.openSession();
+			session.beginTransaction();
 			itemsList = getAll(Item.class);
-			session.getTransaction().commit();
-			client.sendToClient(new Message("#item_deleted", "NetworkMarketingWorker", itemsList));
+			List<ShoppingCart> a = new ArrayList<ShoppingCart>();
+			for (int i = 0; i < itemsList.size(); i++) {
+				itemsList.get(i).setCartList(a);
+			}
+			client.sendToClient(new Message("#opencatalog","1NetworkMarketingWorker" , itemsList));
 			session.close();
 		}
 		else if (msgString.equals("#add new item")) {
@@ -531,34 +537,40 @@ public class SimpleServer extends AbstractServer {
 			session.close();
 		}
 		else if (msgString.startsWith("#apply discount")) {
-			System.out.println("hello222222222222222222");
 			Message msgdiscount = ((Message) msg);
 			double discount = ((double) msgdiscount.getObject()) / 100;
-			System.out.println("hello222222222222222222");
 			if (discount <= 0 || discount >= 1) {
 				Warning newWarning = new Warning("PLEASE enter a number between 1 and 100");
 				client.sendToClient(new Message("wrong discount", newWarning));
 				return;
 			}
-			System.out.println("hello222222222222222222");
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			List<Item> itemsList = getAll(Item.class);
+			List<Registration>registrations=getAll(Registration.class);
 			double new_price;
-			System.out.println("hello222222222222222222");
 			List<ShoppingCart> cart = new ArrayList<ShoppingCart>();
-			System.out.println("hello222222222222222222");
 			for (int i = 0; i < itemsList.size(); i++) {
 				new_price = (itemsList.get(i).getPrice()) * (1 - discount);
 				itemsList.get(i).setPrice(new_price);
 				itemsList.get(i).setCartList(cart);
-				session.save(itemsList.get(i));
+				session.update(itemsList.get(i));
 			}
-			//session.update(itemsList);
 			session.getTransaction().commit();
-			System.out.println("hello222222222222222222");
-			//client.sendToClient(new Message("#natalie","NetworkMarketingWorker",itemsList,"Welcome to our site we have "+ Double.toString(discount*100)+" on everything"));
-			System.out.println("rashillllllllllllllll");
+
+			List<Thread> threadList= new ArrayList<Thread>();
+			for(int i=0;i<registrations.size();i++){
+				if(registrations.get(i).getStatus().equals("Client")){
+					Thread thread=new Thread(new MyThread(registrations.get(i).getEmail(),"SALE!","Our dear Customer we would like to notify you that we have a "+((int)(discount*100))+"% on everything"));
+					threadList.add(thread);
+				}
+			}
+			for(int i=0;i<threadList.size();i++){
+				threadList.get(i).start();
+			}
+
+
+			//client.sendToClient(new Message("#opencatalog","NetworkMarketingWorker",itemsList,"Welcome to our site we have "+ Double.toString(discount*100)+" on everything"));
 			session.close();
 
 		}
@@ -572,7 +584,7 @@ public class SimpleServer extends AbstractServer {
 			for (int i = 0; i < itemsList.size(); i++) {
 				new_price = (itemsList.get(i).getPrice()) * (1 / (1 - discount));
 				itemsList.get(i).setPrice(new_price);
-				session.save(itemsList.get(i));
+				session.update(itemsList.get(i));
 			}
 			session.getTransaction().commit();
 			session.flush();
@@ -1220,30 +1232,30 @@ public class SimpleServer extends AbstractServer {
 			session.close();
 		}
 
-		session = sessionFactory.openSession();
-		session.beginTransaction();
-		List<Order> order_list=getAll(Order.class);
-		for(Order orders : order_list)
-		{
-			System.out.println("akm mra bfot");
-			String DelDate = orders.getRecievedate();
-			String DelTime = orders.getRecievetime();
-
-			RefundCheck time = new RefundCheck();
-			int temp = time.Delivery(DelDate, DelTime);
-			if(temp == 1 && orders.getStatus().equalsIgnoreCase("pending"))
-			{
-				System.out.println("ana bal ifff");
-				orders.setStatus("Delivered");
-				session.update(orders);
-				session.getTransaction().commit();
-				String f = "Your order have been delivered successfully, order number: " + orders.getId();
-				Thread thread = new Thread(new MyThread(orders.getClientmail(), "Order Delivered", f));
-				thread.start();
-			}
-
-			session.flush();
-		}
+//		session = sessionFactory.openSession();
+//		session.beginTransaction();
+//		List<Order> order_list=getAll(Order.class);
+//		for(Order orders : order_list)
+//		{
+//			System.out.println("akm mra bfot");
+//			String DelDate = orders.getRecievedate();
+//			String DelTime = orders.getRecievetime();
+//
+//			RefundCheck time = new RefundCheck();
+//			int temp = time.Delivery(DelDate, DelTime);
+//			if(temp == 1 && orders.getStatus().equalsIgnoreCase("pending"))
+//			{
+//				System.out.println("ana bal ifff");
+//				orders.setStatus("Delivered");
+//				session.update(orders);
+//				session.getTransaction().commit();
+//				String f = "Your order have been delivered successfully, order number: " + orders.getId();
+//				Thread thread = new Thread(new MyThread(orders.getClientmail(), "Order Delivered", f));
+//				thread.start();
+//			}
+//
+//			session.flush();
+//		}
 
 
 	}
@@ -1294,7 +1306,7 @@ public class SimpleServer extends AbstractServer {
 		Item it19 =new Item("Friendship Bouquet" , "Bouquet" , "White" , "il/cshaifasweng/OCSFMediatorExample/client/images/Friendship Bouquet.jpg" ,90 );
 		Item it20 =new Item("Plant" , "Plant" , "Green" ,"il/cshaifasweng/OCSFMediatorExample/client/images/Plant.jpg"  , 30);
 		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareen@gmail.com", "0505123456", "client1", "1234", "Client", "2233445566", "1/1/2023", "Store Account",0,"Lelach, Haifa" );
-		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "Natalie@gmail.com", "0524789000", "client2", "1234", "Client", "1234561299", "5/8/2024", "Chain Account",0,"Lelach, Tel Aviv" );
+		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "natalienk2000@gmail.com", "0524789000", "client2", "1234", "Client", "1234561299", "5/8/2024", "Chain Account",0,"Lelach, Tel Aviv" );
 		Registration client3 = new Registration("Natal", "Nakka", "234789776", "saherdaoud2000@windowslive.com", "0524789000", "client3", "1234", "Client", "1234561299", "5/8/2024", "One year subscription",0,"Lelach, Tel Aviv");
 		Registration CEO = new Registration("Rashil", "Mbariky", "4443336661", "", "", "Rashi", "rashi", "CEO", "", "", "",0,"");
 		Registration NetworkMarketingWorker = new Registration("Eissa", "Wahesh", "", "", "", "Eissa", "11111", "NetworkMarketingWorker", "", "", "",0,"");

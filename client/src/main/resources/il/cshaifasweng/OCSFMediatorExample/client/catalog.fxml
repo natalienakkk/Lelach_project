@@ -21,7 +21,7 @@
    <content>
       <AnchorPane fx:id="Pane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="838.0" style="-fx-background-color: white;">
          <children>
-            <Text fx:id="Header" layoutX="299.0" layoutY="117.0" stroke="#a90d0d" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog">
+            <Text fx:id="Header" layoutX="331.0" layoutY="118.0" stroke="#a90d0d" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog">
                <font>
                   <Font name="Georgia Italic" size="50.0" />
                </font>
@@ -923,6 +923,33 @@
                   </AnchorPane>
                </content>
             </TitledPane>
+            <Text fx:id="welcome" layoutX="207.0" layoutY="160.0" stroke="#a90d0d" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="444.39996337890625">
+               <font>
+                  <Font name="Georgia Italic" size="21.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="1.0" endY="0.6287878851095835" startX="0.35700757575757586" startY="0.2528409090909095">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5247252747252746">
+                           <color>
+                              <Color red="0.9052631855010986" green="0.12070175260305405" blue="0.49990642070770264" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Text>
+            <Button fx:id="refresh" layoutX="280.0" layoutY="28.0" mnemonicParsing="false" onKeyPressed="#refresh" text="Button" />
          </children>
       </AnchorPane>
    </content>
