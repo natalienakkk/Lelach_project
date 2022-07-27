@@ -84,7 +84,7 @@ public class DesignitemController {
 
     @FXML
     void add(ActionEvent event) throws IOException {
-        Item item = new Item("Designed item","Rose","Rainbow","https://i.pinimg.com/originals/47/50/6d/47506d7c3e40f1529a5f0860cc304569.jpg",totalprice);
+        Item item = new Item("Designed item","Rose","Rainbow","https://www.flora2000.com/lux300/18592.jpg",totalprice);
         SimpleClient.getClient().sendToServer(new Message("#addtocart" , item , 1.0 ,User.getUserName()));
         App.setRoot("catalog");
 

@@ -1297,7 +1297,7 @@ public class SimpleServer extends AbstractServer {
 		Item it18 =new Item("SunFlower Bouquet" , "Bouquet" , "Yellow" , "il/cshaifasweng/OCSFMediatorExample/client/images/SunFlower Bouquet.jpg" ,  90);
 		Item it19 =new Item("Friendship Bouquet" , "Bouquet" , "White" , "il/cshaifasweng/OCSFMediatorExample/client/images/Friendship Bouquet.jpg" ,90 );
 		Item it20 =new Item("Plant" , "Plant" , "Green" ,"il/cshaifasweng/OCSFMediatorExample/client/images/Plant.jpg"  , 30);
-		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareen@gmail.com", "0505123456", "client1", "1234", "Client", "2233445566", "1/1/2023", "Store Account",0,"Lelach, Haifa" );
+		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareenghattas1999@gmail.com", "0505123456", "client1", "1234", "Client", "2233445566", "1/1/2023", "Store Account",0,"Lelach, Haifa" );
 		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "natalienk2000@gmail.com", "0524789000", "client2", "1234", "Client", "1234561299", "5/8/2024", "Chain Account",0,"Lelach, Tel Aviv" );
 		Registration client3 = new Registration("Natal", "Nakka", "234789776", "saherdaoud2000@windowslive.com", "0524789000", "client3", "1234", "Client", "1234561299", "5/8/2024", "One year subscription",0,"Lelach, Tel Aviv");
 		Registration CEO = new Registration("Rashil", "Mbariky", "4443336661", "", "", "Rashi", "rashi", "CEO", "", "", "",0,"");
