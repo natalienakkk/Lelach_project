@@ -3,6 +3,7 @@ import il.cshaifasweng.OCSFMediatorExample.entities.*;
 import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import org.greenrobot.eventbus.EventBus;
 import java.awt.event.ItemEvent;
@@ -15,8 +16,8 @@ public class SimpleClient extends AbstractClient {
 		super(host, port);
 	}
 	@Override protected void handleMessageFromServer(Object msg) {
-		System.out.println("im in client");
 		String msgstring = ((Message) msg).getMessage();
+		System.out.println("im in client" + msgstring );
 		if (msgstring.startsWith("#opencatalog")) {
 			if((List<Item>) ((Message) msg).getObject2() == null) {
 				System.out.println("simpleClient list is null");
@@ -72,19 +73,6 @@ public class SimpleClient extends AbstractClient {
 		else if(msgstring.equals("#submitorderwarning")) {
 			System.out.println("nayakat2");
 			EventBus.getDefault().post(new WarningEvent((Warning) ((Message) msg).getObject()));
-		}
-		else if(msgstring.equalsIgnoreCase("#MemberSignedUpSucces")) {
-			EventBus.getDefault().post(new WarningEvent((Warning) ((Message) msg).getObject()));
-//			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//			alert.setTitle("SignedUpSuccess");
-//			alert.setContentText("Dear client, welcome to Lilach. you have been signed up successfully");
-//			alert.showAndWait();
-			try {
-				App.setRoot("HomePage"); /* change to cataloooooooooooggggggg */
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 		else if(msgstring.equalsIgnoreCase("#LogInSucess")) {
 			System.out.println("1");
@@ -187,20 +175,16 @@ public class SimpleClient extends AbstractClient {
 			System.out.println("zbt "+order.getId());
 			EventBus.getDefault().post(new ComplainEvent((Order)((Message) msg).getObject()));
 		}
-		else if(msgstring.equalsIgnoreCase("#MemberSignedUpSucces")) {
-			//////////////////////////////////////////
+		else if(msgstring.equals("#MemberSignedUpSucces")) {
 			EventBus.getDefault().post(new ConfirmationEvent((Confirmation) ((Message) msg).getObject()));
-
-//       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//       alert.setTitle("SignedUpSuccess");
-//       alert.setContentText("Dear client, welcome to Lilach. you have been signed up successfully");
-//       alert.showAndWait();
 			try {
-				App.setRoot("HomePage"); /* change to catalog??? */
+				App.setRoot("HomePage");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setTitle("SignedUpSuccess");
+       		alert.setContentText("Dear client, welcome to Lilach. you have been signed up successfully");
 		}
 		else if(msgstring.equals("#list of complain sent2")) {
 			EventBus.getDefault().post(new ComplainEvent((List<Complain>) ((Message) msg).getObject(),(String)((Message) msg).getObject2()));
@@ -208,7 +192,6 @@ public class SimpleClient extends AbstractClient {
 		else if(msgstring.equals("#list of order sent")) {
 			System.out.println("im in simpleclient in list of order sent");
 			List<Order> orderList = (List<Order>) ((Message) msg).getObject();
-			System.out.println(orderList.get(0).getCart().getItems().size()+ "   oooo:P");
 			EventBus.getDefault().post(new ComplainEvent((String)((Message) msg).getObject2(),(List<Order>) ((Message) msg).getObject()));
 		}
 		else if(msgstring.equals("#list of message sent")) {

@@ -679,7 +679,7 @@ public class CatalogController {
 
     @FXML
     void design1(ActionEvent event) throws IOException {
-
+        App.setRoot("design");
     }
 
 
@@ -748,6 +748,7 @@ public class CatalogController {
         assert photo_8 != null : "fx:id=\"photo_8\" was not injected: check your FXML file 'catalog.fxml'.";
         assert photo_9 != null : "fx:id=\"photo_9\" was not injected: check your FXML file 'catalog.fxml'.";
         colorpicker.getItems().addAll(colors);
+        setCurrUser(App.getUser1());
         setType(App.getType());
         setItemList(App.getItemList());
         for(int i=0;i<itemList.size();i++)
@@ -762,16 +763,22 @@ public class CatalogController {
         filter.setExpanded(false);
 
 ///////////////////////////////////////////
-        setCurrUser(App.getUser1());
-        if(CurrUser.getSelectedStore().equals("Lelach, Haifa"))
-            welcome.setText("Welcome "+ CurrUser.getUserName() + " " +"to our shop Lelach,Haifa");
-        else if(CurrUser.getSelectedStore().equals("Lelach, Tel Aviv"))
-            welcome.setText("Welcome "+ CurrUser.getUserName() + " " +"to our shop Lelach,Tel Aviv");
 ////////////////////////////////////////////////
     }
 
 
     public void setCatalog(){
+//        if(CurrUser==null) welcome.setText("");
+//        else if(CurrUser.getSelectedStore().equals("Lelach, Haifa")) {
+//            System.out.println("aa1");
+//            welcome.setText("Welcome to Lelach,Haifa");
+//            System.out.println("aa2");
+//        }
+//        else{
+//            System.out.println("aa1");
+//            welcome.setText("Welcome to Lelach,Tel Aviv");
+//            System.out.println("aa2");
+//        }
         if (type != null) {
             if (type.equals("Guest")) {
                 other.setText("Sign Up");

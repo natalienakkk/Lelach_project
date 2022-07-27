@@ -197,7 +197,7 @@ public class CancelOrderController {
         List<Order> orderList= getMyOrdersList();
         for(int i=0; i< orderList.size();i++)
         {
-            if(orderList.get(i).getId() == order1.getId())
+            if(orderList.get(i).getClientid() == order1.getClientid())
             {
                 order = orderList.get(i);
                 break;
@@ -224,6 +224,7 @@ public class CancelOrderController {
             else
             {
                 order1.setStatus("Canceled");
+                order.setStatus("Canceled");
                 HistoryTable.refresh();
                 try {
                     SimpleClient.getClient().sendToServer(new Message("#CancelOrder", order, unregClient));

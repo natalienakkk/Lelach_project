@@ -20,6 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedMap;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -195,15 +196,13 @@ public class SimpleServer extends AbstractServer {
 					ind = i;
 				}
 			}
-
-			//ShoppingCart cart1 = (ShoppingCart) msg1.getObject3();
 			if (firstTimes.get(ind).getFirsttime() == 0) {
-				System.out.println("nayaaaaaaakaaaaaaaaaaaaattttttttttttt");
 				cart1 = new ShoppingCart();
 				cart1.AddtoCart(item);
 				cart1.Addamount(amount);
 				cart1.gettotalPrice(cart1);
 				cart1.setUsernamee(username);
+				session.save(item);
 				session.save(cart1);
 				firstTimes.get(ind).setFirsttime(1);
 				firstTimes.get(ind).setFirsttime1(1);
@@ -251,9 +250,11 @@ public class SimpleServer extends AbstractServer {
 //			{
 //				a.get(i).gettotalPrice(a.get(i));
 //			}
+
 			session.update(cart1);
 			session.getTransaction().commit();
 			session.close();
+
 
 		}
 		else if (msgString.startsWith("#getcart")) {
@@ -354,6 +355,9 @@ public class SimpleServer extends AbstractServer {
 				////////////////////////////////////////////////////
 				Confirmation newWarning = new Confirmation("Dear " + newSignUp.getUserName() + " welcome to Lilach. you have been signed up successfully");
 				client.sendToClient(new Message("#MemberSignedUpSucces", newWarning));
+				Thread thread = new Thread(new MyThread(newSignUp.getEmail(),"Welcome to Lelach!","Dear Mr/Mrs "+newSignUp.getFirstName() + '\n' + "Your Sign Up was completed successfully ,Have fun shopping with Lelach. "));
+				thread.run();
+				session.close();
 				return;
 
 			} catch (Exception e) {
@@ -986,8 +990,6 @@ public class SimpleServer extends AbstractServer {
 					RefundCheck time = new RefundCheck();
 					int temp = time.Refund(Date, Time);
 					System.out.println(temp);
-					String RefundRespond = String.valueOf(User.getCreditCard());
-					RefundRespond = RefundRespond.substring(RefundRespond.length() - 4);
 					Confirmation Respond;
 
 					if (temp == 3) {
@@ -1030,6 +1032,7 @@ public class SimpleServer extends AbstractServer {
 
 				}
 			}
+			session.close();
 		}
 //		else if (msgString.equals("#OpenCancelOrder")) {
 //			Message msg1 = ((Message) msg);
@@ -1211,9 +1214,6 @@ public class SimpleServer extends AbstractServer {
 					orderList1.add(orderList.get(i));
 				}
 			}
-
-
-			System.out.println(" im in simpleserver in send order list" + orderList1.get(0).getCart().getAmount().size());
 			client.sendToClient(new Message("#list of order sent", orderList1,type_profile));
 
 			session.close();
@@ -1303,11 +1303,11 @@ public class SimpleServer extends AbstractServer {
 		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "natalienk2000@gmail.com", "0524789000", "client2", "1234", "Client", "1234561299", "5/8/2024", "Chain Account",0,"Lelach, Tel Aviv" );
 		Registration client3 = new Registration("Natal", "Nakka", "234789776", "saherdaoud2000@windowslive.com", "0524789000", "client3", "1234", "Client", "1234561299", "5/8/2024", "One year subscription",0,"Lelach, Tel Aviv");
 		Registration CEO = new Registration("Rashil", "Mbariky", "4443336661", "", "", "Rashi", "rashi", "CEO", "", "", "",0,"");
-		Registration NetworkMarketingWorker = new Registration("Eissa", "Wahesh", "", "", "", "Eissa", "11111", "NetworkMarketingWorker", "", "", "",0,"");
-		Registration customerservice=new Registration("nunu","nunu","","","","nunu","nunu","CustomerService","","","",0,"");
-		Registration SystemManger = new Registration("Elias", "Dow", "", "", "", "Elisa", "lampon", "SystemManager", "", "", "",0,"");
-		Registration BranchManger = new Registration("Saher", "Daoud", "", "", "", "Saher", "123456", "BranchManager", "", "", "",0,"Lelach, Haifa");
-		Registration BranchManger2 = new Registration("saher5", "Daoud", "", "", "", "Saher1", "123456", "BranchManager", "", "", "",0,"Lelach, Tel Aviv");
+		Registration NetworkMarketingWorker = new Registration("Eissa", "Wahesh", "111456789", "", "", "Eissa", "11111", "NetworkMarketingWorker", "", "", "",0,"");
+		Registration customerservice=new Registration("nunu","nunu","","222456789","","nunu","nunu","CustomerService","","","",0,"");
+		Registration SystemManger = new Registration("Elias", "Dow", "", "333356789", "", "Elisa", "lampon", "SystemManager", "", "", "",0,"");
+		Registration BranchManger = new Registration("Saher", "Daoud", "", "425555589", "", "Saher", "123456", "BranchManager", "", "", "",0,"Lelach, Haifa");
+		Registration BranchManger2 = new Registration("saher5", "Daoud", "", "222426789", "", "Saher1", "123456", "BranchManager", "", "", "",0,"Lelach, Tel Aviv");
 
 		//session.save(temp);
 		session.save(it1);

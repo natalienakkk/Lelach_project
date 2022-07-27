@@ -189,7 +189,7 @@ public class ShoppingCartController {
                 order = new Order(date.toString().substring(0, 10), ReceiveDate.getValue().toString(),timeh.getText()+":"+timem.getText(), User2.getCreditCard(), DeliveryOP.getSelectionModel().getSelectedItem(), User2.getClient_ID(), User2.getUserName(),User2.getEmail() ,Receiveraddress2.getText(), Receivername2.getText(), Receiveremail2.getText(), TotalPrice.getText(), "pending", Note2.getText());
             } else if (DeliveryTo2.getSelectionModel().getSelectedItem().equals("Myself")) {
                 System.out.println("opopopop3");
-                order = new Order(date.toString().substring(0, 10), ReceiveDate.getValue().toString(),timeh.getText()+":"+timem.getText(), User2.getCreditCard(), DeliveryOP.getSelectionModel().getSelectedItem(), User2.getClient_ID(), User2.getUserName(), User2.getEmail(),"Haifa", User2.getFirstName(), null, TotalPrice.getText(), "pending");
+                order = new Order(date.toString().substring(0, 10), ReceiveDate.getValue().toString(),timeh.getText()+":"+timem.getText(), User2.getCreditCard(), DeliveryOP.getSelectionModel().getSelectedItem(), User2.getClient_ID(), User2.getUserName(), User2.getEmail(),"Haifa", User2.getFirstName(), " ", TotalPrice.getText(), "pending"," ");
             }
             System.out.println("heyyyyyyyyyyyyyyyyy");
             SimpleClient.getClient().sendToServer(new Message("#submitorder", order, cart,totalpricefinal));

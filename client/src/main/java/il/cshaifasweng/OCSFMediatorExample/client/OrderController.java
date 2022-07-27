@@ -125,7 +125,7 @@ public class OrderController {
         receivedate.setText(order.getRecievedate());
         cardnumber.setText(order.getCard());
         delivery.setText(order.getDeliveryOp());
-        if(delivery.getText().equals("Yes")) {
+        if(delivery.getText().equals("Yes") && (!order.getReceivermail().equals(" "))) {
             receivername.setText(order.getReceivername());
             receiveraddress.setText(order.getReceiveraddress());
             receiveremail.setText(order.getReceivermail());
@@ -140,7 +140,7 @@ public class OrderController {
             note.setVisible(false);
             note1.setVisible(false);
         }
-        if(order.getNote()!=null){
+        if(!order.getNote().equals(" ")){
             note.setText(order.getNote());
         }
         else {

@@ -29,7 +29,7 @@ public class SignUpController implements Initializable {
     @FXML
     private Tooltip AccountTypeToolTip;
 
-    private String[] Accounts = {"Store Account", "Chain Account: Shop in any Store", "One year subscription: Pay 100nis and get 10% discount in every purchase over 50nis"};
+    private String[] Accounts = {"Store Account", "Chain Account: Shop in any Store", "One year subscription"};
 
     @FXML
     private Button Back;
@@ -111,7 +111,7 @@ public class SignUpController implements Initializable {
         if (!password.matches("[a-zA-Z0-9]+")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Illegal Password");
-            alert.setContentText("Please enter new Password: it most contain letters and numbers only");
+            alert.setContentText("Please enter new Password: it must contain letters and numbers only");
 //            Password.setText("Enter new Password: it most contain letters and numbers only");
 //            alert.showAndWait();
             alert.show();
@@ -132,31 +132,46 @@ public class SignUpController implements Initializable {
             PhoneNumber.setText("");
             return false;
         }
+        if(AccountType.getValue().equalsIgnoreCase("One year subscription"))
+        {
+            if(!SubscriptionCheck.isSelected())
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Please confirm charges");
+                alert.setContentText("Please check confirmation account type");
+                alert.showAndWait();
+                ID.setText("");
+                return false;
+            }
+
+        }
         return true;
     }
 
 
     @FXML
     void SignUp(ActionEvent event) {
+        System.out.println("sbaba 5");
         AccountType.setTooltip(AccountTypeToolTip);
         System.out.println(StoreSelection.getValue());
-//        String password = Password.getText();
-//        String Id = ID.getText();
-//        String PhoneNum = PhoneNumber.getText();
         if(Password.getText() == "" || FirstName.getText() == "" || LastName.getText()=="" || ID.getText()=="" ||
                 Email.getText() == "" || PhoneNumber.getText()=="" || UserName.getText()=="" ||  Password.getText()=="" ||
-                CreditCard.getText()== "" || ExpiryDate.getValue().toString() == "" || AccountType.getValue().toString() == "")
+                CreditCard.getText()== "" || ExpiryDate.getValue().toString() == "" || AccountType.getValue() == "")
         {
+            System.out.println("sbaba 9");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Empty Fields");
             alert.setContentText("Please fill out all required fields");
             alert.showAndWait();
+            System.out.println("sbaba 10");
         }
         else if(CheckInputs(Password.getText(), ID.getText(), PhoneNumber.getText()))
         {
+            System.out.println("sbaba 12");
             Registration newClient;
             if(AccountType.getValue().equalsIgnoreCase("Store Account"))
             {
+                System.out.println("sbaba6 ");
                 newClient = new Registration(FirstName.getText(), LastName.getText(), ID.getText(),
                         Email.getText(), PhoneNumber.getText(), UserName.getText(), Password.getText(),
                         "Client", CreditCard.getText(), ExpiryDate.getValue().toString(),
@@ -165,13 +180,18 @@ public class SignUpController implements Initializable {
             }
             else
             {
+                System.out.println("sbaba ");
                 newClient = new Registration(FirstName.getText(), LastName.getText(), ID.getText(),
-                        Email.getText(), PhoneNumber.getText(), UserName.getText(), Password.getText(), "Client",
-                        CreditCard.getText(), ExpiryDate.getValue().toString(), AccountType.getValue().toString(), false, 0);
+                        Email.getText(), PhoneNumber.getText(), UserName.getText(), Password.getText(),
+                        "Client", CreditCard.getText(), ExpiryDate.getValue().toString(),
+                        AccountType.getValue().toString(),false , 0, "");
+                System.out.println("sbaba ");
 
             }
             try {
+                System.out.println("sbaba ");
                 SimpleClient.getClient().sendToServer(new Message("#SignUpRequest", newClient));
+                System.out.println("sbaba 2");
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -231,7 +251,7 @@ public class SignUpController implements Initializable {
                 SubscriptionCheck.setVisible(false);
                 SubscriptionText.setVisible(false);
             }
-            else if(AccountSelection.equalsIgnoreCase("One year subscription: Pay 100nis and get 10% discount in every purchase over 50nis"))
+            else if(AccountSelection.equalsIgnoreCase("One year subscription"))
             {
                 System.out.println("   ChoiceBox.getValue(): " + AccountSelection);
                 SubscriptionText.setVisible(true);
@@ -251,3 +271,4 @@ public class SignUpController implements Initializable {
         });
     }
 }
+
