@@ -318,7 +318,7 @@
             <Font name="System Italic" size="17.0" />
          </font>
       </Text>
-      <Text fx:id="cardnumber" layoutX="171.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+      <Text fx:id="cardnumber" layoutX="171.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="275.1156311035156">
          <font>
             <Font name="System Italic" size="17.0" />
          </font>

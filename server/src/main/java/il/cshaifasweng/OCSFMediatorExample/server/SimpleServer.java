@@ -82,6 +82,7 @@ public class SimpleServer extends AbstractServer {
 			ShoppingCart cart = (ShoppingCart) msg1.getObject2();
 			int totalpricefinal = (int) msg1.getObject3();
 			int price = cart.gettotalPrice(cart);
+			if(order.getDeliveryOp().equals("Yes")) totalpricefinal-=20;
 			order.setCart(cart);
 			List<ShoppingCart> a = new ArrayList<ShoppingCart>();
 			for (int i = 0; i < cart.getItems().size(); i++) {
@@ -103,10 +104,7 @@ public class SimpleServer extends AbstractServer {
 						}
 
 					}
-					System.out.println(User.getRefund());
-					System.out.println(price);
-					System.out.println(totalpricefinal);
-					System.out.println(User.getRefund() - (price - totalpricefinal));
+					if(!(price==(0.9*totalpricefinal)))
 					User.setRefund(User.getRefund() - (price - totalpricefinal));
 					System.out.println(User.getRefund());
 					session.update(User);
