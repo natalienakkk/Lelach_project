@@ -17,7 +17,6 @@ public class SimpleClient extends AbstractClient {
 	}
 	@Override protected void handleMessageFromServer(Object msg) {
 		String msgstring = ((Message) msg).getMessage();
-		System.out.println("im in client" + msgstring );
 		if (msgstring.startsWith("#opencatalog")) {
 			if((List<Item>) ((Message) msg).getObject2() == null) {
 				System.out.println("simpleClient list is null");
@@ -32,7 +31,6 @@ public class SimpleClient extends AbstractClient {
 //			EventBus.getDefault().post(event);
 //		}
 		else if(msgstring.equals("#submitorder")) {
-			System.out.println("sssssssssssddhgdfdfdfgddtctutuvsxfgdcfhgjsdfgjsfdgsdgf");
 			Order order = (Order) ((Message) msg).getObject();
 			ShoppingCart cart = (ShoppingCart) ((Message) msg).getObject2();
 			order.setCart(cart);
@@ -71,13 +69,10 @@ public class SimpleClient extends AbstractClient {
 			EventBus.getDefault().post(new WarningEvent((Warning) ((Message) msg).getObject()));
 		}
 		else if(msgstring.equals("#submitorderwarning")) {
-			System.out.println("nayakat2");
 			EventBus.getDefault().post(new WarningEvent((Warning) ((Message) msg).getObject()));
 		}
 		else if(msgstring.equalsIgnoreCase("#LogInSucess")) {
-			System.out.println("1");
 			Registration user = (Registration) ((Message) msg).getObject();
-			System.out.println("2");
 			if((user.getStatus()).equals("Client")) {
 				System.out.println("login successss! ");
 				catalogEvent event = new catalogEvent(user.getStatus(), (List<Item>) ((Message) msg).getObject2());
@@ -107,7 +102,7 @@ public class SimpleClient extends AbstractClient {
 		else if(msgstring.equals("#information updated")) {
 			EventBus.getDefault().post(new itemEvent((Item) ((Message) msg).getObject()));
 		}
-		else if(msgstring.equals("#item_deleted")) {System.out.println("saheeeeeeeeeeeeeer");
+		else if(msgstring.equals("#item_deleted")) {
 			catalogEvent event = new catalogEvent((String) ((Message) msg).getObject(), (List<Item>) ((Message) msg).getObject2());
 			EventBus.getDefault().post(event);
 
@@ -120,11 +115,9 @@ public class SimpleClient extends AbstractClient {
 		}
 		else if(msgstring.equals("#list of report sent"))
 		{
-			System.out.println("wsl report blclient");
 			EventBus.getDefault().post(new ReportEvent((String) ((Message) msg).getObject(),(LocalDate) ((Message) msg).getObject2(),(LocalDate) ((Message) msg).getObject3(),(List<Report>) ((Message) msg).getObject4(),(List<Complain>) ((Message) msg).getObject5(),(String) ((Message) msg).getObject6(),(List<Registration>) ((Message) msg).getObject7()));
 		}
 		else if(msgstring.equals("#list of report sent2")) {
-			System.out.println("ya 7bebebebbebebbe");
 			EventBus.getDefault().post(new ReportEvent((String) ((Message) msg).getObject(), (LocalDate) ((Message) msg).getObject2(), (LocalDate) ((Message) msg).getObject3(), (List<Order>) ((Message) msg).getObject4(),(String) ((Message) msg).getObject5(),(List<Registration>) ((Message) msg).getObject6()));
 		}
 		else if(msgstring.equals("#list of report sent to compare"))
@@ -146,15 +139,12 @@ public class SimpleClient extends AbstractClient {
 			EventBus.getDefault().post(new UsernameEvent((String) ((Message) msg).getObject(),(List<Registration>) ((Message) msg).getObject2()));
 		}
 		else if(msgstring.equals("#list of complain sent")) {
-			System.out.println("3essa");
 			EventBus.getDefault().post(new ComplainEvent((List<Complain>) ((Message) msg).getObject(),(List<Order>) ((Message) msg).getObject2()));
 			//EventBus.getDefault().post(new ComplainEvent((List<Complain>) ((Message) msg).getObject()));
 			//List<Order> list = (List<Order>) ((Message) msg).getObject2();
 			//System.out.println(list.get(0).getCart().getItems().get(0).getName() + " orderrrr from client");
-			System.out.println("3essa1");
 		}
 		else if (msgstring.equals("#OrderCanceled")) {
-			System.out.println("wslttt hoon");
 			EventBus.getDefault().post(new ConfirmationEvent((Confirmation) ((Message) msg).getObject()));
 		}
 		else if(msgstring.equals("#MyOrdersList")) {
@@ -170,9 +160,7 @@ public class SimpleClient extends AbstractClient {
 			EventBus.getDefault().post(event);
 		}
 		else if (msgstring.equals("#order sent")) {
-			System.out.println("fotnaaaaaaaaaaaaaaaaaaaaaaaaa");
 			Order order =(Order)((Message) msg).getObject();
-			System.out.println("zbt "+order.getId());
 			EventBus.getDefault().post(new ComplainEvent((Order)((Message) msg).getObject()));
 		}
 		else if(msgstring.equals("#MemberSignedUpSucces")) {
@@ -190,7 +178,6 @@ public class SimpleClient extends AbstractClient {
 			EventBus.getDefault().post(new ComplainEvent((List<Complain>) ((Message) msg).getObject(),(String)((Message) msg).getObject2()));
 		}
 		else if(msgstring.equals("#list of order sent")) {
-			System.out.println("im in simpleclient in list of order sent");
 			List<Order> orderList = (List<Order>) ((Message) msg).getObject();
 			EventBus.getDefault().post(new ComplainEvent((String)((Message) msg).getObject2(),(List<Order>) ((Message) msg).getObject()));
 		}
@@ -199,7 +186,6 @@ public class SimpleClient extends AbstractClient {
 		}
 		else if(msgstring.equalsIgnoreCase("#natalie"))
 		{
-			System.out.println("rashillllllllllllllllllll");
 			System.out.println("client"+(String) ((Message) msg).getObject3());
 			EventBus.getDefault().post(new catalogEvent((String) ((Message) msg).getObject(), (List<Item>) ((Message) msg).getObject2(),(String) ((Message) msg).getObject3()));
 		}

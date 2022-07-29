@@ -24,10 +24,8 @@ import javafx.scene.control.TextArea;
 
 public class CancelOrderController {
     @FXML private static List<Order> MyOrdersList;
-//    private static List<Purchase> purchaseList;
     private static Registration unregClient;
     private static int status = 0;
-//    private Purchase temp;
     private Order MyOrder;
 
     public Order getMyOrder() {
@@ -120,10 +118,6 @@ public class CancelOrderController {
 //                break;
 //            }
 //        }
-//        System.out.println("asA???????????/");
-//        System.out.println(order.getTotalprice());
-//        System.out.println(order.getRecievetime());
-//        System.out.println(order.getRecievedate());
 //        if(order == null)
 //        {
 //            Warning New_Warning = new Warning("You Didnt Select An Order!");
@@ -169,7 +163,6 @@ public class CancelOrderController {
 ////                if(MyOrdersList.get(i).getId().equals(orders.get(0).getId()))
 ////                {
 ////                    MyOrder = orders.get(0);
-////                    System.out.println(MyOrder.getClientid());
 ////                }
 ////            }
 ////            if (MyOrder.getStatus().contains("Canceled"))
@@ -203,7 +196,6 @@ public class CancelOrderController {
                 break;
             }
         }
-        System.out.println("asA???????????/");
         System.out.println(order.getTotalprice());
         System.out.println(order.getRecievetime());
         System.out.println(order.getRecievedate());
@@ -253,7 +245,6 @@ public class CancelOrderController {
 //                if(MyOrdersList.get(i).getId().equals(orders.get(0).getId()))
 //                {
 //                    MyOrder = orders.get(0);
-//                    System.out.println(MyOrder.getClientid());
 //                }
 //            }
 //            if (MyOrder.getStatus().contains("Canceled"))
@@ -279,22 +270,14 @@ public class CancelOrderController {
         {
             if(MyOrdersList.get(i).getClientid().equals(unregClient.getClient_ID()))
             {
-                System.out.println("ana fo2");
                 if(MyOrdersList.get(i).getStatus().equals("pending") ||MyOrdersList.get(i).getStatus().equals("Delivered") )
                 {
-                    System.out.println("ana t7t");
                     PurchaseList.add(new Order(MyOrdersList.get(i).getId(), MyOrdersList.get(i).getRecievetime(), MyOrdersList.get(i).getRecievedate(), MyOrdersList.get(i).getClientid(), MyOrdersList.get(i).getTotalprice(), MyOrdersList.get(i).getStatus()));
                 }
             }
         }
 
         return PurchaseList;
-//        Price_col.setCellValueFactory(new PropertyValueFactory<>("totalprice"));
-//        OrderID_col.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        Status_col.setCellValueFactory(new PropertyValueFactory<>("status"));
-//        Time_col.setCellValueFactory(new PropertyValueFactory<>("recievedate"));
-//        HistoryTable.setItems(PurchaseList);
-//        HistoryTable.setItems(PurchaseList);
     }
 
     @FXML
@@ -307,17 +290,8 @@ public class CancelOrderController {
         assert Status_col != null : "fx:id=\"Status_col\" was not injected: check your FXML file 'CancelOrder.fxml'.";
         assert Time_col != null : "fx:id=\"Time_col\" was not injected: check your FXML file 'CancelOrder.fxml'.";
         assert Date_col != null : "fx:id=\"Date_col\" was not injected: check your FXML file 'CancelOrder.fxml'.";
-//        setUnregClient(App.getUser1());
         setMyOrdersList(App.getOrderList());
         setUnregClient(App.getUser1());
-//        for(Order order : MyOrdersList)
-//        {
-//            System.out.println("ana bal cancel order controller");
-//            System.out.println(order.getRecievedate());
-//            System.out.println(order.getStatus());
-//            System.out.println(order.getTotalprice());
-//            System.out.println(order.getId());
-//        }
 
         Price_col.setCellValueFactory(new PropertyValueFactory<Order, String>("totalprice"));
         OrderID_col.setCellValueFactory(new PropertyValueFactory<Order , Long>("id"));
@@ -327,6 +301,5 @@ public class CancelOrderController {
         ClientID_col.setCellValueFactory(new PropertyValueFactory<Order , String>("clientid"));
         HistoryTable.setItems(populateTable());
         HistoryTable.getColumns().addAll();
-//        populateTable();
     }
 }

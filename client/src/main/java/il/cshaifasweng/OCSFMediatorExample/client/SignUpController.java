@@ -151,27 +151,21 @@ public class SignUpController implements Initializable {
 
     @FXML
     void SignUp(ActionEvent event) {
-        System.out.println("sbaba 5");
         AccountType.setTooltip(AccountTypeToolTip);
-        System.out.println(StoreSelection.getValue());
         if(Password.getText() == "" || FirstName.getText() == "" || LastName.getText()=="" || ID.getText()=="" ||
                 Email.getText() == "" || PhoneNumber.getText()=="" || UserName.getText()=="" ||  Password.getText()=="" ||
                 CreditCard.getText()== "" || ExpiryDate.getValue().toString() == "" || AccountType.getValue() == "")
         {
-            System.out.println("sbaba 9");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Empty Fields");
             alert.setContentText("Please fill out all required fields");
             alert.showAndWait();
-            System.out.println("sbaba 10");
         }
         else if(CheckInputs(Password.getText(), ID.getText(), PhoneNumber.getText()))
         {
-            System.out.println("sbaba 12");
             Registration newClient;
             if(AccountType.getValue().equalsIgnoreCase("Store Account"))
             {
-                System.out.println("sbaba6 ");
                 newClient = new Registration(FirstName.getText(), LastName.getText(), ID.getText(),
                         Email.getText(), PhoneNumber.getText(), UserName.getText(), Password.getText(),
                         "Client", CreditCard.getText(), ExpiryDate.getValue().toString(),
@@ -180,18 +174,14 @@ public class SignUpController implements Initializable {
             }
             else
             {
-                System.out.println("sbaba ");
                 newClient = new Registration(FirstName.getText(), LastName.getText(), ID.getText(),
                         Email.getText(), PhoneNumber.getText(), UserName.getText(), Password.getText(),
                         "Client", CreditCard.getText(), ExpiryDate.getValue().toString(),
                         AccountType.getValue().toString(),false , 0, "");
-                System.out.println("sbaba ");
 
             }
             try {
-                System.out.println("sbaba ");
                 SimpleClient.getClient().sendToServer(new Message("#SignUpRequest", newClient));
-                System.out.println("sbaba 2");
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -232,7 +222,6 @@ public class SignUpController implements Initializable {
 
         AccountType.setOnAction((event) -> {
             String AccountSelection = AccountType.getValue();
-//            System.out.println("   ChoiceBox.getValue(): " + AccountSelection);
             if(AccountSelection.equalsIgnoreCase("Store Account"))
             {
                 System.out.println("   ChoiceBox.getValue(): " + AccountSelection);

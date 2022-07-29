@@ -86,7 +86,6 @@ public class CEOController {
 
     @FXML
     void CompareReports_butt(ActionEvent event) {
-        //System.out.println(storeName);
         if (Type.equals("Complain Report")) {
             try {
                 SimpleClient.getClient().sendToServer(new Message("#show Report to compare", "Complain Compare", first_start, first_end, second_start, second_end,storeName));

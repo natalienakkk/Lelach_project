@@ -47,7 +47,6 @@ public class SimpleServer extends AbstractServer {
 
 		String msgString = msg.toString();
 		if (msgString.equals("#opencatalog")) {
-			System.out.println("here1");
 			Message msg3 = ((Message) msg);
 			String user_type = (String) msg3.getObject();
 			session = sessionFactory.openSession();
@@ -57,7 +56,6 @@ public class SimpleServer extends AbstractServer {
 			for (int i = 0; i < itemList.size(); i++) {
 				itemList.get(i).setCartList(a);
 			}
-			System.out.println("here2");
 			client.sendToClient(new Message("#opencatalog", user_type, itemList));
 			session.close();
 		} else if (msgString.startsWith("#deletefromcart")) {
@@ -74,7 +72,6 @@ public class SimpleServer extends AbstractServer {
 			session.flush();
 			session.close();
 		} else if (msgString.startsWith("#submitorder")) {
-			System.out.println("im in simpleserver in submitorder");
 			session = sessionFactory.openSession();
 			session.beginTransaction();
 			Message msg1 = ((Message) msg);
@@ -94,11 +91,9 @@ public class SimpleServer extends AbstractServer {
 			if (totalpricefinal != -1) {
 				if (price != totalpricefinal) {
 
-					System.out.println(order.getClientname());
 					Registration User = null;
 					List<Registration> registrations = getAll(Registration.class);
 					for (int i = 0; i < registrations.size(); i++) {
-						System.out.println(registrations.get(i).getUserName());
 						if (registrations.get(i).getUserName().equals(order.getClientname())) {
 							User = registrations.get(i);
 						}
@@ -106,7 +101,6 @@ public class SimpleServer extends AbstractServer {
 					}
 					if(!(price==(0.9*totalpricefinal)))
 					User.setRefund(User.getRefund() - (price - totalpricefinal));
-					System.out.println(User.getRefund());
 					session.update(User);
 					session.getTransaction().commit();
 				}
@@ -135,7 +129,6 @@ public class SimpleServer extends AbstractServer {
 					} else
 						details1 = details1 + order.getCart().getAmount().get(j) + "x" + order.getCart().getItems().get(j).getName() + " + ";
 				}
-				System.out.println(order.getCart().getItems().get(0).getName());
 				session.save(order);
 				session.update(cart);
 
@@ -205,7 +198,6 @@ public class SimpleServer extends AbstractServer {
 				firstTimes.get(ind).setFirsttime(1);
 				firstTimes.get(ind).setFirsttime1(1);
 				session.update(firstTimes.get(ind));
-				System.out.println(item.getName() + " a");
 			} else {
 				List<ShoppingCart> cartList = getAll(ShoppingCart.class);
 				int flag0 = 0;
@@ -214,9 +206,7 @@ public class SimpleServer extends AbstractServer {
 				cart1 = cartList.get(cartList.size() - 1);
 
 				for (int i = cartList.size() - 1; i >= 0; i--) {
-					System.out.println("in the for loop in add to cart");
 					if (cartList.get(i).getUsernamee().equals(username)) {
-						System.out.println("in the if in addtocart");
 						cart1 = cartList.get(i);
 						break;
 					}
@@ -288,7 +278,6 @@ public class SimpleServer extends AbstractServer {
 				ShoppingCart cart = new ShoppingCart();
 				client.sendToClient(new Message("#getcart", cart));
 			} else {
-				System.out.println(cart1.getItems().get(0).getName());
 				Order ord = new Order();
 				cart1.setOrder(ord);
 				List<Item> a = new ArrayList<Item>();
@@ -305,7 +294,6 @@ public class SimpleServer extends AbstractServer {
 				}
 //				cart1.setItems(cart2.getItems());
 //				cart1.setAmount(cart2.getAmount());
-				System.out.println(User.getClient_ID() + " " + User.getUserName());
 				client.sendToClient(new Message("#getcart", cart1, User));
 			}
 			session.update(cart1);
@@ -318,7 +306,6 @@ public class SimpleServer extends AbstractServer {
 			Warning warning = new Warning("Warning from server!");
 			try {
 				client.sendToClient(warning);
-				System.out.format("Sent warning to client %s\n", client.getInetAddress().getHostAddress());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -332,7 +319,6 @@ public class SimpleServer extends AbstractServer {
 			try {
 				List<Registration> clients = getAll(Registration.class);
 				for (Registration registration : clients) {
-					System.out.println(registration.getUserName());
 					if (registration.getClient_ID().equals(ID1)) {
 //						registration.setRegistered(false);
 						Warning new_warning = new Warning("Dear " + newSignUp.getFirstName() + ",you are already Signed up.\n Please go to Login.");
@@ -384,7 +370,6 @@ public class SimpleServer extends AbstractServer {
 				FirstTime firstTime = new FirstTime(0, 0, UserName);
 				session.save(firstTime);
 			}
-			System.out.println(UserName);
 			String Password = newLogin.getPassword();
 			int UserNameFound = -1;
 			try {
@@ -396,15 +381,20 @@ public class SimpleServer extends AbstractServer {
 							if (registration.getStatus().equalsIgnoreCase("blocked client")) {
 								Warning new_warning = new Warning("You're account have been blocked. Please contact customer service");
 								client.sendToClient(new Message("#BlockedAccount", new_warning));
-								return;
+//								return;
 							}
 							else if (registration.getRegistered().equals(true)) {
 								Warning newWarning = new Warning("You're already logged in from another computer");
 								client.sendToClient(new Message("#LoginWarning", newWarning));
-								return;
+//								return;
 							}
 							else {
 								registration.setRegistered(true);
+//								client.sendToClient(new Message("#LogInSucess", registration, itemList));
+//								session.update(registration);
+//								session.flush();
+//								session.getTransaction().commit();
+
 								List<ShoppingCart> a = new ArrayList<ShoppingCart>();
 								for (int i = 0; i < itemList.size(); i++) {
 									itemList.get(i).setCartList(a);
@@ -418,7 +408,6 @@ public class SimpleServer extends AbstractServer {
 //									}
 //								}
 								client.sendToClient(new Message("#LogInSucess", registration, itemList));
-								System.out.println("sent to client successfully");
 								session.update(registration);
 								session.flush();
 								session.getTransaction().commit();
@@ -647,7 +636,6 @@ public class SimpleServer extends AbstractServer {
 		else if (msgString.equals("#send message")) {
 			Message msgclient = ((Message) msg);
 			String username = ((String) msgclient.getObject());
-			System.out.println(username);
 			String client_msg = ((String) msgclient.getObject2());
 			session = sessionFactory.openSession();
 			session.beginTransaction();
@@ -728,7 +716,6 @@ public class SimpleServer extends AbstractServer {
 					e.printStackTrace();
 				}
 			else if (Type.equals("Revenue Report") || Type.equals("Orders Report")) {
-				System.out.println("3esa3sasasaasasa ");
 				for (int j=0; j<order_list.size();j++)
 				{
 					List<Item> a = new ArrayList<Item>();
@@ -805,8 +792,6 @@ public class SimpleServer extends AbstractServer {
 			{
 				Order ord = new Order();
 				orderList.get(u).getCart().setOrder(ord);
-				System.out.println(orderList.get(u).getCart().getAmount().size());
-				System.out.println(orderList.get(u).getCart().gettotalPrice(orderList.get(u).getCart()));
 				List<Item> a = new ArrayList<Item>();
 				List<Double> b = new ArrayList<Double>();
 				for (int i = 0; i < orderList.get(u).getCart().getItems().size(); i++) {
@@ -853,9 +838,7 @@ public class SimpleServer extends AbstractServer {
 					session.save(new_complain);
 					}
 				}
-				System.out.println("hey" + flag);
 				if(flag==0) {
-					System.out.println("wslna there is no such order");
 					Warning newWarning = new Warning("There is no such order");
 					client.sendToClient(new Message("wrong discount", newWarning));
 					return;
@@ -866,7 +849,6 @@ public class SimpleServer extends AbstractServer {
 			session.close();
 		}
 		else if(msgString.equals("#send order")) {
-			System.out.println("markkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
 			Message msg_order = ((Message) msg);
 			Long id=(Long) msg_order.getObject();
 			session = sessionFactory.openSession();
@@ -878,7 +860,6 @@ public class SimpleServer extends AbstractServer {
 			{
 				if(orderList.get(i).getId().equals(id))
 				{
-					System.out.println("msh zabt2222222222222222222");
 					client.sendToClient(new Message("#order sent",orderList.get(i)));
 					break;
 				}
@@ -950,8 +931,6 @@ public class SimpleServer extends AbstractServer {
 			{
 				Order ord = new Order();
 				orderList.get(u).getCart().setOrder(ord);
-				System.out.println(orderList.get(u).getCart().getAmount().size());
-				System.out.println(orderList.get(u).getCart().gettotalPrice(orderList.get(u).getCart()));
 				List<Item> a = new ArrayList<Item>();
 				List<Double> b = new ArrayList<Double>();
 				for (int i = 0; i < orderList.get(u).getCart().getItems().size(); i++) {
@@ -974,20 +953,16 @@ public class SimpleServer extends AbstractServer {
 			session.beginTransaction();
 			Message msg1 = ((Message) msg);
 			Order order = (Order) msg1.getObject();
-			System.out.println(order.getStatus());
 			order.setStatus("Canceled");
 			Registration User = (Registration) msg1.getObject2();
 			String CurrUserID = order.getClientid();
 			List<Registration> regList = getAll(Registration.class);
 			for (Registration buyer : regList) {
 				if (buyer.getClient_ID().equalsIgnoreCase(CurrUserID)) {
-					System.out.println(buyer.getClient_ID());
 					String Date = order.getRecievedate();
-					System.out.println(Date);
 					String Time = order.getRecievetime();
 					RefundCheck time = new RefundCheck();
 					int temp = time.Refund(Date, Time);
-					System.out.println(temp);
 					Confirmation Respond;
 
 					if (temp == 3) {
@@ -1011,7 +986,6 @@ public class SimpleServer extends AbstractServer {
 					session.flush();
 					session.getTransaction().commit();
 
-					System.out.println(Respond.getMessage());
 					String t = "Dear Mr/Mrs : " + order.getClientname() + '\n'
 							+  " Order with ID " + order.getId() + " have been canceled successfully";
 					try {
@@ -1043,8 +1017,6 @@ public class SimpleServer extends AbstractServer {
 //			{
 //				Order ord = new Order();
 //				orderList.get(u).getCart().setOrder(ord);
-//				System.out.println(orderList.get(u).getCart().getAmount().size());
-//				System.out.println(orderList.get(u).getCart().gettotalPrice(orderList.get(u).getCart()));
 //				List<Item> a = new ArrayList<Item>();
 //				List<Double> b = new ArrayList<Double>();
 //				for (int i = 0; i < orderList.get(u).getCart().getItems().size(); i++) {
@@ -1062,32 +1034,23 @@ public class SimpleServer extends AbstractServer {
 //			client.sendToClient(new Message("#MyOrdersList", orderList));
 //
 //		} else if (msgString.equals("#CancelOrder")) {
-//			System.out.println("ana hoooooooooooooon");
 //			session = sessionFactory.openSession();
 //			session.beginTransaction();
 //			Message msg1 = ((Message) msg);
 //			Order order = (Order) msg1.getObject();
-//			System.out.println(order.getStatus());
 //			order.setStatus("Canceled");
 //			Registration User = (Registration) msg1.getObject2();
 //			String CurrUserID = order.getClientid();
 //
-////            System.out.println(order.getTotalprice());
-////            System.out.println(order.getRecievetime());
-////            System.out.println(order.getRecievedate());
-////            System.out.println(CurrUserID);
 //
 //			List<Registration> regList = getAll(Registration.class);
 //			for (Registration buyer : regList) {
 //				if (buyer.getClient_ID().equalsIgnoreCase(CurrUserID)) {
-//					System.out.println("ana bal if");
-//					System.out.println(buyer.getClient_ID());
+
 //					String Date = order.getRecievedate();
-//					System.out.println(Date);
 //					String Time = order.getRecievetime();
 //					RefundCheck time = new RefundCheck();
 //					int temp = time.Refund(Date, Time);
-//					System.out.println(temp);
 //					String RefundRespond = String.valueOf(User.getCreditCard());
 //					RefundRespond = RefundRespond.substring(RefundRespond.length() - 4);
 ////                    Confirmation Respond;
@@ -1118,7 +1081,6 @@ public class SimpleServer extends AbstractServer {
 //					session.flush();
 //					session.getTransaction().commit();
 //
-//					System.out.println(Respond.getMessage());
 //
 //					try {
 //						client.sendToClient(new Message("#OrderCanceled", Respond));
@@ -1162,7 +1124,6 @@ public class SimpleServer extends AbstractServer {
 			Complain complain=new Complain();
 			Message msg_complain1 = ((Message) msg);
 			String type_profile=((String) msg_complain1.getObject());
-			System.out.println("type="+type_profile);
 			complain  = ((Complain) msg_complain1.getObject2());
 			session = sessionFactory.openSession();
 			session.beginTransaction();
@@ -1188,8 +1149,6 @@ public class SimpleServer extends AbstractServer {
 			{
 				Order ord = new Order();
 				orderList.get(u).getCart().setOrder(ord);
-				System.out.println(orderList.get(u).getCart().getAmount().size());
-				System.out.println(orderList.get(u).getCart().gettotalPrice(orderList.get(u).getCart()));
 				List<Item> a = new ArrayList<Item>();
 				List<Double> b = new ArrayList<Double>();
 				for (int i = 0; i < orderList.get(u).getCart().getItems().size(); i++) {
@@ -1299,7 +1258,7 @@ public class SimpleServer extends AbstractServer {
 		Item it20 =new Item("Plant" , "Plant" , "Green" ,"il/cshaifasweng/OCSFMediatorExample/client/images/Plant.jpg"  , 30);
 		Registration client1 = new Registration("Kareen", "Ghattas", "123456789", "kareenghattas1999@gmail.com", "0505123456", "client1", "1234", "Client", "2233445566", "1/1/2023", "Store Account",0,"Lelach, Haifa" );
 		Registration client2 = new Registration("Natalie", "Nakkara", "234789456", "natalienk2000@gmail.com", "0524789000", "client2", "1234", "Client", "1234561299", "5/8/2024", "Chain Account",0,"Lelach, Tel Aviv" );
-		Registration client3 = new Registration("Natal", "Nakka", "234789776", "saherdaoud2000@windowslive.com", "0524789000", "client3", "1234", "Client", "1234561299", "5/8/2024", "One year subscription",0,"Lelach, Tel Aviv");
+		Registration client3 = new Registration("Natal", "Nakka", "234789776", "saherdaoud2000@windowslive.com", "0524789000", "client3", "1234", "blocked client", "1234561299", "5/8/2024", "One year subscription",0,"Lelach, Tel Aviv");
 		Registration CEO = new Registration("Rashil", "Mbariky", "4443336661", "", "", "Rashi", "rashi", "CEO", "", "", "",0,"");
 		Registration NetworkMarketingWorker = new Registration("Eissa", "Wahesh", "111456789", "", "", "Eissa", "11111", "NetworkMarketingWorker", "", "", "",0,"");
 		Registration customerservice=new Registration("nunu","nunu","","222456789","","nunu","nunu","CustomerService","","","",0,"");

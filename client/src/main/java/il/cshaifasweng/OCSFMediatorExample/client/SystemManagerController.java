@@ -164,7 +164,6 @@ public class SystemManagerController {
         assert workersList != null : "fx:id=\"workersList\" was not injected: check your FXML file 'SystemManager.fxml'.";assert username_txt != null : "fx:id=\"username_txt\" was not injected: check your FXML file 'SystemManager.fxml'.";
 
         setUsername1(App.getUser1());
-        System.out.println( getUserName());
         SM_name.setText("Welcome "+username1.getUserName());
 
     }

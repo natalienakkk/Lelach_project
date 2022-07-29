@@ -28,8 +28,6 @@ public class App extends Application {
     private static String type;
     private static List<Item> itemList;
     private static Item item;
-//    private static Item item1;
-//    private static Double amount;
     boolean isRegistered = false;
     private static String type2;
     private static LocalDate start_date;

@@ -83,7 +83,7 @@ public class Profile2Controller {
                 } else
                     details1 = details1 + order_list.get(i).getCart().getAmount().get(j) + "x" + order_list.get(i).getCart().getItems().get(j).getName() + " + ";
             }
-            System.out.println(details1);
+
             if (order_list.get(i).getClientname().equals(username.getUserName())) {
                 List.add(new Order(order_list.get(i).getStatus(),order_list.get(i).getId(),order_list.get(i).getRecievedate(),order_list.get(i).getTotalprice(),order_list.get(i).getDate(),details1));
             }

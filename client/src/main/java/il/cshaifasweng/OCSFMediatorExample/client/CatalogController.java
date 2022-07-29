@@ -240,13 +240,6 @@ public class CatalogController {
             e.printStackTrace();
         }
     }
-///////////////////////////////////
-//
-//    @FXML
-//    void Back1(ActionEvent event) throws IOException {
-//        AnchorPane pane = FXMLLoader.load(getClass().getResource("homepage.fxml"));
-//        Pane2.getChildren().setAll(pane);
-//    }
 
 
     @FXML
@@ -259,7 +252,6 @@ public class CatalogController {
             e.printStackTrace();
         }
     }
-/////////////////////////////////////////////////
 
     @FXML
     void other(ActionEvent event) throws IOException {
@@ -762,8 +754,6 @@ public class CatalogController {
         setCatalog();
         filter.setExpanded(false);
 
-///////////////////////////////////////////
-////////////////////////////////////////////////
     }
 
 

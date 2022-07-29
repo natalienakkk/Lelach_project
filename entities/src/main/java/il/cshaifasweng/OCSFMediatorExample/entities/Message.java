@@ -22,7 +22,6 @@ public class Message implements Serializable {
     public Message(String msg, Object obj) {
         this.message = msg;
         this.object = obj;
-        System.out.println(" here ");
     }
 
     public Message(String msg, Object obj,Object obj2) {
