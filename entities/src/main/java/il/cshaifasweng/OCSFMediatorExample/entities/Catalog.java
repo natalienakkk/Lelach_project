@@ -39,7 +39,6 @@ public class Catalog implements Serializable {
         if(flag)
             amount++;
         else amount--;
-
     }
     public void removeIteam(Item item)
     {
@@ -47,7 +46,4 @@ public class Catalog implements Serializable {
         items.remove(item);
         updateAmount(flag);
     }
-
-
-
 }

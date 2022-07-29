@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="Pane2" prefHeight="558.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.ShoppingCartController">
+   <children>
+      <ImageView fitHeight="558.0" fitWidth="838.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@HomePage.jpg" />
+         </image>
+      </ImageView>
+      <Text layoutX="258.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shopping Cart" textAlignment="CENTER" wrappingWidth="276.5367431640625">
+         <font>
+            <Font name="Georgia Italic" size="40.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5958933788530347">
+                     <color>
+                        <Color red="0.9368420839309692" green="0.07286549359560013" blue="0.49045419692993164" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="1.0" green="0.2549019753932953" blue="0.8392156958580017" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Text>
+      <Button fx:id="Back" layoutX="7.0" layoutY="6.0" mnemonicParsing="false" onAction="#Back" text="Back">
+         <font>
+            <Font name="Times New Roman Italic" size="15.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill></Button>
+      <TableView fx:id="table" layoutX="166.0" layoutY="88.0" prefHeight="207.0" prefWidth="560.0" AnchorPane.leftAnchor="138.0" AnchorPane.rightAnchor="140.0">
+         <columns>
+            <TableColumn fx:id="col1" prefWidth="146.0" text="Flower Name" />
+            <TableColumn fx:id="col2" prefWidth="120.0" text="Flower Price" />
+            <TableColumn fx:id="col3" prefWidth="71.0" text="Amount" />
+            <TableColumn fx:id="col4" prefWidth="110.39998779296877" text="Price" />
+            <TableColumn fx:id="col5" prefWidth="110.39998779296877" text="Delete Item" />
+         </columns>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.7789473533630371" green="0.305808961391449" blue="0.5818063616752625" />
+               </color>
+            </DropShadow>
+         </effect>
+      </TableView>
+      <Text layoutX="12.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery :" wrappingWidth="75.73672485351562">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5958933788530347">
+                     <color>
+                        <Color red="0.7699999809265137" green="0.06930000334978104" blue="0.41662973165512085" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <ComboBox fx:id="DeliveryOP" layoutX="94.0" layoutY="342.0" onAction="#DeliveryOP" prefHeight="26.0" prefWidth="64.0" />
+      <Text fx:id="DeliveryTo1" layoutX="192.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery to :" wrappingWidth="98.40000000000009">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5958933788530347">
+                     <color>
+                        <Color red="0.9368420839309692" green="0.07286549359560013" blue="0.49045419692993164" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <ComboBox fx:id="DeliveryTo2" layoutX="292.0" layoutY="342.0" onAction="#DeliveryTo2" prefHeight="26.0" prefWidth="114.0" />
+      <Text fx:id="Receivername1" layoutX="12.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver's name :" wrappingWidth="137.33673095703125">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5958933788530347">
+                     <color>
+                        <Color red="0.7699999809265137" green="0.06930000334978104" blue="0.41662973165512085" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <TextField fx:id="Receivername2" layoutX="173.0" layoutY="376.0" prefHeight="26.0" prefWidth="126.0" />
+      <Text fx:id="Receiveraddress1" layoutX="12.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver's address :" wrappingWidth="150.39999999999998">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5958933788530347">
+                     <color>
+                        <Color red="0.9368420839309692" green="0.07286549359560013" blue="0.49045419692993164" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <TextField fx:id="Receiveraddress2" layoutX="173.0" layoutY="412.0" prefHeight="26.0" prefWidth="150.0" />
+      <Text fx:id="Receiveremail1" layoutX="12.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver's Email :" wrappingWidth="137.33673095703125">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5958933788530347">
+                     <color>
+                        <Color red="0.7699999809265137" green="0.06930000334978104" blue="0.41662973165512085" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <TextField fx:id="Receiveremail2" layoutX="173.0" layoutY="446.0" prefHeight="26.0" prefWidth="306.0" />
+      <DatePicker fx:id="ReceiveDate" layoutX="133.0" layoutY="309.0" onAction="#ReceiveDate" />
+      <Text layoutX="12.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receive Date :" wrappingWidth="114.39999999999986">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5958933788530347">
+                     <color>
+                        <Color red="0.9368420839309692" green="0.07286549359560013" blue="0.49045419692993164" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text fx:id="Note1" layoutX="12.0" layoutY="533.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note to Receiver :" wrappingWidth="137.33673095703125">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5958933788530347">
+                     <color>
+                        <Color red="0.7699999809265137" green="0.06930000334978104" blue="0.41662973165512085" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <ComboBox fx:id="Note" layoutX="173.0" layoutY="477.0" onAction="#Note" prefHeight="26.0" prefWidth="64.0" />
+      <Text fx:id="Note3" layoutX="12.0" layoutY="498.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note to the receiver?" wrappingWidth="168.53675842285156">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5958933788530347">
+                     <color>
+                        <Color red="0.9368420839309692" green="0.07286549359560013" blue="0.49045419692993164" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <TextField fx:id="Note2" layoutX="172.0" layoutY="508.0" prefHeight="42.0" prefWidth="294.0" />
+      <Text layoutX="489.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Price :" wrappingWidth="91.20000000000005">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5958933788530347">
+                     <color>
+                        <Color red="0.7699999809265137" green="0.06930000334978104" blue="0.41662973165512085" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text fx:id="TotalPrice" layoutX="588.0" layoutY="535.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="82.93672180175781">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="subsc" fill="#9e008c" layoutX="489.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Lilach Subscirber, you got 10% discount!" wrappingWidth="259.6708984375">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.621052622795105" green="0.0782066285610199" blue="0.5034359693527222" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Text>
+      <Button fx:id="order" layoutX="709.0" layoutY="513.0" mnemonicParsing="false" onAction="#order" prefHeight="34.0" prefWidth="114.0" text="Submit Order">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5958933788530347">
+                     <color>
+                        <Color red="0.9368420839309692" green="0.07286549359560013" blue="0.49045419692993164" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font name="Times New Roman Italic" size="15.0" />
+         </font>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.8526315689086914" green="0.034736841917037964" blue="0.6617894768714905" />
+               </color>
+            </DropShadow>
+         </effect></Button>
+      <Text layoutX="329.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receive Time :" wrappingWidth="114.39999999999986">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5958933788530347">
+                     <color>
+                        <Color red="0.9368420839309692" green="0.07286549359560013" blue="0.49045419692993164" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <TextField fx:id="timeh" layoutX="444.0" layoutY="309.0" onKeyTyped="#recivetime1" prefHeight="26.0" prefWidth="38.0" promptText="hh" />
+      <TextField fx:id="timem" layoutX="490.0" layoutY="309.0" onKeyTyped="#recivetime2" prefHeight="26.0" prefWidth="38.0" promptText="mm" />
+      <Text layoutX="485.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text=":" />
+      <Text fx:id="refund" fill="#9e008c" layoutX="489.0" layoutY="454.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Your Refund amount have been substructed from the Price" wrappingWidth="259.6708984375">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.621052622795105" green="0.0782066285610199" blue="0.5034359693527222" />
+               </color>
+            </DropShadow>
+         </effect>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

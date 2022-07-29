@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pane1" prefHeight="558.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.CEOController">
+    <children>
+        <ImageView fitHeight="550.0" fitWidth="838.0" layoutX="-3.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@SystemManagerBackground.jpg" />
+            </image>
+        </ImageView>
+        <Button fx:id="Branch_button" layoutX="24.0" layoutY="115.0" mnemonicParsing="false" onAction="#Branch_Butt" prefHeight="39.0" prefWidth="147.0" text="view branch Reports">
+            <textFill>
+                <LinearGradient endX="0.618371212121212" endY="0.5075757485447507" startX="0.18560606760509088">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                    </color>
+                </DropShadow>
+            </effect>
+            <font>
+                <Font name="Times New Roman Italic" size="14.0" />
+            </font></Button>
+        <Text fx:id="CEO_Name" layoutX="213.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="379.07812500000006">
+            <font>
+                <Font name="Georgia Italic" size="36.0" />
+            </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5">
+                     <color>
+                        <Color red="0.7789473533630371" green="0.05192982405424118" blue="0.6214268803596497" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.4431372582912445" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+        </Text>
+        <DatePicker fx:id="start_date" layoutX="72.0" layoutY="292.0" onAction="#start_butt" />
+        <DatePicker fx:id="end_date" layoutX="72.0" layoutY="331.0" onAction="#end_butt" />
+        <Text fill="#b42267" layoutX="24.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="start:">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+        </Text>
+        <Text fill="#b42267" layoutX="24.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" text="end:">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+        </Text>
+        <Button fx:id="show_report" layoutX="297.0" layoutY="312.0" mnemonicParsing="false" onAction="#show_butt" text="Show Report">
+            <textFill>
+                <LinearGradient endX="0.618371212121212" endY="0.5075757485447507" startX="0.18560606760509088">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                    </color>
+                </DropShadow>
+            </effect>
+            <font>
+                <Font name="Times New Roman Italic" size="14.0" />
+            </font></Button>
+        <Text layoutX="24.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint(1): Choose report type that you want to see">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Text layoutX="24.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint(2): Choose period for one report ">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="0.618371212121212" endY="0.5075757485447507" startX="0.18560606760509088">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Text layoutX="24.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint: To view branch Reports click on this button">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="0.618371212121212" endY="0.5075757485447507" startX="0.18560606760509088">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Text layoutX="24.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="For Lelach Reports:">
+            <font>
+                <Font name="System Bold Italic" size="14.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.8899999856948853" green="0.20469999313354492" blue="0.532580554485321" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Text layoutX="24.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Compare Reports ">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="0.618371212121212" endY="0.5075757485447507" startX="0.18560606760509088">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Text layoutX="24.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint(3): Choose period to compare between reports">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.8899999856948853" green="0.20469999313354492" blue="0.532580554485321" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Text fill="#cc0964" layoutX="24.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First One:">
+            <font>
+                <Font name="System Bold Italic" size="15.0" />
+            </font>
+        </Text>
+        <DatePicker fx:id="firstr_start" layoutX="72.0" layoutY="476.0" onAction="#firstr_start_butt" />
+        <DatePicker fx:id="firstr_end" layoutX="72.0" layoutY="515.0" onAction="#firstr_end_butt" />
+        <Text layoutX="24.0" layoutY="492.0" strokeType="OUTSIDE" strokeWidth="0.0" text="start:">
+            <font>
+                <Font name="System Bold Italic" size="15.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.8899999856948853" green="0.20469999313354492" blue="0.532580554485321" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Text layoutX="24.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="end:">
+            <font>
+                <Font name="System Bold Italic" size="15.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.8899999856948853" green="0.20469999313354492" blue="0.532580554485321" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Text fill="#cc0964" layoutX="312.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Second One:">
+            <font>
+                <Font name="System Bold Italic" size="15.0" />
+            </font>
+        </Text>
+        <DatePicker fx:id="secondr_start" layoutX="355.0" layoutY="476.0" onAction="#secondr_start_butt" />
+        <DatePicker fx:id="secondr_end" layoutX="355.0" layoutY="515.0" onAction="#secondr_end_butt" />
+        <Text layoutX="312.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="start:">
+            <font>
+                <Font name="System Bold Italic" size="15.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.8899999856948853" green="0.20469999313354492" blue="0.532580554485321" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Text layoutX="312.0" layoutY="532.0" strokeType="OUTSIDE" strokeWidth="0.0" text="end:">
+            <font>
+                <Font name="System Bold Italic" size="15.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.8899999856948853" green="0.20469999313354492" blue="0.532580554485321" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Button fx:id="CompareReports" layoutX="690.0" layoutY="496.0" mnemonicParsing="false" onAction="#CompareReports_butt" text="Compare Reports">
+            <textFill>
+                <LinearGradient endX="0.618371212121212" endY="0.5075757485447507" startX="0.18560606760509088">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.800000011920929" green="0.03529411926865578" blue="0.3921568691730499" />
+                    </color>
+                </DropShadow>
+            </effect>
+            <font>
+                <Font name="Times New Roman Italic" size="14.0" />
+            </font></Button>
+        <ComboBox fx:id="Choose_button" layoutX="24.0" layoutY="219.0" onAction="#Report_Type_butt" prefWidth="150.0" promptText="Choose Report Type" />
+        <ComboBox fx:id="store_name" layoutX="553.0" layoutY="496.0" onAction="#choose_store" prefHeight="26.0" prefWidth="124.0" promptText="Choose Branch">
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.800000011920929" green="0.03529411926865578" blue="0.3921568691730499" />
+                    </color>
+                </DropShadow>
+            </effect>
+        </ComboBox>
+        <Text layoutX="23.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint(4): choose if you want to compare reports between branches or between Lelach reports">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startY="0.3551136363636369">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="0.5247252747252746">
+                            <color>
+                                <Color red="0.8315789699554443" green="0.06775828450918198" blue="0.4369382858276367" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Button fx:id="logout" layoutX="7.0" layoutY="6.0" mnemonicParsing="false" onAction="#logout1" text="LogOut">
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="0.576923076923077">
+                            <color>
+                                <Color red="0.8947368264198303" green="0.09941520541906357" blue="0.48382067680358887" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+            <font>
+                <Font name="Times New Roman Italic" size="15.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

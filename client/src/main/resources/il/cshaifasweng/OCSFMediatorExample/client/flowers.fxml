@@ -1,44 +1,185 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="Pane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.FlowersController">
+<AnchorPane fx:id="Pane1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.FlowersController">
    <children>
-      <Text fx:id="flower_name" layoutX="143.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" textAlignment="CENTER" wrappingWidth="313.33673095703125">
+      <ImageView fitHeight="558.0" fitWidth="838.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@HomePage.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="flower_name" layoutX="510.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" textAlignment="CENTER" wrappingWidth="313.33673095703125">
          <font>
-            <Font size="25.0" />
+            <Font name="Georgia Italic" size="30.0" />
          </font>
+         <fill>
+            <LinearGradient endX="0.8835227272727272" endY="0.5861742424242424" startX="0.31534090367230505" startY="0.16666665221705582">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5357142857142857">
+                     <color>
+                        <Color red="0.8631578683853149" green="0.11828459799289703" blue="0.47830668091773987" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
       </Text>
-      <ImageView fx:id="flower_image" fitHeight="190.0" fitWidth="286.0" layoutX="157.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="flower_id" layoutX="22.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID : " wrappingWidth="263.73675537109375">
+      <Text fx:id="flower_id" layoutX="23.0" layoutY="521.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID : " wrappingWidth="263.73675537109375">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="0.5795454626733606" startX="0.29640154585693823" startY="0.28030301585341943">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.6071428571428571">
+                     <color>
+                        <Color red="0.7803921699523926" green="0.054901961237192154" blue="0.22745098173618317" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text fx:id="flower_price" layoutX="332.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price : " wrappingWidth="62.93670654296875">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="0.5795454626733606" startX="0.29640154585693823" startY="0.28030301585341943">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.6071428571428571">
+                     <color>
+                        <Color red="0.7803921699523926" green="0.054901961237192154" blue="0.22745098173618317" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text fx:id="flower_color" layoutX="23.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color : " wrappingWidth="230.93670654296875">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="0.5795454626733606" startX="0.29640154585693823" startY="0.28030301585341943">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.6071428571428571">
+                     <color>
+                        <Color red="0.7803921699523926" green="0.054901961237192154" blue="0.22745098173618317" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text fx:id="flower_type" layoutX="23.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type :" wrappingWidth="277.336669921875">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="0.6931818263097242" startX="0.3267045472607468" startY="0.39015148625229346">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.6098901098901098">
+                     <color>
+                        <Color red="0.7803921699523926" green="0.054901961237192154" blue="0.22745098173618317" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text fx:id="priceee" layoutX="395.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="62.93670654296875">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="flower_price" layoutX="403.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price : " wrappingWidth="62.93670654296875">
+      <Button fx:id="back_to_catalog" layoutX="6.0" layoutY="7.0" mnemonicParsing="false" onAction="#back_to_catalog1" text="Back">
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.6931818263097242" startX="0.3267045472607468" startY="0.39015148625229346">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
          <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Text fx:id="flower_color" layoutX="22.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color : " wrappingWidth="230.93670654296875">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Text fx:id="flower_type" layoutX="23.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type :" wrappingWidth="277.336669921875">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Text fx:id="priceee" layoutX="475.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="62.93670654296875">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <Button fx:id="back_to_catalog" layoutX="32.0" layoutY="50.0" mnemonicParsing="false" onAction="#back_to_catalog1" text="Back" />
+            <Font name="Times New Roman Italic" size="15.0" />
+         </font></Button>
+      <ImageView fx:id="flower_image" fitHeight="221.0" fitWidth="277.0" layoutX="528.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.7803921699523926" green="0.054901961237192154" blue="0.22745098173618317" />
+               </color>
+            </DropShadow>
+         </effect></ImageView>
    </children>
 </AnchorPane>

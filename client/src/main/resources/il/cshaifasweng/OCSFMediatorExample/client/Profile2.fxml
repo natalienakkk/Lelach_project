@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="558.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.Profile2Controller">
+    <children>
+        <ImageView fitHeight="558.0" fitWidth="838.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@HomePage.jpg" />
+            </image>
+        </ImageView>
+        <TableView fx:id="order_table" layoutX="41.0" layoutY="82.0" prefHeight="461.0" prefWidth="689.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+            <columns>
+                <TableColumn fx:id="orderId" prefWidth="77.0" text="order ID" />
+                <TableColumn fx:id="status" prefWidth="99.0" text="status" />
+                <TableColumn fx:id="recieveDate" prefWidth="100.0" text="recieve date" />
+                <TableColumn fx:id="totalPrice" prefWidth="111.0" text="total price" />
+                <TableColumn fx:id="date" prefWidth="90.0" text="date" />
+                <TableColumn fx:id="items" prefWidth="258.39990234375" text="items" />
+            </columns>
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.7803921699523926" green="0.05098039284348488" blue="0.49803921580314636" />
+                    </color>
+                </DropShadow>
+            </effect>
+        </TableView>
+        <Text layoutX="615.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="My Orders" wrappingWidth="172.7366943359375">
+            <font>
+                <Font name="Times New Roman Bold Italic" size="35.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="0.5274725274725275">
+                            <color>
+                                <Color red="0.9263157844543457" green="0.11321637779474258" blue="0.506214439868927" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                    </color>
+                </DropShadow>
+            </effect>
+        </Text>
+        <Button fx:id="back_button" layoutX="7.0" layoutY="6.0" mnemonicParsing="false" onAction="#back" text="back to catalog">
+            <font>
+                <Font name="Times New Roman Italic" size="15.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="0.5274725274725275">
+                            <color>
+                                <Color red="0.9263157844543457" green="0.11321637779474258" blue="0.506214439868927" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill></Button>
+    </children>
+</AnchorPane>

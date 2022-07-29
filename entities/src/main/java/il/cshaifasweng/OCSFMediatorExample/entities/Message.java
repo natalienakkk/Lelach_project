@@ -12,6 +12,10 @@ public class Message implements Serializable {
     private Object object2;
     private Object object3;
     private Object object4;
+    private Object object5;
+    private Object object6;
+    private Object object7;
+    private Object object8;
 
 
 
@@ -40,6 +44,65 @@ public class Message implements Serializable {
         this.object3 = obj3;
         this.object4 = obj4;
     }
+    public Message(String msg, Object obj,Object obj2, Object obj3, Object obj4,Object obj5) {
+        this.message = msg;
+        this.object = obj;
+        this.object2 = obj2;
+        this.object3 = obj3;
+        this.object4 = obj4;
+        this.object5=obj5;
+    }
+
+
+
+    public Message(String msg, Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6) {
+        this.message = msg;
+        this.object = obj;
+        this.object2 = obj2;
+        this.object3 = obj3;
+        this.object4 = obj4;
+        this.object5=obj5;
+        this.object6=obj6;
+    }
+
+    public Message(String msg ,Object object, Object object2, Object object3, Object object4, Object object5, Object object6, Object object7, Object object8) {
+        this.message = msg;
+        this.object = object;
+        this.object2 = object2;
+        this.object3 = object3;
+        this.object4 = object4;
+        this.object5 = object5;
+        this.object6 = object6;
+        this.object7 = object7;
+        this.object8 = object8;
+    }
+
+    public Message(String msg,Object object, Object object2, Object object3, Object object4, Object object5, Object object6, Object object7) {
+        this.message = msg;
+        this.object = object;
+        this.object2 = object2;
+        this.object3 = object3;
+        this.object4 = object4;
+        this.object5 = object5;
+        this.object6 = object6;
+        this.object7 = object7;
+    }
+
+    public Object getObject7() {
+        return object7;
+    }
+
+    public void setObject7(Object object7) {
+        this.object7 = object7;
+    }
+
+    public Object getObject8() {
+        return object8;
+    }
+
+    public void setObject8(Object object8) {
+        this.object8 = object8;
+    }
 
     public Message(String msg) {
         this.message = msg;
@@ -49,17 +112,11 @@ public class Message implements Serializable {
         return message;
     }
 
-    public Object getObject () {
-        return this.object;
-    }
+    public Object getObject () { return this.object; }
 
-    public Object getObject2 () {
-        return this.object2;
-    }
+    public Object getObject2 () { return this.object2;}
 
-    public Object getObject3 () {
-        return this.object3;
-    }
+    public Object getObject3 () { return this.object3;}
 
     public void setMessage(String msg) {
         this.message=msg;
@@ -88,4 +145,14 @@ public class Message implements Serializable {
     public void setObject4(Object object4) {
         this.object4 = object4;
     }
+    public Object getObject5() { return object5; }
+    public Object getObject6() { return object6; }
+
+    public void setObject5(Object object5) {
+        this.object5 = object5;
+    }
+
+    public void setObject6(Object object6) { this.object6 = object6; }
+
+
 }

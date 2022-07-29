@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="558.0" prefWidth="838.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.OrderController">
+   <children>
+      <ImageView fitHeight="558.0" fitWidth="838.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ThankUBackground.jpg" />
+         </image>
+      </ImageView>
+      <Text layoutX="207.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thank you for your order!" wrappingWidth="379.73681640625">
+         <font>
+            <Font name="Georgia Italic" size="30.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.7490196228027344" green="0.04313725605607033" blue="0.3450980484485626" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Text>
+      <Text layoutX="24.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of order :" wrappingWidth="121.51553344726557">
+         <font>
+            <Font name="FrankRuehl" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text layoutX="24.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status :" wrappingWidth="63.9156494140625">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text layoutX="24.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card number :" wrappingWidth="121.51553344726557">
+         <font>
+            <Font name="FrankRuehl" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text layoutX="24.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client name :" wrappingWidth="112.71560668945318">
+         <font>
+            <Font name="FrankRuehl" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text layoutX="24.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client ID :" wrappingWidth="90.31564331054682">
+         <font>
+            <Font name="FrankRuehl" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text layoutX="24.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery :" wrappingWidth="90.31564331054688">
+         <font>
+            <Font name="FrankRuehl" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text layoutX="24.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receive date :" wrappingWidth="112.71560668945312">
+         <font>
+            <Font name="FrankRuehl" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text fx:id="receiveraddress1" layoutX="24.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver address :" wrappingWidth="146.39999999999998">
+         <font>
+            <Font name="FrankRuehl" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text fx:id="receivername1" layoutX="24.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver name :" wrappingWidth="129.51565551757812">
+         <font>
+            <Font name="FrankRuehl" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text layoutX="276.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total price paid :" wrappingWidth="153.51553344726562">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="21.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text fx:id="note1" layoutX="24.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note :" wrappingWidth="51.115631103515625">
+         <font>
+            <Font name="FrankRuehl" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text layoutX="298.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order ID :" wrappingWidth="80.71560668945312">
+         <font>
+            <Font name="Times New Roman Italic" size="18.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text fx:id="clientname" layoutX="171.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font name="System Italic" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="clientid" layoutX="171.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font name="System Italic" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="dateoforder" layoutX="171.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font name="System Italic" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="receivedate" layoutX="171.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font name="System Italic" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="cardnumber" layoutX="171.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="275.1156311035156">
+         <font>
+            <Font name="System Italic" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="delivery" layoutX="171.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font name="System Italic" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="receivername" layoutX="171.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font name="System Italic" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="receiveraddress" layoutX="171.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font name="System Italic" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="note" layoutX="74.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="690.3157196044922">
+         <font>
+            <Font name="System Italic" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="status" layoutX="85.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font name="System Italic" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="totalprice" layoutX="431.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="90.31564331054688">
+         <font>
+            <Font name="Times New Roman Bold Italic" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="orderid" layoutX="387.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="137.51565551757812">
+         <font>
+            <Font name="Times New Roman Bold" size="17.0" />
+         </font>
+      </Text>
+      <Text fx:id="receiveremail1" layoutX="24.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Receiver e-mail :" wrappingWidth="137.51565551757812">
+         <font>
+            <Font name="FrankRuehl" size="20.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="0.6410984848484848" endY="0.4356060682824163" startX="0.31912882400281506" startY="0.3333333766821659">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Text fx:id="receiveremail" layoutX="171.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="463.9156799316406">
+         <font>
+            <Font name="System Italic" size="17.0" />
+         </font>
+      </Text>
+      <Button fx:id="back" layoutX="6.0" layoutY="7.0" mnemonicParsing="false" onAction="#back" prefHeight="28.0" prefWidth="81.0" text="Logout">
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+         <font>
+            <Font name="Times New Roman Italic" size="15.0" />
+         </font></Button>
+   </children>
+</AnchorPane>

@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pane1" prefHeight="540.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.SystemManagerController">
+    <children>
+        <ImageView fitHeight="540.0" fitWidth="838.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@SystemManagerBackground.jpg" />
+            </image>
+        </ImageView>
+        <Button fx:id="blockaccount_button" layoutX="344.0" layoutY="108.0" mnemonicParsing="false" onAction="#blockaccount_butt" prefHeight="36.0" prefWidth="107.0" text="block account">
+            <font>
+                <Font name="Times New Roman Italic" size="15.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="0.3181818452748385" startX="0.3797348484848485" startY="0.6846590909090909">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                    </color>
+                </DropShadow>
+            </effect></Button>
+        <Text fx:id="SM_name" layoutX="199.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="440.56866455078125" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="199.0">
+            <font>
+                <Font name="Georgia Italic" size="40.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="0.7083333766821659" endY="0.1931818741740602" startX="0.22443180373220734" startY="0.6202651226159298">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Button fx:id="message_button" layoutX="344.0" layoutY="331.0" mnemonicParsing="false" onAction="#message_butt" prefHeight="36.0" prefWidth="159.0" text="send message to client">
+            <font>
+                <Font name="Times New Roman Italic" size="15.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="0.3181818452748385" startX="0.3797348484848485" startY="0.6846590909090909">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                    </color>
+                </DropShadow>
+            </effect></Button>
+        <Text layoutX="24.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="enter username" wrappingWidth="142.0">
+            <font>
+                <Font name="Verdana Italic" size="13.5" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="0.3181818452748385" startX="0.3797348484848485" startY="0.6846590909090909">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.6947368383407593" green="0.12608186900615692" blue="0.6663041114807129" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="1.0" green="0.6586207151412964" blue="0.20000000298023224" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill></Text>
+        <TextField fx:id="block_text" layoutX="187.0" layoutY="114.0" />
+        <Button fx:id="Type_button" layoutX="344.0" layoutY="201.0" mnemonicParsing="false" onAction="#Type_butt" prefHeight="36.0" prefWidth="142.0" text="edit worker type">
+            <font>
+                <Font name="Times New Roman Italic" size="15.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="0.3181818452748385" startX="0.3797348484848485" startY="0.6846590909090909">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                    </color>
+                </DropShadow>
+            </effect></Button>
+        <Text layoutX="24.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="enter worker username" wrappingWidth="159.20000000000005">
+            <font>
+                <Font name="Verdana" size="13.5" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.9578947424888611" green="0.575446367263794" blue="0.1383625715970993" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <TextField fx:id="status_text1" layoutX="187.0" layoutY="190.0" />
+        <TextField fx:id="status_text2" layoutX="187.0" layoutY="219.0" prefHeight="5.0" prefWidth="149.0" />
+        <Text layoutX="24.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="enter new status">
+            <font>
+                <Font name="Verdana Italic" size="13.5" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.9578947424888611" green="0.575446367263794" blue="0.1383625715970993" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Text layoutX="24.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint: enter worker username,enter new status and then press edit worker status" wrappingWidth="597.7366943359375">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Text layoutX="24.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint: enter username and then press block or unblock account">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="0.3181818452748385" startX="0.3797348484848485" startY="0.6846590909090909">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Text layoutX="24.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hint: enter client user name &amp; type the message u want to send ">
+            <font>
+                <Font name="System Bold Italic" size="16.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="0.3181818452748385" startX="0.3797348484848485" startY="0.6846590909090909">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <TextField fx:id="message" layoutX="24.0" layoutY="331.0" prefHeight="36.0" prefWidth="311.0" />
+        <TextField fx:id="username_txt" layoutX="187.0" layoutY="293.0" />
+        <Text layoutX="24.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="enter client username">
+            <font>
+                <Font name="Verdana Italic" size="13.5" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.9578947424888611" green="0.575446367263794" blue="0.1383625715970993" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <Button fx:id="clientsList" layoutX="24.0" layoutY="428.0" mnemonicParsing="false" onAction="#clientsList_butt" text="show clients list">
+            <font>
+                <Font name="Times New Roman Bold Italic" size="16.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill></Button>
+        <Button fx:id="workersList" layoutX="24.0" layoutY="470.0" mnemonicParsing="false" onAction="#workersList_butt" text="show workers list">
+            <font>
+                <Font name="Times New Roman Bold Italic" size="16.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill></Button>
+        <Button fx:id="back" layoutX="6.0" layoutY="7.0" mnemonicParsing="false" onAction="#back" text="Back To Homepage">
+            <font>
+                <Font name="Times New Roman Italic" size="15.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="0.3181818452748385" startX="0.3797348484848485" startY="0.6846590909090909">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill></Button>
+        <Button fx:id="unblock" layoutX="469.0" layoutY="108.0" mnemonicParsing="false" onAction="#unblock" prefHeight="36.0" prefWidth="126.0" text="unblock account">
+            <font>
+                <Font name="Times New Roman Italic" size="15.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="0.3181818452748385" startX="0.3797348484848485" startY="0.6846590909090909">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                    </color>
+                </DropShadow>
+            </effect>
+        </Button>
+    </children>
+</AnchorPane>

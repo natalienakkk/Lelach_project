@@ -1,48 +1,956 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="Pane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.catalogController">
-   <children>
-      <Text fx:id="Header" fill="#5e2727" layoutX="299.0" layoutY="117.0" stroke="#a90d0d" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog">
-         <font>
-            <Font size="47.0" />
-         </font>
-      </Text>
-      <Button fx:id="buttun_1" layoutX="476.0" layoutY="314.0" mnemonicParsing="false" onAction="#spray_buttun" text="Spray carnations" />
-      <Button fx:id="buttun_2" layoutX="329.0" layoutY="314.0" mnemonicParsing="false" onAction="#delphunium_buttun" text="The delphinium" />
-      <Button fx:id="buttun_3" layoutX="181.0" layoutY="314.0" mnemonicParsing="false" onAction="#zamia_buttun" text="Zamia Coconut L" />
-      <Button fx:id="buttun_4" layoutX="42.0" layoutY="314.0" mnemonicParsing="false" onAction="#sensivaria_buttun" text="Sensivaria medium" />
-      <Button fx:id="buttun_5" layoutX="632.0" layoutY="314.0" mnemonicParsing="false" onAction="#bridal_buttun" text="Bridal bouquet" />
-      <ImageView fx:id="image_4" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../images/image4.jpeg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="image_3" fitHeight="100.0" fitWidth="100.0" layoutX="184.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../images/image3.jpeg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="image_2" fitHeight="100.0" fitWidth="100.0" layoutX="329.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../images/image2.jpeg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="image_5" fitHeight="100.0" fitWidth="100.0" layoutX="629.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../images/image5.jpeg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="478.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../images/image1.jpeg" />
-         </image>
-      </ImageView>
-   </children>
-</AnchorPane>
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.CatalogController">
+   <content>
+      <AnchorPane fx:id="Pane2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1500.0" prefWidth="838.0" style="-fx-background-color: white;">
+         <children>
+            <Text fx:id="Header" layoutX="331.0" layoutY="118.0" onMouseClicked="#refresh" stroke="#a90d0d" strokeType="OUTSIDE" strokeWidth="0.0" text="Catalog">
+               <font>
+                  <Font name="Georgia Italic" size="50.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="1.0" endY="0.6287878851095835" startX="0.35700757575757586" startY="0.2528409090909095">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5247252747252746">
+                           <color>
+                              <Color red="0.9052631855010986" green="0.12070175260305405" blue="0.49990642070770264" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Text>
+            <Button fx:id="button_4" layoutX="476.0" layoutY="314.0" mnemonicParsing="false" onAction="#button_4">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <Button fx:id="button_3" layoutX="329.0" layoutY="314.0" mnemonicParsing="false" onAction="#button_3">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <Button fx:id="button_2" layoutX="181.0" layoutY="314.0" mnemonicParsing="false" onAction="#button_2">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <Button fx:id="button_1" layoutX="42.0" layoutY="314.0" mnemonicParsing="false" onAction="#button_1">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <Button fx:id="button_5" layoutX="632.0" layoutY="314.0" mnemonicParsing="false" onAction="#button_5">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_4" fitHeight="100.0" fitWidth="100.0" layoutX="478.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <ImageView fx:id="photo_3" fitHeight="100.0" fitWidth="100.0" layoutX="329.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <ImageView fx:id="photo_2" fitHeight="100.0" fitWidth="100.0" layoutX="184.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <ImageView fx:id="photo_1" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <ImageView fx:id="photo_5" fitHeight="100.0" fitWidth="100.0" layoutX="631.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="other" layoutX="624.0" layoutY="27.0" mnemonicParsing="false" onAction="#other" prefHeight="26.0" prefWidth="170.0">
+               <contextMenu>
+                  <ContextMenu fx:id="ContextMenu" onAction="#ConetxtMenuButton">
+                     <items>
+                        <MenuItem fx:id="Orders" mnemonicParsing="false" onAction="#OrdersButton" text="MyOrders" />
+                        <MenuItem fx:id="MyComplains" mnemonicParsing="false" onAction="#MyComplainsButton" text="MyComplains" />
+                        <MenuItem fx:id="MakeComplain" mnemonicParsing="false" onAction="#MakeComplainButton" text="MakeComplain" />
+                        <MenuItem fx:id="CancelOrder" mnemonicParsing="false" onAction="#CancelOrderButton" text="CancelOrder" />
+                        <MenuItem fx:id="MyMessages" mnemonicParsing="false" onAction="#MessageButton" text="MyMessages" />
+                     </items>
+                  </ContextMenu>
+               </contextMenu>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <font>
+                  <Font name="Times New Roman Italic" size="14.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </DropShadow>
+               </effect></Button>
+            <Button fx:id="LogOutBtn" layoutX="7.0" layoutY="6.0" mnemonicParsing="false" onAction="#LogOut" text="LogOut">
+               <font>
+                  <Font name="Times New Roman Italic" size="15.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="0.6287878851095835" startX="0.35700757575757586" startY="0.2528409090909095">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5247252747252746">
+                           <color>
+                              <Color red="0.9052631855010986" green="0.12070175260305405" blue="0.49990642070770264" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_6" fitHeight="100.0" fitWidth="100.0" layoutX="50.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_6" layoutX="46.0" layoutY="502.0" mnemonicParsing="false" onAction="#button_6">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_7" fitHeight="100.0" fitWidth="100.0" layoutX="192.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_7" layoutX="197.0" layoutY="502.0" mnemonicParsing="false" onAction="#button_7">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_8" fitHeight="100.0" fitWidth="100.0" layoutX="347.0" layoutY="382.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_8" layoutX="342.0" layoutY="502.0" mnemonicParsing="false" onAction="#button_8">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_9" fitHeight="100.0" fitWidth="100.0" layoutX="478.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_9" layoutX="483.0" layoutY="502.0" mnemonicParsing="false" onAction="#button_9">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_10" fitHeight="100.0" fitWidth="100.0" layoutX="629.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_10" layoutX="629.0" layoutY="502.0" mnemonicParsing="false" onAction="#button_10">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <Button fx:id="button_11" layoutX="58.0" layoutY="666.0" mnemonicParsing="false" onAction="#button_11">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_12" fitHeight="100.0" fitWidth="100.0" layoutX="187.0" layoutY="546.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_12" layoutX="183.0" layoutY="666.0" mnemonicParsing="false" onAction="#button_12">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_13" fitHeight="106.0" fitWidth="100.0" layoutX="331.0" layoutY="546.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_13" layoutX="331.0" layoutY="666.0" mnemonicParsing="false" onAction="#button_13" prefHeight="26.0" prefWidth="101.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_14" fitHeight="106.0" fitWidth="100.0" layoutX="478.0" layoutY="546.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_14" layoutX="477.0" layoutY="666.0" mnemonicParsing="false" onAction="#button_14" prefHeight="26.0" prefWidth="101.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_15" fitHeight="106.0" fitWidth="100.0" layoutX="629.0" layoutY="546.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_15" layoutX="628.0" layoutY="666.0" mnemonicParsing="false" onAction="#button_15" prefHeight="26.0" prefWidth="101.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_16" fitHeight="106.0" fitWidth="100.0" layoutX="50.0" layoutY="733.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <ImageView fx:id="photo_11" fitHeight="106.0" fitWidth="100.0" layoutX="50.0" layoutY="543.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_16" layoutX="49.0" layoutY="854.0" mnemonicParsing="false" onAction="#button_16" prefHeight="26.0" prefWidth="101.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_17" fitHeight="100.0" fitWidth="119.0" layoutX="187.0" layoutY="733.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_17" layoutX="186.0" layoutY="854.0" mnemonicParsing="false" onAction="#button_17" prefHeight="26.0" prefWidth="101.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_18" fitHeight="100.0" fitWidth="119.0" layoutX="335.0" layoutY="733.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_18" layoutX="324.0" layoutY="854.0" mnemonicParsing="false" onAction="#button_18" prefHeight="26.0" prefWidth="121.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_19" fitHeight="100.0" fitWidth="119.0" layoutX="483.0" layoutY="733.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_19" layoutX="473.0" layoutY="854.0" mnemonicParsing="false" onAction="#button_19" prefHeight="26.0" prefWidth="119.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_20" fitHeight="100.0" fitWidth="119.0" layoutX="629.0" layoutY="733.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_20" layoutX="619.0" layoutY="854.0" mnemonicParsing="false" onAction="#button_20" prefHeight="26.0" prefWidth="119.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <Button fx:id="other1" layoutX="441.0" layoutY="27.0" mnemonicParsing="false" onAction="#other1" prefHeight="26.0" prefWidth="170.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <font>
+                  <Font name="Times New Roman Italic" size="14.0" />
+               </font>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </DropShadow>
+               </effect></Button>
+            <ImageView fx:id="photo_21" fitHeight="106.0" fitWidth="100.0" layoutX="43.0" layoutY="939.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_21" layoutX="42.0" layoutY="1060.0" mnemonicParsing="false" onAction="#button_21" prefHeight="26.0" prefWidth="101.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_22" fitHeight="106.0" fitWidth="100.0" layoutX="187.0" layoutY="939.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_22" layoutX="186.0" layoutY="1060.0" mnemonicParsing="false" onAction="#button_22" prefHeight="26.0" prefWidth="101.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_23" fitHeight="106.0" fitWidth="100.0" layoutX="332.0" layoutY="939.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_23" layoutX="331.0" layoutY="1060.0" mnemonicParsing="false" onAction="#button_23" prefHeight="26.0" prefWidth="101.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_24" fitHeight="106.0" fitWidth="100.0" layoutX="478.0" layoutY="939.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_24" layoutX="477.0" layoutY="1060.0" mnemonicParsing="false" onAction="#button_24" prefHeight="26.0" prefWidth="101.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <ImageView fx:id="photo_25" fitHeight="106.0" fitWidth="100.0" layoutX="629.0" layoutY="939.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                     </color>
+                  </InnerShadow>
+               </effect></ImageView>
+            <Button fx:id="button_25" layoutX="628.0" layoutY="1060.0" mnemonicParsing="false" onAction="#button_25" prefHeight="26.0" prefWidth="101.0">
+               <textFill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5302197802197801">
+                           <color>
+                              <Color red="1.0" green="0.1111111119389534" blue="0.5407407283782959" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill></Button>
+            <TitledPane fx:id="filter" animated="false" layoutX="6.0" layoutY="53.0" prefHeight="114.0" prefWidth="202.0" text="Filter Items ">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="89.0" prefWidth="201.0">
+                     <children>
+                        <Text layoutX="2.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price range :">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="94.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Min           Max">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="minprice" layoutX="85.0" layoutY="12.0" onAction="#minprice" onKeyPressed="#minprice1" prefHeight="26.0" prefWidth="46.0" promptText="0" />
+                        <TextField fx:id="maxprice" layoutX="150.0" layoutY="12.0" onAction="#maxprice" onKeyPressed="#maxprice1" prefHeight="26.0" prefWidth="47.0" promptText="500" />
+                        <Text layoutX="2.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Color :">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                        <ComboBox fx:id="colorpicker" layoutX="91.0" layoutY="58.0" onAction="#colorpicker" prefHeight="26.0" prefWidth="98.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </TitledPane>
+            <Text fx:id="welcome" layoutX="207.0" layoutY="160.0" stroke="#a90d0d" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="444.39996337890625">
+               <font>
+                  <Font name="Georgia Italic" size="21.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="1.0" endY="0.6287878851095835" startX="0.35700757575757586" startY="0.2528409090909095">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.3176470696926117" green="0.0313725508749485" blue="0.3960784375667572" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5247252747252746">
+                           <color>
+                              <Color red="0.9052631855010986" green="0.12070175260305405" blue="0.49990642070770264" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+            </Text>
+            <Button fx:id="design" layoutX="220.0" layoutY="53.0" mnemonicParsing="false" onAction="#design1" text="Design Item" />
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

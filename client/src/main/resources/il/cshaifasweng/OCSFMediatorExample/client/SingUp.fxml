@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="Pane1" prefHeight="558.0" prefWidth="838.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="il.cshaifasweng.OCSFMediatorExample.client.SignUpController">
+    <children>
+        <ImageView fitHeight="558.0" fitWidth="838.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@SignUpBackground.jpg" />
+            </image>
+        </ImageView>
+        <Text fill="#b42267" layoutX="12.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FirstName:">
+            <font>
+                <Font name="FrankRuehl" size="20.0" />
+            </font>
+        </Text>
+        <Text fill="#b42267" layoutX="12.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LastName:">
+            <font>
+                <Font name="FrankRuehl" size="20.0" />
+            </font>
+        </Text>
+        <Text fill="#b42267" layoutX="12.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
+            <font>
+                <Font name="FrankRuehl" size="20.0" />
+            </font>
+        </Text>
+        <Text fill="#b42267" layoutX="12.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
+            <font>
+                <Font name="FrankRuehl" size="20.0" />
+            </font>
+        </Text>
+        <Text fill="#b42267" layoutX="12.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PhoneNumber:">
+            <font>
+                <Font name="FrankRuehl" size="20.0" />
+            </font>
+        </Text>
+        <Text fill="#b42267" layoutX="12.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UserName:">
+            <font>
+                <Font name="FrankRuehl" size="20.0" />
+            </font>
+        </Text>
+        <Text fill="#b42267" layoutX="12.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:">
+            <font>
+                <Font name="FrankRuehl" size="20.0" />
+            </font>
+        </Text>
+        <Text fill="#b42267" layoutX="12.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CreditCard:">
+            <font>
+                <Font name="FrankRuehl" size="20.0" />
+            </font>
+        </Text>
+        <Text fill="#b42267" layoutX="12.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ExpiryDate:">
+            <font>
+                <Font name="FrankRuehl" size="20.0" />
+            </font>
+        </Text>
+        <Text fill="#b42267" layoutX="12.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AccountType:">
+            <font>
+                <Font name="FrankRuehl" size="20.0" />
+            </font>
+        </Text>
+        <TextField fx:id="FirstName" layoutX="159.0" layoutY="73.0" prefHeight="25.0" prefWidth="243.0" promptText="First Name" />
+        <TextField fx:id="LastName" layoutX="159.0" layoutY="108.0" prefHeight="25.0" prefWidth="243.0" promptText="Last Name" />
+        <TextField fx:id="ID" layoutX="159.0" layoutY="143.0" prefHeight="25.0" prefWidth="243.0" promptText="ID Number" />
+        <TextField fx:id="Email" layoutX="159.0" layoutY="177.0" prefHeight="25.0" prefWidth="243.0" promptText="Your Email" />
+        <TextField fx:id="PhoneNumber" layoutX="159.0" layoutY="212.0" prefHeight="25.0" prefWidth="243.0" promptText="Phone Number" />
+        <TextField fx:id="UserName" layoutX="159.0" layoutY="247.0" prefHeight="25.0" prefWidth="243.0" promptText="User Name" />
+        <TextField fx:id="Password" layoutX="159.0" layoutY="282.0" prefHeight="25.0" prefWidth="243.0" promptText="Choose Your Password" />
+        <TextField fx:id="CreditCard" layoutX="159.0" layoutY="317.0" prefHeight="25.0" prefWidth="243.0" promptText="Credit Card Number" />
+        <Button fx:id="SignUp" layoutX="194.0" layoutY="508.0" mnemonicParsing="false" onAction="#SignUp" prefHeight="44.0" prefWidth="122.0" text="Sign Up">
+            <font>
+                <Font name="Times New Roman" size="24.0" />
+            </font>
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.8631578683853149" green="0.11189083755016327" blue="0.5125666260719299" />
+                    </color></DropShadow>
+            </effect>
+            <textFill>
+                <LinearGradient endX="1.0" endY="0.28409092354051985" startX="0.5909091198083125" startY="0.958333295403105">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.5400000214576721" green="0.05400000140070915" blue="0.38707759976387024" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7490196228027344" green="0.07450980693101883" blue="0.24705882370471954" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Button>
+        <Text layoutX="338.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign Up" textAlignment="CENTER" AnchorPane.leftAnchor="347.0" AnchorPane.rightAnchor="347.0">
+            <font>
+                <Font name="Georgia Italic" size="40.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="0.31818181818181807" startX="0.2926136363636364" startY="0.8409090656222721">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.7684210538864136" green="0.07399610430002213" blue="0.5600935816764832" />
+                            </color>
+                        </Stop>
+                        <Stop offset="0.6039229587616686">
+                            <color>
+                                <Color red="0.4901960790157318" green="0.13333334028720856" blue="0.6235294342041016" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7058823704719543" green="0.13333334028720856" blue="0.40392157435417175" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+            <effect>
+                <DropShadow>
+                    <color>
+                        <Color red="0.843137264251709" green="0.14901961386203766" blue="0.5411764979362488" />
+                    </color>
+                </DropShadow>
+            </effect>
+        </Text>
+        <ChoiceBox fx:id="AccountType" accessibleText="Choose Account Type" layoutX="159.0" layoutY="387.0" prefHeight="25.0" prefWidth="243.0">
+            <tooltip>
+                <Tooltip fx:id="AccountTypeToolTip" text="Lelach offers multiply kinds of account: " />
+            </tooltip></ChoiceBox>
+        <DatePicker fx:id="ExpiryDate" layoutX="159.0" layoutY="352.0" onAction="#ExpiryDate" prefHeight="25.0" prefWidth="243.0" promptText="Select Date" />
+        <Button fx:id="Back" layoutX="7.0" layoutY="6.0" mnemonicParsing="false" onAction="#Back" text="Back To HomePage">
+            <font>
+                <Font name="Times New Roman Italic" size="15.0" />
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="0.28409092354051985" startX="0.5909091198083125" startY="0.958333295403105">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.5400000214576721" green="0.05400000140070915" blue="0.38707759976387024" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="0.7490196228027344" green="0.07450980693101883" blue="0.24705882370471954" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+
+        </Button>
+        <Text fx:id="SelectStoreText" fill="#b42267" layoutX="11.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Your Store:" wrappingWidth="159.5755348205567">
+            <font>
+                <Font name="FrankRuehl" size="20.0" />
+            </font>
+        </Text>
+        <ChoiceBox fx:id="StoreSelection" layoutX="159.0" layoutY="421.0" prefHeight="25.0" prefWidth="243.0" />
+        <TextArea fx:id="ChainAccountText" layoutX="11.0" layoutY="450.0" prefHeight="50.0" prefWidth="218.0" text="You Can now Shop from any store in &#10;our chain.">
+            <font>
+                <Font name="Georgia Pro Cond Semibold Italic" size="12.0" />
+            </font>
+        </TextArea>
+        <CheckBox fx:id="SubscriptionCheck" layoutX="338.0" layoutY="494.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="236.0" text="Please confirm this " textFill="#b42267">
+            <font>
+                <Font name="FrankRuehl" size="20.0" />
+            </font>
+        </CheckBox>
+        <TextArea fx:id="SubscriptionText" layoutX="6.0" layoutY="420.0" prefHeight="76.0" prefWidth="397.0" text="By choosing One year subscription :&#10;Pay 100nis and get 10% discount in every purchase over 50nis;&#10;we well charge your visa 100nis">
+            <font>
+                <Font name="Georgia Pro Cond Semibold" size="14.0" />
+            </font>
+        </TextArea>
+    </children>
+</AnchorPane>
+
