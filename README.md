@@ -1,4 +1,6 @@
 # Lelach_project
+![Java](https://img.shields.io/badge/Language-Java-pink)
+
 Created a web application for florist "Lelach" based OCSF .
 
 ## Structure
